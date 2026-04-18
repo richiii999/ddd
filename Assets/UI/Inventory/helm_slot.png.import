@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dg6bbuxx6p2sf"
-path="res://.godot/imported/MPot Button.png-74b7567a1b23acceda0f930fe0219723.ctex"
+uid="uid://cihq6gxwa4vg4"
+path="res://.godot/imported/helm_slot.png-40e5489e98ca0233d75357e845530eff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/RMenu/MPot Button.png"
-dest_files=["res://.godot/imported/MPot Button.png-74b7567a1b23acceda0f930fe0219723.ctex"]
+source_file="res://Assets/UI/Inventory/helm_slot.png"
+dest_files=["res://.godot/imported/helm_slot.png-40e5489e98ca0233d75357e845530eff.ctex"]
 
 [params]
 

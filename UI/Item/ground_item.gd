@@ -17,7 +17,7 @@ func _ready():
 	
 	if (item == null): # Item not set
 		print_debug("Item not set for GroundItem, using TestItem")
-		item = load("res://UI stuff/INVENTORY/Item Files/TEST_ITEM.tscn").instantiate()
+		item = load("res://UI/Item/Items/TEST_ITEM.tscn").instantiate()
 	
 	$ItemSlot.add_child(item)
 

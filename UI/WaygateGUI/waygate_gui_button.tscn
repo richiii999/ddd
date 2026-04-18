@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://krilfu4qiwqo"]
 
-[ext_resource type="Texture2D" uid="uid://b2i8lrdls6dbr" path="res://UI/RMenu/Inventory/Inv UI/inv_slot.png" id="1_hu1l6"]
+[ext_resource type="Texture2D" uid="uid://b2i8lrdls6dbr" path="res://Assets/UI/Inventory/inv_slot.png" id="1_hu1l6"]
 
 [node name="WaygateGUI_Button" type="Button"]
 custom_minimum_size = Vector2(64, 64)

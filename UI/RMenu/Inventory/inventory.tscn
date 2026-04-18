@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://e5ddefrx8700" path="res://UI/RMenu/Inventory/Inventory_UI.gd" id="1_j403y"]
 [ext_resource type="PackedScene" uid="uid://cjh7vkxeerwbf" path="res://UI/RMenu/Inventory/inv_slot.tscn" id="3_m571r"]
-[ext_resource type="Texture2D" uid="uid://cihq6gxwa4vg4" path="res://UI/RMenu/Inventory/Inv UI/helm_slot.png" id="4_3t3kq"]
-[ext_resource type="Texture2D" uid="uid://barm5wofidii4" path="res://UI/RMenu/Inventory/Inv UI/chest_slot.png" id="5_awv0w"]
-[ext_resource type="Texture2D" uid="uid://bjx5vmien7f17" path="res://UI/RMenu/Inventory/Inv UI/r1_slot.png" id="6_24xyd"]
-[ext_resource type="Texture2D" uid="uid://b2qm4p2gtiog0" path="res://UI/RMenu/Inventory/Inv UI/wep_slot.png" id="7_bryy3"]
-[ext_resource type="Texture2D" uid="uid://i1k3ja2x7sws" path="res://UI/RMenu/Inventory/Inv UI/off_slot.png" id="8_v0o5t"]
-[ext_resource type="Texture2D" uid="uid://cafh7gmk78b2p" path="res://UI/RMenu/Inventory/Inv UI/r2_slot.png" id="9_1g0hy"]
+[ext_resource type="Texture2D" uid="uid://cihq6gxwa4vg4" path="res://Assets/UI/Inventory/helm_slot.png" id="4_3t3kq"]
+[ext_resource type="Texture2D" uid="uid://barm5wofidii4" path="res://Assets/UI/Inventory/chest_slot.png" id="5_awv0w"]
+[ext_resource type="Texture2D" uid="uid://bjx5vmien7f17" path="res://Assets/UI/Inventory/r1_slot.png" id="6_24xyd"]
+[ext_resource type="Texture2D" uid="uid://b2qm4p2gtiog0" path="res://Assets/UI/Inventory/wep_slot.png" id="7_bryy3"]
+[ext_resource type="Texture2D" uid="uid://i1k3ja2x7sws" path="res://Assets/UI/Inventory/off_slot.png" id="8_v0o5t"]
+[ext_resource type="Texture2D" uid="uid://cafh7gmk78b2p" path="res://Assets/UI/Inventory/r2_slot.png" id="9_1g0hy"]
 
 [node name="Inventory" type="Panel" unique_id=1164556197]
 custom_minimum_size = Vector2(256, 416)

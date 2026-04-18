@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cihq6gxwa4vg4"
-path="res://.godot/imported/helm_slot.png-b9ee276ded803355dd5eee02a5b054fb.ctex"
+uid="uid://boqyrj2smlncy"
+path="res://.godot/imported/inv_slotWhite.png-93ee96c9c5e04234e86e3a42191157de.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/RMenu/Inventory/Inv UI/helm_slot.png"
-dest_files=["res://.godot/imported/helm_slot.png-b9ee276ded803355dd5eee02a5b054fb.ctex"]
+source_file="res://Assets/UI/Inventory/inv_slotWhite.png"
+dest_files=["res://.godot/imported/inv_slotWhite.png-93ee96c9c5e04234e86e3a42191157de.ctex"]
 
 [params]
 

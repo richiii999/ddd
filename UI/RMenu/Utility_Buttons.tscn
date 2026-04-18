@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dtef1w3v7r3y1"]
 
-[ext_resource type="Texture2D" uid="uid://fb0magvji858" path="res://UI/RMenu/HPot Button.png" id="1_gatec"]
-[ext_resource type="Texture2D" uid="uid://dg6bbuxx6p2sf" path="res://UI/RMenu/MPot Button.png" id="2_w41be"]
+[ext_resource type="Texture2D" uid="uid://fb0magvji858" path="res://Assets/UI/HPot Button.png" id="1_gatec"]
+[ext_resource type="Texture2D" uid="uid://dg6bbuxx6p2sf" path="res://Assets/UI/MPot Button.png" id="2_w41be"]
 
 [node name="Utility" type="Panel"]
 anchors_preset = -1

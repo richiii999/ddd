@@ -21,9 +21,9 @@ func _ready():
 	UpdateInvStats.connect(find_parent("Player").UpdateStats)
 	
 	# Default inventory, debug items
-	Inv[Slot.INV1] = load("res://UI stuff/INVENTORY/Item Files/TEST_ITEM.tscn").instantiate()
-	Inv[Slot.INV5] = load("res://UI stuff/INVENTORY/Item Files/TEST_ITEM.tscn").instantiate()
-	Inv[Slot.INV9] = load("res://UI stuff/INVENTORY/Item Files/TEST_ITEM.tscn").instantiate()
+	Inv[Slot.INV1] = load("res://UI/Item/Items/TEST_ITEM.tscn").instantiate()
+	Inv[Slot.INV5] = load("res://UI/Item/Items/TEST_ITEM.tscn").instantiate()
+	Inv[Slot.INV9] = load("res://UI/Item/Items/TEST_ITEM.tscn").instantiate()
 	
 	for i in len(Slots):
 		Slots[i].slotNumber = (i) # Assign slotNumber

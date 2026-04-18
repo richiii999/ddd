@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://barm5wofidii4"
-path="res://.godot/imported/chest_slot.png-fb230fd852876343be53ac762ae88334.ctex"
+uid="uid://i1k3ja2x7sws"
+path="res://.godot/imported/off_slot.png-414d240f0db909ae24ba5501b7e75aa3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/RMenu/Inventory/Inv UI/chest_slot.png"
-dest_files=["res://.godot/imported/chest_slot.png-fb230fd852876343be53ac762ae88334.ctex"]
+source_file="res://Assets/UI/Inventory/off_slot.png"
+dest_files=["res://.godot/imported/off_slot.png-414d240f0db909ae24ba5501b7e75aa3.ctex"]
 
 [params]
 

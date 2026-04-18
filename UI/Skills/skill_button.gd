@@ -7,9 +7,9 @@ class_name skillButton extends Button ## SkillButton: Able to be clicked only wh
 @export var active : bool = false # Is this skill currently active? (Shuld be true once selected)
 
 # Icons: Changes icon depending on closed (not availible), availible, and active state
-@export var closedIcon = preload("res://UI stuff/INVENTORY/Inv UI/inv_slot.png")
-@export var openIcon = preload("res://UI stuff/INVENTORY/Inv UI/inv_slotWhite.png")
-@export var activeIcon = preload("res://UI stuff/INVENTORY/Inv UI/inv_slotPurple.png")
+@export var closedIcon = preload("res://Assets/UI/Inventory/inv_slot.png")
+@export var openIcon = preload("res://Assets/UI/Inventory/inv_slotWhite.png")
+@export var activeIcon = preload("res://Assets/UI/Inventory/inv_slotPurple.png")
 func setSkillIcon() -> void: icon = activeIcon if active else openIcon if availible else closedIcon
 
 @export var Stats = [1,1,1, 0,0,0, 0,0,0] # Only change the leftmost 3 nums (TODO change how stats works)

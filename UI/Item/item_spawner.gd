@@ -1,9 +1,9 @@
 class_name ItemSpawner extends Node ## ItemSpawner: Recieves signals to spawn items in the world
 
-var groundItemScene = load("res://ground_item.tscn") # GroundItem node to isntantiate whenever item spawned
+var groundItemScene = load("res://UI/Item/ground_item.tscn") # GroundItem node to isntantiate whenever item spawned
 var items : Array[Resource] = [ # Index of this array == "itemID" used throughout the code
-	load("res://UI stuff/INVENTORY/Item Files/TEST_ITEM.tscn"),
-	load("res://UI stuff/INVENTORY/Item Files/test_chestplate.tscn")
+	load("res://UI/Item/Items/TEST_ITEM.tscn"),
+	load("res://UI/Item/Items/test_chestplate.tscn")
 ]
 
 func SpawnItemByID( itemID : int = 0, pos = Vector2(0,0) ): # Spawns items[itemID] @ Pos

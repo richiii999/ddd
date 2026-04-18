@@ -315,7 +315,7 @@ func DropItem():
 		return
 	
 	## Create the ground item and put it in the scene
-	#var groundItem : GroundItem = load("res://ground_item.tscn").instantiate()
+	#var groundItem : GroundItem = load("res://UI/Item/ground_item.tscn").instantiate()
 	#groundItem._init(droppedItem.duplicate())
 	#add_child(groundItem)
 	#groundItem.reparent(get_parent())
