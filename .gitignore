@@ -1,2 +1,5 @@
-# Godot 4+ specific ignores
+# Godot Gitignore
+# https://docs.godotengine.org/en/stable/tutorials/best_practices/version_control_systems.html
+
+# Cache
 .godot/
