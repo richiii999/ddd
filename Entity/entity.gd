@@ -4,7 +4,7 @@ class_name ENTITY extends CharacterBody2D ## Provides much useful functionality 
 ## References to nodes
 @onready var Manager : GameManager = get_node_or_null("/root/GameManager") # Reference to the WorldNode (so I dont have to call it every time)
 @onready var Sight : SmartArea = find_child("Sight") # Ref to this entity's sight smartarea (if any)
-@onready var ECS : EffectsComponentSystem = find_child("EffectsComponentSystem") # This entity's EffectComponentSystem node, if null, no effects will be applied to this.
+@onready var ECS : EffectComponentSystem = find_child("EffectsComponentSystem") # This entity's EffectComponentSystem node, if null, no effects will be applied to this.
 @onready var Behavior: BehaviorFSM = find_child("BehaviorFSM") # This entity's Behavior Finite State Machine node, if null, will not have any ai behavior (players dont have this)
 @onready var StatusLabel : Node = find_child("Status") # This entity's Status component
 @onready var HPBar : Node = find_child("HP_Bar") # This entity's HP and MP bars

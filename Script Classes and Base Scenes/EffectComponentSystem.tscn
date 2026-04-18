@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dddy50t4saequ"]
+
+[ext_resource type="Script" uid="uid://bpi8akammw01e" path="res://Script Classes and Base Scenes/effectComponentSystem.gd" id="1_6n1ty"]
+
+[node name="EffectsComponentSystem" type="Node2D" unique_id=12836084]
+script = ExtResource("1_6n1ty")

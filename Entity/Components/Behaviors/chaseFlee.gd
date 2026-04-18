@@ -1,4 +1,4 @@
-extends behaviorBASE ## ChaseFlee: Goes directly towards / away from a target
+extends BehaviorBASE ## ChaseFlee: Goes directly towards / away from a target
 
 @export var chaseOrFlee : bool = true # True: Chase towards False: Flee from
 @export var TargetEntity : bool = false # If false, targets point, if true, targets Entity.targetEntity

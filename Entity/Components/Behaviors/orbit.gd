@@ -1,4 +1,4 @@
-extends behaviorBASE ## Orbit: Orbits around a point by a radius
+extends BehaviorBASE ## Orbit: Orbits around a point by a radius
 
 @export var orbitsTargetEntity : bool = false # If false, orbits point, if true, orbits Entity.targetEntity
 @export var orbitRadius : float = 300.0
@@ -6,7 +6,7 @@ extends behaviorBASE ## Orbit: Orbits around a point by a radius
 
 func setOrbit(V2 : Vector2 = Entity.targetEntity.global_position, R : float = orbitRadius): orbitTarget = V2; orbitRadius = R
 
-## Override funcs: behaviorBASE funcs overridden by Wander
+## Override funcs: BehaviorBASE funcs overridden by Wander
 func onEnter(): # Adjust movement for the Entity and begin orbiting
 	Entity.behaviorMoveSpeed = 1.50
 	Entity.targetPosStopRadius = 3.00 # Orbit movement is rubberbanding if this is not close to zero

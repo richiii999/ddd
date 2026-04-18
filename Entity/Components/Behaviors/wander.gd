@@ -1,4 +1,4 @@
-extends behaviorBASE ## Wander: Wanders around slowly
+extends BehaviorBASE ## Wander: Wanders around slowly
 
 var wanderPoint : Vector2 = Vector2(0,0) # Wander about this point
 var wanderRadius : float = 0.00 # Wander within this radius

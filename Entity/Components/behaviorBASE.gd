@@ -1,4 +1,4 @@
-class_name behaviorBASE extends Timer ## Base class for behaviors, provides functions for behaviors to inherit and override
+class_name BehaviorBASE extends Timer ## Base class for behaviors, provides functions for behaviors to inherit and override
 # Extends Timer, since I need timers for a bunch of behaviors anyways
 
 @onready var FSM : BehaviorFSM = get_parent() # The FSM this behavior is a part of

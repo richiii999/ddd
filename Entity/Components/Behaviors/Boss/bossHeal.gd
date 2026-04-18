@@ -1,4 +1,4 @@
-extends behaviorBASE ## Boss1: Stands still and shoots slowly
+extends BehaviorBASE ## Boss1: Stands still and shoots slowly
 
 @export var healRate = 0.20 # What % to heal per second
 @export var healMax = 1.00 # What % to heal up to

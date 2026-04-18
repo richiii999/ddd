@@ -4,8 +4,8 @@ class_name BehaviorFSM extends Timer ## BehaviorFSM: Manages Entity behaviors vi
 
 @export var Sight : SmartArea = null # Refereance to the entity's sight node (if any). Used for many enemy behaviors
 
-@export var initState : behaviorBASE = null
-@onready var currState : behaviorBASE = initState
+@export var initState : BehaviorBASE = null
+@onready var currState : BehaviorBASE = initState
 
 func _ready(): 
 	if !(get_parent() is ENTITY): print_debug("BehaviorFSM is child of a non-Entity")
@@ -15,7 +15,7 @@ func _ready():
 
 func _process(_delta): if currState: currState.BehaviorTick() # Tick current behavior each frame
 func CheckConditions(): if currState: currState.checkConditions() # On timeout (0.5s rather than every frame): check if behavior should change from currState
-func ChangeState(newState : behaviorBASE = null) -> void: # Change state: currState -> newState, calling their respective onLeave/onEnter functions
+func ChangeState(newState : BehaviorBASE = null) -> void: # Change state: currState -> newState, calling their respective onLeave/onEnter functions
 	if !newState: print_debug("newState == null, keeping current state for Entity")
 	if newState == currState: print_debug("newState == currState, keeping current state for Entity")
 	else:

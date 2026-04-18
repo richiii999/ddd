@@ -1,4 +1,4 @@
-class_name EffectsComponentSystem extends Node2D ## EffectsComponentSystem: Manages and applies effects to parent
+class_name EffectComponentSystem extends Node2D ## EffectsComponentSystem: Manages and applies effects to parent
 # Components are cool! I just learned about them from a YT vid lmao TODO: [<yt link>]
 # Loops over child nodes and applies their effects (if possible)
 # Node2D so child effects can inherit position, as many effects apply particles and stuff
