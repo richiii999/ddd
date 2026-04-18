@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bntfe5iinhuu5"]
+
+[ext_resource type="Script" uid="uid://coxt1cshkfv4p" path="res://UI/Item/loot_table.gd" id="1_ov736"]
+
+[node name="LootTable" type="Node" unique_id=530515387]
+script = ExtResource("1_ov736")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dddy50t4saequ"]
+
+[ext_resource type="Script" uid="uid://bpi8akammw01e" path="res://Script Classes and Base Scenes/effects_component_system.gd" id="1_6n1ty"]
+
+[node name="EffectsComponentSystem" type="Node2D"]
+script = ExtResource("1_6n1ty")

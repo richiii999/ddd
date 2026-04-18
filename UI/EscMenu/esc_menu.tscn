@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://d3sxk84gtgbel"]
+
+[ext_resource type="Script" uid="uid://cvmsfxpovabn4" path="res://UI/EscMenu/esc_menu.gd" id="1_54nkb"]
+[ext_resource type="Texture2D" uid="uid://ck2pxoap0tavf" path="res://Assets/Sprites/GD Icons/GD_White.tres" id="2_7yudp"]
+[ext_resource type="Texture2D" uid="uid://dq6232arfxx81" path="res://Assets/Sprites/GD Icons/GD_Red.tres" id="3_ui64h"]
+[ext_resource type="Texture2D" uid="uid://3baec8vvuxpd" path="res://Assets/Sprites/GD Icons/GD_Orange.tres" id="4_a6bah"]
+[ext_resource type="Texture2D" uid="uid://drfpfdw05ump0" path="res://Assets/Sprites/GD Icons/GD_Yellow.tres" id="5_f8yab"]
+[ext_resource type="Texture2D" uid="uid://qslb0hv6f6st" path="res://Assets/Sprites/GD Icons/GD_Green.tres" id="6_x57ra"]
+[ext_resource type="Texture2D" uid="uid://0sdiv7emxf0k" path="res://Assets/Sprites/GD Icons/GD_Cyan.tres" id="7_37hvr"]
+[ext_resource type="Texture2D" uid="uid://dnr70onggtm7f" path="res://Assets/Sprites/GD Icons/GD_Purple.tres" id="8_6820w"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f3cma"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_7yudp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ui64h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_a6bah")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_f8yab")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_x57ra")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_37hvr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_6820w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[node name="EscMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_54nkb")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.497474, 0.497474, 0.497474, 0.498039)
+
+[node name="BG color" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 280.0
+grow_vertical = 2
+color = Color(0.176419, 0.176419, 0.176419, 1)
+
+[node name="Label" type="RichTextLabel" parent="BG color"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -61.5
+offset_right = 61.5
+offset_bottom = 26.0
+grow_horizontal = 2
+theme_override_colors/font_selected_color = Color(1, 1, 1, 1)
+text = "     ESC Menu
+"
+
+[node name="Anchor" type="Control" parent="BG color"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 0.5
+offset_right = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="BG color/Anchor"]
+sprite_frames = SubResource("SpriteFrames_f3cma")
+autoplay = "default"
+
+[node name="ExitGame_Button" type="Button" parent="BG color"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.029
+anchor_top = 0.889
+anchor_right = 0.971
+anchor_bottom = 0.989
+offset_left = -0.12
+offset_top = -0.0800171
+offset_right = 0.119965
+offset_bottom = -0.0800171
+focus_mode = 0
+text = "Exit Game"
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_use_anchors_ = true
+
+[connection signal="button_up" from="BG color/ExitGame_Button" to="." method="quitGame_Button"]

@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://blxsgjk3fmr0e"]
+
+[ext_resource type="Script" uid="uid://cokxulwlr7sv6" path="res://UI/Skills/skillsUI.gd" id="1_ne31x"]
+[ext_resource type="PackedScene" uid="uid://bnwioo2u0cgq2" path="res://UI/Skills/skill_button.tscn" id="1_oyd6t"]
+
+[node name="SkillsUI" type="Panel" unique_id=965317542]
+custom_minimum_size = Vector2(256, 416)
+offset_right = 576.0
+offset_bottom = 416.0
+script = ExtResource("1_ne31x")
+
+[node name="SkillPointsText" type="RichTextLabel" parent="." unique_id=405868335]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 368.0
+offset_right = 384.0
+offset_bottom = 408.0
+text = "Skill Points"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="SkillPointsCount" type="RichTextLabel" parent="SkillPointsText" unique_id=1192861196]
+layout_mode = 0
+offset_right = 192.0
+offset_bottom = 40.0
+text = "0"
+horizontal_alignment = 1
+
+[node name="Skill_0" parent="." unique_id=963993930 instance=ExtResource("1_oyd6t")]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 176.0
+offset_right = 320.0
+offset_bottom = 248.0
+skillText = "+1 ALL"
+availible = true
+Stats = [1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+[node name="Skill_1" parent="." unique_id=1563444799 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 80.0
+offset_right = 320.0
+offset_bottom = 152.0
+skillText = "+1 STR"
+parentSkills = [NodePath("../Skill_0")]
+Stats = [1, 0, 0, 0, 0, 0, 0, 0, 0]
+
+[node name="Skill_2" parent="." unique_id=560904053 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 176.0
+offset_right = 224.0
+offset_bottom = 248.0
+skillText = "+1 AGI"
+parentSkills = [NodePath("../Skill_0")]
+Stats = [0, 0, 1, 0, 0, 0, 0, 0, 0]
+
+[node name="Skill_3" parent="." unique_id=747967176 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 272.0
+offset_right = 320.0
+offset_bottom = 344.0
+skillText = "+1 INT"
+parentSkills = [NodePath("../Skill_0")]
+Stats = [0, 1, 0, 0, 0, 0, 0, 0, 0]
+
+[node name="Skill_4" parent="." unique_id=229106207 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
+layout_mode = 0
+offset_left = 344.0
+offset_top = 176.0
+offset_right = 416.0
+offset_bottom = 248.0
+skillText = "+2 STR"
+parentSkills = [NodePath("../Skill_0")]
+Stats = [2, 0, 0, 0, 0, 0, 0, 0, 0]
+
+[node name="Skill_5" parent="." unique_id=1945750708 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 112.0
+offset_right = 120.0
+offset_bottom = 184.0
+skillText = "+2 DEX"
+parentSkills = [NodePath("../Skill_2")]
+Stats = [0, 0, 0, 0, 0, 2, 0, 0, 0]
+
+[node name="Skill_6" parent="." unique_id=148652741 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 240.0
+offset_right = 120.0
+offset_bottom = 312.0
+skillText = "+2 SPD"
+parentSkills = [NodePath("../Skill_2")]
+Stats = [0, 0, 0, 0, 0, 0, 0, 0, 2]
+
+[node name="Skill_7" parent="." unique_id=1383487241 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
+layout_mode = 0
+offset_left = 456.0
+offset_top = 104.0
+offset_right = 528.0
+offset_bottom = 176.0
+skillText = "+2 TOU"
+parentSkills = [NodePath("../Skill_4")]
+Stats = [0, 0, 0, 2, 0, 0, 0, 0, 0]
+
+[node name="Skill_8" parent="." unique_id=1677158838 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
+layout_mode = 0
+offset_left = 456.0
+offset_top = 232.0
+offset_right = 528.0
+offset_bottom = 304.0
+skillText = "+2 BLK"
+parentSkills = [NodePath("../Skill_4")]
+Stats = [0, 0, 0, 0, 0, 0, 2, 0, 0]

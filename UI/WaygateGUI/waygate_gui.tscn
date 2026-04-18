@@ -1,0 +1,185 @@
+[gd_scene format=3 uid="uid://b286d5w4sx2m8"]
+
+[ext_resource type="Script" uid="uid://da2w6tiraf3ks" path="res://UI/WaygateGUI/waygate_gui.gd" id="1_580yd"]
+[ext_resource type="Texture2D" uid="uid://b2i8lrdls6dbr" path="res://UI/RMenu/Inventory/Inv UI/inv_slot.png" id="3_xbl6y"]
+
+[node name="WaygateGUI" type="Panel"]
+anchors_preset = -1
+anchor_left = 0.35
+anchor_top = 0.267
+anchor_right = 0.65
+anchor_bottom = 0.622
+offset_left = -3.05176e-05
+offset_top = -0.240021
+offset_right = -6.10352e-05
+offset_bottom = 0.159973
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_580yd")
+
+[node name="GUI Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 128.0
+offset_top = 8.0
+offset_right = -128.0
+offset_bottom = -216.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Waygate GUI"
+horizontal_alignment = 1
+
+[node name="NexButton" type="Button" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.996
+offset_left = 168.0
+offset_top = 192.0
+offset_right = -168.0
+offset_bottom = -14.976
+icon = ExtResource("3_xbl6y")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ButtonText" type="Label" parent="NexButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 40.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Nexus"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.996
+offset_left = 16.0
+offset_top = 40.0
+offset_right = -16.0
+offset_bottom = -70.976
+theme_override_constants/h_separation = 104
+theme_override_constants/v_separation = 40
+columns = 3
+
+[node name="Example1" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+icon = ExtResource("3_xbl6y")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ButtonText" type="Label" parent="GridContainer/Example1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 40.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "1"
+horizontal_alignment = 1
+
+[node name="Example2" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+icon = ExtResource("3_xbl6y")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ButtonText" type="Label" parent="GridContainer/Example2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 40.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "2"
+horizontal_alignment = 1
+
+[node name="Example3" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+icon = ExtResource("3_xbl6y")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ButtonText" type="Label" parent="GridContainer/Example3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 40.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "3"
+horizontal_alignment = 1
+
+[node name="Example4" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+icon = ExtResource("3_xbl6y")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ButtonText" type="Label" parent="GridContainer/Example4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 40.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "4"
+horizontal_alignment = 1
+
+[node name="Example5" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+icon = ExtResource("3_xbl6y")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ButtonText" type="Label" parent="GridContainer/Example5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 40.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "5"
+horizontal_alignment = 1
+
+[node name="Example6" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+icon = ExtResource("3_xbl6y")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ButtonText" type="Label" parent="GridContainer/Example6"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 40.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "6"
+horizontal_alignment = 1

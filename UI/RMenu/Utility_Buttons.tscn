@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://dtef1w3v7r3y1"]
+
+[ext_resource type="Texture2D" uid="uid://fb0magvji858" path="res://UI/RMenu/HPot Button.png" id="1_gatec"]
+[ext_resource type="Texture2D" uid="uid://dg6bbuxx6p2sf" path="res://UI/RMenu/MPot Button.png" id="2_w41be"]
+
+[node name="Utility" type="Panel"]
+anchors_preset = -1
+anchor_right = 0.212
+anchor_bottom = 0.1
+offset_right = 0.639984
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="HPot_Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0289412
+anchor_top = 0.112
+anchor_right = 0.205882
+anchor_bottom = 0.889
+offset_left = 0.127996
+offset_top = -0.0640259
+offset_bottom = -0.00800323
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+text = "X"
+icon = ExtResource("1_gatec")
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_use_anchors_ = true
+
+[node name="MPot_Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.234824
+anchor_top = 0.112
+anchor_right = 0.412
+anchor_bottom = 0.887903
+offset_left = 0.127998
+offset_top = -0.0640259
+offset_right = -0.0639496
+offset_bottom = 0.0709839
+focus_mode = 0
+theme_override_colors/font_color = Color(0, 0, 1, 1)
+text = "X"
+icon = ExtResource("2_w41be")
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_use_anchors_ = true
+
+[node name="CamReset_Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.441177
+anchor_top = 0.111
+anchor_right = 0.617648
+anchor_bottom = 0.889
+offset_left = -1.52588e-05
+offset_top = 0.00799942
+offset_right = -1.52588e-05
+offset_bottom = -0.00800323
+focus_mode = 0
+text = "Cam
+Zero"
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Nex_Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.647059
+anchor_top = 0.111
+anchor_right = 0.970588
+anchor_bottom = 0.889
+offset_left = -3.05176e-05
+offset_top = 0.00799942
+offset_bottom = -0.00800323
+focus_mode = 0
+text = "Nexus
+"
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_use_anchors_ = true

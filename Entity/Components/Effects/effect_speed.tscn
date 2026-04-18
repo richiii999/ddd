@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://camr7ev4ss5vd"]
+
+[ext_resource type="Texture2D" uid="uid://dy12ff7b16url" path="res://Assets/Sprites/Particles/star particle white.png" id="1_eknvb"]
+[ext_resource type="Script" uid="uid://djq4jgm2efvwv" path="res://Entity/Components/Effects/effect_speed.gd" id="2_ajd1q"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l0ng0"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 20.0
+emission_ring_inner_radius = 30.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, -1, 0)
+spread = 0.0
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 0, 0)
+
+[node name="Effect_Speed" type="GPUParticles2D"]
+modulate = Color(0, 1, 0, 1)
+amount = 2
+process_material = SubResource("ParticleProcessMaterial_l0ng0")
+texture = ExtResource("1_eknvb")
+lifetime = 0.4
+script = ExtResource("2_ajd1q")
+color = "GREEN"
+efname = "Speed"
+length = 3.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true

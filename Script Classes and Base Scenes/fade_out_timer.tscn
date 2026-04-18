@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://br6cf5ox045ji"]
+
+[ext_resource type="Script" uid="uid://22a1y6dj05ou" path="res://Script Classes and Base Scenes/FadeOutTimer.gd" id="1_axcgi"]
+
+[node name="FadeOutTimer" type="Timer"]
+one_shot = true
+autostart = true
+script = ExtResource("1_axcgi")

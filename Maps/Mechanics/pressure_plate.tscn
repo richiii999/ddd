@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bhn13nvuwbng6"]
+
+[ext_resource type="Script" uid="uid://cstya04ifsc3h" path="res://Maps/Mechanics/pressure_plate.gd" id="1_4i2kf"]
+[ext_resource type="Texture2D" uid="uid://bt0k5w8xqyhj5" path="res://Assets/Sprites/GD Icons/GD_Grey.tres" id="2_0keob"]
+[ext_resource type="Texture2D" uid="uid://3baec8vvuxpd" path="res://Assets/Sprites/GD Icons/GD_Orange.tres" id="3_37jvd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4sa2q"]
+size = Vector2(64, 64)
+
+[node name="Pressure_Plate" type="Area2D"]
+collision_layer = 0
+collision_mask = 0
+monitorable = false
+script = ExtResource("1_4i2kf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4sa2q")
+
+[node name="State_ON" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-1.16229e-06, -2.11596e-06)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_0keob")
+
+[node name="State_OFF" type="Sprite2D" parent="."]
+position = Vector2(-1.16229e-06, -2.11596e-06)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_37jvd")
+
+[connection signal="body_entered" from="." to="." method="UpdateCount" binds= [1]]
+[connection signal="body_exited" from="." to="." method="UpdateCount" binds= [-1]]

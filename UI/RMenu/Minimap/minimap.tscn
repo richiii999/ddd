@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://b5vd2rrbcty04"]
+
+[ext_resource type="Script" uid="uid://c70g6ptmpalcn" path="res://UI/RMenu/Minimap/minimap.gd" id="1_f1c3h"]
+
+[node name="Minimap" type="Panel"]
+custom_minimum_size = Vector2(272, 200)
+anchors_preset = -1
+anchor_right = 0.212
+anchor_bottom = 0.278
+offset_right = 0.639984
+offset_bottom = -0.160019
+script = ExtResource("1_f1c3h")
+metadata/_edit_use_anchors_ = true

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://bfundgol4joaf"]
+
+[ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="1_1ehsu"]
+
+[resource]
+script = ExtResource("1_1ehsu")
+itemName = "TEST_ITEM"
+type = -1
+gearSTR = 1
+gearINT = 2
+gearAGI = 3
+gearTOU = 1
+gearWIS = 2
+gearDEX = 3
+gearBLK = 1
+gearWIL = 2
+gearSPD = 3
+statWeights = {
+0: 1.0
+}

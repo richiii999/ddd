@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bppeakuvj7xq3"]
+
+[ext_resource type="Texture2D" uid="uid://drfpfdw05ump0" path="res://Assets/Sprites/GD Icons/GD_Yellow.tres" id="1_biulr"]
+[ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_q1rlp"]
+[ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/Test_Projectile.tscn" id="3_7r6dx"]
+
+[node name="Test_chestplate" type="Sprite2D"]
+texture = ExtResource("1_biulr")
+script = ExtResource("2_q1rlp")
+itemName = "TEST_ITEM"
+type = 2
+projectile = ExtResource("3_7r6dx")
+metadata/_custom_type_script = "uid://dpbuam0tpmaha"

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://jirxg1144i67"]
+
+[ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/SmartArea.gd" id="1_qntch"]
+
+[node name="SmartArea" type="Area2D"]
+script = ExtResource("1_qntch")
+
+[connection signal="body_entered" from="." to="." method="UpdateArray" binds= [true]]
+[connection signal="body_exited" from="." to="." method="UpdateArray" binds= [false]]

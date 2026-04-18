@@ -1,0 +1,220 @@
+[gd_scene format=3 uid="uid://e5fewqnk5nty"]
+
+[ext_resource type="PackedScene" uid="uid://b5vd2rrbcty04" path="res://UI/RMenu/Minimap/minimap.tscn" id="1_jjgq5"]
+[ext_resource type="PackedScene" uid="uid://dtef1w3v7r3y1" path="res://UI/RMenu/Utility_Buttons.tscn" id="2_e8gpg"]
+[ext_resource type="PackedScene" uid="uid://dmuxbr5wnadof" path="res://UI/RMenu/Inventory/inventory.tscn" id="3_pcc4m"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aog62"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k57t5"]
+bg_color = Color(0, 1, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.501961, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lxb0b"]
+bg_color = Color(0, 0, 0.501961, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m57dx"]
+bg_color = Color(0, 0, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0.501961, 1)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d4mox"]
+bg_color = Color(0, 0.12549, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3fr4e"]
+bg_color = Color(0, 0.501961, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.752941, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3cwvy"]
+bg_color = Color(0.501961, 0.25098, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t0a4u"]
+bg_color = Color(1, 0.501961, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.25098, 0, 1)
+
+[node name="RMenu" type="ColorRect"]
+anchors_preset = -1
+anchor_left = 0.775
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -6.10352e-05
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0.176471, 0.176471, 0.176471, 1)
+
+[node name="Minimap" parent="." instance=ExtResource("1_jjgq5")]
+layout_mode = 1
+anchor_left = 0.0277778
+anchor_top = 0.0111111
+anchor_right = 0.97
+
+[node name="Utility" parent="." instance=ExtResource("2_e8gpg")]
+layout_mode = 1
+anchor_left = 0.0277778
+anchor_top = 0.3
+anchor_right = 0.972222
+anchor_bottom = 0.4
+offset_top = -1.52588e-05
+offset_right = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Inventory" parent="." instance=ExtResource("3_pcc4m")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0555556
+anchor_top = 0.411167
+anchor_right = 0.944
+anchor_bottom = 0.989
+offset_top = -0.0400085
+offset_right = 0.127991
+offset_bottom = -0.0800171
+metadata/_edit_use_anchors_ = true
+
+[node name="HP_Bar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0559999
+anchor_top = 0.200111
+anchor_right = 0.944444
+anchor_bottom = 0.2335
+offset_left = -0.127974
+offset_top = -0.0800018
+offset_bottom = -0.119995
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 16
+theme_override_styles/background = SubResource("StyleBoxFlat_aog62")
+theme_override_styles/fill = SubResource("StyleBoxFlat_k57t5")
+value = 50.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="HP_Text" type="RichTextLabel" parent="HP_Bar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 6.10352e-05
+offset_bottom = -7.62939e-05
+grow_horizontal = 2
+grow_vertical = 2
+text = "HEALTH"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MP_Bar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.056
+anchor_top = 0.244
+anchor_right = 0.944444
+anchor_bottom = 0.277389
+offset_left = -0.128004
+offset_top = 0.319992
+offset_bottom = 0.279984
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 16
+theme_override_styles/background = SubResource("StyleBoxFlat_lxb0b")
+theme_override_styles/fill = SubResource("StyleBoxFlat_m57dx")
+value = 50.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="MP_Text" type="RichTextLabel" parent="MP_Bar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 6.10352e-05
+offset_bottom = -7.62939e-05
+grow_horizontal = 2
+grow_vertical = 2
+text = "MANA"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="XP_Bar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0560001
+anchor_top = 0.155667
+anchor_right = 0.944444
+anchor_bottom = 0.189056
+offset_left = -0.127974
+offset_top = -0.0800018
+offset_bottom = -0.119995
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 16
+theme_override_styles/background = SubResource("StyleBoxFlat_d4mox")
+theme_override_styles/fill = SubResource("StyleBoxFlat_3fr4e")
+value = 50.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="XP_Text" type="RichTextLabel" parent="XP_Bar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 6.10352e-05
+offset_bottom = -7.62939e-05
+grow_horizontal = 2
+grow_vertical = 2
+text = "XP"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Fame_Bar" type="ProgressBar" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.00666655
+anchor_top = 0.150589
+anchor_right = 0.895111
+anchor_bottom = 0.183978
+offset_left = 14.0801
+offset_top = 3.57601
+offset_right = 14.2081
+offset_bottom = 3.53603
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 16
+theme_override_styles/background = SubResource("StyleBoxFlat_3cwvy")
+theme_override_styles/fill = SubResource("StyleBoxFlat_t0a4u")
+value = 50.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Fame_Text" type="RichTextLabel" parent="Fame_Bar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 0.000152588
+offset_right = -6.10352e-05
+offset_bottom = -1.52588e-05
+grow_horizontal = 2
+grow_vertical = 2
+text = "FAME"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1

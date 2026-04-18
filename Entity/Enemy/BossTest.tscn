@@ -1,0 +1,142 @@
+[gd_scene format=3 uid="uid://cah1krc5w5maw"]
+
+[ext_resource type="Script" uid="uid://dk75vwl8p2eck" path="res://Entity/Enemy/Enemy.gd" id="1_53cjx"]
+[ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/Test_Projectile.tscn" id="2_7yqgg"]
+[ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/status.tscn" id="3_3s77v"]
+[ext_resource type="Texture2D" uid="uid://di6ytqcvdio6g" path="res://Assets/Sprites/GD Icons/GodotIconAtlas.png" id="4_wntmj"]
+[ext_resource type="Script" uid="uid://bruyvfxhffooy" path="res://Entity/Components/EntitySight.gd" id="5_nhkol"]
+[ext_resource type="PackedScene" uid="uid://dfcui8l7w2j3m" path="res://Script Classes and Base Scenes/behavior_fsm.tscn" id="6_2j2hh"]
+[ext_resource type="PackedScene" uid="uid://byp1r1vlopabi" path="res://Entity/Components/Behaviors/behavior_boss_1.tscn" id="7_3s77v"]
+[ext_resource type="PackedScene" uid="uid://blcgtxx2m6ge6" path="res://Entity/Components/Behaviors/behavior_boss_heal.tscn" id="8_wntmj"]
+[ext_resource type="PackedScene" uid="uid://vosbka7lsvf0" path="res://Entity/Components/Behaviors/behavior_boss_2.tscn" id="9_nhkol"]
+[ext_resource type="PackedScene" uid="uid://bexluv4wwnwxr" path="res://Entity/Components/boss_bar.tscn" id="10_wntmj"]
+[ext_resource type="PackedScene" uid="uid://bntfe5iinhuu5" path="res://UI/Item/loot_table.tscn" id="11_nhkol"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw8gt"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wjxar"]
+bg_color = Color(0, 1, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.501961, 0, 1)
+corner_detail = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lg3er"]
+atlas = ExtResource("4_wntmj")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2b4ng"]
+radius = 50.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o61b1"]
+size = Vector2(120, 120)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jxsfg"]
+radius = 488.803
+
+[node name="BossTest" type="CharacterBody2D" unique_id=1156960978 groups=["Enemy"]]
+scale = Vector2(2, 2)
+collision_layer = 256
+collision_mask = 267
+motion_mode = 1
+script = ExtResource("1_53cjx")
+proj1 = ExtResource("2_7yqgg")
+proj2 = ExtResource("2_7yqgg")
+accel = 0.0
+kBResistance = 1.0
+HPmax = 500
+
+[node name="Status" parent="." unique_id=1170503114 instance=ExtResource("3_3s77v")]
+offset_left = -72.0
+offset_top = -120.0
+offset_right = 80.0
+offset_bottom = -72.0
+metadata/_edit_use_anchors_ = true
+
+[node name="HP_Bar" type="ProgressBar" parent="." unique_id=1971627743]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_top = 64.0
+offset_right = 64.0
+offset_bottom = 87.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 16
+theme_override_styles/background = SubResource("StyleBoxFlat_pw8gt")
+theme_override_styles/fill = SubResource("StyleBoxFlat_wjxar")
+value = 50.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1336434541]
+texture = SubResource("AtlasTexture_lg3er")
+
+[node name="Physics_Hitbox" type="CollisionShape2D" parent="." unique_id=464345492]
+shape = SubResource("CircleShape2D_2b4ng")
+
+[node name="Projectile_Hitbox" type="Area2D" parent="." unique_id=1770188805]
+collision_layer = 1024
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Projectile_Hitbox" unique_id=1686771942]
+shape = SubResource("RectangleShape2D_o61b1")
+
+[node name="Sight" type="Area2D" parent="." unique_id=2026825530]
+collision_layer = 0
+collision_mask = 16
+input_pickable = false
+monitorable = false
+script = ExtResource("5_nhkol")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=1965683690]
+shape = SubResource("CircleShape2D_jxsfg")
+debug_color = Color(0.501961, 0.501961, 0.501961, 0.25098)
+
+[node name="ShootTimer1" type="Timer" parent="." unique_id=907136257]
+wait_time = 0.75
+autostart = true
+
+[node name="ShootTimer2" type="Timer" parent="." unique_id=879405149]
+wait_time = 5.0
+autostart = true
+
+[node name="DamageFlashTimer" type="Timer" parent="." unique_id=1531883501]
+wait_time = 0.25
+one_shot = true
+
+[node name="FocusTimer" type="Timer" parent="." unique_id=1404600457]
+wait_time = 10.0
+autostart = true
+
+[node name="BehaviorFSM" parent="." unique_id=669444931 node_paths=PackedStringArray("initState") instance=ExtResource("6_2j2hh")]
+initState = NodePath("behavior_boss1")
+
+[node name="behavior_boss1" parent="BehaviorFSM" unique_id=109561774 instance=ExtResource("7_3s77v")]
+
+[node name="behavior_bossHeal" parent="BehaviorFSM" unique_id=152317940 instance=ExtResource("8_wntmj")]
+
+[node name="behavior_boss2" parent="BehaviorFSM" unique_id=1341389818 instance=ExtResource("9_nhkol")]
+wait_time = 5.0
+healthThreshold = 0.0
+
+[node name="BossBar" parent="." unique_id=1422355881 instance=ExtResource("10_wntmj")]
+
+[node name="LootTable" parent="." unique_id=727939910 instance=ExtResource("11_nhkol")]
+lootTable = Dictionary[int, int]({
+0: 1,
+1: 5
+})
+
+[connection signal="onEmpty" from="Sight" to="." method="SightIncrease" binds= [false]]
+[connection signal="onEmpty" from="Sight" to="ShootTimer1" method="set_paused" binds= [true]]
+[connection signal="onEmpty" from="Sight" to="ShootTimer2" method="set_paused" binds= [true]]
+[connection signal="onFirst" from="Sight" to="." method="SightIncrease" binds= [true]]
+[connection signal="onFirst" from="Sight" to="ShootTimer1" method="set_paused" binds= [false]]
+[connection signal="onFirst" from="Sight" to="ShootTimer2" method="set_paused" binds= [false]]
+[connection signal="timeout" from="ShootTimer1" to="." method="EnemyShoot" binds= [1]]
+[connection signal="timeout" from="ShootTimer2" to="." method="EnemyShoot" binds= [2]]
+[connection signal="timeout" from="DamageFlashTimer" to="." method="setStatusFlash"]
+[connection signal="timeout" from="FocusTimer" to="." method="FocusTick"]

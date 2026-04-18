@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://jkkh88r7c0fe"]
+
+[ext_resource type="Script" uid="uid://fennw54i85tr" path="res://UI/LoadingScreen/loading_screen.gd" id="1_88v4s"]
+[ext_resource type="PackedScene" uid="uid://c5o3e7sbqutuq" path="res://Assets/Sprites/GD Icons/GD_Animated_Rainbow.tscn" id="2_u3kqa"]
+[ext_resource type="PackedScene" uid="uid://br6cf5ox045ji" path="res://Script Classes and Base Scenes/fade_out_timer.tscn" id="3_4b7bq"]
+
+[node name="LoadingScreen" type="Control" unique_id=620847767]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_88v4s")
+
+[node name="BG color" type="ColorRect" parent="." unique_id=465023661]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.176419, 0.176419, 0.176419, 1)
+
+[node name="Label" type="RichTextLabel" parent="." unique_id=1108680190]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 576.0
+offset_top = 128.0
+offset_right = -576.0
+offset_bottom = -168.0
+grow_horizontal = 2
+theme_override_colors/font_selected_color = Color(1, 1, 1, 1)
+text = "Loading screen"
+
+[node name="GD_Animated_Rainbow" parent="." unique_id=1891037966 instance=ExtResource("2_u3kqa")]
+position = Vector2(74, -36)
+offset = Vector2(566, 292)
+
+[node name="FadeOutTimer" parent="." unique_id=948517155 instance=ExtResource("3_4b7bq")]

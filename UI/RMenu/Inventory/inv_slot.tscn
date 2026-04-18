@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cjh7vkxeerwbf"]
+
+[ext_resource type="Script" uid="uid://croa2a2lvobg5" path="res://UI/RMenu/Inventory/inv_slot.gd" id="1_1o36c"]
+[ext_resource type="Texture2D" uid="uid://b2i8lrdls6dbr" path="res://UI/RMenu/Inventory/Inv UI/inv_slot.png" id="2_7sq3w"]
+
+[node name="Slot_Button" type="Button"]
+offset_right = 72.0
+offset_bottom = 72.0
+icon = ExtResource("2_7sq3w")
+icon_alignment = 1
+script = ExtResource("1_1o36c")
+
+[node name="Display_Sprite" type="Sprite2D" parent="."]
+position = Vector2(36, 36)
+scale = Vector2(0.5, 0.5)

@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bxg67641quuf5"]
+
+[ext_resource type="Script" uid="uid://bcmwaeeddoef1" path="res://UI/Item/ground_item.gd" id="1_dgtp1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6ecyt"]
+radius = 89.0056
+
+[node name="GroundItem" type="Area2D" unique_id=214671253]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_dgtp1")
+
+[node name="TTL" type="Timer" parent="." unique_id=1160545404]
+
+[node name="Fade" type="Timer" parent="." unique_id=1821753136]
+
+[node name="ItemAreaShape" type="CollisionShape2D" parent="." unique_id=1968873129]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_6ecyt")
+
+[node name="ItemSlot" type="Node2D" parent="." unique_id=208052522]

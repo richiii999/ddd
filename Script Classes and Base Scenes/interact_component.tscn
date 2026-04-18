@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://c8y460v3po8xh"]
+
+[ext_resource type="Script" uid="uid://3g0h3q5odbbp" path="res://Entity/Player/InteractComponent.gd" id="1_0rcg4"]
+
+[node name="InteractComponent" type="Area2D"]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("1_0rcg4")
+
+[connection signal="body_entered" from="." to="." method="EnterOrExit" binds= [true]]
+[connection signal="body_exited" from="." to="." method="EnterOrExit" binds= [false]]

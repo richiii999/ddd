@@ -1,0 +1,138 @@
+[gd_scene format=3 uid="uid://dmuxbr5wnadof"]
+
+[ext_resource type="Script" uid="uid://e5ddefrx8700" path="res://UI/RMenu/Inventory/Inventory_UI.gd" id="1_j403y"]
+[ext_resource type="PackedScene" uid="uid://cjh7vkxeerwbf" path="res://UI/RMenu/Inventory/inv_slot.tscn" id="3_m571r"]
+[ext_resource type="Texture2D" uid="uid://cihq6gxwa4vg4" path="res://UI/RMenu/Inventory/Inv UI/helm_slot.png" id="4_3t3kq"]
+[ext_resource type="Texture2D" uid="uid://barm5wofidii4" path="res://UI/RMenu/Inventory/Inv UI/chest_slot.png" id="5_awv0w"]
+[ext_resource type="Texture2D" uid="uid://bjx5vmien7f17" path="res://UI/RMenu/Inventory/Inv UI/r1_slot.png" id="6_24xyd"]
+[ext_resource type="Texture2D" uid="uid://b2qm4p2gtiog0" path="res://UI/RMenu/Inventory/Inv UI/wep_slot.png" id="7_bryy3"]
+[ext_resource type="Texture2D" uid="uid://i1k3ja2x7sws" path="res://UI/RMenu/Inventory/Inv UI/off_slot.png" id="8_v0o5t"]
+[ext_resource type="Texture2D" uid="uid://cafh7gmk78b2p" path="res://UI/RMenu/Inventory/Inv UI/r2_slot.png" id="9_1g0hy"]
+
+[node name="Inventory" type="Panel" unique_id=1164556197]
+custom_minimum_size = Vector2(256, 416)
+offset_right = 256.0
+offset_bottom = 416.0
+script = ExtResource("1_j403y")
+
+[node name="Inv_GridContainer" type="GridContainer" parent="." unique_id=666718841]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -112.0
+offset_top = -240.0
+offset_right = 112.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+columns = 3
+
+[node name="Inv_Slot0" parent="Inv_GridContainer" unique_id=76576420 instance=ExtResource("3_m571r")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+
+[node name="Inv_Slot1" parent="Inv_GridContainer" unique_id=598834089 instance=ExtResource("3_m571r")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+
+[node name="Inv_Slot2" parent="Inv_GridContainer" unique_id=273886560 instance=ExtResource("3_m571r")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+
+[node name="Inv_Slot3" parent="Inv_GridContainer" unique_id=1550323011 instance=ExtResource("3_m571r")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+
+[node name="Inv_Slot4" parent="Inv_GridContainer" unique_id=1985963053 instance=ExtResource("3_m571r")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+
+[node name="Inv_Slot5" parent="Inv_GridContainer" unique_id=696078105 instance=ExtResource("3_m571r")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+
+[node name="Inv_Slot6" parent="Inv_GridContainer" unique_id=1754219539 instance=ExtResource("3_m571r")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+
+[node name="Inv_Slot7" parent="Inv_GridContainer" unique_id=2090262473 instance=ExtResource("3_m571r")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+
+[node name="Inv_Slot8" parent="Inv_GridContainer" unique_id=1097753495 instance=ExtResource("3_m571r")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+
+[node name="Gear_GridContainer" type="GridContainer" parent="." unique_id=251538202]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -112.0
+offset_top = 16.0
+offset_right = 112.0
+offset_bottom = 164.0
+grow_horizontal = 2
+columns = 3
+
+[node name="Gear_Slot0" parent="Gear_GridContainer" unique_id=1155113532 instance=ExtResource("3_m571r")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+icon = ExtResource("4_3t3kq")
+
+[node name="Gear_Slot1" parent="Gear_GridContainer" unique_id=1610380358 instance=ExtResource("3_m571r")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+icon = ExtResource("5_awv0w")
+
+[node name="Gear_Slot2" parent="Gear_GridContainer" unique_id=1781456212 instance=ExtResource("3_m571r")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+icon = ExtResource("6_24xyd")
+
+[node name="Gear_Slot3" parent="Gear_GridContainer" unique_id=1781983031 instance=ExtResource("3_m571r")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+icon = ExtResource("7_bryy3")
+
+[node name="Gear_Slot4" parent="Gear_GridContainer" unique_id=165092727 instance=ExtResource("3_m571r")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+icon = ExtResource("8_v0o5t")
+
+[node name="Gear_Slot5" parent="Gear_GridContainer" unique_id=215475680 instance=ExtResource("3_m571r")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+icon = ExtResource("9_1g0hy")
+
+[node name="MouseSlot" parent="." unique_id=2029940670 instance=ExtResource("3_m571r")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+scale = Vector2(0.5, 0.5)
+focus_mode = 0
+
+[node name="GroundSlot" parent="." unique_id=2058967404 instance=ExtResource("3_m571r")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+scale = Vector2(0.5, 0.5)
+focus_mode = 0

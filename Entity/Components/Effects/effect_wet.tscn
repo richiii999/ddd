@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://cwlq1pkagvxiq"]
+
+[ext_resource type="Texture2D" uid="uid://dy12ff7b16url" path="res://Assets/Sprites/Particles/star particle white.png" id="1_6ggt3"]
+[ext_resource type="Script" uid="uid://b6l0lrkvityyk" path="res://Entity/Components/Effects/effect_wet.gd" id="1_ksrg6"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r3g05"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 20.0
+emission_ring_inner_radius = 30.0
+emission_ring_cone_angle = 90.0
+gravity = Vector3(0, 100, 0)
+
+[node name="Effect_Wet" type="GPUParticles2D"]
+modulate = Color(0, 0, 1, 1)
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_r3g05")
+texture = ExtResource("1_6ggt3")
+script = ExtResource("1_ksrg6")
+color = "BLUE"
+efname = "Wet"
+length = 3.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true

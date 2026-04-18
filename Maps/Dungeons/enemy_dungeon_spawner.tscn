@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://t77auhbqet13"]
+
+[ext_resource type="Texture2D" uid="uid://cx8la75kvhbps" path="res://Assets/Sprites/EnemyDungeonSpawner_Frame1.png" id="1_3vifh"]
+[ext_resource type="Script" uid="uid://vi6rw8a1kfdv" path="res://Maps/Dungeons/Dungeon_Enemy_Spawner.gd" id="1_tjo7q"]
+[ext_resource type="Texture2D" uid="uid://ichvm2vrowp8" path="res://Assets/Sprites/EnemyDungeonSpawner_Frame2.png" id="2_hxqk0"]
+[ext_resource type="Texture2D" uid="uid://d28i0xf1ww0lg" path="res://Assets/Sprites/EnemyDungeonSpawner_Frame3.png" id="3_avq7k"]
+[ext_resource type="PackedScene" uid="uid://ccbgnraoi6fdf" path="res://Entity/Enemy/enemy_test.tscn" id="5_3f0oe"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_axy1d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_3vifh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_hxqk0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_avq7k")
+}],
+"loop": false,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="EnemyDungeonSpawner" type="AnimatedSprite2D" unique_id=1445437097]
+sprite_frames = SubResource("SpriteFrames_axy1d")
+autoplay = "default"
+script = ExtResource("1_tjo7q")
+EnemyToSpawn = ExtResource("5_3f0oe")
+
+[connection signal="animation_finished" from="." to="." method="SpawnEnemy"]

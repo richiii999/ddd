@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://krilfu4qiwqo"]
+
+[ext_resource type="Texture2D" uid="uid://b2i8lrdls6dbr" path="res://UI/RMenu/Inventory/Inv UI/inv_slot.png" id="1_hu1l6"]
+
+[node name="WaygateGUI_Button" type="Button"]
+custom_minimum_size = Vector2(64, 64)
+anchors_preset = -1
+anchor_right = 0.05
+anchor_bottom = 0.089
+offset_bottom = -0.0800018
+icon = ExtResource("1_hu1l6")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ButtonText" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 64.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Label"
+horizontal_alignment = 1

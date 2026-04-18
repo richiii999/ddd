@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bnwioo2u0cgq2"]
+
+[ext_resource type="Texture2D" uid="uid://b2i8lrdls6dbr" path="res://UI/RMenu/Inventory/Inv UI/inv_slot.png" id="1_xixp4"]
+[ext_resource type="Texture2D" uid="uid://di6ytqcvdio6g" path="res://Assets/Sprites/GD Icons/GodotIconAtlas.png" id="2_ncwhr"]
+[ext_resource type="Script" uid="uid://btob5b5i824nm" path="res://UI/Skills/skill_button.gd" id="2_xokeq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xokeq"]
+atlas = ExtResource("2_ncwhr")
+region = Rect2(128, 0, 128, 128)
+
+[node name="Skill_Button" type="Button"]
+offset_right = 72.0
+offset_bottom = 72.0
+icon = ExtResource("1_xixp4")
+icon_alignment = 1
+script = ExtResource("2_xokeq")
+
+[node name="Display_Sprite" type="Sprite2D" parent="."]
+position = Vector2(36, 36)
+scale = Vector2(0.45, 0.45)
+texture = SubResource("AtlasTexture_xokeq")
+
+[node name="SkillText" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = -24.0
+offset_top = 56.0
+offset_right = 96.0
+offset_bottom = 96.0
+text = "SkillText"
+horizontal_alignment = 1
+vertical_alignment = 1

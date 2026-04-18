@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://dh5gc4sj4sodd"]
+
+[ext_resource type="Script" uid="uid://e4clcs5fqhq" path="res://Entity/Components/Status.gd" id="1_f2ruy"]
+
+[node name="Status" type="RichTextLabel"]
+offset_right = 152.0
+offset_bottom = 48.0
+bbcode_enabled = true
+text = "[color=red]red
+[color=blue]blue"
+scroll_active = false
+script = ExtResource("1_f2ruy")
+
+[node name="StatusTextTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="StatusColorTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="StatusFlashTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="StatusTextTimer" to="." method="statusTextTimer" binds= [true]]
+[connection signal="timeout" from="StatusColorTimer" to="." method="setStatusColor"]
+[connection signal="timeout" from="StatusFlashTimer" to="." method="setStatusFlash"]

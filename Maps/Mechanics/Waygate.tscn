@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://tcx34hy287cs"]
+
+[ext_resource type="Texture2D" uid="uid://bftaon55xestl" path="res://Assets/Sprites/Particles/star particle.png" id="1_5s2m3"]
+[ext_resource type="Script" uid="uid://cy3qxcrqmplr4" path="res://Maps/Mechanics/Waygate.gd" id="2_1hw3p"]
+[ext_resource type="Texture2D" uid="uid://bsq334knc34xj" path="res://Assets/Sprites/Terrain/spawnSquareON.png" id="3_b30aj"]
+[ext_resource type="Texture2D" uid="uid://w3wtcrfc68lr" path="res://Assets/Sprites/Terrain/spawnSquareOFF.png" id="4_b6lit"]
+[ext_resource type="PackedScene" uid="uid://c8y460v3po8xh" path="res://Script Classes and Base Scenes/interact_component.tscn" id="5_6772d"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ftblx"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4r7gn"]
+size = Vector2(288, 288)
+
+[node name="Waygate" type="GPUParticles2D" groups=["Waygate"]]
+z_index = 1
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_ftblx")
+texture = ExtResource("1_5s2m3")
+lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+script = ExtResource("2_1hw3p")
+active = true
+
+[node name="Sprite2D_ON" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_b30aj")
+
+[node name="Sprite2D_OFF" type="Sprite2D" parent="."]
+texture = ExtResource("4_b6lit")
+
+[node name="EffectTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="InteractComponent" parent="." instance=ExtResource("5_6772d")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractComponent"]
+shape = SubResource("RectangleShape2D_4r7gn")
+
+[connection signal="timeout" from="EffectTimer" to="." method="EffectTrigger"]
+[connection signal="Interact" from="InteractComponent" to="." method="WaygateInteract"]
