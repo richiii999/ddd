@@ -1,4 +1,4 @@
-class_name World_BASE extends TileMapLayer ## Base class for worlds, stores stats and lots of references to things
+class_name WorldBASE extends TileMapLayer ## Base class for worlds, stores stats and lots of references to things
 # Keeps track of world stats like cumulative kills, which boss is active, etc.
 
 ## Scripted spawning locations: A world must have a Node2D "Waygates" and "EnemySpawns" as immediate children (there is a better way of doing it but this *for now*)
@@ -13,6 +13,6 @@ func updateWorldWaygateList(): Waygates = get_tree().get_nodes_in_group("Waygate
 @export var currBoss : int = 0 # Which is the current boss to spawn (Based on cumulative kills and other factors)
 
 ## Special world params
-@export var ConstantWorldPlayerEffects : Array[EFFECT_BASE] = [] # perma effects given to players upon entering the world
+@export var ConstantWorldPlayerEffects : Array[EffectBASE] = [] # perma effects given to players upon entering the world
 
 func _ready(): pass

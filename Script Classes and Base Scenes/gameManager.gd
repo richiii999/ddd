@@ -9,8 +9,8 @@ class_name GameManager extends Node ## Controls the game, opens and closes world
 @export var world_tscn: PackedScene
 @export var player_tscn: PackedScene # TODO: obv this is passed from somewhere else, but for now there isnt mp so just load the one player
 
-@onready var nexus: World_BASE = nexus_tscn.instantiate() ## Refs
-@onready var world: World_BASE = world_tscn.instantiate()
+@onready var nexus: WorldBASE = nexus_tscn.instantiate() ## Refs
+@onready var world: WorldBASE = world_tscn.instantiate()
 @onready var player: Player = player_tscn.instantiate()
 
 func _ready():

@@ -1,22 +1,22 @@
 [gd_scene format=3 uid="uid://jvh7seemiuj4"]
 
-[ext_resource type="Script" uid="uid://bu7bcptiyn0ns" path="res://Script Classes and Base Scenes/GameManager.gd" id="1_5l5e5"]
+[ext_resource type="Script" uid="uid://bu7bcptiyn0ns" path="res://Script Classes and Base Scenes/gameManager.gd" id="1_5l5e5"]
 [ext_resource type="PackedScene" uid="uid://yam0tl01v76q" path="res://Maps/Nexus.tscn" id="2_xgfaf"]
 [ext_resource type="PackedScene" uid="uid://brdsmfkvsa5ou" path="res://Maps/TestWorld.tscn" id="3_d5dbk"]
 [ext_resource type="PackedScene" uid="uid://nquy6bnqhiwd" path="res://Entity/Player/Player.tscn" id="4_nj8wv"]
 [ext_resource type="PackedScene" uid="uid://cmgpcvcen5bty" path="res://UI/Item/item_spawner.tscn" id="5_8vor3"]
 
-[node name="GameManager" type="Node"]
+[node name="GameManager" type="Node" unique_id=1545096795]
 process_mode = 3
 script = ExtResource("1_5l5e5")
 nexus_tscn = ExtResource("2_xgfaf")
 world_tscn = ExtResource("3_d5dbk")
 player_tscn = ExtResource("4_nj8wv")
 
-[node name="WorldSlot" type="Node2D" parent="."]
+[node name="WorldSlot" type="Node2D" parent="." unique_id=178269315]
 process_mode = 1
 position = Vector2(30000, 0)
 
-[node name="ParticleTrasher" type="Node" parent="."]
+[node name="ParticleTrasher" type="Node" parent="." unique_id=407857117]
 
-[node name="ItemSpawner" parent="." instance=ExtResource("5_8vor3")]
+[node name="ItemSpawner" parent="." unique_id=1318176200 instance=ExtResource("5_8vor3")]

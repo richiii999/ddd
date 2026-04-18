@@ -13,16 +13,16 @@ emission_ring_inner_radius = 30.0
 emission_ring_cone_angle = 90.0
 gravity = Vector3(0, -100, 0)
 
-[node name="Effect_Burn" type="GPUParticles2D"]
+[node name="Effect_Burn" type="GPUParticles2D" unique_id=976027384]
 modulate = Color(1, 0.501961, 0, 1)
 amount = 4
-process_material = SubResource("ParticleProcessMaterial_l0ng0")
 texture = ExtResource("2_4ellg")
+process_material = SubResource("ParticleProcessMaterial_l0ng0")
 script = ExtResource("1_stfq4")
 color = "ORANGE"
 efname = "Burn"
 length = 3.0
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1739488805]
 wait_time = 3.0
 autostart = true

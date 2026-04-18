@@ -1,4 +1,4 @@
-class_name Dungeon_BASE extends World_BASE ## Inspired by Gungeon, waves of enemies spawn in randomly generated rooms. 
+class_name DungeonBASE extends WorldBASE ## Inspired by Gungeon, waves of enemies spawn in randomly generated rooms. 
 # The root dungeon node has a 'DungeonID' which is given to the Dungeon generator, 
 	# which generates the dungeon by picking rooms with the same ID from a set
 	# It places the portal room first at the center, and the boss room last after the outermost room (by # of rooms from spawn)

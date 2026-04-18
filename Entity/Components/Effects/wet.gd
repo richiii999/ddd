@@ -1,4 +1,4 @@
-extends EFFECT_BASE ## Effect_Wet: Makes movement slippery (less friction)
+extends EffectBASE ## Effect_Wet: Makes movement slippery (less friction)
 func InitialEffect(): 
 	# TODO: make movement slippery
 	pass

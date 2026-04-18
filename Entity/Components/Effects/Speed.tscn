@@ -17,17 +17,17 @@ initial_velocity_min = 200.0
 initial_velocity_max = 200.0
 gravity = Vector3(0, 0, 0)
 
-[node name="Effect_Speed" type="GPUParticles2D"]
+[node name="Effect_Speed" type="GPUParticles2D" unique_id=335693035]
 modulate = Color(0, 1, 0, 1)
 amount = 2
-process_material = SubResource("ParticleProcessMaterial_l0ng0")
 texture = ExtResource("1_eknvb")
 lifetime = 0.4
+process_material = SubResource("ParticleProcessMaterial_l0ng0")
 script = ExtResource("2_ajd1q")
 color = "GREEN"
 efname = "Speed"
 length = 3.0
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=2045385300]
 wait_time = 3.0
 autostart = true

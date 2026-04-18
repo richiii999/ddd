@@ -71,8 +71,8 @@ func initEntityUI(): ## initializes UI stuff (instead of having all these in eac
 ## ShootProj: Shoots one of the projectiles based on input and constructs them according to this entity's stats, effects, and fields
 func ShootProj(input : int, Aim : Vector2 = targetEntity.global_position) -> void: 
 	var F : Field = null       # Prepare nodes of their respective types to be filled in
-	var FE: EFFECT_BASE = null
-	var E : EFFECT_BASE = null
+	var FE: EffectBASE = null
+	var E : EffectBASE = null
 	var P : Projectile  = null
 	
 	match input: # TODO this is kinda a retarded way of doing it, has to be a better way with less duplication
@@ -161,7 +161,7 @@ func setTargetToMaxFocus(): # Set targetEntity to highest focus
 
 ## Entity.AddEffect(): This is used to add effects to entities rather than calling AddEffect on the entity's effect component system
 # This way, it allows for things like immunities and stuff to be handled by the entity and just pass along a modified effect to the ECS
-func AddEffect(E : EFFECT_BASE = null, _field : bool = false) -> void:
+func AddEffect(E : EffectBASE = null, _field : bool = false) -> void:
 	if (!E || !ECS): return # null case (shouldn't happen), or no ECS to apply effect to, so just return
 	
 	if elementResist.has(E.element): 
@@ -176,7 +176,7 @@ func AddEffect(E : EFFECT_BASE = null, _field : bool = false) -> void:
 	#if 
 	
 	ECS.AddEffect(E)
-func RemoveEffect(E: EFFECT_BASE = null) -> void:
+func RemoveEffect(E: EffectBASE = null) -> void:
 	if (!E || !ECS || E not in ECS.get_children()): return # null case (shouldn't happen), or no ECS to apply effect to, or effect not found, just return
 	else: ECS.RemoveEffect(E)
 

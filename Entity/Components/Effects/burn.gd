@@ -1,4 +1,4 @@
-extends EFFECT_BASE ## Effect_Burn: Increased move speed, Damage() each tick
+extends EffectBASE ## Effect_Burn: Increased move speed, Damage() each tick
 func InitialEffect(): 
 	# TODO: makes you go faster
 	pass

@@ -1,4 +1,4 @@
-class_name EFFECT_BASE extends GPUParticles2D ## BASE class for effects, effects should inherit from this
+class_name EffectBASE extends GPUParticles2D ## BASE class for effects, effects should inherit from this
 # Contains the effect params, as well as a overwritable funcs for InitialEffect(), EffectTick(), and EndEffect()
 
 ## NOTE: A bunch of things are not implemented rn due to me not knowing to how start the child timer properly

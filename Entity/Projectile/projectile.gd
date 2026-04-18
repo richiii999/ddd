@@ -8,7 +8,7 @@ var piercing: int = 1      # How many entities can it collide with before breaki
 var knockback:float=150.00 # Knockback (in px/s) added to velocity of entity
 #var element : int = 0     # What element does the proj have (0 = none)
 
-var effect  : EFFECT_BASE = null # What effect applies to hit entities?
+var effect  : EffectBASE = null # What effect applies to hit entities?
 var field   : Field = null # What field to spawn when the projectile destructs?
 
 signal damage # emitted to the thing it hits with (source, power) params
@@ -22,7 +22,7 @@ func Spawn( Source : Node = null,
 			Power : int = 0, 
 			Piercing : int = 1,
 			KnockbackAmt : float = 550.00,
-			Effect : EFFECT_BASE = null, 
+			Effect : EffectBASE = null, 
 			endField : Field = null
 			# Element : int = 0
 			# ScaleFactor : float = 1.00, # Scales the size

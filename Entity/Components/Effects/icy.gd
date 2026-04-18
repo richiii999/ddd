@@ -1,4 +1,4 @@
-extends EFFECT_BASE ## Effect_Icy: Slowed movespeed, Damage() each tick
+extends EffectBASE ## Effect_Icy: Slowed movespeed, Damage() each tick
 func InitialEffect(): 
 	# TODO: makes you go slower
 	pass

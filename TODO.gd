@@ -254,12 +254,11 @@
 		# You can teleport to party members tho from the map
 
 ## Since IS Started:
-# borrow suc idea from mythfall (or make my own (?)) and add K!!!
 
 # dungeons have 'stages' separated by bosses / minibosses. once clear stage 5x (or wtvr) get key or something to skup to next stages start. 
 # e.g. jungle temple first stage is 'JT1' clearing this 5x will let you (one-way) teleport to just after the treasure room of jt1, and the start of jt2. 
 # this allows reuse of dungeon spawners and keeps early game content relevant for longer, while not requiring late game players to run throgu hteh 
-# early stages of low level dungeons. idea is that different stages have different tilesets but still thematically similar. ex. suc castle 1 is a castle 
+# early stages of low level dungeons. idea is that different stages have different tilesets but still thematically similar. ex. succ castle 1 is a castle 
 # theme with knights and stuff and the boss is throne room. sc2 is a dungeon or red carpeted area . sc3 is idk, maybe dungeons idk. point is they are 
 # different loot tiers and difficulties. a dungeons stage shouldnt be linar to difficulty, e.g. stages 1 2 3 shouldnt just be 1 extra tier each, they 
 # can jump e.g. stage 1 -> 2 is loot tier 2 -> 4. the gap is purposeful, and is filled by other dungeons and game content to prevent just running the 

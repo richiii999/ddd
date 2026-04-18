@@ -2,7 +2,7 @@ class_name EnemyDungeonSpawner extends AnimatedSprite2D ## Plays a short animati
 
 @export var EnemyToSpawn : PackedScene = null
 @export var randomizeSpawnLocation : bool = false # If true, ignores editor placement and randomly places this spawner somewhere in the room
-@export var Effects : Array[EFFECT_BASE] = [] # if set, applies effects to the spawned enemy
+@export var Effects : Array[EffectBASE] = [] # if set, applies effects to the spawned enemy
 
 var deathSignalConnection : Node = null # Set by a parent higher in the tree that wants to listen to the enemy death (e.g. dungeon room for counting deaths)
 

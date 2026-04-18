@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://fennw54i85tr" path="res://UI/LoadingScreen/loading_screen.gd" id="1_88v4s"]
 [ext_resource type="PackedScene" uid="uid://c5o3e7sbqutuq" path="res://Assets/Sprites/GD Icons/GD_Animated_Rainbow.tscn" id="2_u3kqa"]
-[ext_resource type="PackedScene" uid="uid://br6cf5ox045ji" path="res://Script Classes and Base Scenes/fade_out_timer.tscn" id="3_4b7bq"]
+[ext_resource type="PackedScene" uid="uid://br6cf5ox045ji" path="res://Script Classes and Base Scenes/FadeOutTimer.tscn" id="3_4b7bq"]
 
 [node name="LoadingScreen" type="Control" unique_id=620847767]
 layout_mode = 3

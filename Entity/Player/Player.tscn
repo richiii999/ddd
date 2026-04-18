@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bo88q26eog6w" path="res://Entity/Player/Camera.tscn" id="13_23qwt"]
 [ext_resource type="Texture2D" uid="uid://0sdiv7emxf0k" path="res://Assets/Sprites/GD Icons/GD_Cyan.tres" id="14_fnijg"]
 [ext_resource type="PackedScene" uid="uid://dddy50t4saequ" path="res://Script Classes and Base Scenes/EffectComponentSystem.tscn" id="15_si366"]
-[ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/SmartArea.gd" id="16_5ay3i"]
+[ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/smartArea.gd" id="16_5ay3i"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sqvdy"]
 radius = 60.0

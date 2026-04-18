@@ -13,16 +13,16 @@ emission_ring_inner_radius = 30.0
 emission_ring_cone_angle = 90.0
 gravity = Vector3(0, 100, 0)
 
-[node name="Effect_Wet" type="GPUParticles2D"]
+[node name="Effect_Wet" type="GPUParticles2D" unique_id=1148809086]
 modulate = Color(0, 0, 1, 1)
 amount = 4
-process_material = SubResource("ParticleProcessMaterial_r3g05")
 texture = ExtResource("1_6ggt3")
+process_material = SubResource("ParticleProcessMaterial_r3g05")
 script = ExtResource("1_ksrg6")
 color = "BLUE"
 efname = "Wet"
 length = 3.0
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=531138420]
 wait_time = 3.0
 autostart = true

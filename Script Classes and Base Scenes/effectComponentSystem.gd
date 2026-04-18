@@ -46,7 +46,7 @@ class_name EffectComponentSystem extends Node2D ## EffectsComponentSystem: Manag
 func _ready(): ClearEffects()
 func _process(_delta): for E in get_children(): E.EffectTick()
 
-func AddEffect(E : EFFECT_BASE = null) -> void:
+func AddEffect(E : EffectBASE = null) -> void:
 	if !E: return # null case
 	
 	# TODO: <if timer, tier, etc. smart logic apply effects and manage timers>
@@ -57,7 +57,7 @@ func AddEffect(E : EFFECT_BASE = null) -> void:
 	add_child(E); print("Added " + E.efname + " (" + str(E.length) + "s)")
 	E.get_child(0).start(E.length) # DEBUG: Start the timer with the effect's length. This shouldnt be needed, but otherwise the timer has 0 seconds and doesnt timeout
 
-func RemoveEffect(E : EFFECT_BASE = null, skipEndEffect : bool = false) -> void: 
+func RemoveEffect(E : EffectBASE = null, skipEndEffect : bool = false) -> void: 
 	if !E: return # null case
 	if E in get_children(): E.Destruct(skipEndEffect) # Only remove the effect if it is a child of this
 

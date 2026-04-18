@@ -15,15 +15,15 @@ gravity = Vector3(0, 0, 0)
 radial_accel_min = 50.0
 radial_accel_max = 75.0
 
-[node name="Effect_Poison" type="GPUParticles2D"]
+[node name="Effect_Poison" type="GPUParticles2D" unique_id=2057271359]
 modulate = Color(0, 1, 0, 1)
 amount = 4
-process_material = SubResource("ParticleProcessMaterial_faj8d")
 texture = ExtResource("2_5cjts")
+process_material = SubResource("ParticleProcessMaterial_faj8d")
 script = ExtResource("1_7t3d5")
 color = "GREEN"
 efname = "Poison"
 length = 3.0
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=412557191]
 wait_time = 3.0

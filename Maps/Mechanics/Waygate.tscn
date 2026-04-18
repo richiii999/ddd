@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cy3qxcrqmplr4" path="res://Maps/Mechanics/waygate.gd" id="2_1hw3p"]
 [ext_resource type="Texture2D" uid="uid://bsq334knc34xj" path="res://Assets/Sprites/Terrain/spawnSquareON.png" id="3_b30aj"]
 [ext_resource type="Texture2D" uid="uid://w3wtcrfc68lr" path="res://Assets/Sprites/Terrain/spawnSquareOFF.png" id="4_b6lit"]
-[ext_resource type="PackedScene" uid="uid://c8y460v3po8xh" path="res://Script Classes and Base Scenes/interact_component.tscn" id="5_6772d"]
+[ext_resource type="PackedScene" uid="uid://c8y460v3po8xh" path="res://Script Classes and Base Scenes/Interactable.tscn" id="5_6772d"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ftblx"]
 particle_flag_disable_z = true

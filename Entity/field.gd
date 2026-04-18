@@ -12,7 +12,7 @@ var source : ENTITY = null # What spawned this field? (passed by projectile)
 @export var icon   : Resource = null  # What is the effect's icon? (displays in the top right)
 @export var color  : String = "WHITE" # Color of status text / entity color change (as a string)
 
-@export var effect : EFFECT_BASE = null # What effect to apply?
+@export var effect : EffectBASE = null # What effect to apply?
 @export var length : float = 0.00 # How long does the effect linger after leaving the field?
 
 #@export var affectsProjectiles: bool = false # Does this field affect <X>? (sets masks in ready())
