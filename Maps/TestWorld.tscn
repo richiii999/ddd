@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://brdsmfkvsa5ou"]
 
 [ext_resource type="TileSet" uid="uid://cnvmagl4xkjae" path="res://Assets/Sprites/Terrain/TileSet.tres" id="1_wfs0s"]
-[ext_resource type="Script" uid="uid://bxf720rh8hgob" path="res://Script Classes and Base Scenes/WorldBASE.gd" id="2_aam50"]
+[ext_resource type="Script" uid="uid://bxf720rh8hgob" path="res://Maps/WorldBASE.gd" id="2_aam50"]
 [ext_resource type="PackedScene" uid="uid://blyjhm2j5onnb" path="res://Maps/Mechanics/EnemyPackSpawner.tscn" id="4_5iikc"]
 [ext_resource type="PackedScene" uid="uid://tcx34hy287cs" path="res://Maps/Mechanics/Waygate.tscn" id="4_bvj08"]
 [ext_resource type="PackedScene" uid="uid://tq8hs5inekce" path="res://Entity/Enemy/Enemies/ChaseZombie.tscn" id="5_473rr"]
