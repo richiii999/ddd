@@ -1,0 +1,127 @@
+[gd_scene format=3 uid="uid://tq8hs5inekce"]
+
+[ext_resource type="Script" uid="uid://dk75vwl8p2eck" path="res://Entity/Enemy/enemy.gd" id="1_rj2pp"]
+[ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_vvp5b"]
+[ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="3_84nuw"]
+[ext_resource type="Texture2D" uid="uid://dq6232arfxx81" path="res://Assets/Sprites/GD Icons/GD_Red.tres" id="4_2oj4o"]
+[ext_resource type="Script" uid="uid://bruyvfxhffooy" path="res://Entity/Components/entitySight.gd" id="5_kihv6"]
+[ext_resource type="PackedScene" uid="uid://dfcui8l7w2j3m" path="res://Entity/Components/BehaviorFSM.tscn" id="6_2wcg3"]
+[ext_resource type="PackedScene" uid="uid://dk58kntas8hfd" path="res://Entity/Components/Behaviors/Wander.tscn" id="7_4vlkc"]
+[ext_resource type="Script" uid="uid://drgv5k0gsyg22" path="res://Entity/Components/behaviorFSM.gd" id="7_vvp5b"]
+[ext_resource type="PackedScene" uid="uid://dvourlhp5t1tv" path="res://Entity/Components/Behaviors/ChaseFlee.tscn" id="8_10a87"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw8gt"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wjxar"]
+bg_color = Color(0, 1, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.501961, 0, 1)
+corner_detail = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2b4ng"]
+radius = 50.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o61b1"]
+size = Vector2(120, 120)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w6h3m"]
+resource_local_to_scene = true
+radius = 272.118
+
+[node name="Enemy_Test" type="CharacterBody2D" unique_id=940119581 groups=["Enemy"]]
+collision_layer = 256
+collision_mask = 267
+motion_mode = 1
+script = ExtResource("1_rj2pp")
+proj1 = ExtResource("2_vvp5b")
+proj2 = ExtResource("2_vvp5b")
+HPmax = 100
+
+[node name="Status" parent="." unique_id=904833884 instance=ExtResource("3_84nuw")]
+offset_left = -72.0
+offset_top = -120.0
+offset_right = 80.0
+offset_bottom = -72.0
+metadata/_edit_use_anchors_ = true
+
+[node name="HP_Bar" type="ProgressBar" parent="." unique_id=1392525678]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_top = 64.0
+offset_right = 64.0
+offset_bottom = 87.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 16
+theme_override_styles/background = SubResource("StyleBoxFlat_pw8gt")
+theme_override_styles/fill = SubResource("StyleBoxFlat_wjxar")
+value = 50.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1430648148]
+texture = ExtResource("4_2oj4o")
+
+[node name="Physics_Hitbox" type="CollisionShape2D" parent="." unique_id=342320193]
+shape = SubResource("CircleShape2D_2b4ng")
+
+[node name="Projectile_Hitbox" type="Area2D" parent="." unique_id=1294373683]
+collision_layer = 1024
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Projectile_Hitbox" unique_id=138021579]
+shape = SubResource("RectangleShape2D_o61b1")
+
+[node name="Sight" type="Area2D" parent="." unique_id=1586348760]
+collision_layer = 0
+collision_mask = 16
+input_pickable = false
+monitorable = false
+script = ExtResource("5_kihv6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=1478919866]
+shape = SubResource("CircleShape2D_w6h3m")
+debug_color = Color(0.501961, 0.501961, 0.501961, 0.25098)
+
+[node name="ShootTimer1" type="Timer" parent="." unique_id=974528602]
+wait_time = 0.75
+autostart = true
+
+[node name="ShootTimer2" type="Timer" parent="." unique_id=109053799]
+wait_time = 5.0
+autostart = true
+
+[node name="DamageFlashTimer" type="Timer" parent="." unique_id=2063292226]
+wait_time = 0.25
+one_shot = true
+
+[node name="FocusTimer" type="Timer" parent="." unique_id=466135081]
+wait_time = 10.0
+autostart = true
+
+[node name="BehaviorFSM" parent="." unique_id=1391725515 node_paths=PackedStringArray("initState") instance=ExtResource("6_2wcg3")]
+script = ExtResource("7_vvp5b")
+initState = NodePath("behavior_wander")
+
+[node name="behavior_wander" parent="BehaviorFSM" unique_id=250405658 instance=ExtResource("7_4vlkc")]
+
+[node name="behavior_chaseFlee" parent="BehaviorFSM" unique_id=327916142 instance=ExtResource("8_10a87")]
+TargetEntity = true
+
+[connection signal="onEmpty" from="Sight" to="." method="SightIncrease" binds= [false]]
+[connection signal="onEmpty" from="Sight" to="ShootTimer1" method="set_paused" binds= [true]]
+[connection signal="onEmpty" from="Sight" to="ShootTimer2" method="set_paused" binds= [true]]
+[connection signal="onEmpty" from="Sight" to="BehaviorFSM" method="ChangeStateByIdx" binds= [0]]
+[connection signal="onFirst" from="Sight" to="." method="SightIncrease" binds= [true]]
+[connection signal="onFirst" from="Sight" to="ShootTimer1" method="set_paused" binds= [false]]
+[connection signal="onFirst" from="Sight" to="ShootTimer2" method="set_paused" binds= [false]]
+[connection signal="onFirst" from="Sight" to="BehaviorFSM" method="ChangeStateByIdx" binds= [1]]
+[connection signal="timeout" from="ShootTimer1" to="." method="EnemyShoot" binds= [1]]
+[connection signal="timeout" from="ShootTimer2" to="." method="EnemyShoot" binds= [2]]
+[connection signal="timeout" from="DamageFlashTimer" to="." method="setStatusFlash"]
+[connection signal="timeout" from="FocusTimer" to="." method="FocusTick"]

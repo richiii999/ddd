@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bclrygg5d3dyn"]
 
-[ext_resource type="Script" uid="uid://bkeg7sxgvrmuu" path="res://Entity/Field.gd" id="1_lkibk"]
+[ext_resource type="Script" uid="uid://bkeg7sxgvrmuu" path="res://Entity/field.gd" id="1_lkibk"]
 [ext_resource type="Texture2D" uid="uid://dd2ds6v4g50yu" path="res://Assets/Sprites/GD Icons/GDCircleCyan.png" id="2_vcssf"]
 [ext_resource type="Texture2D" uid="uid://dy12ff7b16url" path="res://Assets/Sprites/Particles/star particle white.png" id="3_6v8gq"]
 

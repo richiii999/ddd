@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c8y460v3po8xh"]
 
-[ext_resource type="Script" uid="uid://3g0h3q5odbbp" path="res://Entity/Player/InteractComponent.gd" id="1_0rcg4"]
+[ext_resource type="Script" uid="uid://3g0h3q5odbbp" path="res://Entity/Player/interactable.gd" id="1_0rcg4"]
 
 [node name="InteractComponent" type="Area2D"]
 collision_layer = 2

@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://byp1r1vlopabi"]
+
+[ext_resource type="Script" uid="uid://lnkk2dyhqam8" path="res://Entity/Components/Behaviors/Boss/boss1.gd" id="1_4fmom"]
+
+[node name="behavior_boss1" type="Timer" unique_id=1534140584]
+script = ExtResource("1_4fmom")
+metadata/_custom_type_script = "uid://l3g88n22as0l"

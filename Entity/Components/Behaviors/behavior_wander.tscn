@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dk58kntas8hfd"]
-
-[ext_resource type="Script" uid="uid://d2ywc4w0y1cmn" path="res://Entity/Components/Behaviors/behavior_wander.gd" id="1_3en38"]
-
-[node name="behavior_wander" type="Timer"]
-wait_time = 2.0
-script = ExtResource("1_3en38")
-
-[connection signal="timeout" from="." to="." method="Wander"]

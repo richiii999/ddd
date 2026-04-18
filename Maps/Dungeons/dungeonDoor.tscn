@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://g7spcuqqx1mx"]
+
+[ext_resource type="Script" uid="uid://bvng60kbsf4vu" path="res://Maps/Dungeons/dungeonDoor.gd" id="1_xkjpt"]
+[ext_resource type="Texture2D" uid="uid://cmx84stbiij7i" path="res://Assets/Sprites/Veil_Frame1.png" id="2_gmc4l"]
+[ext_resource type="Texture2D" uid="uid://cps51sl3kcnkk" path="res://Assets/Sprites/Veil_Frame2.png" id="3_xijm3"]
+[ext_resource type="Texture2D" uid="uid://y2kjtsow0igp" path="res://Assets/Sprites/Veil_Frame3.png" id="4_lu1i4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ltjwu"]
+size = Vector2(128.124, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5qujs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_gmc4l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xijm3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_lu1i4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nn60q"]
+size = Vector2(128, 24)
+
+[node name="DungeonRoomDoor" type="StaticBody2D" unique_id=594375572]
+script = ExtResource("1_xkjpt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1097515543]
+position = Vector2(0.0620174, 7.15256e-07)
+rotation = -3.14159
+shape = SubResource("RectangleShape2D_ltjwu")
+one_way_collision = true
+
+[node name="Veil" type="AnimatedSprite2D" parent="." unique_id=1479086620]
+scale = Vector2(0.256, 0.32)
+sprite_frames = SubResource("SpriteFrames_5qujs")
+autoplay = "default"
+frame_progress = 0.447701
+
+[node name="PlayerDetector" type="Area2D" parent="." unique_id=241829959]
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" unique_id=1124070121]
+position = Vector2(0, 36)
+shape = SubResource("RectangleShape2D_nn60q")

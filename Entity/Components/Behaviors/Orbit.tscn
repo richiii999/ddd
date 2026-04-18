@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dx23kg5vk3spb"]
+
+[ext_resource type="Script" uid="uid://dff5tghafp4ts" path="res://Entity/Components/Behaviors/orbit.gd" id="1_ruoas"]
+
+[node name="behavior_orbit" type="Timer" unique_id=1130434035]
+wait_time = 4.0
+script = ExtResource("1_ruoas")
+orbitsTargetEntity = true

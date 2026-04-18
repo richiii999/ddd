@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bexluv4wwnwxr"]
+
+[ext_resource type="Script" uid="uid://ct6fjgif1psvs" path="res://Entity/Components/bossBar.gd" id="1_hfc8g"]
+
+[node name="BossBar" type="Node2D"]
+script = ExtResource("1_hfc8g")

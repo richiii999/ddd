@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://blcgtxx2m6ge6"]
-
-[ext_resource type="Script" uid="uid://c7yebdoojlrvf" path="res://Entity/Components/Behaviors/behavior_bossHeal.gd" id="1_fv53t"]
-
-[node name="behavior_bossHeal" type="Timer"]
-script = ExtResource("1_fv53t")
-metadata/_custom_type_script = "uid://l3g88n22as0l"

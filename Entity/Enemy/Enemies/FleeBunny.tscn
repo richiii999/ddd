@@ -1,12 +1,13 @@
-[gd_scene format=3 uid="uid://c2lryasv0namt"]
+[gd_scene format=3 uid="uid://coo4jrce2m4tu"]
 
-[ext_resource type="Script" uid="uid://dk75vwl8p2eck" path="res://Entity/Enemy/enemy.gd" id="1_17rlh"]
-[ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_l1ai2"]
-[ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="3_6b84h"]
-[ext_resource type="Texture2D" uid="uid://di6ytqcvdio6g" path="res://Assets/Sprites/GD Icons/GodotIconAtlas.png" id="4_tbnwm"]
-[ext_resource type="Script" uid="uid://bruyvfxhffooy" path="res://Entity/Components/entitySight.gd" id="5_ib48x"]
-[ext_resource type="PackedScene" uid="uid://dfcui8l7w2j3m" path="res://Entity/Components/BehaviorFSM.tscn" id="6_ptp2k"]
-[ext_resource type="PackedScene" uid="uid://dk58kntas8hfd" path="res://Entity/Components/Behaviors/Wander.tscn" id="7_vuxob"]
+[ext_resource type="Script" uid="uid://dk75vwl8p2eck" path="res://Entity/Enemy/enemy.gd" id="1_xoamq"]
+[ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_ihjrd"]
+[ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="3_qhfj0"]
+[ext_resource type="Texture2D" uid="uid://dq6232arfxx81" path="res://Assets/Sprites/GD Icons/GD_Red.tres" id="4_v54h3"]
+[ext_resource type="Script" uid="uid://bruyvfxhffooy" path="res://Entity/Components/entitySight.gd" id="5_8ueks"]
+[ext_resource type="PackedScene" uid="uid://dfcui8l7w2j3m" path="res://Entity/Components/BehaviorFSM.tscn" id="6_vwlhs"]
+[ext_resource type="PackedScene" uid="uid://dx23kg5vk3spb" path="res://Entity/Components/Behaviors/Orbit.tscn" id="7_6srq1"]
+[ext_resource type="PackedScene" uid="uid://dk58kntas8hfd" path="res://Entity/Components/Behaviors/Wander.tscn" id="8_71ktc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw8gt"]
 bg_color = Color(1, 0, 0, 1)
@@ -20,31 +21,26 @@ border_width_bottom = 2
 border_color = Color(0, 0.501961, 0, 1)
 corner_detail = 1
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lg3er"]
-atlas = ExtResource("4_tbnwm")
-region = Rect2(256, 128, 128, 128)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_2b4ng"]
 radius = 50.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o61b1"]
 size = Vector2(120, 120)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_jxsfg"]
-radius = 40.7922
+[sub_resource type="CircleShape2D" id="CircleShape2D_w6h3m"]
+resource_local_to_scene = true
+radius = 272.118
 
-[node name="Dummy" type="CharacterBody2D" groups=["Enemy"]]
+[node name="Enemy_Test" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 256
 collision_mask = 267
 motion_mode = 1
-script = ExtResource("1_17rlh")
-proj1 = ExtResource("2_l1ai2")
-proj2 = ExtResource("2_l1ai2")
-accel = 0.0
-kBResistance = 1.0
-HPmax = 999999
+script = ExtResource("1_xoamq")
+proj1 = ExtResource("2_ihjrd")
+proj2 = ExtResource("2_ihjrd")
+HPmax = 100
 
-[node name="Status" parent="." instance=ExtResource("3_6b84h")]
+[node name="Status" parent="." instance=ExtResource("3_qhfj0")]
 offset_left = -72.0
 offset_top = -120.0
 offset_right = 80.0
@@ -67,7 +63,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_wjxar")
 value = 50.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("AtlasTexture_lg3er")
+texture = ExtResource("4_v54h3")
 
 [node name="Physics_Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_2b4ng")
@@ -85,10 +81,10 @@ collision_layer = 0
 collision_mask = 16
 input_pickable = false
 monitorable = false
-script = ExtResource("5_ib48x")
+script = ExtResource("5_8ueks")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sight"]
-shape = SubResource("CircleShape2D_jxsfg")
+shape = SubResource("CircleShape2D_w6h3m")
 debug_color = Color(0.501961, 0.501961, 0.501961, 0.25098)
 
 [node name="ShootTimer1" type="Timer" parent="."]
@@ -107,10 +103,12 @@ one_shot = true
 wait_time = 10.0
 autostart = true
 
-[node name="BehaviorFSM" parent="." node_paths=PackedStringArray("initState") instance=ExtResource("6_ptp2k")]
-initState = NodePath("behavior_wander")
+[node name="BehaviorFSM" parent="." node_paths=PackedStringArray("initState") instance=ExtResource("6_vwlhs")]
+initState = NodePath("behavior_orbit")
 
-[node name="behavior_wander" parent="BehaviorFSM" instance=ExtResource("7_vuxob")]
+[node name="behavior_orbit" parent="BehaviorFSM" instance=ExtResource("7_6srq1")]
+
+[node name="behavior_wander" parent="BehaviorFSM" instance=ExtResource("8_71ktc")]
 
 [connection signal="onEmpty" from="Sight" to="." method="SightIncrease" binds= [false]]
 [connection signal="onEmpty" from="Sight" to="ShootTimer1" method="set_paused" binds= [true]]

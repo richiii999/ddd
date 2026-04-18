@@ -22,7 +22,7 @@ func _ready(): ## Setup the timer, send a status text, particles (if any), and a
 	## NOTE: Currently unimplemented
 	#if (field): $Timer.stop() # effect timer is autostart, field timers however start on destructor call
 	
-	if(entity.find_child("Status")): entity.find_child("Status").setStatusText(efname, color)
+	if(entity.find_child("Status")): entity.find_child("Status").addStatusText(efname, color)
 	
 	var HitboxSize = entity.find_child("Projectile_Hitbox").get_child(0).shape.size.x
 	if HitboxSize: # Set the particle effect amount and radius (by size of the entity)
@@ -42,7 +42,6 @@ func Destruct(skipEndEffect : bool = false, Timeout : bool = false) -> void: ## 
 	if !skipEndEffect: EndEffect()
 	
 	Tools.ParticlePassOff(self) # Safely reparent particles to let them expire
-	# NOTE: THIS node is free'd from PassOff(), so NO queue_free() here
 
 ## OVERRIDE FUNCS: Inherited effects will override these and supply the functions they wish to perform
 func InitialEffect() -> void: pass # What to do when the effect first applies

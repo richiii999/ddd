@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://tcx34hy287cs"]
 
 [ext_resource type="Texture2D" uid="uid://bftaon55xestl" path="res://Assets/Sprites/Particles/star particle.png" id="1_5s2m3"]
-[ext_resource type="Script" uid="uid://cy3qxcrqmplr4" path="res://Maps/Mechanics/Waygate.gd" id="2_1hw3p"]
+[ext_resource type="Script" uid="uid://cy3qxcrqmplr4" path="res://Maps/Mechanics/waygate.gd" id="2_1hw3p"]
 [ext_resource type="Texture2D" uid="uid://bsq334knc34xj" path="res://Assets/Sprites/Terrain/spawnSquareON.png" id="3_b30aj"]
 [ext_resource type="Texture2D" uid="uid://w3wtcrfc68lr" path="res://Assets/Sprites/Terrain/spawnSquareOFF.png" id="4_b6lit"]
 [ext_resource type="PackedScene" uid="uid://c8y460v3po8xh" path="res://Script Classes and Base Scenes/interact_component.tscn" id="5_6772d"]

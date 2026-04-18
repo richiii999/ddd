@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dx23kg5vk3spb"]
-
-[ext_resource type="Script" uid="uid://dff5tghafp4ts" path="res://Entity/Components/Behaviors/behavior_orbit.gd" id="1_ralxt"]
-
-[node name="behavior_orbit" type="Timer"]
-wait_time = 4.0
-script = ExtResource("1_ralxt")
-orbitsTargetEntity = true

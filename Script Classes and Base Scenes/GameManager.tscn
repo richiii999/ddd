@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://jvh7seemiuj4"]
 
 [ext_resource type="Script" uid="uid://bu7bcptiyn0ns" path="res://Script Classes and Base Scenes/GameManager.gd" id="1_5l5e5"]
-[ext_resource type="PackedScene" uid="uid://yam0tl01v76q" path="res://Maps/nexus.tscn" id="2_xgfaf"]
-[ext_resource type="PackedScene" uid="uid://brdsmfkvsa5ou" path="res://Maps/test_world.tscn" id="3_d5dbk"]
-[ext_resource type="PackedScene" uid="uid://nquy6bnqhiwd" path="res://Entity/Player/player.tscn" id="4_nj8wv"]
+[ext_resource type="PackedScene" uid="uid://yam0tl01v76q" path="res://Maps/Nexus.tscn" id="2_xgfaf"]
+[ext_resource type="PackedScene" uid="uid://brdsmfkvsa5ou" path="res://Maps/TestWorld.tscn" id="3_d5dbk"]
+[ext_resource type="PackedScene" uid="uid://nquy6bnqhiwd" path="res://Entity/Player/Player.tscn" id="4_nj8wv"]
 [ext_resource type="PackedScene" uid="uid://cmgpcvcen5bty" path="res://UI/Item/item_spawner.tscn" id="5_8vor3"]
 
 [node name="GameManager" type="Node"]
