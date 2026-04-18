@@ -144,14 +144,14 @@ func _physics_process(_delta):
 	get_input()
 	move_and_slide()
 	
-	## HP
+	## MP
 	if(tilePain): Damage(tilePain)
 	
 	if MP < MPmax: incMP(2 if $HurtTimer.is_stopped() else 1) # recharge mana up to 100% (faster if passive)
 	if MP > MPmax  : MP -= (int)( ((MP - MPmax) >> 6) + 1 ) # remove 1/64 proportion + 1 constantly from overflowed MP
 	if MP < 0 - 2 * MPmax: MP = 0 - 2 * MPmax # Clamp minimum MP to -2*max (yes negative is allowed)
 	
-	## MP
+	## HP
 	if $HurtTimer.is_stopped() && HP < (HPmax >> 1) : incHP(1) # recharge health up to 50%
 	if HP > HPmax : HP -= (int)( ((HP - HPmax) >> 7) + 1 ) # remove 1/128 proportion + 1 constantly from overflowed HP
 	
