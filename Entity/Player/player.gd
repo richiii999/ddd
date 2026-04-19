@@ -31,7 +31,7 @@ var dashMax : float = 2.00 # Max dashes stored
 var dashNum : float = 0.00 # Current dashes stored (use 1.00 per dash)
 var dashRec : float = 0.005 # Dash recovered per frame (def: 0.005)
 var dashLen : float = 100  # (px) Length of dash
-var dashSpd : float = 1000  # (px/s) Speed of dash
+var dashSpd : float = 600  # (px/s) Speed of dash
 func setDashing(B:bool): dashing = B # needed cause signal (vvv)
 # $DashTimer.timeout -> setDashing(false)
 # $DashTimer.timeout -> $Projhitbox.col_layer(7, true)
