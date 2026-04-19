@@ -34,12 +34,10 @@ func SightIncrease(enterOrExit:bool): # Called by $Sight onFirst() & onEmpty()
 ## OVERRIDE FUNCS: Entity Funcs overridden by Enemy.gd
 func Death():
 	for E in $Sight.smartArea: # For each Player in Sight
-		if E is Player:
-			death.connect(E.GainXP, 4)
-			death.emit(XP)
+		if E is Player: death.connect(E.GainXP.bind(XP))
 	
 	var LT = find_child("LootTable") # Setup LootTable signal connections
-	if LT: death.connect(LT.DropItem.bind(global_position), CONNECT_ONE_SHOT)
+	if LT: death.connect(LT.DropItem.bind(global_position))
 	
 	death.emit() # If has a parent spawner, this is already connected with bind(self)
 	queue_free()

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_c7cqt"]
 [ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="3_i0j2k"]
 [ext_resource type="Texture2D" uid="uid://dq6232arfxx81" path="res://Assets/Sprites/GD Icons/GD_Red.tres" id="4_cpnto"]
-[ext_resource type="Script" uid="uid://bruyvfxhffooy" path="res://Entity/Components/entitySight.gd" id="5_c1xkl"]
+[ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/smartArea.gd" id="5_8dtga"]
 [ext_resource type="PackedScene" uid="uid://dfcui8l7w2j3m" path="res://Entity/Components/BehaviorFSM.tscn" id="6_85l20"]
 [ext_resource type="PackedScene" uid="uid://dx23kg5vk3spb" path="res://Entity/Components/Behaviors/Orbit.tscn" id="7_mktt5"]
 [ext_resource type="PackedScene" uid="uid://dk58kntas8hfd" path="res://Entity/Components/Behaviors/Wander.tscn" id="8_8h73f"]
@@ -77,12 +77,13 @@ monitoring = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Projectile_Hitbox" unique_id=401901389]
 shape = SubResource("RectangleShape2D_o61b1")
 
-[node name="Sight" type="Area2D" parent="." unique_id=98249343]
+[node name="Sight" type="Area2D" parent="." unique_id=1797314496]
 collision_layer = 0
 collision_mask = 16
 input_pickable = false
 monitorable = false
-script = ExtResource("5_c1xkl")
+script = ExtResource("5_8dtga")
+metadata/_custom_type_script = "uid://hi4e34yydb2t"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=1266922284]
 shape = SubResource("CircleShape2D_w6h3m")
