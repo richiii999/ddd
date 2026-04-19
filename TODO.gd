@@ -1,52 +1,27 @@
 ## TODO.gd: Using to store my TODO's and ideas
 
 ## Change the charge bar to be so that when you charge, the dodge bar gets swapped it with the charge bar and you cant dodge, vice versa
-## Fix poison field from not going UNDER the map, have it be around either the player or the enemy (just not under or above map)
 
 ## XP gain broken (most likely due to focus)
-## Walls cannot be broken (probably godot version)
-## Look into other tile effects 
 ## Can buy the same skill multiple times, should only be once
 ## Last slot in inventory broken
-## Fix burn effect to have increased move speed, then decrease movespeed after the effect is over (DONE)
 
 ## Current stuff:
 # Enemy behaviors: Chase (slow zombies), reverse this for flee (fast treasure bunnies)
-# ^ basically done yee
 
-## items onground
-# 'Q' only way to pick items up
-# 'Q' when item in mouse to drop it (priority over ^)
 
 # TODO behavior: Lift "point / target" coordiate var out of all behaviors and put it in base. since its shared
 # similar refactor: abstract stat changes to a 'stat's compoment that items, effects, and skills all have. same interface for all 3.
 
-## BUG v<Found> <date>: <desc of bug>
-# BUG v0.13-174 (03-07-2024): Still not sure what sets the time for a field to 5s, I litterally changed every possible "length" (none were even 5 btw) and none of them did anything? wtf? Where is this phantom 5 come from?
-# BUG v0.14-83 (23-07-2024): focusList doesnt have freed entities removed, so setMaxFocus() on focusTick() can set to a freed entity.
+## BUG List
+# Still not sure what sets the time for a field to 5s, I litterally changed every possible "length" (none were even 5 btw) and none of them did anything? wtf? Where is this phantom 5 come from?
+# focusList doesnt have freed entities removed, so setMaxFocus() on focusTick() can set to a freed entity.
 	# partial Fix: Fixed for players, but idk about enemies: When gainXP is called from enemydeath signal, that enemy is removed from player's focusList
 
-## BUG fixes (just in case they return)
-# BUG v0.16-32 (26-07-2024): bruh wtf godot, it just deleted the whole ass map when I change the root node's type to my custom type? 
-	# FIXED: v0.16-36 (26-07-2024): just added the stuff back, wasnt hard but still, why did that do that?
-# BUG v0.14-19 (08-07-2024): MPbar not showing correct % after changing MPmax each level up. Should be quick fix tho
-	# FIXED: v0.18-06 (31-12-24): in Player, incMP now sets UI value to MP (was 100.0 * MP/MPmax), incMP now called after levelup not before. Now correctly shows mana overflow
-# BUG v0.13-156 (03-07-2024): Effects and particles dont properly remove themselves from the scene tree from the destructor, especially ones that shouldn't have been added to the tree in the first place
-	# Partial Fix v0.13-164 (03-07-2024): Effects which shouldnt be added to tree are no longer added to tree, however ones that are, are added with 0 length and do not time out. Particles do timeout properly tho
-	# FIXED: v0.13-167 (03-07-2024): added "E.get_child(0).start(E.length)" line to ECS's AddEffect() after add_child(E). Where E is the effect to be added. This shouldnt be needed, but it is and idk why
-# BUG v0.09-63 (24-05-2024): Booms STILL dont hurt the player 
-	# FIXED 0.13-106 (26-06-2024): (charge > 125) was checked in 2 places, but only 1 damaged player. Removed 2nd check entirely when refactoring charge mechanic
-# BUG v0.10-61 (31-05-2024): Projectiles and spawned shit / children mismatch local / global positions 
-	# FIXED vX.XX-XX: I fogot
-# BUG v0.10-86 (04-06-2024): Projectile's speed is fucked up after changing the way they are spawned 
-	# FIXED vX.XX-XX: i fogor
-# BUG v0.11-38 (15-06-2024): Enemies dont reward XP anymore, wtf? Probably bc of signals from new KB mechanic 
-	# FIXED v0.12-XX i fogo
-# BUG v0.12-21 (18-06-2024): projectile direction doesnt seem to work right, the direction is slightly wrong, idk
-	# FIXED v0.13-104 (26-06-2024): setTarget() was overriden properly in player, but never actually called. Now called in player._process()
 
-## BUG's: not fixable / idc
-# BUG v0.14-34 (11-07-2024): Ok this is a Godot Editor thing, but it is like not inheriting subclasses from entity unless I close and reopen Godot. Happened multiple times now
+
+
+
 
 ## "Easy" / soon stuff:
 # 3rd ability: use 125 charge to do opus ability: unlocks at level 20, replaces booming and gettign hurt at 125 (still hurts 100-124)

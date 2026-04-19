@@ -1,11 +1,9 @@
 class_name EffectBASE extends GPUParticles2D ## BASE class for effects, effects should inherit from this
-# Contains the effect params, as well as a overwritable funcs for InitialEffect(), EffectTick(), and EndEffect()
+# Contains the effect params, as well as a virtual fn for InitialEffect(), EffectTick(), and EndEffect()
 
-## NOTE: A bunch of things are not implemented rn due to me not knowing to how start the child timer properly
+@onready var entity : Node = Tools.FindParentByType(self, ENTITY) # Which Entity to apply effects to?
 
-@onready var entity : Node = get_parent().get_parent() # Which node to apply effects to? (e.g. player / enemy node)
-
-@export var icon     : Resource = null  # What is the effect's icon? (displays in the top right)
+@export var icon     : Resource = null  # TODO: What is the effect's icon? (displays in the top right)
 @export var color    : String = "WHITE" # Color of status text / entity color change (as a string)
 
 @export var efname   : String = "BASE"  # Reapplications of the same effect adds to timer ("efname" instead of "name" cause reserved word)

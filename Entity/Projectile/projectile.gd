@@ -78,12 +78,12 @@ func BodyCollideRID(rid: RID, body: Node2D, _body_shape_idx: int, _local_shape_i
 
 func AreaCollide(area : Area2D) -> void: ## Entity collide
 	if(area.get_collision_layer_value(7) || area.get_collision_layer_value(11)): # Player / Enemy projHitbox collide
-		var entity = area.get_parent()
+		var entity = Tools.FindParentByType(area, ENTITY)
 		damage.connect(entity.Damage, 4) # (<>, 4) = "Oneshot" connection (disconnects after emission)
 		if source != null: # Special case: source deleted before proj hits. Have to specify (source != null) can't just do (source).
 			damage.emit(power, source)
 		else:
-			damage.emit(power) 
+			damage.emit(power)
 		damage.connect(entity.Knockback, 4)
 		damage.emit(global_position, knockback)
 		
@@ -103,8 +103,8 @@ func Destruct(skipEndEffect : bool = false) -> void: ## "Destructor", called ins
 		QF = true
 		Tools.ParticlePassOff($ProjParticles) # Let the particles expire rather than instantly disappearing
 		
-		if(field && !skipEndEffect): # Spawn an effect (if any) on destruct
-			get_parent().call_deferred("add_child", field) # BUG: On double hit, destructs twice or something and this is called twice. happens right before free
+		if(field && !skipEndEffect): # Spawn a field (if set) on destruct
+			get_parent().call_deferred("add_child", field)
 			field.position = position # Have to do this, it doesnt just inherit
 		
 		queue_free()

@@ -26,7 +26,7 @@ process_material = SubResource("ParticleProcessMaterial_l0ng0")
 script = ExtResource("2_ajd1q")
 color = "GREEN"
 efname = "Speed"
-length = 3.0
+length = 5.0
 
 [node name="Timer" type="Timer" parent="." unique_id=2045385300]
 wait_time = 3.0

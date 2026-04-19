@@ -21,7 +21,7 @@ process_material = SubResource("ParticleProcessMaterial_r3g05")
 script = ExtResource("1_ksrg6")
 color = "BLUE"
 efname = "Wet"
-length = 3.0
+length = 5.0
 
 [node name="Timer" type="Timer" parent="." unique_id=531138420]
 wait_time = 3.0

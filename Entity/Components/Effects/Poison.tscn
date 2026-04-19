@@ -23,7 +23,7 @@ process_material = SubResource("ParticleProcessMaterial_faj8d")
 script = ExtResource("1_7t3d5")
 color = "GREEN"
 efname = "Poison"
-length = 3.0
+length = 5.0
 
 [node name="Timer" type="Timer" parent="." unique_id=412557191]
 wait_time = 3.0

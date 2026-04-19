@@ -63,5 +63,5 @@ func RemoveEffect(E : EffectBASE = null, skipEndEffect : bool = false) -> void:
 
 func ClearEffects() -> void: # Called mainly from nexus or other portaling, also from priests & boss deaths
 	for E in get_children(): E.Destruct(true) # Remove all effects, skipping any end effects
-	for e in constantEffects: AddEffect(e.instantiate()) # Add constant effects (if any)
+	for e in constantEffects: AddEffect(e.instantiate()) # re-add constant effects (if any)
 	for E in get_children(): E.get_child(0).stop() # Stop timers on constant effects

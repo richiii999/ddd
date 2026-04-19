@@ -70,7 +70,7 @@ func initEntityUI(): ## initializes UI stuff (instead of having all these in eac
 	if StatusLabel: StatusLabel.addStatusText("Status", "GRAY")
 
 ## ShootProj: Shoots one of the projectiles based on input and constructs them according to this entity's stats, effects, and fields
-func ShootProj(input : int, Aim : Vector2 = targetEntity.global_position) -> void: 
+func ShootProj(input : int, Aim : Vector2) -> void: 
 	var F : Field = null       # Prepare nodes of their respective types to be filled in
 	var FE: EffectBASE = null
 	var E : EffectBASE = null
