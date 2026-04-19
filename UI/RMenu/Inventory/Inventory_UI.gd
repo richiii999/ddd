@@ -47,7 +47,7 @@ func ValidateSlot(SlotN : int, item : Item) -> bool:
 	return ( 
 	item == null || # Empty mouse
 	item.type == -1 || # Unset type, any slot allowed
-	SlotN in range(Slot.INV1,Slot.INV9) || # Inventory slots always allowed
+	SlotN in range(Slot.INV1,Slot.INV9 + 1) || # Inventory slots always allowed
 	item.type == item.Types.HELM && SlotN == Slot.HELM || # Helmet
 	item.type == item.Types.CHEST && SlotN == Slot.CHEST || # Chest
 	item.type == item.Types.RING && (SlotN == Slot.RING1 || SlotN == Slot.RING2) || # Ring (either)

@@ -4,7 +4,6 @@
 
 ## XP gain broken (most likely due to focus)
 ## Can buy the same skill multiple times, should only be once
-## Last slot in inventory broken
 
 ## Current stuff:
 # Enemy behaviors: Chase (slow zombies), reverse this for flee (fast treasure bunnies)
