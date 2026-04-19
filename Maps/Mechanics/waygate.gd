@@ -1,6 +1,7 @@
 class_name Waygate extends GPUParticles2D ## Waygate: Node for teleporting players, can be one-way only
 # Emits particles and changes sprite momentarily when triggered
 
+@onready var currWorld : WorldBASE = Tools.FindParentByType(self, WorldBASE)
 @export var active : bool = false # Players can only spawn here if active
 @export var oneWayTarget : Waygate = null # if set, instantly sends players to oneWayTarget on interaction (no GUI) (ex. outside dungeon <-> inside dungeon)
 
@@ -17,8 +18,9 @@ func UseWaygate(P:Player = null): # Teleports player to this waygate
 	# TODO: When going from nex to world, play a short transition screen showing the world name and some info, player in center (with party to side)
 		# and some quest details, and any other stuff like stats idk
 	
-	P.global_position = global_position # Move player
+	P.global_position = global_position # Move player 
 	P.find_child("PlayerCam").InstantMove(global_position) # Force move camera without smoothing
+	P.currWorld = currWorld # Set the player's currWorld to this one (otherwise reading tilemap breaks)
 	
 	P.LoadingScreenEnd()
 

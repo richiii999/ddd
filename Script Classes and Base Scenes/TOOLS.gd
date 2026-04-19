@@ -18,7 +18,7 @@ static func ParticlePassOff(P : GPUParticles2D) -> void:
 	P.call_deferred("reparent", P.get_node("/root/GameManager/ParticleTrasher")) # Reparent because otherwise the particles are deleted when their parent node is this frame
 
 # From https://forum.godotengine.org/t/is-there-a-way-to-access-a-sibling-node-without-knowing-its-name/730
-func find_prev_next_sibling_nodes(target_node): 
+func find_prev_next_sibling_nodes(target_node):
 	var prev_node = null
 	var next_node = null
 	if target_node:
@@ -27,3 +27,11 @@ func find_prev_next_sibling_nodes(target_node):
 		if target_index > 0: prev_node = parent.get_child(target_index - 1)
 		if target_index < parent.get_child_count() - 1: next_node = parent.get_child(target_index + 1)
 	return [prev_node, next_node]
+
+# Recursively search upwards for a parent node of type, returns NULL if cannot find
+static func FindParentByType(target_node:Node, type:Variant) -> Node:
+	var curr = target_node
+	while curr:
+		curr = curr.get_parent()
+		if is_instance_of(curr, type): return curr
+	return null

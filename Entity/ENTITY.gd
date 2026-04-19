@@ -3,6 +3,7 @@ class_name ENTITY extends CharacterBody2D ## Provides much useful functionality 
 
 ## References to nodes
 @onready var Manager : GameManager = get_node_or_null("/root/GameManager") # Reference to the WorldNode (so I dont have to call it every time)
+@onready var currWorld : WorldBASE = Tools.FindParentByType(self, WorldBASE)
 @onready var Sight : SmartArea = find_child("Sight") # Ref to this entity's sight smartarea (if any)
 @onready var ECS : EffectComponentSystem = find_child("EffectsComponentSystem") # This entity's EffectComponentSystem node, if null, no effects will be applied to this.
 @onready var Behavior: BehaviorFSM = find_child("BehaviorFSM") # This entity's Behavior Finite State Machine node, if null, will not have any ai behavior (players dont have this)
@@ -118,8 +119,8 @@ func Heal(power : int, source : Node = null):
 	StatusLabel.setStatusFlash("GREEN", 0.25)
 
 func ReadTerrain(): ## Read tile under the entity, assign tile's data to variables
-	if Manager && Manager.world: 
-		currTile = Manager.world.get_cell_tile_data(Manager.world.local_to_map(position))
+	if currWorld:
+		currTile = currWorld.get_cell_tile_data(currWorld.local_to_map(currWorld.to_local(global_position)))
 		tileSpeed = currTile.get_custom_data("Speed") if currTile else 1.00
 		tilePain  = currTile.get_custom_data("Pain")  if currTile else 0
 

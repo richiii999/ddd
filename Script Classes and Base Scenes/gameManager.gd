@@ -22,6 +22,7 @@ func _ready():
 	nexus.Waygates[0].setActive(true)
 	player.global_position = nexus.Waygates[0].global_position
 	player.find_child("PlayerCam").InstantMove(player.global_position)
+	player.currWorld = nexus
 	nexus.Waygates[0].EffectTrigger()
 
 func quitGame():
