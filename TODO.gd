@@ -1,4 +1,9 @@
 ## TODO.gd: Using to store my TODO's and ideas
+## Change the charge bar to be so that when you charge, the dodge bar gets swapped it with the charge bar and you cant dodge, vice versa
+## Fix poison field from not going UNDER the map, have it be around either the player or the enemy (just not under or above map)
+
+
+
 
 ## Current stuff:
 # Enemy behaviors: Chase (slow zombies), reverse this for flee (fast treasure bunnies)
