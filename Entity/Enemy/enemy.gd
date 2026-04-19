@@ -33,10 +33,11 @@ func SightIncrease(enterOrExit:bool): # Called by $Sight onFirst() & onEmpty()
 
 ## OVERRIDE FUNCS: Entity Funcs overridden by Enemy.gd
 func Death(): 
-	for player in focusList: # Give XP to players based on focus and XP amount of the mob
-		enemyDeathXP.connect(player.GainXP, 4)
-		enemyDeathXP.emit(XP * min(1.00, focusList[player]), self) # Max of 1.00 mult for XP gain based on focus
-	
+	for E in $Sight.smartArea:
+		print(E)
+		if E is Player:
+			enemyDeathXP.connect(E.GainXP, 4)
+			enemyDeathXP.emit(XP, self) # Max of 1.00 mult for XP gain based on focus
 	var LT = find_child("LootTable") # Setup LootTable signal connections
 	if LT: death.connect(LT.DropItem.bind(global_position), CONNECT_ONE_SHOT)
 	

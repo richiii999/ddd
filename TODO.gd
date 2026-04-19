@@ -1,5 +1,5 @@
 ## TODO.gd: Using to store my TODO's and ideas
-## XP gain broken (most likely due to focus)
+## Remove anything related to focus (richards job)
 
 ## Current stuff:
 # Enemy behaviors: Chase (slow zombies), reverse this for flee (fast treasure bunnies)

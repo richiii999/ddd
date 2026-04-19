@@ -201,10 +201,6 @@ func Nexus(): ## Nexus: On press, makes you invincible for a moment then transpo
 ## XP / Leveling: Called by signals from enemy deaths, quest rewards, and other things
 func GainXP(xp : int = 0, source : Node = null):
 	# Statistics
-	if(source):
-		#print(str(focusList))
-		focusList.erase(source) # remove enemy from focusList when it dies
-		return # TODO: keep track of kills based on enemy.isingroup and shit, can also keep track of quests and boss kills and etc.
 	
 	# XP & leveling
 	XP += xp
