@@ -18,13 +18,7 @@ func UseWaygate(P:Player = null): # Teleports player to this waygate
 		# and some quest details, and any other stuff like stats idk
 	
 	P.global_position = global_position # Move player
-	var P_cam = P.find_child("PlayerCam") # Force move camera without smoothing
-	P_cam.position_smoothing_enabled = false
-	var tmp = P_cam.position # preserve offset (ex. RMenu toggle)
-	P_cam.global_position = global_position
-	P_cam.position = tmp
-	P_cam.align()
-	P_cam.position_smoothing_enabled = true
+	P.find_child("PlayerCam").InstantMove(global_position) # Force move camera without smoothing
 	
 	P.LoadingScreenEnd()
 

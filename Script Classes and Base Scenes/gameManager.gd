@@ -17,11 +17,15 @@ func _ready():
 	add_child(nexus) # put the nexus, world, and player into the scene tree
 	$WorldSlot.add_child(world)
 	world.add_child(player)
+	player.LoadingScreenStart()
 	
 	# put the player in the nexus to start
 	nexus.Waygates[0].setActive(true)
 	player.global_position = nexus.Waygates[0].global_position
+	player.find_child("PlayerCam").InstantMove(player.global_position)
 	nexus.Waygates[0].EffectTrigger()
+	
+	player.LoadingScreenEnd()
 
 func quitGame():
 	print("manager: quitting game")
