@@ -1,9 +1,7 @@
 ## TODO.gd: Using to store my TODO's and ideas
 
 ## Change the charge bar to be so that when you charge, the dodge bar gets swapped it with the charge bar and you cant dodge, vice versa
-
 ## XP gain broken (most likely due to focus)
-## Can buy the same skill multiple times, should only be once
 
 ## Current stuff:
 # Enemy behaviors: Chase (slow zombies), reverse this for flee (fast treasure bunnies)

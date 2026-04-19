@@ -1,6 +1,4 @@
 extends EffectBASE ## Effect_Speed: Increased movespeed
-func InitialEffect(): 
-	# TODO: makes you go faster
-	pass
+func InitialEffect(): entity.effectMoveSpeed += 0.5 #50% movespeed increase 
 func EffectTick(): pass
-func EndEffect(): pass
+func EndEffect(): entity.effectMoveSpeed -= 0.5 

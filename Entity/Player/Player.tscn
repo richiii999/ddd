@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://28yokghggm42" path="res://Entity/Player/player.gd" id="1_pnyfx"]
 [ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_7hmw6"]
-[ext_resource type="PackedScene" uid="uid://b7jer77opiti2" path="res://Entity/Components/Effects/Burn.tscn" id="3_3vnax"]
 [ext_resource type="PackedScene" uid="uid://bclrygg5d3dyn" path="res://Entity/Field.tscn" id="4_cretm"]
+[ext_resource type="PackedScene" uid="uid://camr7ev4ss5vd" path="res://Entity/Components/Effects/Speed.tscn" id="4_u55sb"]
 [ext_resource type="PackedScene" uid="uid://e5fewqnk5nty" path="res://UI/RMenu/r_menu.tscn" id="6_s48lg"]
 [ext_resource type="PackedScene" uid="uid://jkkh88r7c0fe" path="res://UI/LoadingScreen/loading_screen.tscn" id="7_2h57d"]
 [ext_resource type="PackedScene" uid="uid://ckppam3wv3dxn" path="res://UI/Death/death_screen.tscn" id="8_pt1bs"]
@@ -36,7 +36,7 @@ script = ExtResource("1_pnyfx")
 proj1 = ExtResource("2_7hmw6")
 proj2 = ExtResource("2_7hmw6")
 field2 = ExtResource("4_cretm")
-fieldEffect2 = ExtResource("3_3vnax")
+fieldEffect2 = ExtResource("4_u55sb")
 aimSpread = 0.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1109501273]
@@ -125,15 +125,28 @@ shortcut_keys_enabled = false
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="Charge_Label" type="Label" parent="." unique_id=1616458601]
+[node name="Charge_Label" type="ProgressBar" parent="." unique_id=2017096562]
 unique_name_in_owner = true
-visible = false
-offset_left = -72.0
-offset_top = 88.0
-offset_right = 75.0
-offset_bottom = 114.0
-text = "Charge = XXX"
-horizontal_alignment = 1
+modulate = Color(0.13725491, 1, 1, 1)
+offset_left = -53.333332
+offset_top = 64.0
+offset_right = 52.666668
+offset_bottom = 91.0
+max_value = 125.0
+
+[node name="DashBar" type="ProgressBar" parent="." unique_id=334706880]
+unique_name_in_owner = true
+modulate = Color(1, 0.501961, 0, 1)
+offset_left = -53.0
+offset_top = 64.0
+offset_right = 53.0
+offset_bottom = 91.0
+max_value = 1.0
+allow_greater = true
+
+[node name="DashTimer" type="Timer" parent="DashBar" unique_id=1333424710]
+unique_name_in_owner = true
+one_shot = true
 
 [node name="PlayerCam" parent="." unique_id=1540115635 instance=ExtResource("13_23qwt")]
 unique_name_in_owner = true
@@ -159,19 +172,6 @@ wait_time = 0.5
 one_shot = true
 
 [node name="EffectsComponentSystem" parent="." unique_id=731740693 instance=ExtResource("15_si366")]
-
-[node name="DashBar" type="ProgressBar" parent="." unique_id=334706880]
-modulate = Color(1, 0.501961, 0, 1)
-offset_left = -53.0
-offset_top = 64.0
-offset_right = 53.0
-offset_bottom = 91.0
-max_value = 1.0
-allow_greater = true
-
-[node name="DashTimer" type="Timer" parent="DashBar" unique_id=1333424710]
-unique_name_in_owner = true
-one_shot = true
 
 [node name="HurtTimer" type="Timer" parent="." unique_id=1601431637]
 wait_time = 5.0

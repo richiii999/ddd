@@ -22,6 +22,7 @@ func _ready():
 	$SkillText.text = skillText
 
 func checkAvailible() -> bool: # Checks if this is now availible, called on all nodes when any skill is activated
+	if active: return false # The skill is not available for the player to obtain
 	for skill in parentSkills: 
 		if not skill.active:
 			return false # Inactive parent, not availible

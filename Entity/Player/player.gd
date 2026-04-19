@@ -78,14 +78,13 @@ func get_input(): # TODO: replace this with _input() ?
 	if (Input.is_action_pressed("LMB") && $ShotTimer.is_stopped()):
 		$ShotTimer.start(max((0.30 / atkSpeed), 0.05)) # Max AtkSpeed is 0.05s per shot (AtkSpeed == 6.00), any higher does nothing
 		ShootProj(1, get_global_mouse_position())
-	if (Input.is_action_pressed("RMB") && dashNum >= 1.00 && %DashTimer.is_stopped() && InputV):
+	if (Input.is_action_pressed("RMB") && dashNum >= 1.00 && %DashTimer.is_stopped() && InputV && charge == 0):
 		%DashTimer.start(dashLen / dashSpd)
 		#print(%DashTimer.time_left)
 		setDashing(true) # Disables WASD movement
 		$Projectile_Hitbox.set_collision_layer_value(7, false) # Disable projectile hitbox
 		dashNum -= 1.00
 		velocity += InputV * dashSpd
-	
 	## Spacebar: Charged shots by holding then releasing space with mana
 	# charge linearly by holding space (up to 125%)
 	# if charge over 100: can discharge but hurts self, aim for 100 exactly or go over to do more but hurts more.
@@ -94,8 +93,10 @@ func get_input(): # TODO: replace this with _input() ?
 	# ^ then jumps up after 100 until 125, on release, play a shoot sound, at 125, play a boom sound.
 	if Input.is_action_pressed("space"): # Holding space to charge up 
 		charge += 1 # "charge" up spellcast attack by holding space
-		%Charge_Label.text = "Charge = " + str(charge)
-		if charge >= 10: %Charge_Label.visible = true # Only show charge for holding space, not just a tap
+		%Charge_Label.value = charge
+		if charge >= 10: 
+			%Charge_Label.visible = true # Only show charge for holding space, not just a tap
+			%DashBar.visible = false # Make it invisible when you are charging up
 		if charge >= 125: # If charge a spell to 125%, the spell explodes on player dealing damage and costing mana
 			incMP(-charge)
 			charge = 0 # Reset charge
@@ -105,6 +106,7 @@ func get_input(): # TODO: replace this with _input() ?
 			$Status.addStatusText("Manaburn (" + str(HPmax >> 1) + ")", "RED")
 	if Input.is_action_just_released("space"): # Release space to cast spell based on charge
 		%Charge_Label.visible = false
+		%DashBar.visible = true # Update the visibility for both bars since charging ended
 		if   charge < 10 : incMP(charge) # dont spend mana if it was just a tap
 		elif charge < 25 || charge > MP: $Status.addStatusText("Fizzle! (" + str(charge) + ")", "GRAY") # spend mana, but dont cast a spell if weak charge / OOM
 		elif charge < 100 : ShootProj(2, get_global_mouse_position()); $Status.addStatusText("Spellcast (" + str(charge) + ")", "BLUE")
