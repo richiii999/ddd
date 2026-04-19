@@ -59,8 +59,8 @@ func _ready():
 
 func get_input(): # TODO: replace this with _input() ?
 	## Debug stuff
-	if Input.is_action_pressed("H- (Debug)"): Damage(2, null)   # "CRTL+0"   Health minus
-	if Input.is_action_pressed("H+ (Debug)"): Heal(2, null)     # "Shift+0"  Heal plus
+	if Input.is_action_pressed("H- (Debug)"): Damage(2)   # "CRTL+0"   Health minus
+	if Input.is_action_pressed("H+ (Debug)"): Heal(2)     # "Shift+0"  Heal plus
 	if Input.is_action_just_pressed("X+ (Debug)"): GainXP(9999) # '9'        XP plus for leveling up for debugging
 	if Input.is_action_just_pressed("DEBUG_Bubble"): toggleBubble(!invulnerable) # "Shift+7" Toggles bubble invulnerable
 	
@@ -100,7 +100,7 @@ func get_input(): # TODO: replace this with _input() ?
 		if charge >= 125: # If charge a spell to 125%, the spell explodes on player dealing damage and costing mana
 			incMP(-charge)
 			charge = 0 # Reset charge
-			Damage(HPmax >> 2, self) # Deal 1/4 HP damage
+			Damage(HPmax >> 2) # Deal 1/4 HP damage
 			incMP(-HPmax >> 1) # cost extra MP @ 2:1 HP
 			$Status.addStatusText("Boom! (" + str(HPmax >> 2) + ")", "RED")
 			$Status.addStatusText("Manaburn (" + str(HPmax >> 1) + ")", "RED")
@@ -112,7 +112,7 @@ func get_input(): # TODO: replace this with _input() ?
 		elif charge < 100 : ShootProj(2, get_global_mouse_position()); $Status.addStatusText("Spellcast (" + str(charge) + ")", "BLUE")
 		elif charge < 125 :
 			ShootProj(2, get_global_mouse_position())
-			Damage((int)( (HPmax >> 3) * ((charge - 100) / 25.00) ), self ) # cost up to 1/8 HP if over 100 charge
+			Damage((int)( (HPmax >> 3) * ((charge - 100) / 25.00) )) # cost up to 1/8 HP if over 100 charge
 			$Status.addStatusText("Spellcast (" + str(charge) + ")", "BLUE")
 			$Status.addStatusText("Manaburn (" + str((int)((HPmax >> 3) * ((charge - 100) / 25.00))) + ")", "RED")
 		incMP(-charge)
@@ -199,7 +199,7 @@ func Nexus(): ## Nexus: On press, makes you invincible for a moment then transpo
 	if nexusWaygate: nexusWaygate.UseWaygate(self)
 
 ## XP / Leveling: Called by signals from enemy deaths, quest rewards, and other things
-func GainXP(xp : int = 0, source : Node = null):
+func GainXP(xp : int = 0):
 	# Statistics
 	
 	# XP & leveling
@@ -335,7 +335,6 @@ func DropItem():
 func Death(): 
 	# BUG: When ded, can togle loading screen and will unded due to natural regen, # probably gonna be removed later when other death stuff is added, so leaving for now (as of v0.7)
 	# TODO: keep a list / vector of the last N things that hurt you within 10s,then display them like in WoW
-	# ^ Via focuslist perhaps? (can include self)
 	death.emit(self); # print("[SIGNAL T] Death")
 	
 	#%DeathScreen.visible = !(%DeathScreen.visible); # print("Death Screen Toggled")
@@ -344,6 +343,6 @@ func Death():
 	
 	#get_tree().set_pause( true ) # Toggle pause
 
-func Damage(power : int, source : Node = null):
-	super.Damage(power, source)
+func Damage(power : int):
+	super.Damage(power)
 	$HurtTimer.start(5.00)

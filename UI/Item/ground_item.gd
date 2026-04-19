@@ -22,5 +22,4 @@ func _ready():
 	$ItemSlot.add_child(item)
 
 func fadeOut(): # Fade 20% every 1/5 of TTL
-	print("fade")
 	set_modulate(Color(get_modulate(), $TTL.time_left / TTL))

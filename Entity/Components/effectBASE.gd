@@ -15,7 +15,6 @@ class_name EffectBASE extends GPUParticles2D ## BASE class for effects, effects 
 
 func _ready(): ## Setup the timer, send a status text, particles (if any), and apply any initial effect
 	$Timer.timeout.connect(Destruct.bind(false,true)) # timeout -> Destruct(false, true). This works for field effects too
-	print("Connections: " + str($Timer.timeout.get_connections())) # BUG: It SAYS it is not connecting with the proper arguments, but it is
 	
 	## NOTE: Currently unimplemented
 	#if (field): $Timer.stop() # effect timer is autostart, field timers however start on destructor call
@@ -35,7 +34,6 @@ func Destruct(skipEndEffect : bool = false, Timeout : bool = false) -> void: ## 
 	
 	## NOTE: Currently unimplemented
 	#if (field && length && !Timeout): $Timer.start(length); return # removing field effects first starts timer, only on timeout -> free
-	print( str(skipEndEffect) + str(Timeout) ) # Debug printing values, despite the signal connector giving an error if done in the inspector, connecting via code works
 	
 	if !skipEndEffect: EndEffect()
 	

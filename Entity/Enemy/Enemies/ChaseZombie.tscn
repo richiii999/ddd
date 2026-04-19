@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://bruyvfxhffooy" path="res://Entity/Components/entitySight.gd" id="5_kihv6"]
 [ext_resource type="PackedScene" uid="uid://dfcui8l7w2j3m" path="res://Entity/Components/BehaviorFSM.tscn" id="6_2wcg3"]
 [ext_resource type="PackedScene" uid="uid://dk58kntas8hfd" path="res://Entity/Components/Behaviors/Wander.tscn" id="7_4vlkc"]
-[ext_resource type="Script" uid="uid://drgv5k0gsyg22" path="res://Entity/Components/behaviorFSM.gd" id="7_vvp5b"]
 [ext_resource type="PackedScene" uid="uid://dvourlhp5t1tv" path="res://Entity/Components/Behaviors/ChaseFlee.tscn" id="8_10a87"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw8gt"]
@@ -105,7 +104,6 @@ wait_time = 10.0
 autostart = true
 
 [node name="BehaviorFSM" parent="." unique_id=1391725515 node_paths=PackedStringArray("initState") instance=ExtResource("6_2wcg3")]
-script = ExtResource("7_vvp5b")
 initState = NodePath("behavior_wander")
 
 [node name="behavior_wander" parent="BehaviorFSM" unique_id=250405658 instance=ExtResource("7_4vlkc")]

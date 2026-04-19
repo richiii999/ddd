@@ -1,8 +1,7 @@
 class_name Enemy extends ENTITY ## ENEMY: Base class for enemies, who are instantiated with params for their behavior and appearance
 # Controls enemy behavior, shooting, health, and death
 
-@export var XP : int = 10 # How much XP does the mob give on death? (Modified by focus)
-signal enemyDeathXP       # Emitted with the XP var to send XP to players.
+@export var XP : int = 10 # How much XP does the mob give on death? (Emitted with entity.death)
 
 var targetPosStopRadius : float = 50 # How close to targetPos will this enemy stop (values closer to 0 make movement rubberband when reach targetPos)
 
@@ -14,6 +13,7 @@ func _ready():
 	$ShootTimer1.set_paused(true) # The shoot timers activate only when SightList has something in it
 	$ShootTimer2.set_paused(true) # ^ via onFirst() turning them on & onEmpty() turning them off
 	$Sight.onEmpty.connect(setTargetEntity.bind(self))
+	$Sight.onFirst.connect(setTargetFirstSight)
 	
 	setTargetPos()
 
@@ -32,20 +32,14 @@ func SightIncrease(enterOrExit:bool): # Called by $Sight onFirst() & onEmpty()
 	else:           $Sight/CollisionShape2D.shape.radius -= 250
 
 ## OVERRIDE FUNCS: Entity Funcs overridden by Enemy.gd
-func Death(): 
-	for E in $Sight.smartArea:
-		print(E)
+func Death():
+	for E in $Sight.smartArea: # For each Player in Sight
 		if E is Player:
-			enemyDeathXP.connect(E.GainXP, 4)
-			enemyDeathXP.emit(XP, self) # Max of 1.00 mult for XP gain based on focus
+			death.connect(E.GainXP, 4)
+			death.emit(XP)
+	
 	var LT = find_child("LootTable") # Setup LootTable signal connections
 	if LT: death.connect(LT.DropItem.bind(global_position), CONNECT_ONE_SHOT)
 	
 	death.emit() # If has a parent spawner, this is already connected with bind(self)
 	queue_free()
-
-#func setTargetPos(T : Vector2 = position):  # TODO: move these to behaviors or soemthing
-	#if (focusList.keys()):         targetPos = focusList.keys()[0].global_position
-	#elif (Sight.smartArea.size()): targetPos = Sight.smartArea[0].global_position
-	#elif (SpawnNode):              targetPos = SpawnNode.global_position
-	#else:                          targetPos = T

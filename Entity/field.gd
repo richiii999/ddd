@@ -18,12 +18,12 @@ var source : ENTITY = null # What spawned this field? (passed by projectile)
 #@export var affectsProjectiles: bool = false # Does this field affect <X>? (sets masks in ready())
 @export var affectsPlayers : bool = false # ^
 @export var affectsEnemies : bool = false # ^
-func _process(_delta): print($Timer.time_left)
+
 func _ready():
 	$Sprite2D.self_modulate = Color(color)
 	$GPUParticles2D.self_modulate = Color(color)
 	
-	print("Spawned field: " + str(effect.efname) + " (" + str(length) + "s)")
+	print("Spawned Field: " + str(effect.efname) + " (" + str(length) + "s)")
 	$Timer.start(length)
 	if permanent: $Timer.queue_free()
 	

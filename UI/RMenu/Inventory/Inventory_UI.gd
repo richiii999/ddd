@@ -30,7 +30,7 @@ func _ready():
 		Slots[i].Slot_Clicked.connect(_on_Slot_Click) # Connect the slot's signal
 		Slots[i].UpdateSlot(Inv[i]) # Updates all the slot nodes according to Inv[]
 		
-	print("First Empty SlotNum = " + str(firstEmptyInvSlot()))
+	#print("First Empty SlotNum = " + str(firstEmptyInvSlot()))
 
 # Position of the inventory's origin relative to game's origin
 # Offset by a few extra pixels (ex. 12) to avoid overlapping the mouse

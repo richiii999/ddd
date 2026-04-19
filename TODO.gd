@@ -1,5 +1,4 @@
 ## TODO.gd: Using to store my TODO's and ideas
-## Remove anything related to focus (richards job)
 
 ## Current stuff:
 # Enemy behaviors: Chase (slow zombies), reverse this for flee (fast treasure bunnies)
@@ -7,11 +6,6 @@
 
 # TODO behavior: Lift "point / target" coordiate var out of all behaviors and put it in base. since its shared
 # similar refactor: abstract stat changes to a 'stat's compoment that items, effects, and skills all have. same interface for all 3.
-
-## BUG List
-# Still not sure what sets the time for a field to 5s, I litterally changed every possible "length" (none were even 5 btw) and none of them did anything? wtf? Where is this phantom 5 come from?
-# focusList doesnt have freed entities removed, so setMaxFocus() on focusTick() can set to a freed entity.
-	# partial Fix: Fixed for players, but idk about enemies: When gainXP is called from enemydeath signal, that enemy is removed from player's focusList
 
 
 
@@ -137,7 +131,7 @@
 	# Basic proj and special aoe attack
 	# Multiple behaviors, wander, spaz, circle, chase, leash, flee, etc.
 	# projectile types (1, 2, 3, aoe, etc.), and stats, texture, animation frames, etc.
-## Also, perhaps can scale up enemy HP by player party size (like set a enemyHPscale, set it to the max of player.partysize in focuslist), 
+## Also, perhaps can scale up enemy HP by player party size
 	# apply this before doing damage to prevent cheese (mythfall suffers from this problem: latency on this effect is too low)
 ## Projectile Patterns: can spawn projectile's in special patterns
 # Possibly can group pattern projectiles via one parent node that has only ONE timer
@@ -153,7 +147,6 @@
 # "Locked" loot: OK I rethought the idea, and just make a bag linked to a particular player, one item (or stack) per bag
 	# enemies with more than one loot item, just drop them one at a time one per bag.
 	# Most normal items and pots will not lock
-	# Bosses drop loot to roughly 1/3 of players on focus
 	# quest items in a bag will lock the bag to that player only. You cannot drop quest items. #oh yeah also quests and stuff
 	# ex. if you have a quest bag, and it despawns or whatever, gets sent to your mail #oh yeah also mail and stuff
 # Quickloot: Loots potions, if there are more potions than you can use: "Greedy" option will just use them right out of the bag

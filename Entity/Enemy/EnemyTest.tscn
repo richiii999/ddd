@@ -104,12 +104,11 @@ one_shot = true
 wait_time = 10.0
 autostart = true
 
-[node name="BehaviorFSM" parent="." unique_id=1117611062 node_paths=PackedStringArray("initState") instance=ExtResource("6_85l20")]
-initState = NodePath("behavior_orbit")
-
-[node name="behavior_orbit" parent="BehaviorFSM" unique_id=394172828 instance=ExtResource("7_mktt5")]
+[node name="BehaviorFSM" parent="." unique_id=1117611062 instance=ExtResource("6_85l20")]
 
 [node name="behavior_wander" parent="BehaviorFSM" unique_id=65294224 instance=ExtResource("8_8h73f")]
+
+[node name="behavior_orbit" parent="BehaviorFSM" unique_id=394172828 instance=ExtResource("7_mktt5")]
 
 [node name="LootTable" parent="." unique_id=1315550005 instance=ExtResource("9_bb34h")]
 lootTable = Dictionary[int, int]({
@@ -123,6 +122,7 @@ lootTable = Dictionary[int, int]({
 [connection signal="onFirst" from="Sight" to="." method="SightIncrease" binds= [true]]
 [connection signal="onFirst" from="Sight" to="ShootTimer1" method="set_paused" binds= [false]]
 [connection signal="onFirst" from="Sight" to="ShootTimer2" method="set_paused" binds= [false]]
+[connection signal="onFirst" from="Sight" to="BehaviorFSM" method="ChangeStateByIdx" binds= [1]]
 [connection signal="timeout" from="ShootTimer1" to="." method="EnemyShoot" binds= [1]]
 [connection signal="timeout" from="ShootTimer2" to="." method="EnemyShoot" binds= [2]]
 [connection signal="timeout" from="DamageFlashTimer" to="." method="setStatusFlash"]
