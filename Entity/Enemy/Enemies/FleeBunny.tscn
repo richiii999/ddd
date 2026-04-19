@@ -31,7 +31,7 @@ size = Vector2(120, 120)
 resource_local_to_scene = true
 radius = 272.118
 
-[node name="Enemy_Test" type="CharacterBody2D" unique_id=357451089 groups=["Enemy"]]
+[node name="Enemy_Test2" type="CharacterBody2D" unique_id=357451089 groups=["Enemy"]]
 collision_layer = 256
 collision_mask = 267
 motion_mode = 1

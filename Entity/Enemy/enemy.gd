@@ -30,6 +30,7 @@ func EnemyShoot(P : int, pos : Vector2 = targetEntity.global_position): ShootPro
 func SightIncrease(enterOrExit:bool): # Called by $Sight onFirst() & onEmpty()
 	if enterOrExit: $Sight/CollisionShape2D.shape.radius += 250
 	else:           $Sight/CollisionShape2D.shape.radius -= 250
+	# TODO: if an enemy is hit from outside sight range, should increase also
 
 ## OVERRIDE FUNCS: Entity Funcs overridden by Enemy.gd
 func Death():
