@@ -28,6 +28,7 @@ size = Vector2(170.667, 170.667)
 
 [node name="Player" type="CharacterBody2D" unique_id=1134707457 groups=["Player"]]
 z_index = 10
+z_as_relative = false
 scale = Vector2(0.75, 0.75)
 collision_layer = 16
 collision_mask = 385

@@ -1,18 +1,14 @@
 ## TODO.gd: Using to store my TODO's and ideas
+
 ## Change the charge bar to be so that when you charge, the dodge bar gets swapped it with the charge bar and you cant dodge, vice versa
 ## Fix poison field from not going UNDER the map, have it be around either the player or the enemy (just not under or above map)
-<<<<<<< Updated upstream
 
-
-
-=======
 ## XP gain broken (most likely due to focus)
 ## Walls cannot be broken (probably godot version)
 ## Look into other tile effects 
 ## Can buy the same skill multiple times, should only be once
 ## Last slot in inventory broken
 ## Fix burn effect to have increased move speed, then decrease movespeed after the effect is over (DONE)
->>>>>>> Stashed changes
 
 ## Current stuff:
 # Enemy behaviors: Chase (slow zombies), reverse this for flee (fast treasure bunnies)
