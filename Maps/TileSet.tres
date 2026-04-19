@@ -1,10 +1,10 @@
 [gd_resource type="TileSet" format=3 uid="uid://cnvmagl4xkjae"]
 
-[ext_resource type="Texture2D" uid="uid://cvbrop21b5ui7" path="res://Assets/Sprites/Terrain/TerrainAtlas.png" id="1_8atcj"]
+[ext_resource type="Texture2D" uid="uid://cvbrop21b5ui7" path="res://Assets/Sprites/Terrain/TerrainAtlas.png" id="1_j4whk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i415w"]
 resource_name = "DebugTextures"
-texture = ExtResource("1_8atcj")
+texture = ExtResource("1_j4whk")
 margins = Vector2i(1, 1)
 separation = Vector2i(1, 1)
 texture_region_size = Vector2i(64, 64)

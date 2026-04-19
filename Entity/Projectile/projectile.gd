@@ -65,13 +65,14 @@ func _physics_process(_delta): global_position += linear_velocity # Simple physi
 ## Use the projectile's properties to determine damage and stuff, then delete the projectile. 
 # If these are called on the wrong thing, it's probably cause layers / masks
 func BodyCollideRID(rid: RID, body: Node2D, _body_shape_idx: int, _local_shape_idx: int) -> void: ## Terrain collide
-	#print("projectile hit: " + str(body))
+	print("projectile hit: " + str(body))
 	if body is TileMapLayer:
 		var tileCoords = body.get_coords_for_body_rid(rid)
+		print(tileCoords)
 		var tile = body.get_cell_tile_data(tileCoords)
 		if tile.get_custom_data("Destructible"): # TODO: "if true" vvv change condition to check if destroyed tile exists based on current tile coords + 1 row or whatever
 			if true: body.set_cell(tileCoords, 0, Vector2i(2,1)) # Tile switches to destroyed version which has no collision and a different texture
-			else: body.erase_cell(tileCoords) # Failsafe: If the tilemap atlas is messed up, just erase the tile	
+			else: body.erase_cell(tileCoords) # Failsafe: If the tilemap atlas is messed up, just erase the tile
 		Destruct()
 	#else: pass
 

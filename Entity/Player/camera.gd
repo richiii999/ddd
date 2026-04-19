@@ -38,7 +38,7 @@ func RMenuOffset() -> void: position.x = 160 if !position.x else 0 # Toggling RM
 func InstantMove(pos: Vector2) -> void: 
 	position_smoothing_enabled = false
 	var tmp = position # preserve localpos offset (from RMenu toggle)
-	global_position = global_position
+	global_position = pos
 	position = tmp
 	align()
 	position_smoothing_enabled = true
