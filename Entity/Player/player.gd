@@ -72,8 +72,18 @@ func get_input(): # TODO: replace this with _input() ?
 		velocity += InputV * (accel * effectMoveSpeed * tileSpeed)
 		velocity *= Vector2(0.95,0.95) # slowdown / speed soft-clamp
 	
-	# TODO: change aniframe and sprite flip direction based on direction / velocity for player, or if not moving, mousePos
+	# TODO: change aniframe and sprite flip direction based on direction / velocity for player, or if not moving, mousePos\ (DONE), now we need to get sprites
+	# The "velocity.length() > 10.0" tells us "are we moving fast enough to count as moving?", and the else gives us a vector pointing from the player toward the mouse 
+	var facingDir : Vector2 = velocity if velocity.length() > 10.0 else (get_global_mouse_position() - global_position)
+	# Flip the sprite horizontally when facing the left 
+	#if facingDir.x != 0:
+		#insert something like $Sprite2D.flip_h = facingDir < 0 
 	
+	#if velocity.length() > 10.0:
+		#insert something like $AnimatedSprite2D.play("walk")
+	#else:
+		#insert something like $AnimatedSprite2D.play("idle")
+
 	## Mouse inputs: "pressed" NOT "just_pressed" so player can hold shoot / dash
 	if (Input.is_action_pressed("LMB") && $ShotTimer.is_stopped()):
 		$ShotTimer.start(max((0.30 / atkSpeed), 0.05)) # Max AtkSpeed is 0.05s per shot (AtkSpeed == 6.00), any higher does nothing
@@ -128,8 +138,7 @@ func get_input(): # TODO: replace this with _input() ?
 	if Input.is_action_just_pressed("Loot"): Loot() # Loot with 'Q'
 	
 	## UI Toggles 
-	# TODO: UI layouts
-	if Input.is_action_just_pressed("Loading Screen Toggle"): # Loading screen pauses the Player (TODO)
+	if Input.is_action_just_pressed("Loading Screen Toggle"):
 		%LoadingScreen.visible = !(%LoadingScreen.visible)
 		#get_tree().set_pause( !(get_tree().is_paused()) ) # Toggle pause
 	if Input.is_action_just_pressed("Esc"): %EscMenu.visible = !(%EscMenu.visible) # Esc manu goes above loading screen, both disable all lower controls and UI interactions.
