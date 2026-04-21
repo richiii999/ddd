@@ -27,13 +27,14 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_ftblx")
 script = ExtResource("2_1hw3p")
-active = true
 
 [node name="Sprite2D_ON" type="Sprite2D" parent="." unique_id=1319976076]
 visible = false
+z_index = -1
 texture = ExtResource("3_b30aj")
 
 [node name="Sprite2D_OFF" type="Sprite2D" parent="." unique_id=366996762]
+z_index = -1
 texture = ExtResource("4_b6lit")
 
 [node name="EffectTimer" type="Timer" parent="." unique_id=424176549]
@@ -45,5 +46,4 @@ one_shot = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractComponent" unique_id=1864128415]
 shape = SubResource("RectangleShape2D_4r7gn")
 
-[connection signal="timeout" from="EffectTimer" to="." method="EffectTrigger"]
 [connection signal="Interact" from="InteractComponent" to="." method="WaygateInteract"]

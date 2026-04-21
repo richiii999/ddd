@@ -7,6 +7,7 @@ class_name Waygate extends GPUParticles2D ## Waygate: Node for teleporting playe
 
 func _ready():
 	$InteractComponent.Interact.connect(WaygateInteract)
+	$EffectTimer.timeout.connect(_on_EffectTimer_timeout)
 
 func WaygateInteract(P:Player = null):
 	print("WaygateInteract called, active: " + str(active))
@@ -37,7 +38,12 @@ func setActive(state:bool):
 		$InteractComponent.set_collision_mask_value(5, true)
 
 func EffectTrigger(state : bool = false): # Emits blue particles and changes sprite for a moment
+	#print("EffectTrigger called, state: " + str(state))
 	$Sprite2D_ON.visible = state; 
 	$Sprite2D_OFF.visible = !state; 
 	emitting = state; 
 	if(state): $EffectTimer.start(1.5) # When this times out, stops emitting (calls this with state = false)
+
+func _on_EffectTimer_timeout():
+	#print("EffectTimer timeout, emitting: " + str(emitting))
+	emitting = false #hopefully stops the particles but keeps the 2D sprite on?
