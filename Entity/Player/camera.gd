@@ -42,3 +42,5 @@ func InstantMove(pos: Vector2) -> void:
 	position = tmp
 	align()
 	position_smoothing_enabled = true
+	#offset to make the camera actually go to the middle 
+	RMenuOffset()
