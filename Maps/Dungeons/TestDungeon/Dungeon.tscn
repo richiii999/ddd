@@ -19,13 +19,13 @@ script = ExtResource("2_6eqjf")
 [node name="Rooms" type="Node2D" parent="." unique_id=1892436274]
 
 [node name="DungeonRoom_Test" parent="Rooms" unique_id=1922064856 instance=ExtResource("4_eji3h")]
-position = Vector2(640, 0)
+position = Vector2(719, 1183)
 
 [node name="DungeonRoom_Test2" parent="Rooms" unique_id=2038708109 instance=ExtResource("4_eji3h")]
-position = Vector2(1344, 0)
+position = Vector2(1805, 1059)
 
 [node name="DungeonBossRoom" parent="Rooms" unique_id=2045440863 instance=ExtResource("5_3faj6")]
-position = Vector2(2048, 0)
+position = Vector2(706, -2)
 isBossRoom = true
 
 [node name="EnemySpawns" type="Node2D" parent="." unique_id=555905646]

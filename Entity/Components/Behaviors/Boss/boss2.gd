@@ -5,6 +5,7 @@ extends BehaviorBASE ## Boss1: Stands still and shoots slowly
 # Copied from Orbit
 @export var orbitRadius : float = 300.0
 @onready var orbitTarget : Vector2 = Entity.global_position
+var orbitAngle : float = 0.0 
 func setOrbit(V2 : Vector2 = Entity.targetEntity.global_position, R : float = orbitRadius): orbitTarget = V2; orbitRadius = R
 
 ## Override funcs: behaviorBASE funcs overridden by ChaseFlee
@@ -19,7 +20,8 @@ func onEnter(): # Adjust movement for the Entity and begin orbiting
 	wait_time = 4.00 # This is needed otherwise all orbiting entities will orbit at the same point and stack up rather than spread out
 
 func BehaviorTick(): # Copied from Orbit
-	Entity.setTargetPos(orbitTarget + (Vector2.RIGHT.rotated( (time_left/wait_time) * 6.00 ) * orbitRadius)) # set Entity.targetPos to a position along a circle of radius orbitRadius
+	orbitAngle += 0.02
+	Entity.setTargetPos(orbitTarget + (Vector2.RIGHT.rotated(orbitAngle) * orbitRadius)) # set Entity.targetPos to a position along a circle of radius orbitRadius
 
 func checkConditions(): 
 	if ( Entity.HPBar.ratio <= healthThreshold): 
