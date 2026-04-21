@@ -10,7 +10,7 @@ func _ready():
 	$EffectTimer.timeout.connect(_on_EffectTimer_timeout)
 
 func WaygateInteract(P:Player = null):
-	print("WaygateInteract called, active: " + str(active))
+	#print("WaygateInteract called, active: " + str(active))
 	if !active: setActive(true) # Inactive case: Activate with a short animation
 	if oneWayTarget: oneWayTarget.UseWaygate(P) # One-way gates activate immediately 
 	else: P.toggleWaygateGUI() # Regular waygates open the GUI to select a destination

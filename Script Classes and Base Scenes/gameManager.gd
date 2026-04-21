@@ -86,12 +86,13 @@ func quitGame():
 
 # Handles signal death from player which deletes player and adds a new player for perma death behavior
 func DeathHandling():
-	player.get_parent().remove_child(player) 
-	player = player_tscn.instantiate()
-	nexus.add_child(player) #we want to start in the nexus
-	player.death.connect(DeathHandling)
+	#pause the game
+	get_tree().set_pause(false)
+	#reset the stats and effects of our player
+	player.ResetPlayer()
+	player.ECS.ClearEffects()
+	#call initial setup which takes them back to spawn and show the player, allow them to move and set the camera up properly
+	InitialSetup()
 	player.show()
 	player.InputStatus = true
 	player.find_child("RMenu").show()
-	InitialSetup()
-	#pass

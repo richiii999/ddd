@@ -51,9 +51,8 @@ signal dropItem # Emitted when dropping an item from the mouse
 func _ready():
 	super._ready() # call ENTITY._ready() (sets HP and MP)
 	super.initEntityUI()
-	
 	#print(get_tree_string_pretty()) #Debug print the nodetree
-	
+	%DeathScreen.find_child("Restart").pressed.connect(_OnDeathScreenButtonPushed)
 	## Initialize the UI info
 	%RMenu/Utility/MPot_Button.text = "%s/%s" % [MPotC, MPotmax]
 	%RMenu/Utility/HPot_Button.text = "%s/%s" % [HPotC, HPotmax]
@@ -368,6 +367,40 @@ func DropItem():
 	# Delete item in mouse (by swapping with GROUND slot)
 	inv._on_Slot_Click(inv.Slot.MOUSE, inv.Slot.GROUND)
 
+#rather than hard coding everything in different functions, just use this function
+func ResetPlayer() -> void:
+	# Stats
+	Level = 1
+	XP = 0
+	XPmax = 100
+	Fame = 0
+	skillPoints = 1
+	Stats = [5, 5, 5,   3, 3, 3,   1, 1, 1,
+			0, 0, 0,   0, 0, 0,   0, 0, 0,
+			0, 0, 0,   0, 0, 0,   0, 0, 0]
+	# HP/MP
+	HPmax = 150
+	MPmax = 100
+	HP = HPmax
+	MP = MPmax
+	
+	# Potions
+	HPotC = 3
+	MPotC = 5
+	
+	# Currency
+	coins = 0
+	
+	# UI
+	initEntityUI()
+	UpdateUIBars()
+	%RMenu/XP_Bar.max_value = XPmax
+	%RMenu/XP_Bar.value = XP
+	%RMenu/MP_Bar.max_value = MPmax
+	%RMenu/Utility/HPot_Button.text = "%s/%s" % [HPotC, HPotmax]
+	%RMenu/Utility/MPot_Button.text = "%s/%s" % [MPotC, MPotmax]
+	%RMenu/Coins.text = str(coins)
+
 ## OVERRIDE FUNCS: Entity Overridden funcs by Player.gd
 func Death(): 
 	# BUG: When ded, can togle loading screen and will unded due to natural regen, # probably gonna be removed later when other death stuff is added, so leaving for now (as of v0.7)
@@ -387,9 +420,9 @@ func Damage(power : int):
 
 # Singal function called when button is pressed, signals game maneger to handle hard reset
 func _OnDeathScreenButtonPushed() -> void:
-	%DeathScreen.visible = !(%DeathScreen.visible)
-	get_tree().set_pause(false)
-	death.emit()
+	%DeathScreen.visible = false
+	#get the actual game manager scripts death handling function
+	get_node("/root/GameManager").DeathHandling()
 	
 
 # signal function called when debug is pressed, revives player on the spot

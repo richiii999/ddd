@@ -92,5 +92,4 @@ offset_right = 162.0
 offset_bottom = 388.0
 text = "Debug Restart"
 
-[connection signal="pressed" from="BG color/Restart" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="BG color/DebugRestart" to="." method="_on_debug_restart_pressed"]
