@@ -49,7 +49,7 @@ func onEnter(entity : Node2D):
 	activeEffects[entity] = newEffect #add the effect to our dictionary's recorded entity
 	entity.AddEffect(newEffect) # Field effects are added with no timer
 	
-func onLeave(entity : Node2D): 
+func onLeave(entity : Node2D):
 	#print("onLeave called, expiring: " + str(expiring) + " | entity: " + str(entity))
 	if expiring: return #the field is cleaning up, so we ignore the exit signals
 	if entity in activeEffects: #check to see if the entity is in an active effect
