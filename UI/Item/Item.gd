@@ -2,6 +2,7 @@ class_name Item extends Sprite2D ## Item CLASS definition
 # Applied to all <item>.tres (which are the actual individual item files)
 
 @export var itemName : String = ""
+@export var price : int = 1 # Price to buy this item from a shop
 
 enum Stat {STR, INT, AGI, TOU, WIS, DEX, BLK, WIL, SPD}
 enum Types {INV, HELM, CHEST, RING, MAINHAND, OFFHAND, UNDROPPABLE}

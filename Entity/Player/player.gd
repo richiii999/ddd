@@ -300,6 +300,12 @@ func UpdateUIBars(): # All at once rather than spread out
 	%RMenu/Fame_Bar/Fame_Text.text = "%s" % [Fame]
 
 ## Items
+# Return index of first empty inv slot (-1 if full)
+func FirstEmptySlot() -> int: return %RMenu/Inventory.firstEmptyInvSlot()
+func PutItemInSlot(slotN:int, item:Item): # Force put item in inv slot
+	var inv = $CanvasLayer/RMenu/Inventory
+	inv.Inv[inv.Slot.GROUND] = item.duplicate() # Put item in 'Ground' slot
+	inv._on_Slot_Click(slotN, inv.Slot.GROUND) # Then perform update on inv (moves into inv, deleted ground item)
 func Loot() -> void: # Smart behavior based on ur curr inventory
 	if %RMenu/Inventory.mouseHasItem(): DropItem() # Drop from mouse
 	else: pickItem() # Otherwise try to pickup
@@ -309,7 +315,7 @@ func pickItem() -> void:
 		$Status.addStatusText("No Item on ground", "Gray")
 		return
 		
-	var openSlot : int = %RMenu/Inventory.firstEmptyInvSlot()
+	var openSlot : int = FirstEmptySlot()
 	var inv = $CanvasLayer/RMenu/Inventory
 	var pickedItem : Item = $ItemPickupRange.smartArea[0].find_child("ItemSlot").get_child(0) # First touched groundItem has priority
 	if (pickedItem == null): 
@@ -325,8 +331,9 @@ func pickItem() -> void:
 		$Status.addStatusText("Full inv!", "Gray")
 		return
 		
-	inv.Inv[inv.Slot.GROUND] = pickedItem.duplicate() # Put item in 'Ground' slot
-	inv._on_Slot_Click(openSlot, inv.Slot.GROUND) # Then perform update on inv (moves into inv, deleted ground item)
+	PutItemInSlot(openSlot, pickedItem)
+	#inv.Inv[inv.Slot.GROUND] = pickedItem.duplicate() # Put item in 'Ground' slot
+	#inv._on_Slot_Click(openSlot, inv.Slot.GROUND) # Then perform update on inv (moves into inv, deleted ground item)
 	$ItemPickupRange.smartArea[0].queue_free() # Delete grounditem after
 
 func DropItem():

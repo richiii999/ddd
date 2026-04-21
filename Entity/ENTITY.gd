@@ -7,7 +7,7 @@ class_name ENTITY extends CharacterBody2D ## Provides much useful functionality 
 @onready var Sight : SmartArea = find_child("Sight") # Ref to this entity's sight smartarea (if any)
 @onready var ECS : EffectComponentSystem = find_child("EffectsComponentSystem") # This entity's EffectComponentSystem node, if null, no effects will be applied to this.
 @onready var Behavior: BehaviorFSM = find_child("BehaviorFSM") # This entity's Behavior Finite State Machine node, if null, will not have any ai behavior (players dont have this)
-@onready var StatusLabel : Node = find_child("Status") # This entity's Status component
+@onready var StatusLabel : Status = find_child("Status") # This entity's Status component
 @onready var HPBar : Node = find_child("HP_Bar") # This entity's HP and MP bars
 @onready var MPBar : Node = find_child("MP_Bar")
 var SpawnNode : Node = null # Link to the entity's spawn node (if any) (ex. player = which waygate, enemy = their spawnnode). Set by the spawnnode
