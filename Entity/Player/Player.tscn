@@ -127,6 +127,7 @@ vertical_alignment = 2
 
 [node name="Charge_Label" type="ProgressBar" parent="." unique_id=2017096562]
 unique_name_in_owner = true
+visible = false
 modulate = Color(0.13725491, 1, 1, 1)
 offset_left = -53.333332
 offset_top = 64.0
