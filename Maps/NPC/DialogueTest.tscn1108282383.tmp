@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bbmy3615xp8ba"]
+
+[ext_resource type="Script" uid="uid://djs45ummhxcbc" path="res://Maps/NPC/NPC.gd" id="1_5av4h"]
+[ext_resource type="PackedScene" uid="uid://c8y460v3po8xh" path="res://Script Classes and Base Scenes/Interactable.tscn" id="1_ty5tp"]
+[ext_resource type="Texture2D" uid="uid://gl7l68p10c2b" path="res://Assets/Sprites/GD Icons/GD_Default.tres" id="2_4fo1f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ty5tp"]
+radius = 106.004715
+
+[node name="DialogueTest" type="Node2D" unique_id=61209940]
+script = ExtResource("1_5av4h")
+
+[node name="InteractComponent" parent="." unique_id=232981462 instance=ExtResource("1_ty5tp")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractComponent" unique_id=890303438]
+shape = SubResource("CircleShape2D_ty5tp")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1821983141]
+texture = ExtResource("2_4fo1f")
+
+[node name="Nameplate" type="Label" parent="." unique_id=253969490]
+offset_left = -19.0
+offset_top = 63.0
+offset_right = 21.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 26
+text = "Joe"
+horizontal_alignment = 1
