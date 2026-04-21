@@ -5,7 +5,8 @@ func Interaction(P:Player = null):
 	Interact.emit(P)
 
 func EnterOrExit(body : Node2D, enterOrExit): # Area2D Enter/Exit: Connect / disconnect signals for Players in range
-	get_parent().modulate = Color("BLUE") if enterOrExit else Color("WHITE") # Changes color when in Interact range #TODO make it a highlight outline
+	print(get_parent())
+	get_parent().self_modulate = Color("BLUE") if enterOrExit else Color("WHITE") # Changes color when in Interact range #TODO make it a highlight outline
 	
 	if enterOrExit: body.Interact.connect(Interaction)
 	else: body.Interact.disconnect(Interaction)
