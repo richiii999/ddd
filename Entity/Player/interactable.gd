@@ -5,12 +5,14 @@ class_name Interactable extends Area2D ## Makes parent interactable, connect 'In
 
 signal Interact # recieved from player and re-emitted to parent or wherever
 func Interaction(P:Player = null):
+	#print("Interactable.Interaction called, parent: " + str(get_parent().name) + " | connections: " + str(Interact.get_connections()))
 	Interact.emit(P)
 
 func _ready():
 	setInteractable(interactable)
 
 func EnterOrExit(body : Node2D, enterOrExit): # Area2D Enter/Exit: Connect / disconnect signals for Players in range
+	#print("EnterOrExit: " + str(get_parent().name) + " | body: " + str(body.name) + " | enter: " + str(enterOrExit))
 	get_parent().self_modulate = Color("BLUE") if enterOrExit else Color("WHITE") # Changes color when in Interact range #TODO make it a highlight outline
 	
 	if enterOrExit: body.Interact.connect(Interaction)

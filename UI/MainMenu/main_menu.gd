@@ -9,14 +9,7 @@ var worldSlot
 
 # TODO: add a better way to access the escape menu signal when 
 func _ready() -> void:
-	worldSlot = get_parent()
-	childrenSearch = worldSlot.get_children()
-	childrenSearch = childrenSearch[0].get_children()
-	childrenSearch = childrenSearch[3].get_children()
-	childrenSearch = childrenSearch[0].get_children()
-	escapeMenu = childrenSearch[5]
-	
-	escapeMenu.mainMenuButton.connect(ActivateMainMenu)
+	pass
 
 func ActivateMainMenu():
 	escHandling.emit()

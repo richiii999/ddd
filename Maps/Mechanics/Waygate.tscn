@@ -17,32 +17,32 @@ gravity = Vector3(0, 0, 0)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4r7gn"]
 size = Vector2(288, 288)
 
-[node name="Waygate" type="GPUParticles2D" groups=["Waygate"]]
+[node name="Waygate" type="GPUParticles2D" unique_id=1585017992 groups=["Waygate"]]
 z_index = 1
 emitting = false
 amount = 30
-process_material = SubResource("ParticleProcessMaterial_ftblx")
 texture = ExtResource("1_5s2m3")
 lifetime = 1.5
 one_shot = true
 explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ftblx")
 script = ExtResource("2_1hw3p")
 active = true
 
-[node name="Sprite2D_ON" type="Sprite2D" parent="."]
+[node name="Sprite2D_ON" type="Sprite2D" parent="." unique_id=1319976076]
 visible = false
 texture = ExtResource("3_b30aj")
 
-[node name="Sprite2D_OFF" type="Sprite2D" parent="."]
+[node name="Sprite2D_OFF" type="Sprite2D" parent="." unique_id=366996762]
 texture = ExtResource("4_b6lit")
 
-[node name="EffectTimer" type="Timer" parent="."]
+[node name="EffectTimer" type="Timer" parent="." unique_id=424176549]
 wait_time = 3.0
 one_shot = true
 
-[node name="InteractComponent" parent="." instance=ExtResource("5_6772d")]
+[node name="InteractComponent" parent="." unique_id=1711202956 instance=ExtResource("5_6772d")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractComponent"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractComponent" unique_id=1864128415]
 shape = SubResource("RectangleShape2D_4r7gn")
 
 [connection signal="timeout" from="EffectTimer" to="." method="EffectTrigger"]

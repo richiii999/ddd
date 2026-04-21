@@ -80,7 +80,7 @@ XP+: 9"
 unique_name_in_owner = true
 metadata/_edit_use_anchors_ = true
 
-[node name="MP_Bar" parent="CanvasLayer/RMenu" index="4"]
+[node name="MP_Bar" parent="CanvasLayer/RMenu" index="4" unique_id=1104932176]
 allow_greater = true
 
 [node name="LoadingScreen" parent="CanvasLayer" unique_id=1453508200 instance=ExtResource("7_2h57d")]

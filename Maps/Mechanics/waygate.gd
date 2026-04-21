@@ -5,7 +5,11 @@ class_name Waygate extends GPUParticles2D ## Waygate: Node for teleporting playe
 @export var active : bool = false # Players can only spawn here if active
 @export var oneWayTarget : Waygate = null # if set, instantly sends players to oneWayTarget on interaction (no GUI) (ex. outside dungeon <-> inside dungeon)
 
+func _ready():
+	$InteractComponent.Interact.connect(WaygateInteract)
+
 func WaygateInteract(P:Player = null):
+	print("WaygateInteract called, active: " + str(active))
 	if !active: setActive(true) # Inactive case: Activate with a short animation
 	if oneWayTarget: oneWayTarget.UseWaygate(P) # One-way gates activate immediately 
 	else: P.toggleWaygateGUI() # Regular waygates open the GUI to select a destination

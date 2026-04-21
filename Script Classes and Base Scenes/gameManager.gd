@@ -25,7 +25,13 @@ func _ready():
 	player.InputStatus = false
 	
 	#Main Menu Handling
-	$WorldSlot.add_child(mainMenu)
+	#canvas allows us to keep the main menu seperate from all the other assets in the game (TLDR)
+	var canvas = CanvasLayer.new() 
+	add_child(canvas)
+	canvas.add_child(mainMenu)
+	
+	mainMenu.escapeMenu = player.find_child("EscMenu") #pass in the child directly rather than us just hardcoding this shit in
+	mainMenu.escapeMenu.mainMenuButton.connect(mainMenu.ActivateMainMenu)
 	mainMenu.show()
 	mainMenu.quitPressed.connect(quitGame)
 	mainMenu.playPressed.connect(Play)
@@ -40,25 +46,31 @@ func Play():
 	player.find_child("RMenu").show()
 
 func ActivatingMainMenu():
+	#print("ActivatingMainMenu called")
 	player.InputStatus = false
 	player.velocity = Vector2.ZERO
-	mainMenu.set_position(player.position)
+	#mainMenu.set_position(player.position)
+	#print("player pos: " + str(player.position) + " | mainMenu pos: " + str(mainMenu.position))
 	player.hide()
 	player.find_child("RMenu").hide()
 	player.find_child("EscMenu").hide()
 	mainMenu.show()
-	player.find_child("PlayerCam").InstantMove(mainMenu.global_position)
+	#print("mainMenu visible: " + str(mainMenu.visible))
+	#player.find_child("PlayerCam").InstantMove(mainMenu.global_position)
 
 
 # Reused initial setup for player
 func InitialSetup():
 	# put the player in the nexus to start
+	#print("Waygates: " + str(nexus.Waygates))
+	if player.get_parent(): player.get_parent().remove_child(player)
+	nexus.add_child(player)
 	nexus.Waygates[0].setActive(true)
 	player.global_position = nexus.Waygates[0].global_position
 	player.find_child("PlayerCam").InstantMove(player.global_position)
 	player.currWorld = nexus
 	nexus.Waygates[0].EffectTrigger()
-
+		
 # quit game function that has a signal added during runtime for Mainmenu quit button handling
 func quitGame():
 	print("manager: quitting game")
@@ -67,9 +79,12 @@ func quitGame():
 
 # Handles signal death from player which deletes player and adds a new player for perma death behavior
 func DeathHandling():
-	world.remove_child(player)
+	player.get_parent().remove_child(player) 
 	player = player_tscn.instantiate()
-	world.add_child(player)
+	nexus.add_child(player) #we want to start in the nexus
 	player.death.connect(DeathHandling)
+	player.show()
+	player.InputStatus = true
+	player.find_child("RMenu").show()
 	InitialSetup()
-	pass
+	#pass
