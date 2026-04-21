@@ -133,7 +133,7 @@ func get_input(): # TODO: replace this with _input() ?
 		charge = 0
 	
 	## Interaction: Interactables handle their signal connections automatically. 'Interact' can be emitted blindly
-	if Input.is_action_just_pressed("Interact"): Interact.emit(self); print("Interact pressed")
+	if Input.is_action_just_pressed("Interact"): Interact.emit(self)
 	
 	## Utility button keys
 	if Input.is_action_just_pressed("HPot"): HPot() # HPot with 'H'

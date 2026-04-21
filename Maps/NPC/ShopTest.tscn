@@ -1,3 +1,68 @@
 [gd_scene format=3 uid="uid://d1qn6ah5n7134"]
 
-[node name="ShopTest" type="Node2D" unique_id=195376219]
+[ext_resource type="Script" uid="uid://860o1xjghf0d" path="res://Maps/NPC/shop.gd" id="1_4ubr3"]
+[ext_resource type="Texture2D" uid="uid://gl7l68p10c2b" path="res://Assets/Sprites/GD Icons/GD_Default.tres" id="1_tmpwn"]
+[ext_resource type="PackedScene" uid="uid://c8y460v3po8xh" path="res://Script Classes and Base Scenes/Interactable.tscn" id="2_5a6me"]
+[ext_resource type="PackedScene" uid="uid://cjh7vkxeerwbf" path="res://UI/RMenu/Inventory/inv_slot.tscn" id="4_0su43"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0su43"]
+radius = 148.12157
+
+[node name="ShopTest" type="Sprite2D" unique_id=2144558353]
+texture = ExtResource("1_tmpwn")
+script = ExtResource("1_4ubr3")
+
+[node name="InteractComponent" parent="." unique_id=337905091 instance=ExtResource("2_5a6me")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractComponent" unique_id=1527244726]
+shape = SubResource("CircleShape2D_0su43")
+
+[node name="ShopName" type="Label" parent="." unique_id=1561334538]
+offset_left = -20.0
+offset_top = 72.0
+offset_right = 20.0
+offset_bottom = 95.0
+text = "SHOP"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ShopGUI" type="Panel" parent="." unique_id=226205169]
+visible = false
+offset_left = -177.0
+offset_top = -272.0
+offset_right = 177.0
+offset_bottom = -58.0
+
+[node name="GridContainer" type="GridContainer" parent="ShopGUI" unique_id=2017597173]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 10.0
+offset_right = 340.0
+offset_bottom = 182.0
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 28
+columns = 4
+
+[node name="Slot_Button" parent="ShopGUI/GridContainer" unique_id=618706586 instance=ExtResource("4_0su43")]
+layout_mode = 2
+
+[node name="Slot_Button2" parent="ShopGUI/GridContainer" unique_id=1013256083 instance=ExtResource("4_0su43")]
+layout_mode = 2
+
+[node name="Slot_Button3" parent="ShopGUI/GridContainer" unique_id=237678368 instance=ExtResource("4_0su43")]
+layout_mode = 2
+
+[node name="Slot_Button4" parent="ShopGUI/GridContainer" unique_id=120250369 instance=ExtResource("4_0su43")]
+layout_mode = 2
+
+[node name="Slot_Button5" parent="ShopGUI/GridContainer" unique_id=306104574 instance=ExtResource("4_0su43")]
+layout_mode = 2
+
+[node name="Slot_Button6" parent="ShopGUI/GridContainer" unique_id=1656888515 instance=ExtResource("4_0su43")]
+layout_mode = 2
+
+[node name="Slot_Button7" parent="ShopGUI/GridContainer" unique_id=1153867649 instance=ExtResource("4_0su43")]
+layout_mode = 2
+
+[node name="Slot_Button8" parent="ShopGUI/GridContainer" unique_id=173069734 instance=ExtResource("4_0su43")]
+layout_mode = 2
