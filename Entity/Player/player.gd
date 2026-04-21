@@ -316,7 +316,6 @@ func pickItem() -> void:
 		return
 		
 	var openSlot : int = FirstEmptySlot()
-	var inv = $CanvasLayer/RMenu/Inventory
 	var pickedItem : Item = $ItemPickupRange.smartArea[0].find_child("ItemSlot").get_child(0) # First touched groundItem has priority
 	if (pickedItem == null): 
 		push_warning("Null item picked up") # null shouldnt break inv, but still shouldnt happen (problem with the item)

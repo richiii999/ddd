@@ -24,6 +24,12 @@ func _ready():
 	player.find_child("PlayerCam").InstantMove(player.global_position)
 	player.currWorld = nexus
 	nexus.Waygates[0].EffectTrigger()
+	
+	## Initial items
+	# Some coins
+	$ItemSpawner.SpawnItemByID(-2, Vector2(-300, 0))
+	$ItemSpawner.SpawnItemByID(-2, Vector2(-400, -100))
+	$ItemSpawner.SpawnItemByID(-2, Vector2(-400, 100))
 
 func quitGame():
 	print("manager: quitting game")
