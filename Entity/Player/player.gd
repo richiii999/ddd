@@ -206,6 +206,10 @@ func Nexus(): ## Nexus: On press, makes you invincible for a moment then transpo
 	print("Nexus!")
 	var nexusWaygate = get_node_or_null("/root/GameManager/Nexus/Waygates/NexusWaygate")
 	if nexusWaygate: nexusWaygate.UseWaygate(self)
+	#Added hp increment can be removed if behavior is unintended
+	#incHP(HPmax)
+	
+
 
 ## XP / Leveling: Called by signals from enemy deaths, quest rewards, and other things
 func GainXP(xp : int = 0):
@@ -344,14 +348,28 @@ func DropItem():
 func Death(): 
 	# BUG: When ded, can togle loading screen and will unded due to natural regen, # probably gonna be removed later when other death stuff is added, so leaving for now (as of v0.7)
 	# TODO: keep a list / vector of the last N things that hurt you within 10s,then display them like in WoW
-	death.emit(self); # print("[SIGNAL T] Death")
+	# death.emit(self); # print("[SIGNAL T] Death")
 	
-	#%DeathScreen.visible = !(%DeathScreen.visible); # print("Death Screen Toggled")
+	%DeathScreen.visible = !(%DeathScreen.visible); # print("Death Screen Toggled")
 	
-	incHP(HPmax) ## Debug: just reset HP when ded
+	#incHP(HPmax) ## Debug: just reset HP when ded
 	
-	#get_tree().set_pause( true ) # Toggle pause
+	get_tree().set_pause( true ) # Toggle pause
 
 func Damage(power : int):
 	super.Damage(power)
 	$HurtTimer.start(5.00)
+
+
+# Singal function called when button is pressed, signals game maneger to handle hard reset
+func _OnDeathScreenButtonPushed() -> void:
+	%DeathScreen.visible = !(%DeathScreen.visible)
+	get_tree().set_pause(false)
+	death.emit()
+	
+
+# signal function called when debug is pressed, revives player on the spot
+func _OnDebugRevive() -> void:
+	%DeathScreen.visible = !(%DeathScreen.visible)
+	get_tree().set_pause(false)
+	HP = HPmax

@@ -15,13 +15,13 @@
 # Think of 1-2 more behaviors and code them with an enemy to test it
 
 
-## Death
+## Death - Done
 # Deathscreen, with respawn button and shows your XP / Fame
 # Respawn takes u back to nexus as new char
 # DEBUG: respawndebug button just revives you in the same spot
 
 
-## Main Menu
+## Main Menu - Initial Version Done: Needs more
 # Splash screen / intro on game launch, specifically a custom Godot Editor splash (cool version)
 # credits with dev nicknames and roles
 # Loading screen (game launch): press space to skip all intros and just load to main asap.
