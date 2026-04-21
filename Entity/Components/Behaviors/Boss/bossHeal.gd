@@ -18,5 +18,4 @@ func onLeave(): # Reset movement stuff
 func checkConditions(): 
 	Entity.Heal( int(Entity.HPmax * (healRate / 2.00)) ) # /2 since every 0.5s 
 	if ( Entity.HPBar.ratio >= healMax): 
-		changeStateByIdx.connect(get_parent().ChangeStateByIdx)
 		changeStateByIdx.emit(self.get_index() + 1 ) # Go to next phase

@@ -45,7 +45,6 @@ motion_mode = 1
 script = ExtResource("1_53cjx")
 proj1 = ExtResource("2_7yqgg")
 proj2 = ExtResource("2_7yqgg")
-accel = 0.0
 kBResistance = 1.0
 HPmax = 500
 

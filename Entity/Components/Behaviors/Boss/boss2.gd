@@ -11,7 +11,7 @@ func setOrbit(V2 : Vector2 = Entity.targetEntity.global_position, R : float = or
 ## Override funcs: behaviorBASE funcs overridden by ChaseFlee
 func onEnter(): # Adjust movement for the Entity and begin orbiting
 	Entity.behaviorMoveSpeed = 1.00
-	Entity.set_collision_layer_value(9, false)
+	#Entity.set_collision_layer_value(9, false)
 	Entity.StatusLabel.addStatusText("Boss2", "WHITE")
 	
 	# Copied from Orbit
@@ -21,9 +21,9 @@ func onEnter(): # Adjust movement for the Entity and begin orbiting
 
 func BehaviorTick(): # Copied from Orbit
 	orbitAngle += 0.02
-	Entity.setTargetPos(orbitTarget + (Vector2.RIGHT.rotated(orbitAngle) * orbitRadius)) # set Entity.targetPos to a position along a circle of radius orbitRadius
+	var newTarget = orbitTarget + (Vector2.RIGHT.rotated(orbitAngle) * orbitRadius)
+	Entity.setTargetPos(newTarget) # set Entity.targetPos to a position along a circle of radius orbitRadius
 
 func checkConditions(): 
 	if ( Entity.HPBar.ratio <= healthThreshold): 
-		changeStateByIdx.connect(get_parent().ChangeStateByIdx)
 		changeStateByIdx.emit(self.get_index() + 1 ) # Go to next phase

@@ -6,7 +6,10 @@ class_name BehaviorBASE extends Timer ## Base class for behaviors, provides func
 
 signal changeState # Emitted by checkConditions() with the state to change to, to the parent FSM
 signal changeStateByIdx # Emitted by checkConditions() with the idx of the sibling state to change to, to the parent FSM
-
+func _ready():
+	#connect our signals once, since they were bouncing around between states
+	changeStateByIdx.connect(get_parent().ChangeStateByIdx)
+	changeState.connect(get_parent().ChangeState)
 func onEnter(): pass # What to do when this behavior is triggered
 func onLeave(): pass # What to do when this behavior is ended
 func BehaviorTick(): pass # What to do each frame during this behavior

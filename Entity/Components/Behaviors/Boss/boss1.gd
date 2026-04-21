@@ -14,5 +14,4 @@ func onLeave(): # Reset movement stuff
 
 func checkConditions(): 
 	if ( Entity.HPBar.ratio <= healthThreshold): 
-		changeStateByIdx.connect(get_parent().ChangeStateByIdx)
 		changeStateByIdx.emit(self.get_index() + 1 ) # Go to next phase
