@@ -19,13 +19,19 @@ var source : ENTITY = null # What spawned this field? (passed by projectile)
 @export var affectsPlayers : bool = false # ^
 @export var affectsEnemies : bool = false # ^
 
+var activeEffects : Dictionary = {} #maps an entity with their effect instance
+var expiring : bool = false 
+
 func _ready():
 	$Sprite2D.self_modulate = Color(color)
 	$GPUParticles2D.self_modulate = Color(color)
 	
-	print("Spawned Field: " + str(effect.efname) + " (" + str(length) + "s)")
-	$Timer.start(length)
+	#print("Spawned Field: " + str(effect.efname) + " (" + str(length) + "s)")
 	if permanent: $Timer.queue_free()
+	else: 
+		$Timer.timeout.connect(_on_Timer_timeout); 
+		$Timer.start(length)
+		#print("Field timer started: " + str(length) + "s")
 	
 	set_collision_mask_value(5, affectsPlayers)
 	set_collision_mask_value(9, affectsEnemies)
@@ -37,6 +43,22 @@ func _ready():
 
 ## OVERRIDE FUNCS: SmartArea.gd funcs overridden by Field.gd
 func onEnter(entity : Node2D):
+	if entity in activeEffects and activeEffects[entity].lingering: return #its already a lingering effect, so dont restart
 	var newEffect = effect.duplicate()
-	entity.AddEffect(newEffect, true) # Field effects are added with no timer
-func onLeave(entity : Node2D): entity.RemoveEffect(effect) # Removing a field effect starts it's timer (via destructor)
+	newEffect.field = self #set the fields reference so that our effectBASE knows that its a field effect
+	activeEffects[entity] = newEffect #add the effect to our dictionary's recorded entity
+	entity.AddEffect(newEffect) # Field effects are added with no timer
+	
+func onLeave(entity : Node2D): 
+	#print("onLeave called, expiring: " + str(expiring) + " | entity: " + str(entity))
+	if expiring: return #the field is cleaning up, so we ignore the exit signals
+	if entity in activeEffects: #check to see if the entity is in an active effect
+		var effect = activeEffects[entity]
+		if is_instance_valid(effect): #check to see if they still have an effect
+			entity.RemoveEffect(activeEffects[entity]) # Removing a field effect starts it's timer (via destructor)
+		activeEffects.erase(entity) 
+
+func _on_Timer_timeout():
+	expiring = true
+	#print("Field expired")
+	queue_free()

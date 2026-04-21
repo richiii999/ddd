@@ -54,16 +54,16 @@ func AddEffect(E : EffectBASE = null) -> void:
 	for existing in get_children():
 		if existing.get_script() == E.get_script():
 			#reset the timer for the effect, since they are the same
-			if is_instance_valid(existing.field): return #field effect still active, do nothing
+			if is_instance_valid(existing.field) or existing.lingering: return #field effect still active./lingering, do nothing
 			existing.get_child(0).start(existing.length)
-			print("Refreshed timer for: " + existing.efname)
+			#print("Refreshed timer for: " + existing.efname)
 			#discard our new instance, since we dont need it
 			E.queue_free()
 			return
 	
 	# else: passes all filters ^^, therefore the effect is new, so add it (which calls the effects ready since this is the first time entering the tree), add a fresh effect
 	add_child(E); print("Added " + E.efname + " (" + str(E.length) + "s)")
-	E.get_child(0).start(E.length) # DEBUG: Start the timer with the effect's length. This shouldnt be needed, but otherwise the timer has 0 seconds and doesnt timeout
+	E.get_node("Timer").start(E.length) # DEBUG: Start the timer with the effect's length. This shouldnt be needed, but otherwise the timer has 0 seconds and doesnt timeout
 
 func RemoveEffect(E : EffectBASE = null, skipEndEffect : bool = false) -> void: 
 	if !E: return # null case
