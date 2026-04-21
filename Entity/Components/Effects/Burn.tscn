@@ -25,4 +25,3 @@ length = 5.0
 
 [node name="Timer" type="Timer" parent="." unique_id=1739488805]
 wait_time = 3.0
-autostart = true
