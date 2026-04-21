@@ -5,6 +5,7 @@ extends BehaviorBASE ## Boss1: Stands still and shoots slowly
 ## Override funcs: behaviorBASE funcs overridden by ChaseFlee
 func onEnter(): # Boss stands still
 	Entity.behaviorMoveSpeed = 0.00
+	Entity.velocity = Vector2.ZERO #make sure the boss doesn't move AT ALL
 	Entity.set_collision_layer_value(9, true)
 	Entity.StatusLabel.addStatusText("Boss1", "WHITE")
 
@@ -14,5 +15,4 @@ func onLeave(): # Reset movement stuff
 
 func checkConditions(): 
 	if ( Entity.HPBar.ratio <= healthThreshold): 
-		changeStateByIdx.connect(get_parent().ChangeStateByIdx)
 		changeStateByIdx.emit(self.get_index() + 1 ) # Go to next phase

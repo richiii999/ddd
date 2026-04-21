@@ -99,7 +99,7 @@ func ShootProj(input : int, Aim : Vector2) -> void:
 	
 	Manager.add_child(P) # Reparent projectile to the world
 	P.global_position = global_position # Have to do this from here, not from p.Spawn()
-	if F: FE.field = true; F.effect = FE; F.color = FE.color; F.source = self # Set field & effects (if any)
+	if F: FE.field = F; F.effect = FE; F.color = FE.color; F.source = self # Set field & effects (if any)
 	if E: P.effect = E # Set effect (if any)
 
 func ShootSmart(input : int): ShootProj(input, targetEntity.global_position + targetEntity.velocity * 20) ## Shoots at where targetEntity will be, instead of where it is now

@@ -30,9 +30,9 @@ func ChangeState(newState : BehaviorBASE = null) -> void: # Change state: currSt
 		currState.onEnter()
 
 func ChangeStateByIdx(newStateChildIdx : int = -1) -> void:
-	if newStateChildIdx < 0: print_debug("newStateChildIdx < 0, keeping current state for Entity")
-	if newStateChildIdx > self.get_child_count() - 1: print_debug("newStateChildIdx == outOfRange, keeping current state for Entity")
-	else: # Valid index
-		currState.onLeave()
-		currState = get_child(newStateChildIdx)
-		currState.onEnter()
+	#return rather than else statmenet, since its not going to change anything and leave it as is
+	if newStateChildIdx < 0: print_debug("newStateChildIdx < 0, keeping current state for Entity"); return
+	if newStateChildIdx > self.get_child_count() - 1: print_debug("newStateChildIdx == outOfRange, keeping current state for Entity"); return
+	currState.onLeave()
+	currState = get_child(newStateChildIdx)
+	currState.onEnter()
