@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://cyesuh0mf14kt"]
+
+[ext_resource type="Script" uid="uid://b8flv0x2lfsvy" path="res://UI/MainMenu/main_menu.gd" id="1_jld46"]
+
+[node name="MainMenu" type="Control" unique_id=1191625732]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jld46")
+
+[node name="BG color" type="ColorRect" parent="." unique_id=2091183323]
+z_index = 4096
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2890427, 0.7106343, 0.8717462, 1)
+
+[node name="Label" type="RichTextLabel" parent="BG color" unique_id=2400649]
+modulate = Color(0.057722077, 0.019735226, 0.015061044, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -319.0
+offset_top = 95.17
+offset_right = 319.0
+offset_bottom = 382.16998
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 52
+text = "Domain of the Deranged Deity"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Play" type="Button" parent="BG color" unique_id=1512749159]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.5
+offset_top = -15.5
+offset_right = 59.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 34
+text = "Play"
+
+[node name="Quit" type="Button" parent="BG color" unique_id=1898754078]
+z_index = 4096
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.5
+offset_top = 38.01001
+offset_right = 59.5
+offset_bottom = 93.01001
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 34
+text = "Quit"
+
+[connection signal="pressed" from="BG color/Play" to="." method="_OnPlayPressed"]
+[connection signal="pressed" from="BG color/Quit" to="." method="_OnQuitPressed"]
