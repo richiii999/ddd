@@ -150,7 +150,9 @@ func get_input(): # TODO: replace this with _input() ?
 		%ControlsText.visible = !(%ControlsText.visible)
 		%HiddenControlsText.visible = !(%HiddenControlsText.visible)
 	if Input.is_action_just_pressed("WaygateGUI"): toggleWaygateGUI() # WaygateGUI toggle 'F2'
-	if Input.is_action_just_pressed("RMenu Toggle"): %RMenu.visible = !(%RMenu.visible) # RMenu toggle 'F12'
+	if Input.is_action_just_pressed("RMenu Toggle"): 
+		%RMenu.visible = !(%RMenu.visible) # RMenu toggle 'F12'
+		%PlayerCam.setOffset(%RMenu.visible)
 	if Input.is_action_just_pressed("SkillsUI"): %SkillsUI.visible = !(%SkillsUI.visible) # SkillsUI 'P'
 
 func _physics_process(_delta):
