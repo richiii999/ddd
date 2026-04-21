@@ -1,10 +1,5 @@
 extends Control ## Inventory (MAIN): Interfaces with the slots for gear, items, and the mouse
 
-
-## TODO: Later, can change the UI layout to left, right, top, bottom, whatever
-# which is just mirrored or setting the anchor to Top Left instead of Top Right
-# Bottom layout: 1 row, many column: [Player Icon] [Playername] [HP] [Mana] [gear slots] [inventory slots] [minimap]
-
 ## I fuckin hate anchors. Why is it so hard to scale things to the screen? 
 # I litterally just locked the resolution of the game to 1280x720 to fix it "temporarily" (forever)
 # TODO: ^ probably should lock it to 2k res and use scaling or whatever.
@@ -33,15 +28,11 @@ func _ready():
 	#print("First Empty SlotNum = " + str(firstEmptyInvSlot()))
 
 # Position of the inventory's origin relative to game's origin
-# Offset by a few extra pixels (ex. 12) to avoid overlapping the mouse
+# Offset by a few extra pixels (20) to avoid overlapping the mouse
 @export var MouseOffset : Vector2i = Vector2i(995 - 20, 295 - 20) 
 
 func _process(_delta):
 	$MouseSlot.position = Tools.VecSub(get_global_mouse_position(), MouseOffset)
-
-# Inv management: When click on slot, swap with mouse slot. 
-# TODO: If "Q" with item in mouse, drop in bag. 
-# TODO: bag despawns with important item gets sent to mail
 
 func ValidateSlot(SlotN : int, item : Item) -> bool:
 	return ( 

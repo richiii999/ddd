@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://tcx34hy287cs" path="res://Maps/Mechanics/Waygate.tscn" id="3_rty01"]
 [ext_resource type="PackedScene" uid="uid://blyjhm2j5onnb" path="res://Maps/Mechanics/EnemyPackSpawner.tscn" id="4_6ppdv"]
 [ext_resource type="PackedScene" uid="uid://c2lryasv0namt" path="res://Entity/Enemy/Dummy.tscn" id="5_np840"]
+[ext_resource type="PackedScene" uid="uid://bkpkshofyjcse" path="res://UI/Item/Items/Coin.tscn" id="6_1hknf"]
 [ext_resource type="PackedScene" uid="uid://bxg67641quuf5" path="res://UI/Item/ground_item.tscn" id="6_6ie80"]
 
 [node name="Nexus" type="TileMapLayer" unique_id=961261896 groups=["World"]]
@@ -53,9 +54,12 @@ position = Vector2(-608, 32)
 
 [node name="GroundItem8" parent="testItems" unique_id=410372538 instance=ExtResource("6_6ie80")]
 position = Vector2(-607, 104)
+itemScene = ExtResource("6_1hknf")
 
 [node name="GroundItem9" parent="testItems" unique_id=632036917 instance=ExtResource("6_6ie80")]
 position = Vector2(-545, 104)
+itemScene = ExtResource("6_1hknf")
 
 [node name="GroundItem10" parent="testItems" unique_id=2072095981 instance=ExtResource("6_6ie80")]
 position = Vector2(-530, -75)
+itemScene = ExtResource("6_1hknf")

@@ -1,9 +1,14 @@
 class_name GroundItem extends Node2D
 
 @export var TTL : float = 15.00 # Time for an item to despawn (sec)
-@export var item : Item = null 
+@export var item : Item = null
 
-func _ready(): 
+# If the groundItem is manually placed (ex. for debugging), need to use a scene
+@export var itemScene : PackedScene = null 
+
+func _ready():
+	if itemScene: item = itemScene.instantiate()
+	
 	z_index = 10 # Render above floor
 	
 	# Despawn Timer

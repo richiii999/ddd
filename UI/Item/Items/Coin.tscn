@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bkpkshofyjcse"]
+
+[ext_resource type="Texture2D" uid="uid://drfpfdw05ump0" path="res://Assets/Sprites/GD Icons/GD_Yellow.tres" id="1_buae7"]
+[ext_resource type="Texture2D" uid="uid://3baec8vvuxpd" path="res://Assets/Sprites/GD Icons/GD_Orange.tres" id="2_d7een"]
+[ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_fcwoc"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_buae7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_buae7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_d7een")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Coin" type="Sprite2D" unique_id=1667245125]
+script = ExtResource("2_fcwoc")
+itemName = "Coin"
+type = -2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1259461133]
+sprite_frames = SubResource("SpriteFrames_buae7")
+autoplay = "default"
+frame = 1
+frame_progress = 0.5181447
+speed_scale = 0.5

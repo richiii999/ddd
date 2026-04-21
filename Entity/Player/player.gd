@@ -25,6 +25,10 @@ var XPScaleFactor : float = 1.25 # How much does the cost go up per level?
 var FMScaleFactor : float = 1.05 # How much does the cost go up per fame? (scales slower)
 var skillPoints : int = 1 # One per level
 
+## Currency
+var coins : int = 0 # Coins drop from various places / enemies
+func incCoins(i:int): coins += i; %RMenu/Coins.text = str(coins)
+
 ## Dashing
 var dashing : bool = false # Dashing state, if true, cannot move with WASD
 var dashMax : float = 2.00 # Max dashes stored
@@ -296,22 +300,34 @@ func UpdateUIBars(): # All at once rather than spread out
 	%RMenu/Fame_Bar/Fame_Text.text = "%s" % [Fame]
 
 ## Items
-func Loot(): # Smart behavior based on ur curr inventory
+func Loot() -> void: # Smart behavior based on ur curr inventory
 	if %RMenu/Inventory.mouseHasItem(): DropItem() # Drop from mouse
 	else: pickItem() # Otherwise try to pickup
 
-func pickItem():
-	var openSlot : int = %RMenu/Inventory.firstEmptyInvSlot()
-	if ($ItemPickupRange.smartArea.is_empty()): $Status.addStatusText("No Item on ground", "Gray")
-	elif (openSlot == -1): $Status.addStatusText("Full inv!", "Gray")
-	else: 
-		var inv = $CanvasLayer/RMenu/Inventory
-		var pickedItem : Item = $ItemPickupRange.smartArea[0].find_child("ItemSlot").get_child(0) # First touched groundItem has priority
-		if (pickedItem == null): print("Null item picked up") # null shouldnt break inv, but still shouldnt happen (problem with the item)
+func pickItem() -> void:
+	if ($ItemPickupRange.smartArea.is_empty()): 
+		$Status.addStatusText("No Item on ground", "Gray")
+		return
 		
-		inv.Inv[inv.Slot.GROUND] = pickedItem.duplicate() # Put item in 'Ground' slot
-		inv._on_Slot_Click(openSlot, inv.Slot.GROUND) # Then perform update on inv (moves into inv, deleted ground item)
-		$ItemPickupRange.smartArea[0].queue_free() # Delete grounditem after
+	var openSlot : int = %RMenu/Inventory.firstEmptyInvSlot()
+	var inv = $CanvasLayer/RMenu/Inventory
+	var pickedItem : Item = $ItemPickupRange.smartArea[0].find_child("ItemSlot").get_child(0) # First touched groundItem has priority
+	if (pickedItem == null): 
+		push_warning("Null item picked up") # null shouldnt break inv, but still shouldnt happen (problem with the item)
+		return
+	
+	if (pickedItem.type == -2): 
+		incCoins(1) # Coins have a special itemType
+		$ItemPickupRange.smartArea[0].queue_free()
+		return
+	
+	if (openSlot == -1):
+		$Status.addStatusText("Full inv!", "Gray")
+		return
+		
+	inv.Inv[inv.Slot.GROUND] = pickedItem.duplicate() # Put item in 'Ground' slot
+	inv._on_Slot_Click(openSlot, inv.Slot.GROUND) # Then perform update on inv (moves into inv, deleted ground item)
+	$ItemPickupRange.smartArea[0].queue_free() # Delete grounditem after
 
 func DropItem():
 	var inv = $CanvasLayer/RMenu/Inventory
