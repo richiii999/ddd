@@ -26,7 +26,7 @@ func WaygateInteract(P:Player):
 			P.StatusLabel.addStatusText("Need " + str(coinPrice) + " Coins", "RED")
 		else: # Player can afford it
 			P.incCoins(coinPrice * -1)
-			print(P.Inv.HasItemName(itemPriceItem.itemName))
+			#print(P.Inv.HasItemName(itemPriceItem.itemName))
 			if itemPrice:
 				var slotN = P.Inv.HasItemName(itemPriceItem.itemName) # Find the item slot
 				P.Inv.PutItemInSlot(slotN, null) # Delete the item from Player Inv
@@ -57,6 +57,6 @@ func setActive(state:bool):
 	active = state
 
 func EffectTrigger(state:bool=true): # Emits blue particles and changes sprite for a moment
-	print("EffectTrigger called, state: " + str(state) + "WG= " + str(self))
+	#print("EffectTrigger called, state: " + str(state) + "WG= " + str(self))
 	emitting = state; 
 	if(state): $EffectTimer.start(1.5) # Ttops emitting (calls this with state = false)
