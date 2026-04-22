@@ -38,7 +38,8 @@ func Death():
 		if E is Player: death.connect(E.GainXP.bind(XP))
 	
 	var LT = find_child("LootTable") # Setup LootTable signal connections
-	if LT: death.connect(LT.DropItem.bind(global_position))
+	if LT: # Roll off loot (harder enemies may have more than 1 loot drop)
+		for i in range(LT.numRolls): LT.DropItem(global_position)
 	
 	death.emit() # If has a parent spawner, this is already connected with bind(self)
 	queue_free()

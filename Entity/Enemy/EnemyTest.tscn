@@ -113,7 +113,7 @@ autostart = true
 
 [node name="LootTable" parent="." unique_id=1315550005 instance=ExtResource("9_bb34h")]
 lootTable = Dictionary[int, int]({
-0: 1,
+0: 0,
 1: 1
 })
 

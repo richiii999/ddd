@@ -125,9 +125,11 @@ healthThreshold = 0.0
 [node name="BossBar" parent="." unique_id=1422355881 instance=ExtResource("10_wntmj")]
 
 [node name="LootTable" parent="." unique_id=727939910 instance=ExtResource("11_nhkol")]
+numRolls = 3
 lootTable = Dictionary[int, int]({
+-2: 5,
 0: 1,
-1: 5
+1: 3
 })
 
 [connection signal="onEmpty" from="Sight" to="." method="SightIncrease" binds= [false]]

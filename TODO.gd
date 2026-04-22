@@ -2,7 +2,8 @@
 # NOTE: We are NOT doing classes, instead there's a large skill tree that offers specializations
 
 ## BUG list
-# boss2 behavior is supposed to be identical to orbit, but doesnt work.
+# main menu and death screen fucked up again
+# Specifically the waygate in the nexus behaves strangely (no particles), all other waygates work
 
 
 ## Enemies and behaviors
@@ -34,19 +35,6 @@
 # Saves only player info like stats, inventory, etc.
 # read on game launch, if present, uses the save file
 # if not present, just makes a new player
-
-
-## NPC Dialogue
-# Preferably re-using the existing 'Interactable' code
-# Press 'E' to talk to an NPC, which makes a text box and NPC picture at the bottom of screen
-# NOTE: Players can still move when talking to NPC, just close the dialogue if they walk away
-# At the end of dialogue, emit a signal for NPC dialogue completed (can perhaps be used for quests)
-
-
-## Currency
-# Drops from bosses, 1 coin per boss maybe
-# Can be used at shops (interactables in the nexus):
-	# clicking a shop button will attempt to place an item in your inv, while removing coins
 
 
 ## 3rd Ability "Opus"
