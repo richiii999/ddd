@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c70g6ptmpalcn" path="res://UI/RMenu/Minimap/minimap.gd" id="1_f1c3h"]
 
-[node name="Minimap" type="Panel"]
+[node name="Minimap" type="Panel" unique_id=1497915041]
 custom_minimum_size = Vector2(272, 200)
 anchors_preset = -1
 anchor_right = 0.212
