@@ -62,8 +62,8 @@ func _ready():
 
 func get_input(): # TODO: replace this with _input() ?
 	## Debug stuff
-	if Input.is_action_pressed("H- (Debug)"): Damage(2)   # "CRTL+0"   Health minus
-	if Input.is_action_pressed("H+ (Debug)"): Heal(2)     # "Shift+0"  Heal plus
+	if Input.is_action_pressed("H- (Debug)"): Damage(20)   # "CRTL+0"   Health minus
+	if Input.is_action_pressed("H+ (Debug)"): Heal(20)     # "Shift+0"  Heal plus
 	if Input.is_action_just_pressed("X+ (Debug)"): GainXP(9999) # '9'        XP plus for leveling up for debugging
 	if Input.is_action_just_pressed("DEBUG_Bubble"): toggleBubble(!invulnerable) # "Shift+7" Toggles bubble invulnerable
 	
@@ -113,10 +113,14 @@ func get_input(): # TODO: replace this with _input() ?
 		if charge >= 125: # If charge a spell to 125%, the spell explodes on player dealing damage and costing mana
 			incMP(-charge)
 			charge = 0 # Reset charge
-			Damage(HPmax >> 2) # Deal 1/4 HP damage
-			incMP(-HPmax >> 1) # cost extra MP @ 2:1 HP
-			$Status.addStatusText("Boom! (" + str(HPmax >> 2) + ")", "RED")
-			$Status.addStatusText("Manaburn (" + str(HPmax >> 1) + ")", "RED")
+			if(Level < 20): #since they're less than level 20 (5 levels before max), they get hurt
+				Damage(HPmax >> 2) # Deal 1/4 HP damage
+				incMP(-HPmax >> 1) # cost extra MP @ 2:1 HP
+				$Status.addStatusText("Boom! (" + str(HPmax >> 2) + ")", "RED")
+				$Status.addStatusText("Manaburn (" + str(HPmax >> 1) + ")", "RED")
+			else: #TODO: implement opus somehow
+				$Status.addStatusText("Casting OPUS!")
+				ShootProj(3, get_global_mouse_position())
 	if Input.is_action_just_released("space"): # Release space to cast spell based on charge
 		%Charge_Label.visible = false
 		%DashBar.visible = true # Update the visibility for both bars since charging ended
@@ -235,7 +239,7 @@ func LevelUp():
 		
 		MPmax += 10
 		$CanvasLayer/RMenu/MP_Bar.max_value = MPmax
-		
+		$CanvasLayer/RMenu/HP_Bar.max_value = HPmax
 		skillPoints += 1
 		$CanvasLayer/SkillsUI/SkillPointsText/SkillPointsCount.text = str(skillPoints)
 		
@@ -253,7 +257,9 @@ func LevelUp():
 		XP -= XPmax; XPmax = (int)(XPmax * XPScaleFactor)
 		$CanvasLayer/RMenu/Fame_Bar.value = XP
 		$CanvasLayer/RMenu/Fame_Bar.max_value = XPmax
-	
+		
+	HPmax += 20
+	MPmax += 10
 	incHP(HPmax)
 	incMP(MPmax)
 
