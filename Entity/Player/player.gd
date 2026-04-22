@@ -420,9 +420,9 @@ func Damage(power : int):
 
 # Singal function called when button is pressed, signals game maneger to handle hard reset
 func _OnDeathScreenButtonPushed() -> void:
-	%DeathScreen.visible = false
-	#get the actual game manager scripts death handling function
-	get_node("/root/GameManager").DeathHandling()
+	%DeathScreen.visible = !(%DeathScreen.visible)
+	get_tree().set_pause(false)
+	death.emit()
 	
 
 # signal function called when debug is pressed, revives player on the spot

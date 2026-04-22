@@ -86,13 +86,9 @@ func quitGame():
 
 # Handles signal death from player which deletes player and adds a new player for perma death behavior
 func DeathHandling():
-	#pause the game
-	get_tree().set_pause(false)
-	#reset the stats and effects of our player
-	player.ResetPlayer()
-	player.ECS.ClearEffects()
-	#call initial setup which takes them back to spawn and show the player, allow them to move and set the camera up properly
+	world.remove_child(player)
+	player = player_tscn.instantiate()
+	world.add_child(player)
+	player.death.connect(DeathHandling)
 	InitialSetup()
-	player.show()
-	player.InputStatus = true
-	player.find_child("RMenu").show()
+	#pass
