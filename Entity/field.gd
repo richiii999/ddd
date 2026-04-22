@@ -43,6 +43,7 @@ func _ready():
 
 ## OVERRIDE FUNCS: SmartArea.gd funcs overridden by Field.gd
 func onEnter(entity : Node2D):
+	if not effect: return
 	if entity in activeEffects and activeEffects[entity].lingering: return #its already a lingering effect, so dont restart
 	var newEffect = effect.duplicate()
 	newEffect.field = self #set the fields reference so that our effectBASE knows that its a field effect

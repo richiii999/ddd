@@ -33,12 +33,9 @@ collision_layer = 16
 collision_mask = 385
 motion_mode = 1
 script = ExtResource("1_pnyfx")
-proj1 = ExtResource("2_7hmw6")
-proj2 = ExtResource("2_7hmw6")
-proj3 = ExtResource("2_7hmw6")
-field2 = ExtResource("4_cretm")
-fieldEffect2 = ExtResource("4_u55sb")
-fieldEffect3 = ExtResource("4_u55sb")
+projs = Array[PackedScene]([ExtResource("2_7hmw6"), ExtResource("2_7hmw6"), ExtResource("2_7hmw6")])
+fields = Array[PackedScene]([null, ExtResource("4_cretm"), null])
+fieldEffects = Array[PackedScene]([null, ExtResource("4_u55sb"), null])
 aimSpread = 0.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1109501273]
