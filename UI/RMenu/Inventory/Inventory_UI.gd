@@ -1,16 +1,18 @@
-extends Control ## Inventory (MAIN): Interfaces with the slots for gear, items, and the mouse
+extends Control ## Inventory: Stores the slots for gear, items, and the mouse
+# Interfaces with root/ItemSpawner to drop items on ground
 
-## I fuckin hate anchors. Why is it so hard to scale things to the screen? 
-# I litterally just locked the resolution of the game to 1280x720 to fix it "temporarily" (forever)
-# TODO: ^ probably should lock it to 2k res and use scaling or whatever.
+# Refs to parts of the Player
+@onready var player : Player = Tools.FindParentByType(self, Player)
+@onready var itemPickupRange : SmartArea = player.find_child("ItemPickupRange")
+@onready var itemSpawner = get_node("/root/GameManager/ItemSpawner")
 
 # Position of the inventory's origin relative to game's origin
 # NOTE: Offset by a few extra pixels (20) to avoid overlapping the mouse
 @export var MouseOffset : Vector2i = Vector2i(995 - 20, 295 - 20)
 
-# All items are stored in an array: [0 Mouse, 1-6 Gear, 7-15 Items]
-# Items have a "Type" int, which restricts what slot the item can be placed in.
+# All items are stored in an array: [0 Mouse, 1 Ground, 2-7 Gear, 8-16 Items]
 # NOTE: Mouse and Ground slots are special
+# Gear has a "Type", which restricts what slot the item can be placed in.
 enum Slot {
 MOUSE, GROUND, 
 HELM, CHEST, RING1, 
@@ -38,20 +40,28 @@ null, null, null,
 null, null, null
 ]
 
-signal UpdateInvStats(increase:bool, type:int, sourceStats:Array) # Emitted to player when changing items
+# Emitted to player when changing items
+signal UpdateInvStats(increase:bool, type:int, sourceStats:Array) 
+
+# Emitted when dropping an item, with the dropped item and position
+signal dropItem
 
 func _ready(): 
-	UpdateInvStats.connect(find_parent("Player").UpdateStats)
+	UpdateInvStats.connect(player.UpdateStats)
+	dropItem.connect(itemSpawner.SpawnItem)
 	
-	# Default inventory, debug items
-	Inv[Slot.INV1] = load("res://UI/Item/Items/TEST_ITEM.tscn").instantiate()
-	Inv[Slot.INV5] = load("res://UI/Item/Items/TEST_ITEM.tscn").instantiate()
-	Inv[Slot.INV9] = load("res://UI/Item/Items/TEST_ITEM.tscn").instantiate()
 	
 	for i in len(Slots):
-		Slots[i].slotNumber = (i) # Assign slotNumber
+		Slots[i].slotNumber = i # Assign slotNumber
 		Slots[i].Slot_Clicked.connect(SlotClick) # Connect the slot's signal
 		Slots[i].UpdateSlot(Inv[i]) # Updates all the slot nodes according to Inv[]
+	
+	# Default inventory, debug items
+	var testItem = load("res://UI/Item/Items/TEST_ITEM.tscn").instantiate()
+	# Deferred since player isnt ready() yet
+	call_deferred("PutItemInSlot", 8, testItem)
+	call_deferred("PutItemInSlot", 12, testItem)
+	call_deferred("PutItemInSlot", 16, testItem)
 
 
 func _process(_delta): 
@@ -74,7 +84,7 @@ func SlotClick(SlotA:int, SlotB:int = Slot.MOUSE) -> void:
 	print("Inv: " + str(SlotA) + "<->" + str(SlotB) + "  " + str(Inv[SlotA]) + "<->" + str(Inv[SlotB]))
 	
 	if !ValidateSlot(SlotA, Inv[SlotB]): # Wrong slot, do not swap
-		find_parent("Player").find_child("Status").addStatusText("Wrong Slot", "GREY")
+		player.StatusLabel.addStatusText("Wrong Slot!", "GREY")
 		return
 	
 	# Swap the SlotA <-> B
@@ -87,8 +97,7 @@ func SlotClick(SlotA:int, SlotB:int = Slot.MOUSE) -> void:
 	Slots[SlotB].UpdateSlot(Inv[SlotB])
 	
 	# Adjust UI if needed
-	%MouseSlot.visible = true if (Inv[Slot.MOUSE]) else false
-	%GroundSlot.visible = false
+	%MouseSlot.visible = MouseHasItem()
 	Inv[Slot.GROUND] = null # Remove ground items (e.g. after dropping an item), prevent duplication
 	
 	# Update player stats if changing a gear slot (0's if no item)
@@ -99,10 +108,56 @@ func SlotClick(SlotA:int, SlotB:int = Slot.MOUSE) -> void:
 		if Inv[SlotA]: UpdateInvStats.emit(true, 2, Inv[SlotA].Stats)
 		else: UpdateInvStats.emit(true, 2, [0,0,0,  0,0,0,  0,0,0]) # Add new item
 
-## Returns first empty regular inv slot (SlotN 7-15) or -1 if full
+## Returns first empty slot [8-16] or -1 if full
 func FirstEmptyInvSlot() -> int: 
 	var first : int = Inv.slice(Slot.INV1).find(null) 
-	return ( (-1) if (first == -1) else (first + Slot.INV1) ) # + because the slice's index 0 maps to original index 7
-	
+	# + because the slice's index 0 maps to original index 7
+	return ( -1 if (first == -1) else first + Slot.INV1 ) 
+
 ## Does the mouse have an item in it?
 func MouseHasItem() -> bool: return true if Inv[Slot.MOUSE] else false 
+
+## Put an item in inv slot
+# NOTE: Item must be a valid type for the slot
+# NOTE: This will overwrite any existing item in the slot
+func PutItemInSlot(slotN:int, item:Item): 
+	Inv[Slot.GROUND] = item.duplicate() # Put item in 'Ground' slot
+	SlotClick(slotN, Slot.GROUND) # Then perform update on inv (moves into inv, deleted ground item)
+
+## 'Q' to pickup / drop items on ground
+func Loot() -> void: 
+	if MouseHasItem(): DropItem()
+	else: PickItem()
+
+## Pickup a nearby item from the ground
+func PickItem() -> void:
+	if (itemPickupRange.smartArea.is_empty()): 
+		player.StatusLabel.addStatusText("No Item on ground", "Gray")
+		return
+		
+	var openSlot : int = FirstEmptyInvSlot()
+	var pickedItem : Item = itemPickupRange.smartArea[0].find_child("ItemSlot").get_child(0) # First touched groundItem has priority
+	
+	# null shouldnt break inv, but still shouldnt happen (problem with the item usually)
+	if (pickedItem == null): 
+		push_warning("Null item picked up") 
+	
+	# Coins have a special itemType
+	elif (pickedItem.type == -2): 
+		player.incCoins(1) 
+		itemPickupRange.smartArea[0].queue_free()
+	
+	# No open slot
+	elif (openSlot == -1):
+		player.StatusLabel.addStatusText("Full inv!", "Gray")
+	
+	else:
+		PutItemInSlot(openSlot, pickedItem)
+		itemPickupRange.smartArea[0].queue_free() # Delete grounditem after
+
+## Drop the item in mouse on the ground
+func DropItem():
+	if MouseHasItem(): dropItem.emit(Inv[Slot.MOUSE], player.global_position)
+	else: push_warning("Tried to drop null item") # Null case: shouldnt happen, see Loot()
+	
+	SlotClick(Slot.MOUSE, Slot.GROUND) # Delete item in MOUSE

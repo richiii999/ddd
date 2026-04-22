@@ -156,3 +156,7 @@
 # As a way to ensure the player has actually been in that area for a little bit.
 
 ##Enemies should have an immoveable flag that doesn't allow them to move at all 
+
+## I fuckin hate anchors. Why is it so hard to scale things to the screen? 
+# I litterally just locked the resolution of the game to 1280x720 to fix it "temporarily" (forever)
+# TODO: ^ probably should lock it to 2k res and use scaling or whatever.

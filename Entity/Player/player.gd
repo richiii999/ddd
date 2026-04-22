@@ -1,6 +1,10 @@
 class_name Player extends ENTITY ## PLAYER: Gamedevs be like: Player.script = 10,000LoC, any other script = 5 LoC
 # controls the player and UI via keypresses. Stores stats, actions, storage, and lots of stuff...
 
+## Refs to child nodes
+@onready var Inv = $CanvasLayer/RMenu/Inventory # Other stuff needs to access player inv (ex. shops)
+# NOTE: Inv requires there to be a ItemPickupRange (type SmartArea)
+
 ## Stats
 enum Stat {coreSTR, coreINT, coreAGI,   coreTOU, coreWIS, coreDEX,   coreBLK, coreWIL, coreSPD, # STR = Melee  - INT = Magic - AGI = Ranged
 		   gearSTR, gearINT, gearAGI,   gearTOU, gearWIS, gearDEX,   gearBLK, gearWIL, gearSPD, # TOU = Health - WIS = Mana  - DEX = Crit
@@ -46,7 +50,6 @@ func setInput(state:bool): InputStatus = state # Disables all input (used when l
 var InputV : Vector2 = Vector2.ZERO # Input vector
 var charge : int = 0 # (Spacebar) Charge incrementor for spellcasting
 signal Interact # Emitted with self to any connected interact component
-signal dropItem # Emitted when dropping an item from the mouse
 
 func _ready():
 	super._ready() # call ENTITY._ready() (sets HP and MP)
@@ -142,7 +145,7 @@ func get_input(): # TODO: replace this with _input() ?
 	if Input.is_action_just_pressed("HPot"): HPot() # HPot with 'H'
 	if Input.is_action_just_pressed("MPot"): MPot() # MPot with 'G'
 	if Input.is_action_just_pressed("Nexus"): Nexus() # Nex with 'N'
-	if Input.is_action_just_pressed("Loot"): Loot() # Loot with 'Q'
+	if Input.is_action_just_pressed("Loot"): Inv.Loot() # Loot with 'Q'
 	
 	## UI Toggles 
 	if Input.is_action_just_pressed("Loading Screen Toggle"):
@@ -311,65 +314,7 @@ func UpdateUIBars(): # All at once rather than spread out
 	%RMenu/Fame_Bar/Fame_Text.text = "%s" % [Fame]
 
 ## Items
-# Return index of first empty inv slot (-1 if full)
-func FirstEmptySlot() -> int: return %RMenu/Inventory.FirstEmptyInvSlot()
-func PutItemInSlot(slotN:int, item:Item): # Force put item in inv slot
-	var inv = $CanvasLayer/RMenu/Inventory
-	inv.Inv[inv.Slot.GROUND] = item.duplicate() # Put item in 'Ground' slot
-	inv._on_Slot_Click(slotN, inv.Slot.GROUND) # Then perform update on inv (moves into inv, deleted ground item)
-func Loot() -> void: # Smart behavior based on ur curr inventory
-	if %RMenu/Inventory.MouseHasItem(): DropItem() # Drop from mouse
-	else: pickItem() # Otherwise try to pickup
-
-func pickItem() -> void:
-	if ($ItemPickupRange.smartArea.is_empty()): 
-		$Status.addStatusText("No Item on ground", "Gray")
-		return
-		
-	var openSlot : int = FirstEmptySlot()
-	var pickedItem : Item = $ItemPickupRange.smartArea[0].find_child("ItemSlot").get_child(0) # First touched groundItem has priority
-	if (pickedItem == null): 
-		push_warning("Null item picked up") # null shouldnt break inv, but still shouldnt happen (problem with the item)
-		return
-	
-	if (pickedItem.type == -2): 
-		incCoins(1) # Coins have a special itemType
-		$ItemPickupRange.smartArea[0].queue_free()
-		return
-	
-	if (openSlot == -1):
-		$Status.addStatusText("Full inv!", "Gray")
-		return
-		
-	PutItemInSlot(openSlot, pickedItem)
-	#inv.Inv[inv.Slot.GROUND] = pickedItem.duplicate() # Put item in 'Ground' slot
-	#inv._on_Slot_Click(openSlot, inv.Slot.GROUND) # Then perform update on inv (moves into inv, deleted ground item)
-	$ItemPickupRange.smartArea[0].queue_free() # Delete grounditem after
-
-func DropItem():
-	var inv = $CanvasLayer/RMenu/Inventory
-	var droppedItem : Item = inv.Inv[inv.Slot.MOUSE]
-	
-	if (droppedItem == null): # Null case
-		print("Tried to drop null item")
-		return
-	
-	## Create the ground item and put it in the scene
-	#var groundItem : GroundItem = load("res://UI/Item/ground_item.tscn").instantiate()
-	#groundItem._init(droppedItem.duplicate())
-	#add_child(groundItem)
-	#groundItem.reparent(get_parent())
-	
-	var itemSpawner = get_node("/root/GameManager/ItemSpawner")
-	if itemSpawner == null: 
-		push_warning("ItemSpawner not found! Skipping Player.DropItem()")
-		return
-	else: 
-		dropItem.connect(itemSpawner.SpawnItem, CONNECT_ONE_SHOT) # Signal to ItemSpawner to spawn the item
-		dropItem.emit(droppedItem, global_position)
-		
-	# Delete item in mouse (by swapping with GROUND slot)
-	inv._on_Slot_Click(inv.Slot.MOUSE, inv.Slot.GROUND)
+# TODO wip move
 
 ## OVERRIDE FUNCS: Entity Overridden funcs by Player.gd
 func Death(): 
