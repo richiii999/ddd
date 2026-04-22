@@ -121,7 +121,7 @@ func MouseHasItem() -> bool: return true if Inv[Slot.MOUSE] else false
 # NOTE: Item must be a valid type for the slot
 # NOTE: This will overwrite any existing item in the slot
 func PutItemInSlot(slotN:int, item:Item): 
-	Inv[Slot.GROUND] = item.duplicate() # Put item in 'Ground' slot
+	Inv[Slot.GROUND] = item.duplicate() if item else null # Put item in 'Ground' slot
 	SlotClick(slotN, Slot.GROUND) # Then perform update on inv (moves into inv, deleted ground item)
 
 ## 'Q' to pickup / drop items on ground
@@ -161,3 +161,16 @@ func DropItem():
 	else: push_warning("Tried to drop null item") # Null case: shouldnt happen, see Loot()
 	
 	SlotClick(Slot.MOUSE, Slot.GROUND) # Delete item in MOUSE
+
+## Check for a specific item in inv, returning the slotN it's in (-1 if not found)
+func HasItem(item:Item) -> int: return HasItemID(item.ID)
+func HasItemName(itemName:String) -> int:
+	for i in range(len(Inv)):
+		if Inv[i] and Inv[i].itemName == itemName: return i
+	return -1
+func HasItemID(id:int) -> int:
+	if id == 0: push_warning("Searching for ItemID:0")
+	
+	for i in range(len(Inv)):
+		if Inv[i] and Inv[i].ID == id: return i
+	return -1

@@ -1,8 +1,8 @@
-class_name Item extends Sprite2D ## Item CLASS definition
-# Applied to all <item>.tres (which are the actual individual item files)
+class_name Item extends Sprite2D ## Item stats and info
 
-@export var itemName : String = ""
+@export var itemName : String = "" #TODO: itemname is filename without underscores
 @export var price : int = 1 # Price to buy this item from a shop
+var ID : int = 0 # Set by ItemSpawner when items are created
 
 enum Stat {STR, INT, AGI, TOU, WIS, DEX, BLK, WIL, SPD}
 enum Types {INV, HELM, CHEST, RING, MAINHAND, OFFHAND, UNDROPPABLE}
@@ -17,4 +17,5 @@ var Stats : Array = [1,1,1,  1,1,1,  1,1,1]
 ## Projectile: generally main & offhand items, but potentially others.
 @export var projectile : PackedScene = null
 
-# TODO: item table is res:// strings, just pick one randoml;y or someth
+func _ready(): 
+	if itemName == "": push_warning("ItemName not set! " + str(self))

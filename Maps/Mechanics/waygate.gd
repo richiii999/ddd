@@ -5,20 +5,36 @@ class_name Waygate extends GPUParticles2D ## Waygate: Node for teleporting playe
 @export var active : bool = false # Players can only spawn here if active
 @export var oneWayTarget : Waygate = null # Instantly tp to oneWayTarget, no GUI (ex. dung exit)
 
-# TODO: Change this to require (one or more) itemIDs
-@export var price : int = 0 # What does it cost to activate this waygate?
+# Activation cost
+# NOTE: Consumed upon activation, if free, can just press 'E' to activate
+# NOTE: oneway and dungeon-related waygates shouldnt have these, only the open-world ones.
+@export var coinPrice : int = 0
+@export var itemPrice : PackedScene = null # put any Item.tscn in editor
+var itemPriceItem : Item = null # Actual item from ^
 
 func _ready():
 	$InteractComponent.Interact.connect(WaygateInteract)
 	$EffectTimer.timeout.connect(EffectTrigger.bind(false)) # Timer controls particle burst
-
-func WaygateInteract(P:Player = null):
-	if !active:
-		# TODO: check for cost
-		setActive(true)
 	
-	if oneWayTarget: oneWayTarget.UseWaygate(P) # One-way gates activate immediately
-	else: P.toggleWaygateGUI() # Regular waygates open the GUI to select a destination
+	if itemPrice: itemPriceItem = itemPrice.instantiate()
+
+func WaygateInteract(P:Player):
+	if !active: # Inactive, try to purchase
+		if itemPrice and P.Inv.HasItemName(itemPriceItem.itemName) == -1: # itemName since ID is 0
+			P.StatusLabel.addStatusText("Missing Item: " + str(itemPriceItem.name), "RED")
+		elif P.coins < coinPrice:
+			P.StatusLabel.addStatusText("Need " + str(coinPrice) + " Coins", "RED")
+		else: # Player can afford it
+			P.incCoins(coinPrice * -1)
+			#print(P.Inv.HasItemName(itemPriceItem.itemName))
+			if itemPrice:
+				var slotN = P.Inv.HasItemName(itemPriceItem.itemName) # Find the item slot
+				P.Inv.PutItemInSlot(slotN, null) # Delete the item from Player Inv
+			setActive(true)
+	
+	else: # Already active
+		if oneWayTarget: oneWayTarget.UseWaygate(P) # One-way gates activate immediately
+		else: P.toggleWaygateGUI() # Regular waygates open the GUI to select a destination
 
 func UseWaygate(P:Player): # Teleports player to this waygate
 	await P.LoadingScreenStart() # Show loading screen before moving player & camera
@@ -41,6 +57,6 @@ func setActive(state:bool):
 	active = state
 
 func EffectTrigger(state:bool=true): # Emits blue particles and changes sprite for a moment
-	print("EffectTrigger called, state: " + str(state) + "WG= " + str(self))
+	#print("EffectTrigger called, state: " + str(state) + "WG= " + str(self))
 	emitting = state; 
 	if(state): $EffectTimer.start(1.5) # Ttops emitting (calls this with state = false)
