@@ -1,24 +1,26 @@
-class_name Waygate extends GPUParticles2D ## Waygate: Node for teleporting players, can be one-way only
+class_name Waygate extends GPUParticles2D ## Waygate: Node for teleporting players
 # Emits particles and changes sprite momentarily when triggered
 
 @onready var currWorld : WorldBASE = Tools.FindParentByType(self, WorldBASE)
 @export var active : bool = false # Players can only spawn here if active
-@export var oneWayTarget : Waygate = null # if set, instantly sends players to oneWayTarget on interaction (no GUI) (ex. outside dungeon <-> inside dungeon)
+@export var oneWayTarget : Waygate = null # Instantly tp to oneWayTarget, no GUI (ex. dung exit)
+
+# TODO: Change this to require (one or more) itemIDs
+@export var price : int = 0 # What does it cost to activate this waygate?
 
 func _ready():
 	$InteractComponent.Interact.connect(WaygateInteract)
-	$EffectTimer.timeout.connect(_on_EffectTimer_timeout)
+	$EffectTimer.timeout.connect(EffectTrigger.bind(false)) # Timer controls particle burst
 
 func WaygateInteract(P:Player = null):
-	#print("WaygateInteract called, active: " + str(active))
-	if !active: setActive(true) # Inactive case: Activate with a short animation
-	if oneWayTarget: oneWayTarget.UseWaygate(P) # One-way gates activate immediately 
+	if !active:
+		# TODO: check for cost
+		setActive(true)
+	
+	if oneWayTarget: oneWayTarget.UseWaygate(P) # One-way gates activate immediately
 	else: P.toggleWaygateGUI() # Regular waygates open the GUI to select a destination
 
-func UseWaygate(P:Player = null): # Teleports player to this waygate
-	if !P: print_debug("UseWaygate() called without arg 'Player', returning"); return
-	if !active: setActive(true) # Inactive destination case: Activate it, then continue (ex. entering a dungeon)
-	
+func UseWaygate(P:Player): # Teleports player to this waygate
 	await P.LoadingScreenStart() # Show loading screen before moving player & camera
 	# TODO: When going from nex to world, play a short transition screen showing the world name and some info, player in center (with party to side)
 		# and some quest details, and any other stuff like stats idk
@@ -28,22 +30,17 @@ func UseWaygate(P:Player = null): # Teleports player to this waygate
 	P.currWorld = currWorld # Set the player's currWorld to this one (otherwise reading tilemap breaks)
 	
 	P.LoadingScreenEnd()
+	
+	EffectTrigger()
 
-func setActive(state:bool): 
-	if state && !active: # If activating from inactive
-		$InteractComponent.set_collision_mask_value(5, false) # Disable interaction until animation is over
-		# TODO: await play animation # Does this mess with WGinteract?? ^^^
-		EffectTrigger(state)
-		active = true
-		$InteractComponent.set_collision_mask_value(5, true)
+# BUG: The nexus waygate gets set twice when the game is started, something in gameManager
+func setActive(state:bool):
+	EffectTrigger(state)
+	$Sprite2D_ON.visible = state;
+	$Sprite2D_OFF.visible = !state;
+	active = state
 
-func EffectTrigger(state : bool = false): # Emits blue particles and changes sprite for a moment
-	#print("EffectTrigger called, state: " + str(state))
-	$Sprite2D_ON.visible = state; 
-	$Sprite2D_OFF.visible = !state; 
+func EffectTrigger(state:bool=true): # Emits blue particles and changes sprite for a moment
+	print("EffectTrigger called, state: " + str(state) + "WG= " + str(self))
 	emitting = state; 
-	if(state): $EffectTimer.start(1.5) # When this times out, stops emitting (calls this with state = false)
-
-func _on_EffectTimer_timeout():
-	#print("EffectTimer timeout, emitting: " + str(emitting))
-	emitting = false #hopefully stops the particles but keeps the 2D sprite on?
+	if(state): $EffectTimer.start(1.5) # Ttops emitting (calls this with state = false)

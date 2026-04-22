@@ -306,13 +306,13 @@ func UpdateUIBars(): # All at once rather than spread out
 
 ## Items
 # Return index of first empty inv slot (-1 if full)
-func FirstEmptySlot() -> int: return %RMenu/Inventory.firstEmptyInvSlot()
+func FirstEmptySlot() -> int: return %RMenu/Inventory.FirstEmptyInvSlot()
 func PutItemInSlot(slotN:int, item:Item): # Force put item in inv slot
 	var inv = $CanvasLayer/RMenu/Inventory
 	inv.Inv[inv.Slot.GROUND] = item.duplicate() # Put item in 'Ground' slot
 	inv._on_Slot_Click(slotN, inv.Slot.GROUND) # Then perform update on inv (moves into inv, deleted ground item)
 func Loot() -> void: # Smart behavior based on ur curr inventory
-	if %RMenu/Inventory.mouseHasItem(): DropItem() # Drop from mouse
+	if %RMenu/Inventory.MouseHasItem(): DropItem() # Drop from mouse
 	else: pickItem() # Otherwise try to pickup
 
 func pickItem() -> void:
