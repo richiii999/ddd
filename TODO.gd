@@ -154,3 +154,5 @@
 # Dungeons and open world minibosses from an area drop shards / essence
 # One of which is required to unlock the shrine (teleporter) for a biome. 
 # As a way to ensure the player has actually been in that area for a little bit.
+
+##Enemies should have an immoveable flag that doesn't allow them to move at all 
