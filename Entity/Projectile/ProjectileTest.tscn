@@ -16,24 +16,24 @@ initial_velocity_min = 100.0
 initial_velocity_max = 200.0
 gravity = Vector3(0, 0, 0)
 
-[node name="Projectile" type="Area2D" groups=["Projectile"]]
+[node name="Projectile" type="Area2D" unique_id=2065421689 groups=["Projectile"]]
 collision_layer = 0
 collision_mask = 9
 script = ExtResource("1_66mr8")
 
-[node name="CollisionBox2D" type="CollisionShape2D" parent="."]
+[node name="CollisionBox2D" type="CollisionShape2D" parent="." unique_id=170694314]
 shape = SubResource("RectangleShape2D_gyw6f")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=367044911]
 z_index = 3
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_fs76d")
 
-[node name="ProjTime" type="Timer" parent="."]
+[node name="ProjTime" type="Timer" parent="." unique_id=1506985516]
 one_shot = true
 autostart = true
 
-[node name="ProjParticles" type="GPUParticles2D" parent="."]
+[node name="ProjParticles" type="GPUParticles2D" parent="." unique_id=136577469]
 texture = ExtResource("3_ks3r5")
 process_material = SubResource("ParticleProcessMaterial_l7fne")
 
