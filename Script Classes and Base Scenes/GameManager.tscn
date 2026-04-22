@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://brdsmfkvsa5ou" path="res://Maps/TestWorld.tscn" id="3_d5dbk"]
 [ext_resource type="PackedScene" uid="uid://nquy6bnqhiwd" path="res://Entity/Player/Player.tscn" id="4_nj8wv"]
 [ext_resource type="PackedScene" uid="uid://cmgpcvcen5bty" path="res://UI/Item/item_spawner.tscn" id="5_8vor3"]
+[ext_resource type="PackedScene" uid="uid://cyesuh0mf14kt" path="res://UI/MainMenu/main_menu.tscn" id="5_xwctg"]
 
 [node name="GameManager" type="Node" unique_id=1545096795]
 process_mode = 3
@@ -12,6 +13,7 @@ script = ExtResource("1_5l5e5")
 nexus_tscn = ExtResource("2_xgfaf")
 world_tscn = ExtResource("3_d5dbk")
 player_tscn = ExtResource("4_nj8wv")
+mainmenu_tscn = ExtResource("5_xwctg")
 
 [node name="WorldSlot" type="Node2D" parent="." unique_id=178269315]
 process_mode = 1

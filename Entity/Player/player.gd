@@ -1,6 +1,10 @@
 class_name Player extends ENTITY ## PLAYER: Gamedevs be like: Player.script = 10,000LoC, any other script = 5 LoC
 # controls the player and UI via keypresses. Stores stats, actions, storage, and lots of stuff...
 
+## Refs to child nodes
+@onready var Inv = $CanvasLayer/RMenu/Inventory # Other stuff needs to access player inv (ex. shops)
+# NOTE: Inv requires there to be a ItemPickupRange (type SmartArea)
+
 ## Stats
 enum Stat {coreSTR, coreINT, coreAGI,   coreTOU, coreWIS, coreDEX,   coreBLK, coreWIL, coreSPD, # STR = Melee  - INT = Magic - AGI = Ranged
 		   gearSTR, gearINT, gearAGI,   gearTOU, gearWIS, gearDEX,   gearBLK, gearWIL, gearSPD, # TOU = Health - WIS = Mana  - DEX = Crit
@@ -25,13 +29,17 @@ var XPScaleFactor : float = 1.25 # How much does the cost go up per level?
 var FMScaleFactor : float = 1.05 # How much does the cost go up per fame? (scales slower)
 var skillPoints : int = 1 # One per level
 
+## Currency
+var coins : int = 0 # Coins drop from various places / enemies
+func incCoins(i:int): coins += i; %RMenu/Coins.text = str(coins)
+
 ## Dashing
 var dashing : bool = false # Dashing state, if true, cannot move with WASD
 var dashMax : float = 2.00 # Max dashes stored
 var dashNum : float = 0.00 # Current dashes stored (use 1.00 per dash)
 var dashRec : float = 0.005 # Dash recovered per frame (def: 0.005)
 var dashLen : float = 100  # (px) Length of dash
-var dashSpd : float = 1000  # (px/s) Speed of dash
+var dashSpd : float = 600  # (px/s) Speed of dash
 func setDashing(B:bool): dashing = B # needed cause signal (vvv)
 # $DashTimer.timeout -> setDashing(false)
 # $DashTimer.timeout -> $Projhitbox.col_layer(7, true)
@@ -42,14 +50,12 @@ func setInput(state:bool): InputStatus = state # Disables all input (used when l
 var InputV : Vector2 = Vector2.ZERO # Input vector
 var charge : int = 0 # (Spacebar) Charge incrementor for spellcasting
 signal Interact # Emitted with self to any connected interact component
-signal dropItem # Emitted when dropping an item from the mouse
 
 func _ready():
 	super._ready() # call ENTITY._ready() (sets HP and MP)
 	super.initEntityUI()
-	
 	#print(get_tree_string_pretty()) #Debug print the nodetree
-	
+	%DeathScreen.find_child("Restart").pressed.connect(_OnDeathScreenButtonPushed)
 	## Initialize the UI info
 	%RMenu/Utility/MPot_Button.text = "%s/%s" % [MPotC, MPotmax]
 	%RMenu/Utility/HPot_Button.text = "%s/%s" % [HPotC, HPotmax]
@@ -59,8 +65,8 @@ func _ready():
 
 func get_input(): # TODO: replace this with _input() ?
 	## Debug stuff
-	if Input.is_action_pressed("H- (Debug)"): Damage(2, null)   # "CRTL+0"   Health minus
-	if Input.is_action_pressed("H+ (Debug)"): Heal(2, null)     # "Shift+0"  Heal plus
+	if Input.is_action_pressed("H- (Debug)"): Damage(20)   # "CRTL+0"   Health minus
+	if Input.is_action_pressed("H+ (Debug)"): Heal(20)     # "Shift+0"  Heal plus
 	if Input.is_action_just_pressed("X+ (Debug)"): GainXP(9999) # '9'        XP plus for leveling up for debugging
 	if Input.is_action_just_pressed("DEBUG_Bubble"): toggleBubble(!invulnerable) # "Shift+7" Toggles bubble invulnerable
 	
@@ -72,20 +78,29 @@ func get_input(): # TODO: replace this with _input() ?
 		velocity += InputV * (accel * effectMoveSpeed * tileSpeed)
 		velocity *= Vector2(0.95,0.95) # slowdown / speed soft-clamp
 	
-	# TODO: change aniframe and sprite flip direction based on direction / velocity for player, or if not moving, mousePos
+	# TODO: change aniframe and sprite flip direction based on direction / velocity for player, or if not moving, mousePos\ (DONE), now we need to get sprites
+	# The "velocity.length() > 10.0" tells us "are we moving fast enough to count as moving?", and the else gives us a vector pointing from the player toward the mouse 
+	var facingDir : Vector2 = velocity if velocity.length() > 10.0 else (get_global_mouse_position() - global_position)
+	# Flip the sprite horizontally when facing the left 
+	#if facingDir.x != 0:
+		#insert something like $Sprite2D.flip_h = facingDir < 0 
 	
+	#if velocity.length() > 10.0:
+		#insert something like $AnimatedSprite2D.play("walk")
+	#else:
+		#insert something like $AnimatedSprite2D.play("idle")
+
 	## Mouse inputs: "pressed" NOT "just_pressed" so player can hold shoot / dash
 	if (Input.is_action_pressed("LMB") && $ShotTimer.is_stopped()):
 		$ShotTimer.start(max((0.30 / atkSpeed), 0.05)) # Max AtkSpeed is 0.05s per shot (AtkSpeed == 6.00), any higher does nothing
 		ShootProj(1, get_global_mouse_position())
-	if (Input.is_action_pressed("RMB") && dashNum >= 1.00 && %DashTimer.is_stopped() && InputV):
+	if (Input.is_action_pressed("RMB") && dashNum >= 1.00 && %DashTimer.is_stopped() && InputV && charge == 0):
 		%DashTimer.start(dashLen / dashSpd)
 		#print(%DashTimer.time_left)
 		setDashing(true) # Disables WASD movement
 		$Projectile_Hitbox.set_collision_layer_value(7, false) # Disable projectile hitbox
 		dashNum -= 1.00
 		velocity += InputV * dashSpd
-	
 	## Spacebar: Charged shots by holding then releasing space with mana
 	# charge linearly by holding space (up to 125%)
 	# if charge over 100: can discharge but hurts self, aim for 100 exactly or go over to do more but hurts more.
@@ -94,40 +109,46 @@ func get_input(): # TODO: replace this with _input() ?
 	# ^ then jumps up after 100 until 125, on release, play a shoot sound, at 125, play a boom sound.
 	if Input.is_action_pressed("space"): # Holding space to charge up 
 		charge += 1 # "charge" up spellcast attack by holding space
-		%Charge_Label.text = "Charge = " + str(charge)
-		if charge >= 10: %Charge_Label.visible = true # Only show charge for holding space, not just a tap
+		%Charge_Label.value = charge
+		if charge >= 10: 
+			%Charge_Label.visible = true # Only show charge for holding space, not just a tap
+			%DashBar.visible = false # Make it invisible when you are charging up
 		if charge >= 125: # If charge a spell to 125%, the spell explodes on player dealing damage and costing mana
 			incMP(-charge)
 			charge = 0 # Reset charge
-			Damage(HPmax >> 2, self) # Deal 1/4 HP damage
-			incMP(-HPmax >> 1) # cost extra MP @ 2:1 HP
-			$Status.addStatusText("Boom! (" + str(HPmax >> 2) + ")", "RED")
-			$Status.addStatusText("Manaburn (" + str(HPmax >> 1) + ")", "RED")
+			if(Level < 20): #since they're less than level 20 (5 levels before max), they get hurt
+				Damage(HPmax >> 2) # Deal 1/4 HP damage
+				incMP(-HPmax >> 1) # cost extra MP @ 2:1 HP
+				$Status.addStatusText("Boom! (" + str(HPmax >> 2) + ")", "RED")
+				$Status.addStatusText("Manaburn (" + str(HPmax >> 1) + ")", "RED")
+			else: #TODO: implement opus somehow
+				$Status.addStatusText("Casting OPUS!")
+				ShootProj(3, get_global_mouse_position())
 	if Input.is_action_just_released("space"): # Release space to cast spell based on charge
 		%Charge_Label.visible = false
+		%DashBar.visible = true # Update the visibility for both bars since charging ended
 		if   charge < 10 : incMP(charge) # dont spend mana if it was just a tap
 		elif charge < 25 || charge > MP: $Status.addStatusText("Fizzle! (" + str(charge) + ")", "GRAY") # spend mana, but dont cast a spell if weak charge / OOM
 		elif charge < 100 : ShootProj(2, get_global_mouse_position()); $Status.addStatusText("Spellcast (" + str(charge) + ")", "BLUE")
 		elif charge < 125 :
 			ShootProj(2, get_global_mouse_position())
-			Damage((int)( (HPmax >> 3) * ((charge - 100) / 25.00) ), self ) # cost up to 1/8 HP if over 100 charge
+			Damage((int)( (HPmax >> 3) * ((charge - 100) / 25.00) )) # cost up to 1/8 HP if over 100 charge
 			$Status.addStatusText("Spellcast (" + str(charge) + ")", "BLUE")
 			$Status.addStatusText("Manaburn (" + str((int)((HPmax >> 3) * ((charge - 100) / 25.00))) + ")", "RED")
 		incMP(-charge)
 		charge = 0
 	
 	## Interaction: Interactables handle their signal connections automatically. 'Interact' can be emitted blindly
-	if Input.is_action_just_pressed("Interact"): Interact.emit(self); print("Interact pressed")
+	if Input.is_action_just_pressed("Interact"): Interact.emit(self)
 	
 	## Utility button keys
 	if Input.is_action_just_pressed("HPot"): HPot() # HPot with 'H'
 	if Input.is_action_just_pressed("MPot"): MPot() # MPot with 'G'
 	if Input.is_action_just_pressed("Nexus"): Nexus() # Nex with 'N'
-	if Input.is_action_just_pressed("Loot"): Loot() # Loot with 'Q'
+	if Input.is_action_just_pressed("Loot"): Inv.Loot() # Loot with 'Q'
 	
 	## UI Toggles 
-	# TODO: UI layouts
-	if Input.is_action_just_pressed("Loading Screen Toggle"): # Loading screen pauses the Player (TODO)
+	if Input.is_action_just_pressed("Loading Screen Toggle"):
 		%LoadingScreen.visible = !(%LoadingScreen.visible)
 		#get_tree().set_pause( !(get_tree().is_paused()) ) # Toggle pause
 	if Input.is_action_just_pressed("Esc"): %EscMenu.visible = !(%EscMenu.visible) # Esc manu goes above loading screen, both disable all lower controls and UI interactions.
@@ -135,7 +156,9 @@ func get_input(): # TODO: replace this with _input() ?
 		%ControlsText.visible = !(%ControlsText.visible)
 		%HiddenControlsText.visible = !(%HiddenControlsText.visible)
 	if Input.is_action_just_pressed("WaygateGUI"): toggleWaygateGUI() # WaygateGUI toggle 'F2'
-	if Input.is_action_just_pressed("RMenu Toggle"): %RMenu.visible = !(%RMenu.visible) # RMenu toggle 'F12'
+	if Input.is_action_just_pressed("RMenu Toggle"): 
+		%RMenu.visible = !(%RMenu.visible) # RMenu toggle 'F12'
+		%PlayerCam.setOffset(%RMenu.visible)
 	if Input.is_action_just_pressed("SkillsUI"): %SkillsUI.visible = !(%SkillsUI.visible) # SkillsUI 'P'
 
 func _physics_process(_delta):
@@ -195,14 +218,14 @@ func Nexus(): ## Nexus: On press, makes you invincible for a moment then transpo
 	print("Nexus!")
 	var nexusWaygate = get_node_or_null("/root/GameManager/Nexus/Waygates/NexusWaygate")
 	if nexusWaygate: nexusWaygate.UseWaygate(self)
+	#Added hp increment can be removed if behavior is unintended
+	#incHP(HPmax)
+	
+
 
 ## XP / Leveling: Called by signals from enemy deaths, quest rewards, and other things
-func GainXP(xp : int = 0, source : Node = null):
+func GainXP(xp : int = 0):
 	# Statistics
-	if(source):
-		#print(str(focusList))
-		focusList.erase(source) # remove enemy from focusList when it dies
-		return # TODO: keep track of kills based on enemy.isingroup and shit, can also keep track of quests and boss kills and etc.
 	
 	# XP & leveling
 	XP += xp
@@ -219,7 +242,7 @@ func LevelUp():
 		
 		MPmax += 10
 		$CanvasLayer/RMenu/MP_Bar.max_value = MPmax
-		
+		$CanvasLayer/RMenu/HP_Bar.max_value = HPmax
 		skillPoints += 1
 		$CanvasLayer/SkillsUI/SkillPointsText/SkillPointsCount.text = str(skillPoints)
 		
@@ -237,7 +260,9 @@ func LevelUp():
 		XP -= XPmax; XPmax = (int)(XPmax * XPScaleFactor)
 		$CanvasLayer/RMenu/Fame_Bar.value = XP
 		$CanvasLayer/RMenu/Fame_Bar.max_value = XPmax
-	
+		
+	HPmax += 20
+	MPmax += 10
 	incHP(HPmax)
 	incMP(MPmax)
 
@@ -289,63 +314,33 @@ func UpdateUIBars(): # All at once rather than spread out
 	%RMenu/Fame_Bar/Fame_Text.text = "%s" % [Fame]
 
 ## Items
-func Loot(): # Smart behavior based on ur curr inventory
-	if %RMenu/Inventory.mouseHasItem(): DropItem() # Drop from mouse
-	else: pickItem() # Otherwise try to pickup
-
-func pickItem():
-	var openSlot : int = %RMenu/Inventory.firstEmptyInvSlot()
-	if ($ItemPickupRange.smartArea.is_empty()): $Status.addStatusText("No Item on ground", "Gray")
-	elif (openSlot == -1): $Status.addStatusText("Full inv!", "Gray")
-	else: 
-		var inv = $CanvasLayer/RMenu/Inventory
-		var pickedItem : Item = $ItemPickupRange.smartArea[0].find_child("ItemSlot").get_child(0) # First touched groundItem has priority
-		if (pickedItem == null): print("Null item picked up") # null shouldnt break inv, but still shouldnt happen (problem with the item)
-		
-		inv.Inv[inv.Slot.GROUND] = pickedItem.duplicate() # Put item in 'Ground' slot
-		inv._on_Slot_Click(openSlot, inv.Slot.GROUND) # Then perform update on inv (moves into inv, deleted ground item)
-		$ItemPickupRange.smartArea[0].queue_free() # Delete grounditem after
-
-func DropItem():
-	var inv = $CanvasLayer/RMenu/Inventory
-	var droppedItem : Item = inv.Inv[inv.Slot.MOUSE]
-	
-	if (droppedItem == null): # Null case
-		print("Tried to drop null item")
-		return
-	
-	## Create the ground item and put it in the scene
-	#var groundItem : GroundItem = load("res://UI/Item/ground_item.tscn").instantiate()
-	#groundItem._init(droppedItem.duplicate())
-	#add_child(groundItem)
-	#groundItem.reparent(get_parent())
-	
-	var itemSpawner = get_node("/root/GameManager/ItemSpawner")
-	if itemSpawner == null: 
-		push_warning("ItemSpawner not found! Skipping Player.DropItem()")
-		return
-	else: 
-		dropItem.connect(itemSpawner.SpawnItem, CONNECT_ONE_SHOT) # Signal to ItemSpawner to spawn the item
-		dropItem.emit(droppedItem, global_position)
-		
-		
-	
-	# Delete item in mouse (by swapping with GROUND slot)
-	inv._on_Slot_Click(inv.Slot.MOUSE, inv.Slot.GROUND)
+# TODO wip move
 
 ## OVERRIDE FUNCS: Entity Overridden funcs by Player.gd
 func Death(): 
 	# BUG: When ded, can togle loading screen and will unded due to natural regen, # probably gonna be removed later when other death stuff is added, so leaving for now (as of v0.7)
 	# TODO: keep a list / vector of the last N things that hurt you within 10s,then display them like in WoW
-	# ^ Via focuslist perhaps? (can include self)
-	death.emit(self); # print("[SIGNAL T] Death")
+	# death.emit(self); # print("[SIGNAL T] Death")
 	
-	#%DeathScreen.visible = !(%DeathScreen.visible); # print("Death Screen Toggled")
+	%DeathScreen.visible = !(%DeathScreen.visible); # print("Death Screen Toggled")
 	
-	incHP(HPmax) ## Debug: just reset HP when ded
+	#incHP(HPmax) ## Debug: just reset HP when ded
 	
-	#get_tree().set_pause( true ) # Toggle pause
+	get_tree().set_pause( true ) # Toggle pause
 
-func Damage(power : int, source : Node = null):
-	super.Damage(power, source)
+func Damage(power : int):
+	super.Damage(power)
 	$HurtTimer.start(5.00)
+
+
+# Singal function called when button is pressed, signals game maneger to handle hard reset
+func _OnDeathScreenButtonPushed() -> void:
+	%DeathScreen.visible = false
+	get_node("/root/GameManager").DeathHandling()
+	
+
+# signal function called when debug is pressed, revives player on the spot
+func _OnDebugRevive() -> void:
+	%DeathScreen.visible = !(%DeathScreen.visible)
+	get_tree().set_pause(false)
+	HP = HPmax

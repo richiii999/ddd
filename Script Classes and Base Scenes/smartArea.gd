@@ -20,13 +20,13 @@ func _ready(): # NOTE: have to connect signals from this script since they dont 
 func UpdateArray(N : Node2D, enter : bool): ## Add/remove entities to array when they enter/exit the Area2D
 	if enter:
 		onEnter(N)
-		if !smartArea.size(): onFirst.emit() 
 		smartArea.append(N)
+		if smartArea.size() == 1: onFirst.emit()
 		if (threshold && (smartArea.size() == threshold)): onThreshold.emit(true)
 	else:
 		onLeave(N)
 		smartArea.erase(N)
-		if !smartArea.size(): onEmpty.emit() 
+		if smartArea.size() == 0: onEmpty.emit() 
 		if (threshold && (smartArea.size() == threshold)): onThreshold.emit(false)
 
 ## OVERRIDE FUNCS: Funcs to be overridden by inherited things

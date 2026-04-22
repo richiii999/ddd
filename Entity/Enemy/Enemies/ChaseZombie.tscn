@@ -4,10 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_vvp5b"]
 [ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="3_84nuw"]
 [ext_resource type="Texture2D" uid="uid://dq6232arfxx81" path="res://Assets/Sprites/GD Icons/GD_Red.tres" id="4_2oj4o"]
-[ext_resource type="Script" uid="uid://bruyvfxhffooy" path="res://Entity/Components/entitySight.gd" id="5_kihv6"]
+[ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/smartArea.gd" id="5_rj2pp"]
 [ext_resource type="PackedScene" uid="uid://dfcui8l7w2j3m" path="res://Entity/Components/BehaviorFSM.tscn" id="6_2wcg3"]
 [ext_resource type="PackedScene" uid="uid://dk58kntas8hfd" path="res://Entity/Components/Behaviors/Wander.tscn" id="7_4vlkc"]
-[ext_resource type="Script" uid="uid://drgv5k0gsyg22" path="res://Entity/Components/behaviorFSM.gd" id="7_vvp5b"]
 [ext_resource type="PackedScene" uid="uid://dvourlhp5t1tv" path="res://Entity/Components/Behaviors/ChaseFlee.tscn" id="8_10a87"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw8gt"]
@@ -77,12 +76,13 @@ monitoring = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Projectile_Hitbox" unique_id=138021579]
 shape = SubResource("RectangleShape2D_o61b1")
 
-[node name="Sight" type="Area2D" parent="." unique_id=1586348760]
+[node name="Sight" type="Area2D" parent="." unique_id=919572636]
 collision_layer = 0
 collision_mask = 16
 input_pickable = false
 monitorable = false
-script = ExtResource("5_kihv6")
+script = ExtResource("5_rj2pp")
+metadata/_custom_type_script = "uid://hi4e34yydb2t"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=1478919866]
 shape = SubResource("CircleShape2D_w6h3m")
@@ -105,7 +105,6 @@ wait_time = 10.0
 autostart = true
 
 [node name="BehaviorFSM" parent="." unique_id=1391725515 node_paths=PackedStringArray("initState") instance=ExtResource("6_2wcg3")]
-script = ExtResource("7_vvp5b")
 initState = NodePath("behavior_wander")
 
 [node name="behavior_wander" parent="BehaviorFSM" unique_id=250405658 instance=ExtResource("7_4vlkc")]

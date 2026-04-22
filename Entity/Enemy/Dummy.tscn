@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_l1ai2"]
 [ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="3_6b84h"]
 [ext_resource type="Texture2D" uid="uid://di6ytqcvdio6g" path="res://Assets/Sprites/GD Icons/GodotIconAtlas.png" id="4_tbnwm"]
-[ext_resource type="Script" uid="uid://bruyvfxhffooy" path="res://Entity/Components/entitySight.gd" id="5_ib48x"]
+[ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/smartArea.gd" id="5_0hipr"]
 [ext_resource type="PackedScene" uid="uid://dfcui8l7w2j3m" path="res://Entity/Components/BehaviorFSM.tscn" id="6_ptp2k"]
 [ext_resource type="PackedScene" uid="uid://dk58kntas8hfd" path="res://Entity/Components/Behaviors/Wander.tscn" id="7_vuxob"]
 
@@ -33,7 +33,7 @@ size = Vector2(120, 120)
 [sub_resource type="CircleShape2D" id="CircleShape2D_jxsfg"]
 radius = 40.7922
 
-[node name="Dummy" type="CharacterBody2D" groups=["Enemy"]]
+[node name="Dummy" type="CharacterBody2D" unique_id=1328473886 groups=["Enemy"]]
 collision_layer = 256
 collision_mask = 267
 motion_mode = 1
@@ -44,14 +44,14 @@ accel = 0.0
 kBResistance = 1.0
 HPmax = 999999
 
-[node name="Status" parent="." instance=ExtResource("3_6b84h")]
+[node name="Status" parent="." unique_id=218576894 instance=ExtResource("3_6b84h")]
 offset_left = -72.0
 offset_top = -120.0
 offset_right = 80.0
 offset_bottom = -72.0
 metadata/_edit_use_anchors_ = true
 
-[node name="HP_Bar" type="ProgressBar" parent="."]
+[node name="HP_Bar" type="ProgressBar" parent="." unique_id=1156252790]
 visible = false
 anchors_preset = 5
 anchor_left = 0.5
@@ -66,51 +66,52 @@ theme_override_styles/background = SubResource("StyleBoxFlat_pw8gt")
 theme_override_styles/fill = SubResource("StyleBoxFlat_wjxar")
 value = 50.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1094646159]
 texture = SubResource("AtlasTexture_lg3er")
 
-[node name="Physics_Hitbox" type="CollisionShape2D" parent="."]
+[node name="Physics_Hitbox" type="CollisionShape2D" parent="." unique_id=218434068]
 shape = SubResource("CircleShape2D_2b4ng")
 
-[node name="Projectile_Hitbox" type="Area2D" parent="."]
+[node name="Projectile_Hitbox" type="Area2D" parent="." unique_id=421205443]
 collision_layer = 1024
 collision_mask = 0
 monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Projectile_Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Projectile_Hitbox" unique_id=1906297249]
 shape = SubResource("RectangleShape2D_o61b1")
 
-[node name="Sight" type="Area2D" parent="."]
+[node name="Sight" type="Area2D" parent="." unique_id=1222182996]
 collision_layer = 0
 collision_mask = 16
 input_pickable = false
 monitorable = false
-script = ExtResource("5_ib48x")
+script = ExtResource("5_0hipr")
+metadata/_custom_type_script = "uid://hi4e34yydb2t"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=1659775364]
 shape = SubResource("CircleShape2D_jxsfg")
 debug_color = Color(0.501961, 0.501961, 0.501961, 0.25098)
 
-[node name="ShootTimer1" type="Timer" parent="."]
+[node name="ShootTimer1" type="Timer" parent="." unique_id=1705980328]
 wait_time = 0.75
 autostart = true
 
-[node name="ShootTimer2" type="Timer" parent="."]
+[node name="ShootTimer2" type="Timer" parent="." unique_id=708575231]
 wait_time = 5.0
 autostart = true
 
-[node name="DamageFlashTimer" type="Timer" parent="."]
+[node name="DamageFlashTimer" type="Timer" parent="." unique_id=672961847]
 wait_time = 0.25
 one_shot = true
 
-[node name="FocusTimer" type="Timer" parent="."]
+[node name="FocusTimer" type="Timer" parent="." unique_id=44605170]
 wait_time = 10.0
 autostart = true
 
-[node name="BehaviorFSM" parent="." node_paths=PackedStringArray("initState") instance=ExtResource("6_ptp2k")]
+[node name="BehaviorFSM" parent="." unique_id=135330396 node_paths=PackedStringArray("initState") instance=ExtResource("6_ptp2k")]
 initState = NodePath("behavior_wander")
 
-[node name="behavior_wander" parent="BehaviorFSM" instance=ExtResource("7_vuxob")]
+[node name="behavior_wander" parent="BehaviorFSM" unique_id=492589810 instance=ExtResource("7_vuxob")]
 
 [connection signal="onEmpty" from="Sight" to="." method="SightIncrease" binds= [false]]
 [connection signal="onEmpty" from="Sight" to="ShootTimer1" method="set_paused" binds= [true]]

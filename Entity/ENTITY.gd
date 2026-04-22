@@ -3,23 +3,32 @@ class_name ENTITY extends CharacterBody2D ## Provides much useful functionality 
 
 ## References to nodes
 @onready var Manager : GameManager = get_node_or_null("/root/GameManager") # Reference to the WorldNode (so I dont have to call it every time)
+@onready var currWorld : WorldBASE = Tools.FindParentByType(self, WorldBASE)
 @onready var Sight : SmartArea = find_child("Sight") # Ref to this entity's sight smartarea (if any)
 @onready var ECS : EffectComponentSystem = find_child("EffectsComponentSystem") # This entity's EffectComponentSystem node, if null, no effects will be applied to this.
 @onready var Behavior: BehaviorFSM = find_child("BehaviorFSM") # This entity's Behavior Finite State Machine node, if null, will not have any ai behavior (players dont have this)
-@onready var StatusLabel : Node = find_child("Status") # This entity's Status component
+@onready var StatusLabel : Status = find_child("Status") # This entity's Status component
 @onready var HPBar : Node = find_child("HP_Bar") # This entity's HP and MP bars
 @onready var MPBar : Node = find_child("MP_Bar")
 var SpawnNode : Node = null # Link to the entity's spawn node (if any) (ex. player = which waygate, enemy = their spawnnode). Set by the spawnnode
 
 ## Scenes to spawn
-@export var proj1  : PackedScene = null # Main attack projectile
-@export var proj2  : PackedScene = null # Spell projectile
-@export var effect1: PackedScene = null # proj<X>'s effect and field (if any)
-@export var effect2: PackedScene = null
-@export var field1 : PackedScene = null
-@export var field2 : PackedScene = null
-@export var fieldEffect1: PackedScene = null # If there is a field, there has to be a corresponding field effect
-@export var fieldEffect2: PackedScene = null
+@export var projs : Array[PackedScene] = [null, null, null]
+@export var effects : Array[PackedScene] = [null, null, null]
+@export var fields : Array[PackedScene] = [null, null, null]
+@export var fieldEffects : Array[PackedScene] = [null, null, null]
+#@export var proj1  : PackedScene = null # Main attack projectile
+#@export var proj2  : PackedScene = null # Spell projectile
+#@export var proj3 : PackedScene = null # Opus projectile
+#@export var effect1: PackedScene = null # proj<X>'s effect and field (if any)
+#@export var effect2: PackedScene = null
+#@export var effect3: PackedScene = null
+#@export var field1 : PackedScene = null
+#@export var field2 : PackedScene = null
+#@export var field3 : PackedScene = null
+#@export var fieldEffect1: PackedScene = null # If there is a field, there has to be a corresponding field effect
+#@export var fieldEffect2: PackedScene = null
+#@export var fieldEffect3: PackedScene = null
 
 ## Entity Stats
 @export var mainStat     : int = 10      # Main stat, less specific then the Player's 'core stats' since monsters dont care
@@ -56,10 +65,14 @@ func incMP(inc:int): MP += inc; if (MPBar): MPBar.value = MP
 
 ## Entity AI stuff
 @onready var targetEntity : ENTITY = self # What entity is this entity targeting? (ex. player targeted by enemy)
+
 @onready var targetPos : Vector2 = global_position # movement target (global position) for pathfinding to (players dont use this)
 
-func setTargetEntity(T : ENTITY = self): targetEntity = T
+func setTargetEntity(T : ENTITY = self): targetEntity = T if T is ENTITY else self # Failsafe
 func setTargetPos(T : Vector2 = Vector2(0,0)): targetPos = T # TODO: Pathfinding
+
+# Workaround for double signal binding (enemy Sight.onFirst sets target entity to whatever was seen)
+func setTargetFirstSight(): setTargetEntity(Sight.smartArea.front())
 
 signal death # Emitted when ded
 
@@ -69,39 +82,65 @@ func initEntityUI(): ## initializes UI stuff (instead of having all these in eac
 	if StatusLabel: StatusLabel.addStatusText("Status", "GRAY")
 
 ## ShootProj: Shoots one of the projectiles based on input and constructs them according to this entity's stats, effects, and fields
-func ShootProj(input : int, Aim : Vector2 = targetEntity.global_position) -> void: 
+func ShootProj(input : int, Aim : Vector2) -> void:
+	var index := input - 1 #literally just var assignment
+	if index < 0 or index >= projs.size(): #check to see if the index that we pass in is even in the bounds of the projectiles we have set
+		push_error("Invalid projectile index: " + str(input))
+		return
+	
 	var F : Field = null       # Prepare nodes of their respective types to be filled in
 	var FE: EffectBASE = null
 	var E : EffectBASE = null
 	var P : Projectile  = null
 	
-	match input: # TODO this is kinda a retarded way of doing it, has to be a better way with less duplication
-		1: 
-			if field1: F = field1.instantiate()
-			if fieldEffect1: FE = fieldEffect1.instantiate()
-			if effect1: E = effect1.instantiate()
-			if proj1: P = proj1.instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing, kBstrength1, E, F)
-		2:
-			if field2: F = field2.instantiate()
-			if fieldEffect2: FE = fieldEffect2.instantiate()
-			if effect2: E = effect2.instantiate()
-			if proj2: P = proj2.instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing, kBstrength2, E, F)
+	if index < fields.size() and fields[index]: #if the index is in the range, instantiate the objects
+		F = fields[index].instantiate()
+	if index < fieldEffects.size() and fieldEffects[index]:
+		FE = fieldEffects[index].instantiate()
+		
+	if index < effects.size() and effects[index]:
+		E = effects[index].instantiate()
+	if projs[index]: #if the index exists in the projectiles array, instantiate our projectile
+		P = projs[index].instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing, kBstrength1, E, F)
+		
+	#match input: # TODO this is kinda a retarded way of doing it, has to be a better way with less duplication
+		#1: 
+			#if field1: F = field1.instantiate()
+			#if fieldEffect1: FE = fieldEffect1.instantiate()
+			#if effect1: E = effect1.instantiate()
+			#if proj1: P = proj1.instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing, kBstrength1, E, F)
+		#2:
+			#if field2: F = field2.instantiate()
+			#if fieldEffect2: FE = fieldEffect2.instantiate()
+			#if effect2: E = effect2.instantiate()
+			#if proj2: P = proj2.instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing, kBstrength2, E, F)
 		#3: 
 			# <field 3>
+			#if field3: F = field3.instantiate()
 			# <FE 3>
+			#if fieldEffect3: FE = fieldEffect3.instantiate()
 			# <effect3>
+			#if effect3: E = effect3.instantiate() 
 			# <proj 3>
+			#if proj3: P = proj3.instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing, kBstrength2, E, F)
 	
+	#need to add a check to make sure if P and manager are null, push an error to not break the game 
+	if P == null:
+		push_error("Shit broke")
+		return
+	if Manager == null: 
+		push_error("Shit broke")
+		return
 	Manager.add_child(P) # Reparent projectile to the world
 	P.global_position = global_position # Have to do this from here, not from p.Spawn()
-	if F: FE.field = true; F.effect = FE; F.color = FE.color; F.source = self # Set field & effects (if any)
+	if F and FE: FE.field = F; F.effect = FE; F.color = FE.color; F.source = self # Set field & effects (if any, check to see both exists first)
 	if E: P.effect = E # Set effect (if any)
 
 func ShootSmart(input : int): ShootProj(input, targetEntity.global_position + targetEntity.velocity * 20) ## Shoots at where targetEntity will be, instead of where it is now
 
 ## Damage / Heal: Called by signals, the incrementors handle UI
 # TODO: do stuff with sources idk, like for tracking stats
-func Damage(power : int, source : Node = null):
+func Damage(power : int):
 	if invulnerable: return
 	if !power: return # zero case
 	if (HPBar && !HPBar.visible): HPBar.visible = true
@@ -109,55 +148,21 @@ func Damage(power : int, source : Node = null):
 	$Status.setStatusFlash("RED", 0.25)
 	if(HP <= 0 ): Death(); return # Return early on death
 	
-	if source: FocusAdd(source, power) 
 	if(HP < HPmax >> 2 && StatusLabel && !StatusLabel.textQueue.find("Low HP")): StatusLabel.setStatusText("Low HP", "RED") # Under 1/4 health, warn
-func Heal(power : int, source : Node = null):
+
+func Heal(power : int):
 	if !power: return # zero case
-	if(source): FocusAdd(source, power)
 	incHP(power)
 	StatusLabel.setStatusFlash("GREEN", 0.25)
 
 func ReadTerrain(): ## Read tile under the entity, assign tile's data to variables
-	if Manager && Manager.world: 
-		currTile = Manager.world.get_cell_tile_data(Manager.world.local_to_map(position))
+	if currWorld:
+		currTile = currWorld.get_cell_tile_data(currWorld.local_to_map(currWorld.to_local(global_position)))
 		tileSpeed = currTile.get_custom_data("Speed") if currTile else 1.00
 		tilePain  = currTile.get_custom_data("Pain")  if currTile else 0
 
 ## Knockback (signaled from the colliding projectile): Applies an impluse to velocity in px/s (modified by KBresistance)
 func Knockback(from : Vector2, strength : float): if !invulnerable: velocity += Vector2.from_angle(from.angle_to_point(global_position)) * (1.00 - kBResistance) * strength
-
-## FocusList: List of entities who've tagged this entity, and the focus amounts
-# This is used to send XP out to players when a mob dies, according to their focus.
-# Focus is gained based on: ((damage / HPmax) * FocusFactor), this is to prevent low levels from farming XP on high level mobs
-# Focus decays over time if not atleast 1.00, If your focus <= 0.00, you lose the tag
-# On death, signals players in the focus list with their amount of focus, so they can get XP based on kill credit
-# Focus decays over time with both a constant offset and proportional decrease. (Mainly to prevent low level players from farming)
-# If you reach a minimum focus (by damaging mob or whatever), you will always get credit for kill
-# TODO: Highest focus gets priority targeting by the mob (aggro), with up to 90/10/10 proportion of shots going based on focus proportion for top 3
-# TODO: Add taunt abilities that have an effect on hit or aoe field to take all mob's hit focuses and add a bunch of focus to the player who shot it
-	# Get a list of all mobs hit, call this func on them but instead of using proj.power for dmg, use that * 10 or something idk
-@export var focusFactor : float = 1.00 # Some mobs with very high HPmax would give even appropirate level players lower XP based on HPmax denominator.
-var focusList : Dictionary = {}
-func FocusAdd(E: ENTITY, amt : float = 0.01):
-	if E in focusList: focusList[E] = (amt * focusFactor / (HPmax >> 3)) + focusList[E] # Increment value, add the key if it doesnt exist
-	else:              focusList[E] = (amt * focusFactor / (HPmax >> 3)) # 1.00 is achieved at 12.5% of maxHP dealt worth of focus
-	setTargetToMaxFocus()
-func FocusTick():
-	for key in focusList:
-		if focusList[key] < 1.00: # If focus is not atleast 1.00,
-			focusList[key] *= 0.90 # Proportionately scale down 10%
-			focusList[key] -= 0.10 # Constantly scale down by 0.10
-			if focusList[key] <= 0.00: # If after scaling, focus <= 0 ...
-				if key in $Sight.smartArea: focusList[key] = 0.01 # If still in sight, focus = 0.01
-				else: focusList.erase(key); break # elif not in sight, erase (Unsupported behavior: erase while iter, so just break)
-	setTargetToMaxFocus()
-func setTargetToMaxFocus(): # Set targetEntity to highest focus
-	if !focusList.keys(): return # empty case
-	
-	var MaxVal = focusList[focusList.keys()[0]]
-	for key in focusList: if focusList[key] > MaxVal: MaxVal = focusList[key] # Find max value in focusList
-	
-	targetEntity = focusList.find_key(MaxVal) # Set targetEntity to the Entity in focusList whose focus value is the highest
 
 ## Entity.AddEffect(): This is used to add effects to entities rather than calling AddEffect on the entity's effect component system
 # This way, it allows for things like immunities and stuff to be handled by the entity and just pass along a modified effect to the ECS
@@ -176,12 +181,13 @@ func AddEffect(E : EffectBASE = null, _field : bool = false) -> void:
 	#if 
 	
 	ECS.AddEffect(E)
+
 func RemoveEffect(E: EffectBASE = null) -> void:
 	if (!E || !ECS || E not in ECS.get_children()): return # null case (shouldn't happen), or no ECS to apply effect to, or effect not found, just return
 	else: ECS.RemoveEffect(E)
 
 ## OVERRIDE funcs: Player and Enemy scripts override these and provide additional functionality
-func _ready():
+func _ready(): 
 	incHP(HPmax)
 	incMP(MPmax)
 

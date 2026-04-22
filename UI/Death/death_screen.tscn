@@ -1,16 +1,18 @@
 [gd_scene format=3 uid="uid://ckppam3wv3dxn"]
 
-[ext_resource type="PackedScene" uid="uid://c5o3e7sbqutuq" path="res://Assets/Sprites/GD Icons/GD_Animated_Rainbow.tscn" id="1_fbqay"]
+[ext_resource type="Script" uid="uid://ceai1uuf6bm0d" path="res://UI/Death/death_screen.gd" id="1_0hx6s"]
+[ext_resource type="Texture2D" uid="uid://b6lvk4ovtd460" path="res://Assets/UI/Death UI/pixel-art-halloween-skull-head-elemenet-3-png.webp" id="1_0kqq6"]
 
-[node name="DeathScreen" type="Control"]
+[node name="DeathScreen" type="Control" unique_id=968885346]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_0hx6s")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1650225218]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,34 +21,38 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.497474, 0.497474, 0.497474, 0.498039)
 
-[node name="BG color" type="ColorRect" parent="."]
+[node name="BG color" type="ColorRect" parent="." unique_id=264889655]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -297.0
-offset_top = -224.5
-offset_right = 297.0
-offset_bottom = 224.5
+offset_left = -295.0
+offset_top = -216.0
+offset_right = 299.0
+offset_bottom = 233.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.176419, 0.176419, 0.176419, 1)
+color = Color(0.34862554, 0.023335436, 0.045079388, 1)
 
-[node name="Label" type="RichTextLabel" parent="BG color"]
+[node name="Label" type="RichTextLabel" parent="BG color" unique_id=1116276198]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -61.5
-offset_right = 61.5
-offset_bottom = 26.0
+offset_left = -82.5
+offset_top = 36.07
+offset_right = 82.5
+offset_bottom = 97.73001
 grow_horizontal = 2
 theme_override_colors/font_selected_color = Color(1, 1, 1, 1)
-text = "Death Menu"
+theme_override_font_sizes/normal_font_size = 26
+text = "You Died"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Anchor" type="Control" parent="BG color"]
+[node name="Anchor" type="Control" parent="BG color" unique_id=1934319382]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -58,4 +64,32 @@ offset_bottom = -0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GD_Animated_Rainbow" parent="BG color/Anchor" instance=ExtResource("1_fbqay")]
+[node name="PixelArtHalloweenSkullHeadElemenet3Png" type="Sprite2D" parent="BG color/Anchor" unique_id=1867230920]
+position = Vector2(1.0000029, -30)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_0kqq6")
+
+[node name="Restart" type="Button" parent="BG color" unique_id=611327040]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -32.5
+offset_top = -86.41501
+offset_right = 32.5
+offset_bottom = -55.41501
+grow_horizontal = 2
+grow_vertical = 0
+text = "Restart"
+
+[node name="DebugRestart" type="Button" parent="BG color" unique_id=535913046]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 357.0
+offset_right = 162.0
+offset_bottom = 388.0
+text = "Debug Restart"
+
+[connection signal="pressed" from="BG color/DebugRestart" to="." method="_on_debug_restart_pressed"]

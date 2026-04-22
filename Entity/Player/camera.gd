@@ -18,6 +18,11 @@ var zoomRate: Vector2 = Vector2(0.01, 0.01) # How fast the cam zooms in/out
 var zoomMax : Vector2 = Vector2(1.25, 1.25) # Max / Min zoom amount
 var zoomMin : Vector2 = Vector2(0.40, 0.40)
 
+var rMenuOffset : bool = true # Applies an offset to account for the game's UI
+func setOffset(state:bool):
+	rMenuOffset = state
+	RMenuOffset()
+
 func _ready(): 
 	Follow.find_child("CamReset_Button").pressed.connect(camReset)
 	Follow.find_child("RMenu").visibility_changed.connect(RMenuOffset)
@@ -32,4 +37,16 @@ func camReset() -> void : zoom = Vector2(1.00,1.00)
 
 func Zoom(input : float = 0.00) -> void : zoom = (zoom + (zoomRate * input) ).clamp(zoomMin, zoomMax)
 
-func RMenuOffset() -> void: position.x = 160 if !position.x else 0 # Toggling RMenu recenters cam
+func RMenuOffset() -> void: position.x = 160 if rMenuOffset else 0 # Toggling RMenu recenters cam
+
+# Instantly move the camera's global pos without smooth scrolling (ex. when teleporting)
+func InstantMove(pos: Vector2) -> void: 
+	position_smoothing_enabled = false
+	
+	var tmp = position # preserve localpos offset (from RMenu toggle)
+	global_position = pos
+	position = tmp
+	align()
+	position_smoothing_enabled = true
+	
+	RMenuOffset() # offset if needed 

@@ -12,7 +12,7 @@ class_name skillButton extends Button ## SkillButton: Able to be clicked only wh
 @export var activeIcon = preload("res://Assets/UI/Inventory/inv_slotPurple.png")
 func setSkillIcon() -> void: icon = activeIcon if active else openIcon if availible else closedIcon
 
-@export var Stats = [1,1,1, 0,0,0, 0,0,0] # Only change the leftmost 3 nums (TODO change how stats works)
+@export var Stats = [1,1,1, 0,0,0, 0,0,0] 
 
 signal skillUpdate # emitted to the SkillsUI when a skill is bought
 
@@ -22,6 +22,7 @@ func _ready():
 	$SkillText.text = skillText
 
 func checkAvailible() -> bool: # Checks if this is now availible, called on all nodes when any skill is activated
+	if active: return false # The skill is not available for the player to obtain
 	for skill in parentSkills: 
 		if not skill.active:
 			return false # Inactive parent, not availible

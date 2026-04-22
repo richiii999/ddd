@@ -22,7 +22,7 @@ radial_velocity_max = 20.0
 gravity = Vector3(0, 0, 0)
 attractor_interaction_enabled = false
 
-[node name="Field" type="Area2D"]
+[node name="Field" type="Area2D" unique_id=690576861]
 collision_layer = 0
 collision_mask = 0
 monitorable = false
@@ -30,7 +30,7 @@ script = ExtResource("1_lkibk")
 length = 5.0
 affectsPlayers = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1779874368]
 modulate = Color(1, 1, 1, 0.25098)
 z_index = -1
 z_as_relative = false
@@ -38,20 +38,19 @@ position = Vector2(4.05312e-06, 3.8147e-06)
 scale = Vector2(1.625, 1.625)
 texture = ExtResource("2_vcssf")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=704975668]
 shape = SubResource("CircleShape2D_0llea")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=119759765]
 one_shot = true
-autostart = true
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=266337254]
 modulate = Color(0, 0.67451, 1, 1)
 position = Vector2(4.05312e-06, 3.8147e-06)
 scale = Vector2(1.625, 1.625)
 amount = 50
-process_material = SubResource("ParticleProcessMaterial_n4jax")
 texture = ExtResource("3_6v8gq")
+process_material = SubResource("ParticleProcessMaterial_n4jax")
 
 [connection signal="body_entered" from="." to="." method="onEnter"]
 [connection signal="body_exited" from="." to="." method="onLeave"]

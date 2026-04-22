@@ -2,6 +2,7 @@ class_name LootTable extends Node ## LootTable: Stores {itemID : weight} and Rol
 # This is a separate node so that it can be used as a component in multiple different things
 # ex. both Enemies and DungeonRooms need a loot table, this reduces duplication
 
+@export var numRolls : int = 1 # How many rolls to the table
 @export var lootTable : Dictionary[int, int] = { 0 : 1 } # { itemID : weight}, 0 = no item
 var sumWeights : int = 0 # Total weight in lootTable (set on ready)
 
@@ -21,7 +22,7 @@ func DropItem(pos:Vector2 = Vector2.ZERO, itemID:int = -1): # Attempts to signal
 		return
 	
 	SpawnItem.connect(itemSpawner.SpawnItemByID, CONNECT_ONE_SHOT) # Signal to ItemSpawner to spawn the item
-	SpawnItem.emit(itemID, pos)
+	SpawnItem.emit(itemID, Tools.NudgeVec2(pos, 50)) # Slight nudge to pos to prevent stacking
 
 func RollForItem() -> int: # Uses weighted RNG to pick an ID from the lootTable
 	# Dumb way of doing it, there has to be a better way for sure.

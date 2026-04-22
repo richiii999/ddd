@@ -4,9 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_7yqgg"]
 [ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="3_3s77v"]
 [ext_resource type="Texture2D" uid="uid://di6ytqcvdio6g" path="res://Assets/Sprites/GD Icons/GodotIconAtlas.png" id="4_wntmj"]
-[ext_resource type="Script" uid="uid://bruyvfxhffooy" path="res://Entity/Components/entitySight.gd" id="5_nhkol"]
+[ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/smartArea.gd" id="5_nhkol"]
 [ext_resource type="PackedScene" uid="uid://dfcui8l7w2j3m" path="res://Entity/Components/BehaviorFSM.tscn" id="6_2j2hh"]
-[ext_resource type="Script" uid="uid://drgv5k0gsyg22" path="res://Entity/Components/behaviorFSM.gd" id="7_2j2hh"]
 [ext_resource type="PackedScene" uid="uid://byp1r1vlopabi" path="res://Entity/Components/Behaviors/Boss/Boss1.tscn" id="7_3s77v"]
 [ext_resource type="PackedScene" uid="uid://blcgtxx2m6ge6" path="res://Entity/Components/Behaviors/Boss/BossHeal.tscn" id="8_wntmj"]
 [ext_resource type="PackedScene" uid="uid://vosbka7lsvf0" path="res://Entity/Components/Behaviors/Boss/Boss2.tscn" id="9_nhkol"]
@@ -46,7 +45,6 @@ motion_mode = 1
 script = ExtResource("1_53cjx")
 proj1 = ExtResource("2_7yqgg")
 proj2 = ExtResource("2_7yqgg")
-accel = 0.0
 kBResistance = 1.0
 HPmax = 500
 
@@ -85,12 +83,13 @@ monitoring = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Projectile_Hitbox" unique_id=1686771942]
 shape = SubResource("RectangleShape2D_o61b1")
 
-[node name="Sight" type="Area2D" parent="." unique_id=2026825530]
+[node name="Sight" type="Area2D" parent="." unique_id=845665305]
 collision_layer = 0
 collision_mask = 16
 input_pickable = false
 monitorable = false
 script = ExtResource("5_nhkol")
+metadata/_custom_type_script = "uid://hi4e34yydb2t"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=1965683690]
 shape = SubResource("CircleShape2D_jxsfg")
@@ -113,7 +112,6 @@ wait_time = 10.0
 autostart = true
 
 [node name="BehaviorFSM" parent="." unique_id=669444931 node_paths=PackedStringArray("initState") instance=ExtResource("6_2j2hh")]
-script = ExtResource("7_2j2hh")
 initState = NodePath("behavior_boss1")
 
 [node name="behavior_boss1" parent="BehaviorFSM" unique_id=109561774 instance=ExtResource("7_3s77v")]
@@ -127,9 +125,11 @@ healthThreshold = 0.0
 [node name="BossBar" parent="." unique_id=1422355881 instance=ExtResource("10_wntmj")]
 
 [node name="LootTable" parent="." unique_id=727939910 instance=ExtResource("11_nhkol")]
+numRolls = 3
 lootTable = Dictionary[int, int]({
+-2: 5,
 0: 1,
-1: 5
+1: 3
 })
 
 [connection signal="onEmpty" from="Sight" to="." method="SightIncrease" binds= [false]]

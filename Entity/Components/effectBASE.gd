@@ -1,11 +1,9 @@
 class_name EffectBASE extends GPUParticles2D ## BASE class for effects, effects should inherit from this
-# Contains the effect params, as well as a overwritable funcs for InitialEffect(), EffectTick(), and EndEffect()
+# Contains the effect params, as well as a virtual fn for InitialEffect(), EffectTick(), and EndEffect()
 
-## NOTE: A bunch of things are not implemented rn due to me not knowing to how start the child timer properly
+@onready var entity : Node = Tools.FindParentByType(self, ENTITY) # Which Entity to apply effects to?
 
-@onready var entity : Node = get_parent().get_parent() # Which node to apply effects to? (e.g. player / enemy node)
-
-@export var icon     : Resource = null  # What is the effect's icon? (displays in the top right)
+@export var icon     : Resource = null  # TODO: What is the effect's icon? (displays in the top right)
 @export var color    : String = "WHITE" # Color of status text / entity color change (as a string)
 
 @export var efname   : String = "BASE"  # Reapplications of the same effect adds to timer ("efname" instead of "name" cause reserved word)
@@ -13,14 +11,17 @@ class_name EffectBASE extends GPUParticles2D ## BASE class for effects, effects 
 @export var strength : int = 1          # Effects of a higher strength override lower strengths (& adds time)
 @export var length   : float = 4.00     # How long does the effect last?
 @export var element  : String = ""      # Element
-@export var field    : bool = false     # Is this a field effect? (Timer starts when leave field)
+@export var field    : Node = null     # Reference to the field node
+
+var lingering : bool = false 
 
 func _ready(): ## Setup the timer, send a status text, particles (if any), and apply any initial effect
 	$Timer.timeout.connect(Destruct.bind(false,true)) # timeout -> Destruct(false, true). This works for field effects too
-	print("Connections: " + str($Timer.timeout.get_connections())) # BUG: It SAYS it is not connecting with the proper arguments, but it is
 	
 	## NOTE: Currently unimplemented
-	#if (field): $Timer.stop() # effect timer is autostart, field timers however start on destructor call
+	if (field): 
+		$Timer.stop() # effect timer is autostart, field timers however start on destructor call
+		#print(efname + " field effect added, timer stopped. Timer time_left: " + str($Timer.time_left))
 	
 	if(entity.find_child("Status")): entity.find_child("Status").addStatusText(efname, color)
 	
@@ -32,17 +33,26 @@ func _ready(): ## Setup the timer, send a status text, particles (if any), and a
 	
 	InitialEffect()
 
-func Destruct(skipEndEffect : bool = false, Timeout : bool = false) -> void: ## NOT "_exit_tree()" because this has a param & reparents itself before freeing
-	if !is_inside_tree(): queue_free(); return # free effect if it isnt even in the tree (e.g. effects stored in fields) # BUG: stored effects are being added to tree
+func Destruct(skipEndEffect : bool = false, Timeout : bool = false) -> void: ## NOT "_exit_tree()" because this has a param & reparents itself before freeing\
+	#print(efname + " Destruct called | field: " + str(field) + " | Timeout: " + str(Timeout) + " | time_left: " + str($Timer.time_left) + " | stack: " + str(get_stack()))
+	if !is_inside_tree(): 
+		queue_free()
+		return # free effect if it isnt even in the tree (e.g. effects stored in fields) # BUG: stored effects are being added to tree
 	
 	## NOTE: Currently unimplemented
-	#if (field && length && !Timeout): $Timer.start(length); return # removing field effects first starts timer, only on timeout -> free
-	print( str(skipEndEffect) + str(Timeout) ) # Debug printing values, despite the signal connector giving an error if done in the inspector, connecting via code works
-	
+	if(field != null && !Timeout): # removing field effects first starts timer, only on timeout -> free
+		lingering = true
+		$Timer.one_shot = true
+		$Timer.start(length)
+		#print("Linger timer started, one_shot: " + str($Timer.one_shot) + " | time_left: " + str($Timer.time_left))
+		field = null
+		return
+	#if(is_instance_valid(field) && !Timeout): # removing field effects first starts timer, only on timeout -> free
+		
 	if !skipEndEffect: EndEffect()
-	
 	Tools.ParticlePassOff(self) # Safely reparent particles to let them expire
-
+	queue_free()
+	
 ## OVERRIDE FUNCS: Inherited effects will override these and supply the functions they wish to perform
 func InitialEffect() -> void: pass # What to do when the effect first applies
 func EffectTick() -> void:    pass # What to do each physics tick

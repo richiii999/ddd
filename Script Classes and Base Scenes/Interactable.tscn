@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://3g0h3q5odbbp" path="res://Entity/Player/interactable.gd" id="1_0rcg4"]
 
-[node name="InteractComponent" type="Area2D"]
+[node name="InteractComponent" type="Area2D" unique_id=248235521]
 collision_layer = 2
 collision_mask = 16
 script = ExtResource("1_0rcg4")

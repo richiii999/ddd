@@ -68,21 +68,22 @@ func BodyCollideRID(rid: RID, body: Node2D, _body_shape_idx: int, _local_shape_i
 	#print("projectile hit: " + str(body))
 	if body is TileMapLayer:
 		var tileCoords = body.get_coords_for_body_rid(rid)
+		#print(tileCoords)
 		var tile = body.get_cell_tile_data(tileCoords)
 		if tile.get_custom_data("Destructible"): # TODO: "if true" vvv change condition to check if destroyed tile exists based on current tile coords + 1 row or whatever
 			if true: body.set_cell(tileCoords, 0, Vector2i(2,1)) # Tile switches to destroyed version which has no collision and a different texture
-			else: body.erase_cell(tileCoords) # Failsafe: If the tilemap atlas is messed up, just erase the tile	
+			else: body.erase_cell(tileCoords) # Failsafe: If the tilemap atlas is messed up, just erase the tile
 		Destruct()
 	#else: pass
 
 func AreaCollide(area : Area2D) -> void: ## Entity collide
 	if(area.get_collision_layer_value(7) || area.get_collision_layer_value(11)): # Player / Enemy projHitbox collide
-		var entity = area.get_parent()
+		var entity = Tools.FindParentByType(area, ENTITY)
 		damage.connect(entity.Damage, 4) # (<>, 4) = "Oneshot" connection (disconnects after emission)
 		if source != null: # Special case: source deleted before proj hits. Have to specify (source != null) can't just do (source).
-			damage.emit(power, source)
+			damage.emit(power)
 		else:
-			damage.emit(power) 
+			damage.emit(power)
 		damage.connect(entity.Knockback, 4)
 		damage.emit(global_position, knockback)
 		
@@ -102,8 +103,8 @@ func Destruct(skipEndEffect : bool = false) -> void: ## "Destructor", called ins
 		QF = true
 		Tools.ParticlePassOff($ProjParticles) # Let the particles expire rather than instantly disappearing
 		
-		if(field && !skipEndEffect): # Spawn an effect (if any) on destruct
-			get_parent().call_deferred("add_child", field) # BUG: On double hit, destructs twice or something and this is called twice. happens right before free
+		if(field && !skipEndEffect): # Spawn a field (if set) on destruct
+			get_parent().call_deferred("add_child", field)
 			field.position = position # Have to do this, it doesnt just inherit
 		
 		queue_free()
