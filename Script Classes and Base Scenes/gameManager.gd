@@ -86,9 +86,15 @@ func quitGame():
 
 # Handles signal death from player which deletes player and adds a new player for perma death behavior
 func DeathHandling():
-	world.remove_child(player)
+	get_tree().set_pause(false)
+	if player.get_parent(): player.get_parent().remove_child(player)
+	player.queue_free()
 	player = player_tscn.instantiate()
-	world.add_child(player)
+	nexus.add_child(player)
 	player.death.connect(DeathHandling)
+	player.show()
+	player.InputStatus = true
+	player.find_child("RMenu").show() #reconnect the main menu escape reference to new player
+	mainMenu.escapeMenu = player.find_child("EscMenu")
+	mainMenu.escapeMenu.mainMenuButton.connect(mainMenu.ActivateMainMenu)
 	InitialSetup()
-	#pass
