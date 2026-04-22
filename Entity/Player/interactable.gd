@@ -1,6 +1,8 @@
 class_name Interactable extends Area2D ## Makes parent interactable, connect 'Interact' signal to a parent function or whatever
 # NOTE: You MUST add a CollisionShape2D as the first child to this obj otherwise it doesnt work
 
+# TODO: signal when walking out of range of interactable, ex. waygates should close GUI
+
 @export var interactable : bool = true
 
 signal Interact # recieved from player and re-emitted to parent or wherever

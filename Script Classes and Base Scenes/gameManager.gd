@@ -78,6 +78,16 @@ func InitialSetup():
 	$ItemSpawner.SpawnItemByID(-2, Vector2(-300, 0))
 	$ItemSpawner.SpawnItemByID(-2, Vector2(-400, -100))
 	$ItemSpawner.SpawnItemByID(-2, Vector2(-400, 100))
+	# 9 items to fill inventory
+	$ItemSpawner.SpawnItemByID(1, Vector2(-600, 0))
+	$ItemSpawner.SpawnItemByID(1, Vector2(-700, 0))
+	$ItemSpawner.SpawnItemByID(1, Vector2(-800, 0))
+	$ItemSpawner.SpawnItemByID(1, Vector2(-600, 100))
+	$ItemSpawner.SpawnItemByID(1, Vector2(-700, 100))
+	$ItemSpawner.SpawnItemByID(1, Vector2(-800, 100))
+	$ItemSpawner.SpawnItemByID(1, Vector2(-600, 200))
+	$ItemSpawner.SpawnItemByID(1, Vector2(-700, 200))
+	$ItemSpawner.SpawnItemByID(1, Vector2(-800, 200))
 
 func quitGame():
 	print("manager: quitting game")
