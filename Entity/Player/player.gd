@@ -51,6 +51,9 @@ var InputV : Vector2 = Vector2.ZERO # Input vector
 var charge : int = 0 # (Spacebar) Charge incrementor for spellcasting
 signal Interact # Emitted with self to any connected interact component
 
+func getSPD() -> int:
+	return Stats[Stat.coreSPD] + Stats[Stat.gearSPD] + Stats[Stat.effcSPD]
+
 func _ready():
 	super._ready() # call ENTITY._ready() (sets HP and MP)
 	super.initEntityUI()
@@ -75,7 +78,10 @@ func get_input(): # TODO: replace this with _input() ?
 	## Movement keys:
 	InputV = Input.get_vector("left", "right", "up", "down")
 	if !dashing: 
-		velocity += InputV * (accel * effectMoveSpeed * tileSpeed)
+		#get the speed and then cap it as you keep leveling up
+		var spd := getSPD()
+		var spd_mult := 1.0 + (spd / (spd + 20.0))
+		velocity += InputV * (accel * effectMoveSpeed * tileSpeed * spd_mult)
 		velocity *= Vector2(0.95,0.95) # slowdown / speed soft-clamp
 	
 	# TODO: change aniframe and sprite flip direction based on direction / velocity for player, or if not moving, mousePos\ (DONE), now we need to get sprites

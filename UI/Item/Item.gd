@@ -9,7 +9,7 @@ enum Types {INV, HELM, CHEST, RING, MAINHAND, OFFHAND, UNDROPPABLE}
 @export var type : int = -1 # -1=unset, should be one of ^
 
 ## Stats: Adds Player's gear stats
-var Stats : Array = [1,1,1,  1,1,1,  1,1,1]
+@export var Stats : Array = [1,1,1,  1,1,1,  1,1,1]
 
 ## Input stats & Weights: Used mostly for weapons, affects how important the player's stats are for this item
 @export var statWeights = {Stat.STR : 1.00}

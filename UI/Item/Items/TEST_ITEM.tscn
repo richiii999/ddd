@@ -9,5 +9,6 @@ texture = ExtResource("1_8bq7i")
 script = ExtResource("1_8pf0b")
 itemName = "TEST_ITEM"
 type = 1
+Stats = [99, 99, 99, 99, 99, 99, 99, 99, 99]
 projectile = ExtResource("2_woukd")
 metadata/_custom_type_script = "uid://dpbuam0tpmaha"
