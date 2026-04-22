@@ -86,9 +86,12 @@ func quitGame():
 
 # Handles signal death from player which deletes player and adds a new player for perma death behavior
 func DeathHandling():
+	#pause the game
 	get_tree().set_pause(false)
+	#basically delete the player node and the information for the player
 	if player.get_parent(): player.get_parent().remove_child(player)
 	player.queue_free()
+	#make a new instance of the player and add that to the world, then show the player to the world
 	player = player_tscn.instantiate()
 	nexus.add_child(player)
 	player.death.connect(DeathHandling)

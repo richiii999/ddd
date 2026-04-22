@@ -362,8 +362,6 @@ func DropItem():
 		dropItem.connect(itemSpawner.SpawnItem, CONNECT_ONE_SHOT) # Signal to ItemSpawner to spawn the item
 		dropItem.emit(droppedItem, global_position)
 		
-		
-	
 	# Delete item in mouse (by swapping with GROUND slot)
 	inv._on_Slot_Click(inv.Slot.MOUSE, inv.Slot.GROUND)
 
