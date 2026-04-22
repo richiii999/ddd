@@ -187,6 +187,8 @@ func RemoveEffect(E: EffectBASE = null) -> void:
 	else: ECS.RemoveEffect(E)
 
 ## OVERRIDE funcs: Player and Enemy scripts override these and provide additional functionality
-func _ready(): incHP(HPmax); incMP(MPmax)
+func _ready(): 
+	incHP(HPmax)
+	incMP(MPmax)
 
 func Death(): death.emit(self) ## Death: Default func for entities just emits the signal

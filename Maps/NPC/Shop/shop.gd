@@ -13,8 +13,11 @@ func _ready():
 	for item in shopItems:
 		var slot = invSlot.instantiate()
 		$ShopGUI/GridContainer.add_child(slot)
+		
+		# TODO Price and label
 		#var itemLabel = 
 		#var priceLabel
+		
 		slot.slotNumber = i
 		slot.Slot_Clicked.connect(BuyItem) # SlotN is emitted with this signal
 		slot.UpdateSlot(shopItems[i].instantiate()) # Add item to slot
