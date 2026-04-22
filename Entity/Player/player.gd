@@ -62,8 +62,8 @@ func _ready():
 
 func get_input(): # TODO: replace this with _input() ?
 	## Debug stuff
-	if Input.is_action_pressed("H- (Debug)"): Damage(2)   # "CRTL+0"   Health minus
-	if Input.is_action_pressed("H+ (Debug)"): Heal(2)     # "Shift+0"  Heal plus
+	if Input.is_action_pressed("H- (Debug)"): Damage(20)   # "CRTL+0"   Health minus
+	if Input.is_action_pressed("H+ (Debug)"): Heal(20)     # "Shift+0"  Heal plus
 	if Input.is_action_just_pressed("X+ (Debug)"): GainXP(9999) # '9'        XP plus for leveling up for debugging
 	if Input.is_action_just_pressed("DEBUG_Bubble"): toggleBubble(!invulnerable) # "Shift+7" Toggles bubble invulnerable
 	
@@ -239,7 +239,7 @@ func LevelUp():
 		
 		MPmax += 10
 		$CanvasLayer/RMenu/MP_Bar.max_value = MPmax
-		
+		$CanvasLayer/RMenu/HP_Bar.max_value = HPmax
 		skillPoints += 1
 		$CanvasLayer/SkillsUI/SkillPointsText/SkillPointsCount.text = str(skillPoints)
 		
