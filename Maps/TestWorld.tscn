@@ -22,9 +22,11 @@ z_index = 1
 
 [node name="Testworld Beach" parent="Waygates" unique_id=780580875 instance=ExtResource("4_bvj08")]
 position = Vector2(128, 128)
+active = true
 
 [node name="Testworld Grass" parent="Waygates" unique_id=1832319352 instance=ExtResource("4_bvj08")]
 position = Vector2(-2944, -1280)
+price = 1
 
 [node name="EnemySpawns" type="Node2D" parent="." unique_id=653064510]
 z_index = 2
