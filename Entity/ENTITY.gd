@@ -15,12 +15,16 @@ var SpawnNode : Node = null # Link to the entity's spawn node (if any) (ex. play
 ## Scenes to spawn
 @export var proj1  : PackedScene = null # Main attack projectile
 @export var proj2  : PackedScene = null # Spell projectile
+@export var proj3 : PackedScene = null # Opus projectile
 @export var effect1: PackedScene = null # proj<X>'s effect and field (if any)
 @export var effect2: PackedScene = null
+@export var effect3: PackedScene = null
 @export var field1 : PackedScene = null
 @export var field2 : PackedScene = null
+@export var field3 : PackedScene = null
 @export var fieldEffect1: PackedScene = null # If there is a field, there has to be a corresponding field effect
 @export var fieldEffect2: PackedScene = null
+@export var fieldEffect3: PackedScene = null
 
 ## Entity Stats
 @export var mainStat     : int = 10      # Main stat, less specific then the Player's 'core stats' since monsters dont care
@@ -91,11 +95,15 @@ func ShootProj(input : int, Aim : Vector2) -> void:
 			if fieldEffect2: FE = fieldEffect2.instantiate()
 			if effect2: E = effect2.instantiate()
 			if proj2: P = proj2.instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing, kBstrength2, E, F)
-		#3: 
+		3: 
 			# <field 3>
+			if field3: F = field3.instantiate()
 			# <FE 3>
+			if fieldEffect3: FE = fieldEffect3.instantiate()
 			# <effect3>
+			if effect3: E = effect3.instantiate() 
 			# <proj 3>
+			if proj3: P = proj3.instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing, kBstrength2, E, F)
 	
 	Manager.add_child(P) # Reparent projectile to the world
 	P.global_position = global_position # Have to do this from here, not from p.Spawn()
