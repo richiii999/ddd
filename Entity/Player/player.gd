@@ -113,10 +113,13 @@ func get_input(): # TODO: replace this with _input() ?
 		if charge >= 125: # If charge a spell to 125%, the spell explodes on player dealing damage and costing mana
 			incMP(-charge)
 			charge = 0 # Reset charge
-			Damage(HPmax >> 2) # Deal 1/4 HP damage
-			incMP(-HPmax >> 1) # cost extra MP @ 2:1 HP
-			$Status.addStatusText("Boom! (" + str(HPmax >> 2) + ")", "RED")
-			$Status.addStatusText("Manaburn (" + str(HPmax >> 1) + ")", "RED")
+			if(Level < 25): #since they're less than level 25 (the max level before fame), they get hurt
+				Damage(HPmax >> 2) # Deal 1/4 HP damage
+				incMP(-HPmax >> 1) # cost extra MP @ 2:1 HP
+				$Status.addStatusText("Boom! (" + str(HPmax >> 2) + ")", "RED")
+				$Status.addStatusText("Manaburn (" + str(HPmax >> 1) + ")", "RED")
+			else: #TODO: implement opus somehow
+				$Status.addStatusText("Too ez")
 	if Input.is_action_just_released("space"): # Release space to cast spell based on charge
 		%Charge_Label.visible = false
 		%DashBar.visible = true # Update the visibility for both bars since charging ended
@@ -253,7 +256,9 @@ func LevelUp():
 		XP -= XPmax; XPmax = (int)(XPmax * XPScaleFactor)
 		$CanvasLayer/RMenu/Fame_Bar.value = XP
 		$CanvasLayer/RMenu/Fame_Bar.max_value = XPmax
-	
+		
+	HPmax += 20
+	MPmax += 10
 	incHP(HPmax)
 	incMP(MPmax)
 
