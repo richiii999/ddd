@@ -32,14 +32,8 @@ func ItemInSlot(slotN:int) -> Item:
 	return $ShopGUI/GridContainer.get_child(slotN).item
 
 func BuyItem(slotN:int):
-	print("Buy: " + str(slotN))
-	if slotN > $ShopGUI/GridContainer.get_child_count():
-		push_error("IndexOOB on shop slot")
-		return
-	
-	if currPlayer == null: 
-		push_error("null player tried to buy")
-		return
+	if slotN > $ShopGUI/GridContainer.get_child_count(): push_error("IndexOOB on shop slot"); return
+	if currPlayer == null: push_error("null player tried to buy"); return
 	
 	var item = ItemInSlot(slotN)
 	print("Player tried to buy " + str(item))

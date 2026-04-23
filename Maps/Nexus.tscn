@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://tcx34hy287cs" path="res://Maps/Mechanics/Waygate.tscn" id="3_rty01"]
 [ext_resource type="PackedScene" uid="uid://blyjhm2j5onnb" path="res://Maps/Mechanics/EnemyPackSpawner.tscn" id="4_6ppdv"]
 [ext_resource type="PackedScene" uid="uid://c2lryasv0namt" path="res://Entity/Enemy/Dummy.tscn" id="5_np840"]
+[ext_resource type="PackedScene" uid="uid://cq8sges6clqip" path="res://Maps/NPC/BankTest.tscn" id="8_22jxy"]
 [ext_resource type="PackedScene" uid="uid://bbmy3615xp8ba" path="res://Maps/NPC/DialogueTest.tscn" id="8_cyj7h"]
 [ext_resource type="PackedScene" uid="uid://d1qn6ah5n7134" path="res://Maps/NPC/Shop/ShopTest.tscn" id="9_22jxy"]
 
@@ -34,5 +35,8 @@ spawnRadius = 0
 [node name="DialogueTest" parent="NPCs" unique_id=61209940 instance=ExtResource("8_cyj7h")]
 position = Vector2(-513, -641)
 
-[node name="ShopTest" parent="." unique_id=2144558353 instance=ExtResource("9_22jxy")]
+[node name="ShopTest" parent="NPCs" unique_id=2144558353 instance=ExtResource("9_22jxy")]
 position = Vector2(512, -644)
+
+[node name="BankTest" parent="NPCs" unique_id=18598485 instance=ExtResource("8_22jxy")]
+position = Vector2(1, 831)

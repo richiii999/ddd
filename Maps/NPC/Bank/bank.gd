@@ -3,45 +3,37 @@ class_name Bank extends Node ## Bank: Players can store items that persist throu
 var currPlayer = null # Ref to player (set when u open the bank)
 @export var items : Array[PackedScene] # Put item scenes in editor
 
+@export var bankSlots : int = 8 # How many bankslots?
+
 var invSlot = preload("res://UI/RMenu/Inventory/inv_slot.tscn")
 
 func _ready():
-	$InteractComponent.Interact.connect(ToggleShopGUI)
+	$InteractComponent.Interact.connect(ToggleBankGUI)
 	
-	var i : int = 0
-	for item in items:
+	for i in range(bankSlots): # Create bankslots
 		var slot = invSlot.instantiate()
-		$ShopGUI/GridContainer.add_child(slot)
-		
-		# TODO Price and label
-		#var itemLabel = 
-		#var priceLabel
+		$BankGUI/GridContainer.add_child(slot)
 		
 		slot.slotNumber = i
 		slot.Slot_Clicked.connect(BuyItem) # SlotN is emitted with this signal
-		slot.UpdateSlot(items[i].instantiate()) # Add item to slot
-		i += 1
+		if i < len(items) - 1: slot.UpdateSlot(items[i].instantiate()) # Add item to slot (if present)
 
 # Dialogue text is visible for a few seconds then goes away automatically
-func ToggleShopGUI(player):
-	$ShopGUI.visible = !$ShopGUI.visible
+func ToggleBankGUI(player):
+	$BankGUI.visible = !$BankGUI.visible
 	currPlayer = player
 
 func ItemInSlot(slotN:int) -> Item: 
-	return $ShopGUI/GridContainer.get_child(slotN).item
+	return $BankGUI/GridContainer.get_child(slotN).item
 
-func BuyItem(slotN:int):
-	print("Buy: " + str(slotN))
-	if slotN > $ShopGUI/GridContainer.get_child_count():
-		push_error("IndexOOB on shop slot")
-		return
+func BankSwap(bankSlotN:int, playerSlotN:int):
+	if bankSlotN > $BankGUI/GridContainer.get_child_count(): push_error("IndexOOB on shop slot"); return
+	if currPlayer == null: push_error("null player tried to buy"); return
 	
-	if currPlayer == null: 
-		push_error("null player tried to buy")
-		return
+	var item = ItemInSlot(bankSlotN)
+	print("BankSwap: " + str(item))
+	if item == null: return # Skip empty slot
 	
-	var item = ItemInSlot(slotN)
-	print("Player tried to buy " + str(item))
 	if not currPlayer.Inv.FirstEmptyInvSlot():
 		# BUG: Full inv is not triggering
 		currPlayer.StatusLabel.addStatusText("Full Inv!", "RED")
