@@ -135,12 +135,15 @@ func get_input(): # TODO: replace this with _input() ?
 	# The "velocity.length() > 10.0" tells us "are we moving fast enough to count as moving?", and the else gives us a vector pointing from the player toward the mouse 
 	var facingDir : Vector2 = velocity if velocity.length() > 10.0 else (get_global_mouse_position() - global_position)
 	# Flip the sprite horizontally when facing the left 
-	#if facingDir.x != 0:
+	if facingDir.x != 0:
+		$AnimatedSprite2D.flip_h = facingDir.x > 0
 		#insert something like $Sprite2D.flip_h = facingDir < 0 
 	
-	#if velocity.length() > 10.0:
+	if velocity.length() > 10.0:
+		$AnimatedSprite2D.play("walk")
 		#insert something like $AnimatedSprite2D.play("walk")
-	#else:
+	else:
+		$AnimatedSprite2D.play("idle")
 		#insert something like $AnimatedSprite2D.play("idle")
 
 	## Mouse inputs: "pressed" NOT "just_pressed" so player can hold shoot / dash
