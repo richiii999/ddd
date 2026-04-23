@@ -6,12 +6,18 @@ class_name Player extends ENTITY ## PLAYER: Gamedevs be like: Player.script = 10
 # NOTE: Inv requires there to be a ItemPickupRange (type SmartArea)
 
 ## Stats
-enum Stat {coreSTR, coreINT, coreAGI,   coreTOU, coreWIS, coreDEX,   coreBLK, coreWIL, coreSPD, # STR = Melee  - INT = Magic - AGI = Ranged
-		   gearSTR, gearINT, gearAGI,   gearTOU, gearWIS, gearDEX,   gearBLK, gearWIL, gearSPD, # TOU = Health - WIS = Mana  - DEX = Crit
-		   effcSTR, effcINT, effcAGI,   effcTOU, effcWIS, effcDEX,   effcBLK, effcWIL, effcSPD} # BLK = Block  - WIL = MPBLK - SPD = Movespeed & Dodge
-var Stats : Array[int] = [5, 5, 5,   3, 3, 3,   1, 1, 1, # Core stats, from level and skills
-						  0, 0, 0,   0, 0, 0,   0, 0, 0, # Gear stats, from items
-						  0, 0, 0,   0, 0, 0,   0, 0, 0] # Effect stats, from status effects
+enum Stat {STR, INT, AGI, TOU, WIS, DEX, BLK, WIL, SPD}
+var coreStats := {Stat.STR: 5, Stat.INT: 5, Stat.AGI : 5, Stat.TOU : 3, Stat.WIS : 3, Stat.DEX : 3, Stat.BLK: 1, Stat.WIL : 1, Stat.SPD : 1}
+var gearStats := {}
+var effectStats := {}
+
+
+#enum Stat {coreSTR, coreINT, coreAGI,   coreTOU, coreWIS, coreDEX,   coreBLK, coreWIL, coreSPD, # STR = Melee  - INT = Magic - AGI = Ranged
+#		   gearSTR, gearINT, gearAGI,   gearTOU, gearWIS, gearDEX,   gearBLK, gearWIL, gearSPD, # TOU = Health - WIS = Mana  - DEX = Crit
+#		   effcSTR, effcINT, effcAGI,   effcTOU, effcWIS, effcDEX,   effcBLK, effcWIL, effcSPD} # BLK = Block  - WIL = MPBLK - SPD = Movespeed & Dodge
+#var Stats : Array[int] = [5, 5, 5,   3, 3, 3,   1, 1, 1, # Core stats, from level and skills
+#						  0, 0, 0,   0, 0, 0,   0, 0, 0, # Gear stats, from items
+#						  0, 0, 0,   0, 0, 0,   0, 0, 0] # Effect stats, from status effects
 
 ## Pots
 var HPotmax : int = 5 # Max Potions you can carry
@@ -51,13 +57,48 @@ var InputV : Vector2 = Vector2.ZERO # Input vector
 var charge : int = 0 # (Spacebar) Charge incrementor for spellcasting
 signal Interact # Emitted with self to any connected interact component
 
-func getSPD() -> int:
-	return Stats[Stat.coreSPD] + Stats[Stat.gearSPD] + Stats[Stat.effcSPD]
+#get all of your stats 
+func getStats(stat : int) -> int: 
+	return coreStats.get(stat, 0) + gearStats.get(stat, 0) + effectStats.get(stat, 0 )
+
+#TODO: check to see if this even actually works
+func applyStats(target: Dictionary, stats : Dictionary, mult : int = 1):
+	for key in stats: 
+		var new_val = target.get(key, 0) + stats[key] * mult
+		
+		#if the entry is empty, remove it
+		if new_val == 0: 
+			target.erase(key)
+		else:
+			target[key] = new_val
+#get the move speed buff
+func get_move_spd() -> float: 
+	var spd = getStats(Stat.SPD)
+	return 1.0 + (spd / (spd + 20.0))
+
+#debug testing
+func test_apply_stats():
+	var test_stats = {Stat.STR: 10, Stat.SPD: 5}
+	
+	print("Before:", gearStats)
+
+	applyStats(gearStats, test_stats)
+
+	print("After add:", gearStats)
+	print("Total STR:", getStats(Stat.STR)) # should be 5 (core) + 10 = 15
+	print("Total SPD:", getStats(Stat.SPD)) # should be 1 (core) + 5 = 6
+
+	applyStats(gearStats, test_stats, -1)
+
+	print("After remove:", gearStats)
+	print("Total STR:", getStats(Stat.STR)) # back to 5
+	print("Total SPD:", getStats(Stat.SPD)) # back to 1
 
 func _ready():
 	super._ready() # call ENTITY._ready() (sets HP and MP)
 	super.initEntityUI()
 	#print(get_tree_string_pretty()) #Debug print the nodetree
+	test_apply_stats()
 	%DeathScreen.find_child("Restart").pressed.connect(_OnDeathScreenButtonPushed)
 	## Initialize the UI info
 	%RMenu/Utility/MPot_Button.text = "%s/%s" % [MPotC, MPotmax]
@@ -79,8 +120,7 @@ func get_input(): # TODO: replace this with _input() ?
 	InputV = Input.get_vector("left", "right", "up", "down")
 	if !dashing: 
 		#get the speed and then cap it as you keep leveling up
-		var spd := getSPD()
-		var spd_mult := 1.0 + (spd / (spd + 20.0))
+		var spd_mult := get_move_spd()
 		velocity += InputV * (accel * effectMoveSpeed * tileSpeed * spd_mult)
 		velocity *= Vector2(0.95,0.95) # slowdown / speed soft-clamp
 	
@@ -192,7 +232,7 @@ func _physics_process(_delta):
 ## Stats calculations
 func WepPower() -> int:
 	var wep = %Inventory.Inv[%Inventory.Slot.MAINHAND]
-	if wep == null: return int((Stats[Stat.coreSTR] + Stats[Stat.gearSTR] + Stats[Stat.effcSTR]) * 0.5) # Null case: use STR / 2
+	#if wep == null: return int((Stats[Stat.coreSTR] + Stats[Stat.gearSTR] + Stats[Stat.effcSTR]) * 0.5) # Null case: use STR / 2
 	# TODO: perhaps monkpath uses no wep or fist weps?
 	# get weapon stat input dict {stat (int): weight (float), ...}
 	# init a power var to store the value
@@ -272,17 +312,16 @@ func LevelUp():
 	incHP(HPmax)
 	incMP(MPmax)
 
-func UpdateStats(increase:bool, type:int, sourceStats:Array) -> void: 
-	print("[Signal R]: UpdateStats " + ("Core" if type == 1 else "Gear" if type == 2 else "Effect") + (' +' if increase else ' -') + str(sourceStats))
-	var newStats:Array = sourceStats.duplicate() # Avoid changing the source's stats array
-	if !increase: # Removal via -[stats]
-		for i in range(len(newStats)): newStats[i] *= -1
-	match type:
-		1: for i in range(len(newStats)): Stats[i] += newStats[i] # Core stats
-		2: for i in range(len(newStats)): Stats[i + 9] += newStats[i] # Gear stats
-		3: for i in range(len(newStats)): Stats[i +18] += newStats[i] # Effect stats
-		_: print("Bug, Player.UpdateStats(invalid type)")
+#TODO: update this function to take in an item rather than bool, type, sourcestats since item has all of that garbagio
+func UpdateStats(increase: bool, stats: Dictionary) -> void:
+	if increase: #if its a stat increase, increase the stat
+		applyStats(gearStats, stats)
+	else:
+		applyStats(gearStats, stats, -1)
 
+	print("GEAR STATS:", gearStats)
+	print("FINAL SPD:", getStats(Stat.SPD))
+	
 ## Transitional stuff: Used when the player is teleporting, loading into the world, or otherwise changing in a way that they must wait for
 func toggleBubble(state:bool) -> void: # Makes player invulnerable, disables input, and puts a bubble around player
 	velocity = Vector2.ZERO
