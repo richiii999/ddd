@@ -43,11 +43,11 @@ func BuyItem(slotN:int):
 	
 	var item = ItemInSlot(slotN)
 	print("Player tried to buy " + str(item))
-	if not currPlayer.FirstEmptySlot():
+	if not currPlayer.Inv.FirstEmptyInvSlot():
 		# BUG: Full inv is not triggering
 		currPlayer.StatusLabel.addStatusText("Full Inv!", "RED")
 	elif currPlayer.coins < item.price:
 		currPlayer.StatusLabel.addStatusText("U R BROKE!", "RED")
 	else:
 		currPlayer.incCoins(item.price * -1)
-		currPlayer.PutItemInSlot(currPlayer.FirstEmptySlot(), item)
+		currPlayer.Inv.PutItemInSlot(currPlayer.Inv.FirstEmptyInvSlot(), item)
