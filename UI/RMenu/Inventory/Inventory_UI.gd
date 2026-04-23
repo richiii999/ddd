@@ -56,7 +56,7 @@ func _ready():
 		Slots[i].slotClicked.connect(SlotClick) # Connect the slot's signal
 	
 	# Default inventory, debug items
-	var testItem = load("res://UI/Item/Items/TEST_ITEM.tscn").instantiate()
+	var testItem = load("res://UI/Item/Items/Special/TEST_ITEM.tscn").instantiate()
 	# Deferred since player isnt ready() yet
 	call_deferred("PutItemInSlot", 8, testItem)
 	call_deferred("PutItemInSlot", 12, testItem)

@@ -3,13 +3,13 @@ class_name ItemSpawner extends Node ## ItemSpawner: Recieves signals to spawn it
 var groundItemScene = load("res://UI/Item/ground_item.tscn") # GroundItem to put items in bags
 
 var specialItems : Array[Resource] = [ # Negative item IDs
-	load("res://UI/Item/Items/TEST_ITEM.tscn"), # -0, shouldnt be possible
-	load("res://UI/Item/Items/TEST_ITEM.tscn"), # -1
-	load("res://UI/Item/Items/Coin.tscn")       # -2
+	load("res://UI/Item/Items/Special/TEST_ITEM.tscn"), # -0, shouldnt be possible
+	load("res://UI/Item/Items/Special/TEST_ITEM.tscn"), # -1
+	load("res://UI/Item/Items/Special/Coin.tscn")       # -2
 ]
 
 var items : Array[Resource] = [ # Index of this array == "itemID" used throughout the code
-	load("res://UI/Item/Items/TEST_ITEM.tscn"), # NOTE: Present in both arrays at index 0
+	load("res://UI/Item/Items/Special/TEST_ITEM.tscn"), # NOTE: Present in both arrays at index 0
 	load("res://UI/Item/Items/test_chestplate.tscn"),
 	load("res://UI/Item/Items/TEST_ITEM2.tscn")
 ]

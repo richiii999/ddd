@@ -19,4 +19,5 @@ enum Types {INV, HELM, CHEST, RING, MAINHAND, OFFHAND, UNDROPPABLE}
 @export var projectile : PackedScene = null
 
 func _ready(): 
+	scale = Vector2(0.5,0.5) # Items are small
 	if itemName == "": push_warning("ItemName not set! " + str(self))
