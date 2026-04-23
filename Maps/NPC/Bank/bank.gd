@@ -15,7 +15,7 @@ func _ready():
 		$BankGUI/GridContainer.add_child(slot)
 		
 		slot.slotNumber = i
-		slot.Slot_Clicked.connect(BuyItem) # SlotN is emitted with this signal
+		slot.slotClicked.connect(BankSwap) # SlotN is emitted with this signal
 		if i < len(items) - 1: slot.UpdateSlot(items[i].instantiate()) # Add item to slot (if present)
 
 # Dialogue text is visible for a few seconds then goes away automatically
@@ -23,22 +23,17 @@ func ToggleBankGUI(player):
 	$BankGUI.visible = !$BankGUI.visible
 	currPlayer = player
 
-func ItemInSlot(slotN:int) -> Item: 
-	return $BankGUI/GridContainer.get_child(slotN).item
+func GetItemSlot(slotN:int) -> Item: return $BankGUI/GridContainer.get_child(slotN).item
+func SetItemSlot(slotN:int, item:Item): $BankGUI/GridContainer.get_child(slotN).UpdateSlot(item)
 
-func BankSwap(bankSlotN:int, playerSlotN:int):
-	if bankSlotN > $BankGUI/GridContainer.get_child_count(): push_error("IndexOOB on shop slot"); return
-	if currPlayer == null: push_error("null player tried to buy"); return
+func BankSwap(bankSlotN:int):
+	if bankSlotN > $BankGUI/GridContainer.get_child_count() - 1: push_error("IndexOOB on bank slot"); return
+	if currPlayer == null: push_error("null player tried to BankSwap"); return
 	
-	var item = ItemInSlot(bankSlotN)
-	print("BankSwap: " + str(item))
-	if item == null: return # Skip empty slot
+	var bankItem = GetItemSlot(bankSlotN)
+	var playerItem = currPlayer.Inv.Inv[currPlayer.Inv.Slot.MOUSE]
+	print("BankSwap " + str(bankSlotN) + ": " + str(bankItem) + "<->" + str(playerItem))
 	
-	if not currPlayer.Inv.FirstEmptyInvSlot():
-		# BUG: Full inv is not triggering
-		currPlayer.StatusLabel.addStatusText("Full Inv!", "RED")
-	elif currPlayer.coins < item.price:
-		currPlayer.StatusLabel.addStatusText("U R BROKE!", "RED")
-	else:
-		currPlayer.incCoins(item.price * -1)
-		currPlayer.Inv.PutItemInSlot(currPlayer.Inv.FirstEmptyInvSlot(), item)
+	# Swap bank <-> player items
+	SetItemSlot(bankSlotN, playerItem)
+	currPlayer.Inv.PutItemInSlot(currPlayer.Inv.Slot.MOUSE, bankItem)

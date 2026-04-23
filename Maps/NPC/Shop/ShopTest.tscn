@@ -11,7 +11,7 @@ radius = 148.12157
 [node name="ShopTest" type="Sprite2D" unique_id=2144558353]
 texture = ExtResource("1_tmpwn")
 script = ExtResource("1_4ubr3")
-shopItems = Array[PackedScene]([ExtResource("3_ja3ak")])
+items = Array[PackedScene]([ExtResource("3_ja3ak")])
 
 [node name="InteractComponent" parent="." unique_id=337905091 instance=ExtResource("2_5a6me")]
 

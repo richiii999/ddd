@@ -19,7 +19,7 @@ func _ready():
 		#var priceLabel
 		
 		slot.slotNumber = i
-		slot.Slot_Clicked.connect(BuyItem) # SlotN is emitted with this signal
+		slot.slotClicked.connect(BuyItem) # SlotN is emitted with this signal
 		slot.UpdateSlot(items[i].instantiate()) # Add item to slot
 		i += 1
 
@@ -28,11 +28,10 @@ func ToggleShopGUI(player):
 	$ShopGUI.visible = !$ShopGUI.visible
 	currPlayer = player
 
-func ItemInSlot(slotN:int) -> Item: 
-	return $ShopGUI/GridContainer.get_child(slotN).item
+func ItemInSlot(slotN:int) -> Item: return $ShopGUI/GridContainer.get_child(slotN).item
 
 func BuyItem(slotN:int):
-	if slotN > $ShopGUI/GridContainer.get_child_count(): push_error("IndexOOB on shop slot"); return
+	if slotN > $ShopGUI/GridContainer.get_child_count() - 1: push_error("IndexOOB on shop slot"); return
 	if currPlayer == null: push_error("null player tried to buy"); return
 	
 	var item = ItemInSlot(slotN)

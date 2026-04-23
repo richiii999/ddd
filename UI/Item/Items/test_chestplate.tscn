@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_q1rlp"]
 [ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="3_7r6dx"]
 
-[node name="Test_chestplate" type="Sprite2D"]
+[node name="Test_chestplate" type="Sprite2D" unique_id=1605123198]
 texture = ExtResource("1_biulr")
 script = ExtResource("2_q1rlp")
 itemName = "TEST_ITEM"

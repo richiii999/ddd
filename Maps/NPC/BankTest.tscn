@@ -10,8 +10,6 @@ radius = 160.02812
 [node name="BankTest" type="Sprite2D" unique_id=18598485]
 texture = ExtResource("1_7iqsq")
 script = ExtResource("2_837d7")
-items = null
-bankSlots = null
 
 [node name="InteractComponent" parent="." unique_id=248235521 instance=ExtResource("2_18qgn")]
 
