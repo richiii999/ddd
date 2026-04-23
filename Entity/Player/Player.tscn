@@ -195,7 +195,6 @@ debug_color = Color(0.644771, 0.636917, 0.625141, 0.14902)
 [connection signal="pressed" from="CanvasLayer/RMenu/Utility/HPot_Button" to="." method="HPot"]
 [connection signal="pressed" from="CanvasLayer/RMenu/Utility/MPot_Button" to="." method="MPot"]
 [connection signal="pressed" from="CanvasLayer/RMenu/Utility/Nex_Button" to="." method="Nexus"]
-[connection signal="timeout" from="DashBar/DashTimer" to="Projectile_Hitbox" method="set_collision_layer_value" binds= [7, true]]
 
 [editable path="CanvasLayer/RMenu"]
 [editable path="CanvasLayer/RMenu/Utility"]

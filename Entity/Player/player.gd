@@ -108,6 +108,10 @@ func _ready():
 	%RMenu/MP_Bar.max_value = MPmax
 	%RMenu/XP_Bar.max_value = XPmax
 	%RMenu/HP_Bar.visible = true
+	
+	# Connect signals
+	$DashBar/DashTimer.timeout.connect(setDashing.bind(false))
+	$DashBar/DashTimer.timeout.connect($Projectile_Hitbox.set_collision_layer_value.bind(7, true))
 
 func get_input(): # TODO: replace this with _input() ?
 	## Debug stuff
@@ -315,8 +319,8 @@ func UpdateStats(increase: bool, stats: Dictionary) -> void:
 	else:
 		applyStats(gearStats, stats, -1)
 
-	print("GEAR STATS:", gearStats)
-	print("FINAL SPD:", getStats(Stats.SPD))
+	#print("GEAR STATS:", gearStats)
+	#print("FINAL SPD:", getStats(Stats.SPD))
 	
 ## Transitional stuff: Used when the player is teleporting, loading into the world, or otherwise changing in a way that they must wait for
 func toggleBubble(state:bool) -> void: # Makes player invulnerable, disables input, and puts a bubble around player
