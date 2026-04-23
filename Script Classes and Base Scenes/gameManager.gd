@@ -75,9 +75,21 @@ func InitialSetup():
 	
 	## Initial items
 	# Some coins
-	$ItemSpawner.SpawnItemByID(-2, Vector2(-300, 0))
-	$ItemSpawner.SpawnItemByID(-2, Vector2(-400, -100))
-	$ItemSpawner.SpawnItemByID(-2, Vector2(-400, 100))
+	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.Coin, Vector2(-300, 0))
+	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.Coin, Vector2(-400, -100))
+	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.Coin, Vector2(-400, 100))
+	# HPots and MPots
+	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.HPot, Vector2(-200, 0))
+	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.HPot, Vector2(-200, 50))
+	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.HPot, Vector2(-200, 75))
+	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.HPot, Vector2(-200, 100))
+	
+	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.MPot, Vector2(-175, 0))
+	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.MPot, Vector2(-175, 25))
+	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.MPot, Vector2(-175, 50))
+	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.MPot, Vector2(-175, 75))
+	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.MPot, Vector2(-175, 100))
+	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.MPot, Vector2(-175, 125))
 	# 9 items to fill inventory
 	$ItemSpawner.SpawnItemByID(1, Vector2(-600, 0))
 	$ItemSpawner.SpawnItemByID(1, Vector2(-700, 0))

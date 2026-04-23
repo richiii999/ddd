@@ -251,17 +251,21 @@ func WepPower() -> int:
 func HPot(): # Health Potion: Called when press 'H' to restore HP
 	if !HPotC: $Status.addStatusText("Out of Health pots!", "GOLD") # First, if you are out of pots, fail and show UI
 	else: # Use a HPot
-		HPotC -= 1 
+		incHPot(-1)
 		incHP((int)(60 * potionFactor))
-		$CanvasLayer/RMenu/Utility/HPot_Button.text = str(HPotC) + "/" + str(HPotmax)
 		$Status.addStatusText("Used health potion", "RED") # Show status text
 func MPot(): # Mana Potion: Called when press 'G' to restore MP
 	if !MPotC: $Status.addStatusText("Out of Mana pots!", "GOLD") # First, if you are out of pots, fail and show UI
 	else: # Use a MPot
-		MPotC -= 1 
+		incMPot(-1)
 		incMP((int)(100 * potionFactor))
-		$CanvasLayer/RMenu/Utility/MPot_Button.text = str(MPotC) + "/" + str(MPotmax)
 		$Status.addStatusText("Used mana potion", "BLUE") # Show status text
+func incHPot(i:int):
+	HPotC += i 
+	$CanvasLayer/RMenu/Utility/HPot_Button.text = str(HPotC) + "/" + str(HPotmax)
+func incMPot(i:int):
+	MPotC += i 
+	$CanvasLayer/RMenu/Utility/MPot_Button.text = str(MPotC) + "/" + str(MPotmax)
 
 func Nexus(): ## Nexus: On press, makes you invincible for a moment then transports you to the nexus
 	print("Nexus!")

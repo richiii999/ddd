@@ -2,10 +2,15 @@ class_name ItemSpawner extends Node ## ItemSpawner: Recieves signals to spawn it
 
 var groundItemScene = load("res://UI/Item/ground_item.tscn") # GroundItem to put items in bags
 
+# Dedicated Enum for special item IDs, since they are so common
+enum specialID {TEST_ITEM=-1, Coin=-2, HPot=-3, MPot=-4}
+
 var specialItems : Array[Resource] = [ # Negative item IDs
-	load("res://UI/Item/Items/Special/TEST_ITEM.tscn"), # -0, shouldnt be possible
-	load("res://UI/Item/Items/Special/TEST_ITEM.tscn"), # -1
-	load("res://UI/Item/Items/Special/Coin.tscn")       # -2
+	load("res://UI/Item/Items/Special/TEST_ITEM.tscn"), # -0, Just to pad index
+	load("res://UI/Item/Items/Special/TEST_ITEM.tscn"),
+	load("res://UI/Item/Items/Special/Coin.tscn"),
+	load("res://UI/Item/Items/Special/HPot.tscn"),
+	load("res://UI/Item/Items/Special/MPot.tscn")
 ]
 
 var items : Array[Resource] = [ # Index of this array == "itemID" used throughout the code
