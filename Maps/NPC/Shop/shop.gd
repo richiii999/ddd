@@ -25,7 +25,7 @@ func _ready():
 
 # Dialogue text is visible for a few seconds then goes away automatically
 func ToggleShopGUI(player):
-	$ShopGUI.visible = !$ShopGUI.visible
+	$ShopGUI.visible = (player != null)
 	currPlayer = player
 
 func ItemInSlot(slotN:int) -> Item: return $ShopGUI/GridContainer.get_child(slotN).item
