@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://28yokghggm42" path="res://Entity/Player/player.gd" id="1_pnyfx"]
 [ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_7hmw6"]
+[ext_resource type="PackedScene" uid="uid://dko0els7hvmek" path="res://Entity/Projectile/ProjectileTest2.tscn" id="3_pnyfx"]
 [ext_resource type="PackedScene" uid="uid://bclrygg5d3dyn" path="res://Entity/Field.tscn" id="4_cretm"]
 [ext_resource type="PackedScene" uid="uid://camr7ev4ss5vd" path="res://Entity/Components/Effects/Speed.tscn" id="4_u55sb"]
 [ext_resource type="PackedScene" uid="uid://e5fewqnk5nty" path="res://UI/RMenu/r_menu.tscn" id="6_s48lg"]
@@ -33,7 +34,7 @@ collision_layer = 16
 collision_mask = 385
 motion_mode = 1
 script = ExtResource("1_pnyfx")
-projs = Array[PackedScene]([ExtResource("2_7hmw6"), ExtResource("2_7hmw6"), ExtResource("2_7hmw6")])
+projs = Array[PackedScene]([ExtResource("2_7hmw6"), ExtResource("3_pnyfx"), ExtResource("2_7hmw6")])
 fields = Array[PackedScene]([null, ExtResource("4_cretm"), null])
 fieldEffects = Array[PackedScene]([null, ExtResource("4_u55sb"), null])
 aimSpread = 0.0
