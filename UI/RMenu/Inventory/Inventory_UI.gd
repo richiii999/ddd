@@ -104,10 +104,10 @@ func SlotClick(SlotA:int, SlotB:int = Slot.MOUSE) -> void:
 	if SlotA in range(Slot.HELM, Slot.INV1):
 	# REMOVE old item
 		if Inv[SlotB]:
-			UpdateInvStats.emit(false, Inv[SlotB].Stats)
+			UpdateInvStats.emit(false, Inv[SlotB].stats)
 	# ADD new item
 		if Inv[SlotA]:
-			UpdateInvStats.emit(true, Inv[SlotA].Stats)
+			UpdateInvStats.emit(true, Inv[SlotA].stats)
 
 ## Returns first empty slot [8-16] or -1 if full
 func FirstEmptyInvSlot() -> int: 

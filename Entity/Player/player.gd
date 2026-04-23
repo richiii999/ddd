@@ -6,18 +6,20 @@ class_name Player extends ENTITY ## PLAYER: Gamedevs be like: Player.script = 10
 # NOTE: Inv requires there to be a ItemPickupRange (type SmartArea)
 
 ## Stats
-enum Stat {STR, INT, AGI, TOU, WIS, DEX, BLK, WIL, SPD}
-var coreStats := {Stat.STR: 5, Stat.INT: 5, Stat.AGI : 5, Stat.TOU : 3, Stat.WIS : 3, Stat.DEX : 3, Stat.BLK: 1, Stat.WIL : 1, Stat.SPD : 1}
+@warning_ignore("int_as_enum_without_cast")
+@export var coreStats: Dictionary[Stats.STAT, int] = {
+Stats.STR: 5, 
+Stats.INT: 5, 
+Stats.AGI: 5, 
+Stats.TOU: 3, 
+Stats.WIS: 3, 
+Stats.DEX: 3, 
+Stats.BLK: 1, 
+Stats.WIL: 1, 
+Stats.SPD: 1
+}
 var gearStats := {}
 var effectStats := {}
-
-
-#enum Stat {coreSTR, coreINT, coreAGI,   coreTOU, coreWIS, coreDEX,   coreBLK, coreWIL, coreSPD, # STR = Melee  - INT = Magic - AGI = Ranged
-#		   gearSTR, gearINT, gearAGI,   gearTOU, gearWIS, gearDEX,   gearBLK, gearWIL, gearSPD, # TOU = Health - WIS = Mana  - DEX = Crit
-#		   effcSTR, effcINT, effcAGI,   effcTOU, effcWIS, effcDEX,   effcBLK, effcWIL, effcSPD} # BLK = Block  - WIL = MPBLK - SPD = Movespeed & Dodge
-#var Stats : Array[int] = [5, 5, 5,   3, 3, 3,   1, 1, 1, # Core stats, from level and skills
-#						  0, 0, 0,   0, 0, 0,   0, 0, 0, # Gear stats, from items
-#						  0, 0, 0,   0, 0, 0,   0, 0, 0] # Effect stats, from status effects
 
 ## Pots
 var HPotmax : int = 5 # Max Potions you can carry
@@ -73,26 +75,26 @@ func applyStats(target: Dictionary, stats : Dictionary, mult : int = 1):
 			target[key] = new_val
 #get the move speed buff
 func get_move_spd() -> float: 
-	var spd = getStats(Stat.SPD)
+	var spd = getStats(Stats.SPD)
 	return 1.0 + (spd / (spd + 20.0))
 
 #debug testing
 func test_apply_stats():
-	var test_stats = {Stat.STR: 10, Stat.SPD: 5}
+	var test_stats = {Stats.STR: 10, Stats.SPD: 5}
 	
 	print("Before:", gearStats)
 
 	applyStats(gearStats, test_stats)
 
 	print("After add:", gearStats)
-	print("Total STR:", getStats(Stat.STR)) # should be 5 (core) + 10 = 15
-	print("Total SPD:", getStats(Stat.SPD)) # should be 1 (core) + 5 = 6
+	print("Total STR:", getStats(Stats.STR)) # should be 5 (core) + 10 = 15
+	print("Total SPD:", getStats(Stats.SPD)) # should be 1 (core) + 5 = 6
 
 	applyStats(gearStats, test_stats, -1)
 
 	print("After remove:", gearStats)
-	print("Total STR:", getStats(Stat.STR)) # back to 5
-	print("Total SPD:", getStats(Stat.SPD)) # back to 1
+	print("Total STR:", getStats(Stats.STR)) # back to 5
+	print("Total SPD:", getStats(Stats.SPD)) # back to 1
 
 func _ready():
 	super._ready() # call ENTITY._ready() (sets HP and MP)
@@ -232,15 +234,9 @@ func _physics_process(_delta):
 ## Stats calculations
 func WepPower() -> int:
 	var wep = %Inventory.Inv[%Inventory.Slot.MAINHAND]
-	#if wep == null: return int((Stats[Stat.coreSTR] + Stats[Stat.gearSTR] + Stats[Stat.effcSTR]) * 0.5) # Null case: use STR / 2
-	# TODO: perhaps monkpath uses no wep or fist weps?
-	# get weapon stat input dict {stat (int): weight (float), ...}
-	# init a power var to store the value
-	# for each stat input ^:
-		# add relevant core stats for that stat together
-		# multiply by given weight
-		# add to power
-	# return power
+	# Null case: use STR / 2
+	if wep == null: return int((coreStats[Stats.STR] + effectStats[Stats.STR] + gearStats[Stats.STR]) * 0.5)
+	
 	return 0
 
 ## Consumables
@@ -320,7 +316,7 @@ func UpdateStats(increase: bool, stats: Dictionary) -> void:
 		applyStats(gearStats, stats, -1)
 
 	print("GEAR STATS:", gearStats)
-	print("FINAL SPD:", getStats(Stat.SPD))
+	print("FINAL SPD:", getStats(Stats.SPD))
 	
 ## Transitional stuff: Used when the player is teleporting, loading into the world, or otherwise changing in a way that they must wait for
 func toggleBubble(state:bool) -> void: # Makes player invulnerable, disables input, and puts a bubble around player
