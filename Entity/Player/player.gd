@@ -82,19 +82,19 @@ func get_move_spd() -> float:
 func test_apply_stats():
 	var test_stats = {Stats.STR: 10, Stats.SPD: 5}
 	
-	print("Before:", gearStats)
+	#print("Before:", gearStats)
 
 	applyStats(gearStats, test_stats)
 
-	print("After add:", gearStats)
-	print("Total STR:", getStats(Stats.STR)) # should be 5 (core) + 10 = 15
-	print("Total SPD:", getStats(Stats.SPD)) # should be 1 (core) + 5 = 6
+	#print("After add:", gearStats)
+	#print("Total STR:", getStats(Stats.STR)) # should be 5 (core) + 10 = 15
+	#print("Total SPD:", getStats(Stats.SPD)) # should be 1 (core) + 5 = 6
 
 	applyStats(gearStats, test_stats, -1)
 
-	print("After remove:", gearStats)
-	print("Total STR:", getStats(Stats.STR)) # back to 5
-	print("Total SPD:", getStats(Stats.SPD)) # back to 1
+	#print("After remove:", gearStats)
+	#print("Total STR:", getStats(Stats.STR)) # back to 5
+	#print("Total SPD:", getStats(Stats.SPD)) # back to 1
 
 func _ready():
 	super._ready() # call ENTITY._ready() (sets HP and MP)

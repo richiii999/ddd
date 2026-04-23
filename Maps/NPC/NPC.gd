@@ -20,7 +20,9 @@ func DisplayDialogue(state:bool):
 	$DialoguePanel/Timer.start(3.0)
 
 # Step through the dialogue, displaying in a text box above the NPC
-func DialogueStep(_Player, step:int = -1):
+func DialogueStep(P:Player = null, step:int = -1):
+	if P == null: return # Dont dialogue if player leaves
+	
 	currStep = currStep + 1 if (step == -1) else step # Go to next/specific step
 	if currStep > len(dialogue) - 1: 
 		push_error("IndexOOB on dialogue")

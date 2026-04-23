@@ -2,7 +2,7 @@ class_name Shop extends Node
 ## Shop: Opens a shop GUI that u can spend coins at for items / pots
 
 var currPlayer = null # Ref to player (set when u open the shop)
-@export var shopItems : Array[PackedScene] # Put item scenes in editor
+@export var items : Array[PackedScene] # Put item scenes in editor
 
 var invSlot = preload("res://UI/RMenu/Inventory/inv_slot.tscn")
 
@@ -10,7 +10,7 @@ func _ready():
 	$InteractComponent.Interact.connect(ToggleShopGUI)
 	
 	var i : int = 0
-	for item in shopItems:
+	for item in items:
 		var slot = invSlot.instantiate()
 		$ShopGUI/GridContainer.add_child(slot)
 		
@@ -19,27 +19,20 @@ func _ready():
 		#var priceLabel
 		
 		slot.slotNumber = i
-		slot.Slot_Clicked.connect(BuyItem) # SlotN is emitted with this signal
-		slot.UpdateSlot(shopItems[i].instantiate()) # Add item to slot
+		slot.slotClicked.connect(BuyItem) # SlotN is emitted with this signal
+		slot.UpdateSlot(items[i].instantiate()) # Add item to slot
 		i += 1
 
 # Dialogue text is visible for a few seconds then goes away automatically
 func ToggleShopGUI(player):
-	$ShopGUI.visible = !$ShopGUI.visible
+	$ShopGUI.visible = !$ShopGUI.visible if player != null else false # Hide GUI if player leaves
 	currPlayer = player
 
-func ItemInSlot(slotN:int) -> Item: 
-	return $ShopGUI/GridContainer.get_child(slotN).item
+func ItemInSlot(slotN:int) -> Item: return $ShopGUI/GridContainer.get_child(slotN).item
 
 func BuyItem(slotN:int):
-	print("Buy: " + str(slotN))
-	if slotN > $ShopGUI/GridContainer.get_child_count():
-		push_error("IndexOOB on shop slot")
-		return
-	
-	if currPlayer == null: 
-		push_error("null player tried to buy")
-		return
+	if slotN > $ShopGUI/GridContainer.get_child_count() - 1: push_error("IndexOOB on shop slot"); return
+	if currPlayer == null: push_error("null player tried to buy"); return
 	
 	var item = ItemInSlot(slotN)
 	print("Player tried to buy " + str(item))

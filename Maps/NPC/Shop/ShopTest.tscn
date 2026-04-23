@@ -11,14 +11,14 @@ radius = 148.12157
 [node name="ShopTest" type="Sprite2D" unique_id=2144558353]
 texture = ExtResource("1_tmpwn")
 script = ExtResource("1_4ubr3")
-shopItems = Array[PackedScene]([ExtResource("3_ja3ak")])
+items = Array[PackedScene]([ExtResource("3_ja3ak")])
 
 [node name="InteractComponent" parent="." unique_id=337905091 instance=ExtResource("2_5a6me")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractComponent" unique_id=1527244726]
 shape = SubResource("CircleShape2D_0su43")
 
-[node name="ShopName" type="Label" parent="." unique_id=1561334538]
+[node name="ShopLabel" type="Label" parent="." unique_id=1561334538]
 offset_left = -20.0
 offset_top = 72.0
 offset_right = 20.0
