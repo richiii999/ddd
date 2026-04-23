@@ -20,7 +20,7 @@ func _ready():
 
 # Dialogue text is visible for a few seconds then goes away automatically
 func ToggleBankGUI(player):
-	$BankGUI.visible = (player != null)
+	$BankGUI.visible = !$BankGUI.visible
 	currPlayer = player
 
 func GetItemSlot(slotN:int) -> Item: return $BankGUI/GridContainer.get_child(slotN).item
