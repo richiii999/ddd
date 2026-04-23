@@ -12,7 +12,7 @@ func _ready():
 	setInteractable(interactable)
 
 func EnterOrExit(body : Node2D, enterOrExit): # Area2D Enter/Exit: Connect / disconnect signals for Players in range
-	print("EnterOrExit: " + str(get_parent().name) + " | body: " + str(body.name) + " | enter: " + str(enterOrExit))
+	#print("EnterOrExit: " + str(get_parent().name) + " | body: " + str(body.name) + " | enter: " + str(enterOrExit))
 	get_parent().self_modulate = Color("BLUE") if enterOrExit else Color("WHITE") # Changes color when in Interact range #TODO make it a highlight outline
 	if get_parent() is Waygate:
 		#the sprites HAVE to be the first 2 children, otherwise it breaks, but does the same as the interact for NPC
