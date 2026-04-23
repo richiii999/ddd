@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bxf720rh8hgob" path="res://Maps/WorldBASE.gd" id="2_aam50"]
 [ext_resource type="PackedScene" uid="uid://blyjhm2j5onnb" path="res://Maps/Mechanics/EnemyPackSpawner.tscn" id="4_5iikc"]
 [ext_resource type="PackedScene" uid="uid://tcx34hy287cs" path="res://Maps/Mechanics/Waygate.tscn" id="4_bvj08"]
-[ext_resource type="PackedScene" uid="uid://cd6fjuhanrh2a" path="res://UI/Item/Items/TEST_ITEM.tscn" id="4_mehv6"]
+[ext_resource type="PackedScene" uid="uid://cd6fjuhanrh2a" path="res://UI/Item/Items/Special/TEST_ITEM.tscn" id="4_mehv6"]
 [ext_resource type="PackedScene" uid="uid://tq8hs5inekce" path="res://Entity/Enemy/Enemies/ChaseZombie.tscn" id="5_473rr"]
 [ext_resource type="PackedScene" uid="uid://57ucfjynaww3" path="res://Maps/Dungeons/TestDungeon/Dungeon.tscn" id="5_n2maq"]
 [ext_resource type="PackedScene" uid="uid://dm6wv0ic4m2so" path="res://Maps/TrainingRoom.tscn" id="5_pgajl"]

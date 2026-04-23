@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://croa2a2lvobg5" path="res://UI/RMenu/Inventory/inv_slot.gd" id="1_1o36c"]
 [ext_resource type="Texture2D" uid="uid://b2i8lrdls6dbr" path="res://Assets/UI/Inventory/inv_slot.png" id="2_7sq3w"]
+[ext_resource type="Texture2D" uid="uid://bwylkowr4koxh" path="res://Assets/UI/Inventory/borderSlot2.png" id="3_6m3m7"]
 
 [node name="Slot_Button" type="Button" unique_id=618706586]
 offset_right = 72.0
@@ -13,3 +14,7 @@ script = ExtResource("1_1o36c")
 [node name="Display_Sprite" type="Sprite2D" parent="." unique_id=263854480]
 position = Vector2(36, 36)
 scale = Vector2(0.5, 0.5)
+
+[node name="BorderSprite" type="Sprite2D" parent="." unique_id=1127903311]
+position = Vector2(36, 36)
+texture = ExtResource("3_6m3m7")

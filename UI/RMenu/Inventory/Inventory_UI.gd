@@ -56,7 +56,7 @@ func _ready():
 		Slots[i].slotClicked.connect(SlotClick) # Connect the slot's signal
 	
 	# Default inventory, debug items
-	var testItem = load("res://UI/Item/Items/TEST_ITEM.tscn").instantiate()
+	var testItem = load("res://UI/Item/Items/Special/TEST_ITEM.tscn").instantiate()
 	# Deferred since player isnt ready() yet
 	call_deferred("PutItemInSlot", 8, testItem)
 	call_deferred("PutItemInSlot", 12, testItem)
@@ -137,24 +137,44 @@ func PickItem() -> void:
 		return
 		
 	var openSlot : int = FirstEmptyInvSlot()
-	var pickedItem : Item = itemPickupRange.smartArea[0].find_child("ItemSlot").get_child(0) # First touched groundItem has priority
-	
-	# null shouldnt break inv, but still shouldnt happen (problem with the item usually)
-	if (pickedItem == null): 
-		push_warning("Null item picked up") 
-	
-	# Coins have a special itemType
-	elif (pickedItem.type == -2): 
-		player.incCoins(1) 
-		itemPickupRange.smartArea[0].queue_free()
-	
-	# No open slot
-	elif (openSlot == -1):
-		player.StatusLabel.addStatusText("Full inv!", "Gray")
-	
-	else:
-		PutItemInSlot(openSlot, pickedItem)
-		itemPickupRange.smartArea[0].queue_free() # Delete grounditem after
+	# First groundItem has priority, but can still pick up other items if it fails
+	# ex. full on HPots, try to pickup HPot but fail -> go to next item (prevent blocking)
+	for groundItem in itemPickupRange.smartArea.filter(func(node): return node is GroundItem):
+		var item:Item = groundItem.item # Get the item from the GroundItem
+		
+		# null shouldnt break inv, but still shouldnt happen (problem with the item usually)
+		if (item == null): push_warning("Null item looted, skipping"); continue
+		
+		# Special items
+		if item.ID < 0:
+			match item.ID:
+				-2: # Coin
+					player.incCoins(1) 
+				-3: # HPot
+					if player.HPotC == player.HPotmax:
+						player.StatusLabel.addStatusText("Full Health pots!", "GOLD")
+						continue # Prevent blocking
+					else: 
+						player.incHPot(1)
+				-4: # MPot
+					if player.MPotC == player.MPotmax:
+						player.StatusLabel.addStatusText("Full Mana pots!", "GOLD")
+						continue # Prevent blocking
+					else: 
+						player.incMPot(1)
+			
+			groundItem.queue_free()
+			return # Only pick up 1 item per press
+		
+		# No open slot
+		elif (openSlot == -1):
+			player.StatusLabel.addStatusText("Full inv!", "Gray")
+			return
+		
+		else:
+			PutItemInSlot(openSlot, item)
+			groundItem.queue_free() # Delete grounditem after
+			return # Only pick up 1 item per press
 
 ## Drop the item in mouse on the ground
 func DropItem():
