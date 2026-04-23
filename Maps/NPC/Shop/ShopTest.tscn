@@ -18,7 +18,7 @@ shopItems = Array[PackedScene]([ExtResource("3_ja3ak")])
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractComponent" unique_id=1527244726]
 shape = SubResource("CircleShape2D_0su43")
 
-[node name="ShopName" type="Label" parent="." unique_id=1561334538]
+[node name="ShopLabel" type="Label" parent="." unique_id=1561334538]
 offset_left = -20.0
 offset_top = 72.0
 offset_right = 20.0

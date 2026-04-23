@@ -1,7 +1,6 @@
-class_name Shop extends Node
-## Shop: Opens a shop GUI that u can spend coins at for items / pots
+class_name Bank extends Node ## Bank: Players can store items that persist through death.
 
-var currPlayer = null # Ref to player (set when u open the shop)
+var currPlayer = null # Ref to player (set when u open the bank)
 @export var items : Array[PackedScene] # Put item scenes in editor
 
 var invSlot = preload("res://UI/RMenu/Inventory/inv_slot.tscn")
