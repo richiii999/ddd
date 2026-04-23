@@ -3,7 +3,6 @@
 
 ## BUG list
 # main menu and death screen fucked up again
-# Specifically the waygate in the nexus behaves strangely (no particles), all other waygates work
 
 
 ## Enemies and behaviors
@@ -14,12 +13,6 @@
 # Detonate: enemy suicides and launches many projectiles when doing so
 	# Can use this after a short period of chase to make suicide bomber enemies
 # Think of 1-2 more behaviors and code them with an enemy to test it
-
-
-## Death - Done
-# Deathscreen, with respawn button and shows your XP / Fame
-# Respawn takes u back to nexus as new char
-# DEBUG: respawndebug button just revives you in the same spot
 
 
 ## Main Menu - Initial Version Done: Needs more
@@ -33,14 +26,9 @@
 
 ## Save feature for player
 # Saves only player info like stats, inventory, etc.
+# Also saves bank, not lost on death
 # read on game launch, if present, uses the save file
 # if not present, just makes a new player
-
-
-## 3rd Ability "Opus"
-# Before level 25: Holding space till 125 charge hurts you
-# After level 25: Holding space till 125 launches a different spell called an "Opus"
-# Opus is unique to each class
 
 
 ## Pets
@@ -48,11 +36,6 @@
 	# Player.pos - pet.pos (+- offset based on direction or whatever), 
 	# if nonzero, divide by some small number and subtract by a constant 
 # Cosmetic first, then functional like stat boost or something
-
-
-## Bank
-# Extra inventory that isnt deleted when you die
-# Access via some place in the nexus
 
 
 ## Hall of Fame
@@ -64,9 +47,11 @@
 # your dot and enemy dots, player dots, treasure dots, dungeon dots
 # Simplified terrain view
 
+
 ## Various enemy ideas
 # Big slime boss that splits up in some phases and you can kill parts, but they break up into smaller parts that can reform
 	# Changes color to show what damage type you need to use to kill it (e.g. green = poison, red = fire, etc.)
+
 
 ## Audio
 # Sounds, music, sound effects, UI noises on focus and click, items have special pickup/drop sounds etc. etc.
@@ -96,7 +81,6 @@
 
 
 ## Inventory UI stuff
-# Item Color: Wh < Gr < Bl (max openworld) < Pu (dgn boss) < Red (oryx) < Orange (quest items)
 # Quickloot: Loots potions, if there are more potions than you can use: "Greedy" option will just use them right out of the bag
 	# ex. You have 149/150 HP and 5/5 pots. quickloot will not pick up the pot. Greedy quickloot will
 	# ex. you have 1/150 HP and 5/5 pots. both options will use 1 pot, greedy will use 2 from bags. 
