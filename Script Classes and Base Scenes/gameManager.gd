@@ -41,7 +41,7 @@ func _ready():
 	
 # signal function when play is pressed that starts player movement
 func Play():
-	#TODO: Load Player stats
+	LoadData()
 	InitialSetup()
 	player.show()
 	player.InputStatus = true
@@ -95,7 +95,7 @@ func InitialSetup():
 func quitGame():
 	print("manager: quitting game")
 	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST) # Notify whole tree (so player can save and other stuff)
-	SavaData() #Currently empty, still needs implementation
+	await SavaData()
 	
 	get_tree().quit() # Actually quit the game
 
@@ -116,21 +116,48 @@ func DeathHandling():
 	mainMenu.escapeMenu = player.find_child("EscMenu")
 	mainMenu.escapeMenu.mainMenuButton.connect(mainMenu.ActivateMainMenu)
 	InitialSetup()
-	#TODO: Clear save data here
+	SavaData()
 	
 # Main Save function, should save any variables we want
 func SavaData():
-	#TODO: Add data to json file
-	pass
+	#Add data to custom resource file, GODOT resource
+	print("DataSaved")
+	var savedData:SavedData = SavedData.new()
+	savedData.max_player_health = player.HPmax
+	savedData.max_player_mp = player.MPmax
+	#savedData.current_hp = player.HP irrelevant? maybe, should be max on load i think
+	#savedData.current_mp = player.MP irrelevant? maybe, self regens soooo
+	savedData.core_Stats = player.coreStats
+	savedData.coins = player.coins
+	savedData.fame = player.Fame
+	savedData.hp_pot_current = player.HPotC
+	savedData.hp_pot_max = player.HPotmax
+	savedData.level = player.Level
+	savedData.mp_pot_current = player.MPotC
+	savedData.mp_pot_max = player.MPotmax
+	savedData.skill_points = player.skillPoints
+	savedData.xp_current = player.XP
+	savedData.xp_max = player.XPmax
+	
+	ResourceSaver.save(savedData, "user://savegame.tres")
 	
 # Main load function that should
 func LoadData():
-	pass
+	var savedData:SavedData = load("user://savegame.tres") as SavedData
 	
-# Main delete data function	
-func ClearData():
-	pass
-	
-	
-	
-	
+	if savedData != null:
+		print("DataLoaded")
+		player.HPmax = savedData.max_player_health
+		player.MPmax = savedData.max_player_mp
+		player.coreStats = savedData.core_Stats
+		player.coins = savedData.coins
+		player.Fame = savedData.fame
+		player.HPotC = savedData.hp_pot_current
+		player.HPotmax = savedData.hp_pot_max
+		player.Level = savedData.level
+		player.MPotC = savedData.mp_pot_current
+		player.MPotmax = savedData.mp_pot_max
+		player.skillPoints = savedData.skill_points
+		player.XP  = savedData.xp_current
+		player.XPmax = savedData.xp_max
+		pass
