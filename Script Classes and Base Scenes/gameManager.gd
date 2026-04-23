@@ -88,7 +88,8 @@ func InitialSetup():
 	$ItemSpawner.SpawnItemByID(1, Vector2(-600, 200))
 	$ItemSpawner.SpawnItemByID(1, Vector2(-700, 200))
 	$ItemSpawner.SpawnItemByID(1, Vector2(-800, 200))
-
+	$ItemSpawner.SpawnItemByID(2, Vector2(-500, 200))
+	
 func quitGame():
 	print("manager: quitting game")
 	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST) # Notify whole tree (so player can save and other stuff)

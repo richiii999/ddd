@@ -12,5 +12,5 @@ func skillUpdate(newSkill): # Refresh UI, and adjust player stats
 	player.skillPoints -= 1
 	$SkillPointsText/SkillPointsCount.text = str(player.skillPoints)
 	
-	# Update player stats (TODO: update how stats works)
-	for i in range(len(newSkill.Stats)): player.Stats[i] += newSkill.Stats[i]
+	# Update player stats
+	for stat in newSkill.stats: player.coreStats[stat] += newSkill.stats[stat]

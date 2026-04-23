@@ -4,18 +4,17 @@ class_name Item extends Sprite2D ## Item stats and info
 @export var price : int = 1 # Price to buy this item from a shop
 var ID : int = 0 # Set by ItemSpawner when items are created
 
-enum Stat {STR, INT, AGI, TOU, WIS, DEX, BLK, WIL, SPD}
 enum Types {INV, HELM, CHEST, RING, MAINHAND, OFFHAND, UNDROPPABLE}
 @export var type : int = -1 # -1=unset, should be one of ^
 
 ## Stats: Adds Player's gear stats
-@export var Stats : Array = [1,1,1,  1,1,1,  1,1,1]
-
-## Input stats & Weights: Used mostly for weapons, affects how important the player's stats are for this item
-@export var statWeights = {Stat.STR : 1.00}
+@warning_ignore("int_as_enum_without_cast")
+@export var stats : Dictionary[Stats.STAT, int]= {Stats.STR: 0, Stats.INT: 0, Stats.AGI: 0, Stats.TOU: 0, Stats.WIS: 0, Stats.DEX: 0, Stats.BLK: 0, Stats.WIL: 0, Stats.SPD: 0}
 
 ## Projectile: generally main & offhand items, but potentially others.
 @export var projectile : PackedScene = null
 
 func _ready(): 
 	if itemName == "": push_warning("ItemName not set! " + str(self))
+	#if $TestItem.Type == Types.MAINHAND: 
+		#print("yuh")

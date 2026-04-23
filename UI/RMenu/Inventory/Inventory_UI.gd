@@ -41,7 +41,7 @@ null, null, null
 ]
 
 # Emitted to player when changing items
-signal UpdateInvStats(increase:bool, type:int, sourceStats:Array) 
+signal UpdateInvStats(increase:bool, stats : Dictionary) 
 
 # Emitted when dropping an item, with the dropped item and position
 signal dropItem
@@ -102,11 +102,12 @@ func SlotClick(SlotA:int, SlotB:int = Slot.MOUSE) -> void:
 	
 	# Update player stats if changing a gear slot (0's if no item)
 	if SlotA in range(Slot.HELM, Slot.INV1):
-		if Inv[SlotB]: UpdateInvStats.emit(false, 2, Inv[SlotB].Stats)
-		else: UpdateInvStats.emit(false, 2, [0,0,0,  0,0,0,  0,0,0]) # Remove curr item
-		
-		if Inv[SlotA]: UpdateInvStats.emit(true, 2, Inv[SlotA].Stats)
-		else: UpdateInvStats.emit(true, 2, [0,0,0,  0,0,0,  0,0,0]) # Add new item
+	# REMOVE old item
+		if Inv[SlotB]:
+			UpdateInvStats.emit(false, Inv[SlotB].stats)
+	# ADD new item
+		if Inv[SlotA]:
+			UpdateInvStats.emit(true, Inv[SlotA].stats)
 
 ## Returns first empty slot [8-16] or -1 if full
 func FirstEmptyInvSlot() -> int: 

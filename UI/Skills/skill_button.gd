@@ -12,8 +12,18 @@ class_name skillButton extends Button ## SkillButton: Able to be clicked only wh
 @export var activeIcon = preload("res://Assets/UI/Inventory/inv_slotPurple.png")
 func setSkillIcon() -> void: icon = activeIcon if active else openIcon if availible else closedIcon
 
-@export var Stats = [1,1,1, 0,0,0, 0,0,0] 
-
+@warning_ignore("int_as_enum_without_cast")
+@export var stats: Dictionary[Stats.STAT, int] = {
+Stats.STR: 5, 
+Stats.INT: 5, 
+Stats.AGI: 5, 
+Stats.TOU: 3, 
+Stats.WIS: 3, 
+Stats.DEX: 3, 
+Stats.BLK: 1, 
+Stats.WIL: 1, 
+Stats.SPD: 1
+}
 signal skillUpdate # emitted to the SkillsUI when a skill is bought
 
 func _ready(): 
