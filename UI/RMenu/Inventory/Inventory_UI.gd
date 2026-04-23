@@ -53,8 +53,7 @@ func _ready():
 	
 	for i in len(Slots):
 		Slots[i].slotNumber = i # Assign slotNumber
-		Slots[i].Slot_Clicked.connect(SlotClick) # Connect the slot's signal
-		Slots[i].UpdateSlot(Inv[i]) # Updates all the slot nodes according to Inv[]
+		Slots[i].slotClicked.connect(SlotClick) # Connect the slot's signal
 	
 	# Default inventory, debug items
 	var testItem = load("res://UI/Item/Items/TEST_ITEM.tscn").instantiate()
@@ -72,6 +71,7 @@ func ValidateSlot(SlotN : int, item : Item) -> bool:
 	return ( 
 	item == null || # Empty mouse
 	item.type == -1 || # Unset type, any slot allowed
+	SlotN == 0 || # Mouse slot always allowed
 	SlotN in range(Slot.INV1,Slot.INV9 + 1) || # Inventory slots always allowed
 	item.type == item.Types.HELM && SlotN == Slot.HELM || # Helmet
 	item.type == item.Types.CHEST && SlotN == Slot.CHEST || # Chest

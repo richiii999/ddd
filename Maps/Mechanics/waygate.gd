@@ -5,6 +5,9 @@ class_name Waygate extends GPUParticles2D ## Waygate: Node for teleporting playe
 @export var active : bool = false # Players can only spawn here if active
 @export var oneWayTarget : Waygate = null # Instantly tp to oneWayTarget, no GUI (ex. dung exit)
 
+var currPlayer : Player = null # Set when player interacts with this
+# TODO: This is used often for interactables, perhaps move it to there idk
+
 # Activation cost
 # NOTE: Consumed upon activation, if free, can just press 'E' to activate
 # NOTE: oneway and dungeon-related waygates shouldnt have these, only the open-world ones.
@@ -19,6 +22,11 @@ func _ready():
 	if itemPrice: itemPriceItem = itemPrice.instantiate()
 
 func WaygateInteract(P:Player):
+	# Player left range
+	if currPlayer and P == null: 
+		currPlayer.toggleWaygateGUI()
+		return
+	
 	if !active: # Inactive, try to purchase
 		if itemPrice and P.Inv.HasItemName(itemPriceItem.itemName) == -1: # itemName since ID is 0
 			P.StatusLabel.addStatusText("Missing Item: " + str(itemPriceItem.name), "RED")
@@ -34,7 +42,8 @@ func WaygateInteract(P:Player):
 	
 	else: # Already active
 		if oneWayTarget: oneWayTarget.UseWaygate(P) # One-way gates activate immediately
-		else: P.toggleWaygateGUI() # Regular waygates open the GUI to select a destination
+		else: # BUG: On game start this is reached with P=null
+			if P != null: P.toggleWaygateGUI() # Regular waygates open the GUI to select a destination
 
 func UseWaygate(P:Player): # Teleports player to this waygate
 	await P.LoadingScreenStart() # Show loading screen before moving player & camera

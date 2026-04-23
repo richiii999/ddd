@@ -9,12 +9,11 @@ enum Types {INV, HELM, CHEST, RING, MAINHAND, OFFHAND, UNDROPPABLE}
 
 ## Stats: Adds Player's gear stats
 @warning_ignore("int_as_enum_without_cast")
-@export var stats : Dictionary[Stats.STAT, int]= {Stats.STR: 0, Stats.INT: 0, Stats.AGI: 0, Stats.TOU: 0, Stats.WIS: 0, Stats.DEX: 0, Stats.BLK: 0, Stats.WIL: 0, Stats.SPD: 0}
+@export var stats : Dictionary[Stats.STAT, int] = {Stats.STR: 0, Stats.INT: 0, Stats.AGI: 0, Stats.TOU: 0, Stats.WIS: 0, Stats.DEX: 0, Stats.BLK: 0, Stats.WIL: 0, Stats.SPD: 0}
 
-## Projectile: generally main & offhand items, but potentially others.
+## Projectile: What projectile is given from this item? Overrides the player's
+# NOTE: Only used on Main/Off-hand items
 @export var projectile : PackedScene = null
 
 func _ready(): 
 	if itemName == "": push_warning("ItemName not set! " + str(self))
-	#if $TestItem.Type == Types.MAINHAND: 
-		#print("yuh")
