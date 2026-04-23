@@ -23,6 +23,7 @@ func _ready():
 	player.hide()
 	player.find_child("RMenu").hide()
 	player.InputStatus = false
+
 	
 	#Main Menu Handling
 	#canvas allows us to keep the main menu seperate from all the other assets in the game (TLDR)
@@ -40,6 +41,7 @@ func _ready():
 	
 # signal function when play is pressed that starts player movement
 func Play():
+	#TODO: Load Player stats
 	InitialSetup()
 	player.show()
 	player.InputStatus = true
@@ -93,6 +95,8 @@ func InitialSetup():
 func quitGame():
 	print("manager: quitting game")
 	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST) # Notify whole tree (so player can save and other stuff)
+	SavaData() #Currently empty, still needs implementation
+	
 	get_tree().quit() # Actually quit the game
 
 # Handles signal death from player which deletes player and adds a new player for perma death behavior
@@ -112,3 +116,21 @@ func DeathHandling():
 	mainMenu.escapeMenu = player.find_child("EscMenu")
 	mainMenu.escapeMenu.mainMenuButton.connect(mainMenu.ActivateMainMenu)
 	InitialSetup()
+	#TODO: Clear save data here
+	
+# Main Save function, should save any variables we want
+func SavaData():
+	#TODO: Add data to json file
+	pass
+	
+# Main load function that should
+func LoadData():
+	pass
+	
+# Main delete data function	
+func ClearData():
+	pass
+	
+	
+	
+	

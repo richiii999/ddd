@@ -102,6 +102,7 @@ func _ready():
 	#print(get_tree_string_pretty()) #Debug print the nodetree
 	test_apply_stats()
 	%DeathScreen.find_child("Restart").pressed.connect(_OnDeathScreenButtonPushed)
+	%DeathScreen.find_child("DebugRestart").pressed.connect(_OnDebugRevive)
 	## Initialize the UI info
 	%RMenu/Utility/MPot_Button.text = "%s/%s" % [MPotC, MPotmax]
 	%RMenu/Utility/HPot_Button.text = "%s/%s" % [HPotC, HPotmax]
@@ -369,6 +370,9 @@ func Death():
 	
 	%DeathScreen.visible = !(%DeathScreen.visible); # print("Death Screen Toggled")
 	
+	InputStatus = false
+	self.velocity = Vector2.ZERO
+	
 	#incHP(HPmax) ## Debug: just reset HP when ded
 	
 	get_tree().set_pause( true ) # Toggle pause
@@ -388,4 +392,5 @@ func _OnDeathScreenButtonPushed() -> void:
 func _OnDebugRevive() -> void:
 	%DeathScreen.visible = !(%DeathScreen.visible)
 	get_tree().set_pause(false)
+	self.InputStatus = true
 	HP = HPmax
