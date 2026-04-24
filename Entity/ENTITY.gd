@@ -82,13 +82,13 @@ func initEntityUI(): ## initializes UI stuff (instead of having all these in eac
 	if StatusLabel: StatusLabel.addStatusText("Status", "GRAY")
 
 #this will get overwritten by our player getEquippedProj
-#func getEquippedProj() -> PackedScene:
-#	return null
+func getEquippedProj(index : int) -> PackedScene:
+	return projs[index]
 
 ## ShootProj: Shoots one of the projectiles based on input and constructs them according to this entity's stats, effects, and fields
 #TODO: figure out how to seperate enemy and player from ShootProj
 func ShootProj(input : int, Aim : Vector2) -> void:
-	#var proj_scene : PackedScene = null
+	var proj_scene : PackedScene = null
 	var index := input - 1 #literally just var assignment
 	if index < 0 or index >= projs.size(): #check to see if the index that we pass in is even in the bounds of the projectiles we have set
 		push_error("Invalid projectile index: " + str(input))
@@ -107,35 +107,14 @@ func ShootProj(input : int, Aim : Vector2) -> void:
 	if index < effects.size() and effects[index]:
 		E = effects[index].instantiate()
 		
-	#proj_scene = getEquippedProj()
-	#if proj_scene == null:
-	#	proj_scene = projs[index]
-	#if proj_scene:
-	#	P = proj_scene.instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing, kBstrength1, E, F)
+	proj_scene = getEquippedProj(index)
+	if proj_scene == null:
+		proj_scene = projs[index]
+	if proj_scene:
+		P = proj_scene.instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing, kBstrength1, E, F)
 	
-	if projs[index]: #if the index exists in the projectiles array, instantiate our projectile
-		P = projs[index].instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing, kBstrength1, E, F)
-		
-	#match input: # TODO this is kinda a retarded way of doing it, has to be a better way with less duplication
-		#1: 
-			#if field1: F = field1.instantiate()
-			#if fieldEffect1: FE = fieldEffect1.instantiate()
-			#if effect1: E = effect1.instantiate()
-			#if proj1: P = proj1.instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing, kBstrength1, E, F)a
-		#2:
-			#if field2: F = field2.instantiate()
-			#if fieldEffect2: FE = fieldEffect2.instantiate()
-			#if effect2: E = effect2.instantiate()
-			#if proj2: P = proj2.instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing, kBstrength2, E, F)
-		#3: 
-			# <field 3>
-			#if field3: F = field3.instantiate()
-			# <FE 3>
-			#if fieldEffect3: FE = fieldEffedct3.instantiate()
-			# <effect3>
-			#if effect3: E = effect3.instantiate() 
-			# <proj 3>
-			#if proj3: P = proj3.instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing, kBstrength2, E, F)
+	#if projs[index]: #if the index exists in the projectiles array, instantiate our projectile
+	#	P = projs[index].instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing, kBstrength1, E, F)
 	
 	#need to add a check to make sure if P and manager are null, push an error to not break the game 
 	if P == null:

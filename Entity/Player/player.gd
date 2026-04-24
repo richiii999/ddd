@@ -71,18 +71,21 @@ func getStats(stat : int) -> int:
 #func getOffHand():
 #	return %Inventory.Inv[%Inventory.Slot.OFFHAND]
 
-#func getEquippedProj() -> PackedScene:
-#	var main = getMainHand()
-#	var off = getOffHand()
+func getEquippedProj(index : int) -> PackedScene:
+	#check to make sure the inventory node is not null
+	if Inv == null or Inv.Inv == null:
+		return super.getEquippedProj(index)
+		
+	var main = Inv.Inv[Inv.Slot.MAINHAND]
 	
-	#check if the projectiles exist, then return
-#	if main and main.projectile:
-#		return main.projectile
-	
-#	if off and off.projectile:
-#		return off.projectile
-	
-#	return defaultProjectile
+	#check if the projectiles exist and left click is pressed, then return
+	if index == 0:
+		if main and main.projectile:
+			print("Using MAINHAND projectile:", main.projectile.resource_path)
+			return main.projectile
+		else:
+			print("Default projectile")
+	return super.getEquippedProj(index)
 
 #apply the stats of items/skillpoints 
 func applyStats(target: Dictionary, stats : Dictionary, mult : int = 1):
@@ -121,6 +124,7 @@ func get_move_spd() -> float:
 func _ready():
 	super._ready() # call ENTITY._ready() (sets HP and MP)
 	super.initEntityUI()
+	print("Inventory node:", Inv)
 	#print(get_tree_string_pretty()) #Debug print the nodetree
 	#test_apply_stats()
 	%DeathScreen.find_child("Restart").pressed.connect(_OnDeathScreenButtonPushed)
