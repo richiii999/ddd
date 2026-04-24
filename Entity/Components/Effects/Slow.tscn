@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dkf8po3prat36"]
+
+[ext_resource type="Texture2D" uid="uid://dy12ff7b16url" path="res://Assets/Sprites/Particles/star particle white.png" id="1_lpk46"]
+[ext_resource type="Script" uid="uid://wq0r0krhbs5m" path="res://Entity/Components/Effects/slow.gd" id="2_lpk46"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l0ng0"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 20.0
+emission_ring_inner_radius = 30.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, -1, 0)
+spread = 0.0
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 0, 0)
+
+[node name="Effect_Slow" type="GPUParticles2D" unique_id=335693035]
+modulate = Color(0, 1, 0, 1)
+amount = 2
+texture = ExtResource("1_lpk46")
+lifetime = 0.4
+process_material = SubResource("ParticleProcessMaterial_l0ng0")
+script = ExtResource("2_lpk46")
+color = "GRAY"
+efname = "Slow"
+length = 5.0

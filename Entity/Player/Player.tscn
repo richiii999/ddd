@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_7hmw6"]
 [ext_resource type="PackedScene" uid="uid://dko0els7hvmek" path="res://Entity/Projectile/ProjectileTest2.tscn" id="3_pnyfx"]
 [ext_resource type="PackedScene" uid="uid://bclrygg5d3dyn" path="res://Entity/Field.tscn" id="4_cretm"]
-[ext_resource type="PackedScene" uid="uid://b7jer77opiti2" path="res://Entity/Components/Effects/Burn.tscn" id="5_pnyfx"]
+[ext_resource type="PackedScene" uid="uid://dkf8po3prat36" path="res://Entity/Components/Effects/Slow.tscn" id="5_pnyfx"]
 [ext_resource type="PackedScene" uid="uid://e5fewqnk5nty" path="res://UI/RMenu/r_menu.tscn" id="6_s48lg"]
 [ext_resource type="PackedScene" uid="uid://jkkh88r7c0fe" path="res://UI/LoadingScreen/loading_screen.tscn" id="7_2h57d"]
 [ext_resource type="PackedScene" uid="uid://ckppam3wv3dxn" path="res://UI/Death/death_screen.tscn" id="8_pt1bs"]
