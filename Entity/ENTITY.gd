@@ -137,28 +137,6 @@ func ReadTerrain(): ## Read tile under the entity, assign tile's data to variabl
 ## Knockback (signaled from the colliding projectile): Applies an impluse to velocity in px/s (modified by KBresistance)
 func Knockback(from : Vector2, strength : float): if !invulnerable: velocity += Vector2.from_angle(from.angle_to_point(global_position)) * (1.00 - kBResistance) * strength
 
-## Entity.AddEffect(): This is used to add effects to entities rather than calling AddEffect on the entity's effect component system
-# This way, it allows for things like immunities and stuff to be handled by the entity and just pass along a modified effect to the ECS
-func AddEffect(E : EffectBASE = null, _field : bool = false) -> void:
-	if (!E || !ECS): return # null case (shouldn't happen), or no ECS to apply effect to, so just return
-	
-	if elementResist.has(E.element): 
-		return
-		# TODO:
-		# if res > tier + 2
-			# immune, return and print immune status text
-		# else, res > 0
-			# resistance, lower strength of effect or soemthing, print "resist"
-	
-	# TODO: can have both regular and field effects at once. Field effects with timer started are reset in timer and puased,
-	#if 
-	
-	ECS.AddEffect(E)
-
-func RemoveEffect(E: EffectBASE = null) -> void:
-	if (!E || !ECS || E not in ECS.get_children()): return # null case (shouldn't happen), or no ECS to apply effect to, or effect not found, just return
-	else: ECS.RemoveEffect(E)
-
 ## OVERRIDE funcs: Player and Enemy scripts override these and provide additional functionality
 func _ready(): 
 	incHP(HPmax)

@@ -124,3 +124,38 @@
 ## I fuckin hate anchors. Why is it so hard to scale things to the screen? 
 # I litterally just locked the resolution of the game to 1280x720 to fix it "temporarily" (forever)
 # TODO: ^ probably should lock it to 2k res and use scaling or whatever.
+
+# TODO: when nexus, clear all effects and stuff, heal you, etc.
+# TODO: UI stuff display icons and timers or soemthing (graphically transparent circles like wow)
+
+## Effects management stuff:
+# e.g. apply a bleed 3 for 5sec, will overwrite a bleed 2 (of any time), or a bleed 3 of less than 5s, but not a bleed 4 (of any time)
+# component effects can have their own timer nodes or something that just queue free the components, reapplying stacks will just refresh the timer (like ^^) rather than make a new node.
+# Maybe different levels of the same effect can stack? idk, mayb
+# Aha! different levels dont stack, but only the highest level is applied, so if you have bleed 3 2s, and bleed 2 5s, you get (in sec) [ 3 3 2 2 2 ]
+# Status effect colors and shit are probably just gonna have to be applied every frame, idk. pick the strongest level effect and use it's color
+# Permanent effects? e.g. for use in a dungeon where you are split into 2 groups and have to do stuff idk
+	# Magnet, positive negative fields are attached to opposites
+# idea: Effect that gets spammed alot, whole mechanic is about not reaching too high of a timer
+	# Effect is reapplied often in dungeon, and unavoidably, so the timer never goes down, if you get too high, hurt or soemthing
+	# Goal is to do dungeon with minimal stacks of effect
+# UI display effects similar to wow with little squares in tr or soemthing and an icon
+# Constant effects, not the same thing as perma or untimed effects. 
+	# Constant effects are stored on the player, and applied even when effects are otherwise wiped (e.g. nexus)
+	# Example could be: Everyone gets a constant effect for holidays or something idk.
+	# Constant effects for certain classes in the form of perma-buffs?
+	# Constant effects applied from gear? e.g. constantly regen HP, or soemthing
+# Effects applied by tiles? Effects applied by worlds or dungeons?
+# as mentioned, Effects are cleared when nexus, and some other times. 
+	# Priests and other supports can also clear negative effects and stuff, idk how exactly that's gonna work
+# Content ideas effects:
+# content idea: status effect which adds a higher tier of itself on expire, dealing more and more dmg, must clear
+# content idea: likewise && but counts down, need to keep up stacks or explode at the end
+# TODO: effect "berserk", applies to enemies when their spawn node deactivates, or when the packboss dies, or for certain enemies, when they go below a HP threshold
+# Magnet (from specified point or node2D) by adding velocity based on what's in the field (area2D) and how close it is
+# Magnet (directional) adding constant velocity
+# Heal
+# Damage NOTE: done
+# Speed up / slow down
+# Fields can be HoT, DoT, etc. litterally anything.
+# Can also have tiles that have effects beyond just hurting you or whatever, conveyor belts, slippery ice, status effect goo

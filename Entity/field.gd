@@ -48,7 +48,7 @@ func onEnter(entity : Node2D):
 	var newEffect = effect.duplicate()
 	newEffect.field = self #set the fields reference so that our effectBASE knows that its a field effect
 	activeEffects[entity] = newEffect #add the effect to our dictionary's recorded entity
-	entity.AddEffect(newEffect) # Field effects are added with no timer
+	entity.ECS.AddEffect(newEffect) # Field effects are added with no timer
 	
 func onLeave(entity : Node2D):
 	#print("onLeave called, expiring: " + str(expiring) + " | entity: " + str(entity))
@@ -56,7 +56,7 @@ func onLeave(entity : Node2D):
 	if entity in activeEffects: #check to see if the entity is in an active effect
 		var effect = activeEffects[entity]
 		if is_instance_valid(effect): #check to see if they still have an effect
-			entity.RemoveEffect(activeEffects[entity]) # Removing a field effect starts it's timer (via destructor)
+			entity.ECS.RemoveEffect(activeEffects[entity]) # Removing a field effect starts it's timer (via destructor)
 		activeEffects.erase(entity) 
 
 func _on_Timer_timeout():

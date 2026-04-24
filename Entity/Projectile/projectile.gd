@@ -6,7 +6,6 @@ var player  : bool = false # if player proj, dont hurt player (via different lay
 var power   : int = 0      # How much base power the projectile has (~ damage)
 var piercing: int = 1      # How many entities can it collide with before breaking? (Always expires on hitting a wall)
 var knockback:float=150.00 # Knockback (in px/s) added to velocity of entity
-#var element : int = 0     # What element does the proj have (0 = none)
 
 var effect  : EffectBASE = null # What effect applies to hit entities?
 var field   : Field = null # What field to spawn when the projectile destructs?
@@ -24,7 +23,6 @@ func Spawn( Source : Node = null,
 			KnockbackAmt : float = 550.00,
 			Effect : EffectBASE = null, 
 			endField : Field = null
-			# Element : int = 0
 			# ScaleFactor : float = 1.00, # Scales the size
 			# Location : Vector2 = Vector2(0,0) # Where to spawn it relative to source (Usually spawn at the center of source)
 			# Trail : PackedScene = null # What happens when the projectile is shot? (e.g. special travel path)
@@ -44,7 +42,6 @@ func Spawn( Source : Node = null,
 	knockback = KnockbackAmt
 	effect = Effect
 	field = endField
-	#element = Element
 	#$Sprite2D.apply_scale(Vector2(ScaleFactor, ScaleFactor)) # Scales the proj TODO: WTF! can't just scale the root node? "Overriden by physics engine"
 	#$CollisionBox2D.apply_scale(Vector2(ScaleFactor, ScaleFactor))
 	#position = Location
