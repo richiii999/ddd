@@ -79,34 +79,60 @@ func getEquippedProj(index : int) -> PackedScene:
 
 ## ShootProj: Shoots one of the projectiles based on input and constructs them according to this entity's stats, effects, and fields
 func ShootProj(input : int, Aim : Vector2) -> void:
-	var proj_scene : PackedScene = null
 	var index := input - 1 #literally just var assignment
+	
 	if index < 0 or index >= projs.size(): #check to see if the index that we pass in is even in the bounds of the projectiles we have set
 		push_error("Invalid projectile index: " + str(input))
 		return
+		
+	var attack : AttackData = null
+	
+	if self is Player: 
+		attack = (self as Player).getEquippedAttack(index)
+		
+	#if no item attack exists, get the current projectile based off our index
+	if attack == null: 
+		var proj_fallback = getEquippedProj(index)
+		if proj_fallback == null:
+			push_error("Invalid projectile index at: " + str(index))
+			return
+		
+		#create a new attack and assign that to the projectile, then assign everything else basef off the index
+		attack = AttackData.new()
+		attack.projectile = proj_fallback
+		
+		if index < fields.size() and fields[index]:
+			attack.field = fields[index]
+		if index < fieldEffects.size() and fieldEffects[index]:
+			attack.fieldEffect = fieldEffects[index]
+		if index < effects.size() and effects[index]:
+			attack.effect = effects[index]
+			
+	#var proj_scene : PackedScene = null
 	
 	var F : Field = null       # Prepare nodes of their respective types to be filled in
 	var FE: EffectBASE = null
 	var E : EffectBASE = null
 	var P : Projectile  = null
 	
-	if index < fields.size() and fields[index]: #if the index is in the range, instantiate the objects
-		F = fields[index].instantiate()
-	if index < fieldEffects.size() and fieldEffects[index]:
-		FE = fieldEffects[index].instantiate()
-		
-	if index < effects.size() and effects[index]:
-		E = effects[index].instantiate()
+	if attack.field: #instantiate based off if these exist
+		F = attack.field.instantiate()
+	if attack.fieldEffect:
+		FE = attack.fieldEffect.instantiate()
+	if attack.effect:
+		E = attack.effect.instantiate()
 
-	proj_scene = getEquippedProj(index)
-	if proj_scene == null:
-		proj_scene = projs[index]
-	if proj_scene:
-		P = proj_scene.instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing, kBstrength1, E, F)
+	#proj_scene = getEquippedProj(index)
+	#if proj_scene == null:
+		#proj_scene = projs[index]
+	#if proj_scene:
+		#P = proj_scene.instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing, kBstrength1, E, F)
 	
-	#if projs[index]: #if the index exists in the projectiles array, instantiate our projectile
-	#	P = projs[index].instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing, kBstrength1, E, F)
-
+	if attack.projectile: #if the projectile exists, instantiate our projectile
+		P = attack.projectile.instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing, kBstrength1, E, F)
+	else: 
+		push_error("AttackData missing projectile")
+		return
 	#need to add a check to make sure if P and manager are null, push an error to not break the game 
 	if P == null:
 		push_error("P Shit broke")

@@ -16,7 +16,7 @@ enum Types {INV, HELM, CHEST, RING, MAINHAND, OFFHAND, UNDROPPABLE}
 
 ## Projectile: What projectile is given from this item? Overrides the player's
 # NOTE: Only used on Main/Off-hand items
-@export var projectile : PackedScene = null
+@export var attack : AttackData
 
 func _ready(): 
 	scale = Vector2(0.5,0.5) # Items are small

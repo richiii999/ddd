@@ -27,6 +27,5 @@ position = Vector2(1476, -8)
 
 [node name="DungeonBossRoom" parent="Rooms" unique_id=2045440863 instance=ExtResource("5_3faj6")]
 position = Vector2(2247, -8)
-isBossRoom = true
 
 [node name="EnemySpawns" type="Node2D" parent="." unique_id=555905646]

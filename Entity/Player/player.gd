@@ -71,24 +71,21 @@ func getStats(stat : int) -> int:
 #func getOffHand():
 #	return %Inventory.Inv[%Inventory.Slot.OFFHAND]
 
-func getEquippedProj(index : int) -> PackedScene:
+func getEquippedAttack(index : int) -> AttackData:
 	#check to make sure the inventory node is not null
 	if Inv == null or Inv.Inv == null:
-		return super.getEquippedProj(index)
+		return null
 		
 	var main = Inv.Inv[Inv.Slot.MAINHAND]
+	var off = Inv.Inv[Inv.Slot.OFFHAND]
 	
 	#check if the projectiles exist and left click is pressed, then return
-	if index == 0:
-		if main and main.projectile:
-			print("Using MAINHAND projectile:", main.projectile.resource_path)
-			return main.projectile
+	if index == 0 and main:
+		return main.attack
 	
-	if index == 1:
-		var off = Inv.Inv[Inv.Slot.OFFHAND]
-		if off and off.projectile:
-			return off.projectile
-	return super.getEquippedProj(index)
+	if index == 1 and off:
+		return off.attack
+	return null
 
 #apply the stats of items/skillpoints 
 func applyStats(target: Dictionary, stats : Dictionary, mult : int = 1):
