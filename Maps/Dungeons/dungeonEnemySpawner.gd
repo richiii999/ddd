@@ -60,6 +60,7 @@ func SpawnEnemy():
 	
 	get_parent().add_child(spawnedEnemy)
 	spawnedEnemy.global_position = global_position
+	spawnedEnemy.set_collision_layer_value(9, true) # Enemy Physics
 	# Workaround for awkward signal connection
 	if deathSignalConnection: spawnedEnemy.death.connect(deathSignalConnection.onEnemyDeath) 
 	

@@ -2,7 +2,7 @@ class_name ENTITY extends CharacterBody2D ## Provides much useful functionality 
 # Used for players / enemies / neutrals
 
 ## References to nodes
-@onready var Manager : GameManager = get_node_or_null("/root/GameManager") # Reference to the WorldNode (so I dont have to call it every time)
+@onready var Manager : GameManager = get_node("/root/GameManager") # Reference to the WorldNode (so I dont have to call it every time)
 @onready var currWorld : WorldBASE = Tools.FindParentByType(self, WorldBASE)
 @onready var Sight : SmartArea = find_child("Sight") # Ref to this entity's sight smartarea (if any)
 @onready var ECS : EffectComponentSystem = find_child("EffectsComponentSystem") # This entity's EffectComponentSystem node, if null, no effects will be applied to this.
@@ -10,7 +10,7 @@ class_name ENTITY extends CharacterBody2D ## Provides much useful functionality 
 @onready var StatusLabel : Status = find_child("Status") # This entity's Status component
 @onready var HPBar : Node = find_child("HP_Bar") # This entity's HP and MP bars
 @onready var MPBar : Node = find_child("MP_Bar")
-var SpawnNode : Node = null # Link to the entity's spawn node (if any) (ex. player = which waygate, enemy = their spawnnode). Set by the spawnnode
+var SpawnNode : Node = null # Link to the entity's spawn node (if any), Set by the spawnnode
 
 ## Scenes to spawn
 @export var projs : Array[PackedScene] = [null, null, null]
@@ -132,19 +132,27 @@ func ShootProj(input : int, Aim : Vector2) -> void:
 	else: 
 		push_error("AttackData missing projectile")
 		return
-	#need to add a check to make sure if P and manager are null, push an error to not break the game 
+	
 	if P == null:
 		push_error("P Shit broke")
 		return
-	if Manager == null: 
-		push_error("Manager Shit broke")
-		return
+	
 	Manager.add_child(P) # Reparent projectile to the world
 	P.global_position = global_position # Have to do this from here, not from p.Spawn()
-	if F and FE: FE.field = F; F.effect = FE; F.color = FE.color; F.source = self # Set field & effects (if any, check to see both exists first)
-	if E: P.effect = E # Set effect (if any)
+	
+	# Set field & effects (if any)
+	if E: P.effect = E
+	if F:
+		if FE == null:
+			push_error("Field with no effect!")
+			return
+		F.effect = FE
+		F.fieldColor = FE.color
+		F.particleColor = FE.color
+	
 
-func ShootSmart(input : int): ShootProj(input, targetEntity.global_position + targetEntity.velocity * 20) ## Shoots at where targetEntity will be, instead of where it is now
+## Shoots at where targetEntity will be, instead of where it is now
+func ShootSmart(input : int): ShootProj(input, targetEntity.global_position + targetEntity.velocity * 20)
 
 ## Damage / Heal: Called by signals, the incrementors handle UI
 func Damage(power : int):

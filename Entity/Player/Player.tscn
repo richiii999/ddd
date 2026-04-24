@@ -222,7 +222,6 @@ collision_layer = 0
 collision_mask = 4
 monitorable = false
 script = ExtResource("16_5ay3i")
-AreaOrBody = true
 metadata/_custom_type_script = "uid://hi4e34yydb2t"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemPickupRange" unique_id=1834462106]

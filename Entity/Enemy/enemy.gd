@@ -8,6 +8,7 @@ var targetPosStopRadius : float = 50 # How close to targetPos will this enemy st
 func _ready():
 	super._ready() # call ENTITY._ready() (sets HP and MP)
 	EntityUI()
+	set_collision_layer_value(9, true) # Enemy Physics
 	z_index = 2 # TODO: should probably write down what order things should be layers in
 	$ShootTimer1.set_paused(true) # The shoot timers activate only when SightList has something in it
 	$ShootTimer2.set_paused(true) # ^ via onFirst() turning them on & onEmpty() turning them off
@@ -16,6 +17,9 @@ func _ready():
 	setTargetPos()
 
 func _physics_process(_delta):
+	# BUG: Really annoying workaround to enemies from spawners not having this set properly
+	if not get_collision_layer_value(9): set_collision_layer_value(9, true)
+	
 	ReadTerrain()
 	if(abs(global_position.x - targetPos.x) + abs(global_position.y - targetPos.y) > targetPosStopRadius ): velocity += (Vector2.from_angle(get_angle_to(targetPos))) * (accel * behaviorMoveSpeed * effectMoveSpeed * tileSpeed)
 	

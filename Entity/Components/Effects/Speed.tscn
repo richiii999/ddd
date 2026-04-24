@@ -27,7 +27,3 @@ script = ExtResource("2_ajd1q")
 color = "GREEN"
 efname = "Speed"
 length = 5.0
-
-[node name="Timer" type="Timer" parent="." unique_id=2045385300]
-wait_time = 3.0
-autostart = true

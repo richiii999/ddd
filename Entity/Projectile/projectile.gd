@@ -12,7 +12,8 @@ var field   : Field = null # What field to spawn when the projectile destructs?
 
 signal damage # emitted to the thing it hits with (source, power) params
 
-var linear_velocity : Vector2 = Vector2(0,0) # CONSTANT linear Velocity NOTE: this is an area2D, not a physics object like RigidBody2D
+var linear_velocity : Vector2 = Vector2(0,0) # Constant linear Velocity 
+# NOTE: this is an area2D, not a physics object like RigidBody2D
 
 ## Constructor, this replaces the projectile manager signal translator thingy
 func Spawn( Source : Node = null,
@@ -61,7 +62,10 @@ func _physics_process(_delta): global_position += linear_velocity # Simple physi
 
 ## Use the projectile's properties to determine damage and stuff, then delete the projectile. 
 # If these are called on the wrong thing, it's probably cause layers / masks
-func BodyCollideRID(rid: RID, body: Node2D, _body_shape_idx: int, _local_shape_idx: int) -> void: ## Terrain collide
+
+
+## Terrain collide
+func BodyCollideRID(rid: RID, body: Node2D, _body_shape_idx: int, _local_shape_idx: int) -> void: 
 	#print("projectile hit: " + str(body))
 	if body is TileMapLayer:
 		var tileCoords = body.get_coords_for_body_rid(rid)
@@ -91,26 +95,21 @@ func AreaCollide(area : Area2D) -> void: ## Entity collide
 	# else: wall/gate collide or smth idk, just queue free
 	Destruct()
 
-## Knockback (signaled from the colliding projectile): Applies an impulse in px/s to velocity (modified by KBresistance) # modifed from Entity.Knockback(): "LINEAR velocity" 
+## Knockback: Applies an impulse in px/s to velocity (modified by KBresistance) 
+# NOTE: modifed from Entity.Knockback(): "LINEAR velocity" 
+# NOTE: signaled from the colliding projectile
 func Knockback(from : Vector2, strength : float) -> void: linear_velocity += Vector2.from_angle(from.angle_to_point(global_position)) * (strength / 50) # Reduced strength due to no drag
 
-var QF : bool = false # Used as a temp to mark when queue_free() is called, to prevent destructing twice
-func Destruct(skipEndEffect : bool = false) -> void: ## "Destructor", called instead of queue_free() or exit_tree() so I can do certain stuff and call it directly
-	if !QF:
-		QF = true
-		Tools.ParticlePassOff($ProjParticles) # Let the particles expire rather than instantly disappearing
-		
-		if(field && !skipEndEffect): # Spawn a field (if set) on destruct
-			#get_parent().call_deferred("add_child", field)
-			#field.global_position = global_position # Have to do this, it doesnt just inherit
-			print("Projectile global:", global_position)
-
-			get_parent().call_deferred("add_child", field)
-
-			# TEMP: wait one frame so it's actually in the scene tree
-			await get_tree().process_frame
+## Destructor, called instead of queue_free() so I can prepare stuff first
+var QF : bool = false # Prevent destructing twice
+func Destruct() -> void: 
+	if QF: return
+	QF = true
 	
-			field.global_position = global_position
+	Tools.ParticlePassOff($ProjParticles) # Let the particles expire separately
 	
-			print("Field global:", field.global_position)
-		queue_free()
+	if(field): # Spawn a field
+		get_parent().call_deferred("add_child", field)
+		field.global_position = global_position
+	
+	queue_free()
