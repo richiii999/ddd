@@ -383,7 +383,7 @@ func LoadingScreenEnd() -> void: # Fade out the loading screen, this function is
 
 ## UI toggle (called from outside so has to be it's own func)
 func toggleWaygateGUI(state:bool): 
-	%WaygateGUI.visible = state
+	%WaygateGUI.visible = !%WaygateGUI.visible if state else false
 	if state: %WaygateGUI.UpdateWaygateList() # Refreshes the list of usable waygates
 func UpdateUIBars(): # All at once rather than spread out
 	%RMenu/HP_Bar.value = HP
