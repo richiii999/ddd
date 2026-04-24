@@ -83,8 +83,11 @@ func getEquippedProj(index : int) -> PackedScene:
 		if main and main.projectile:
 			print("Using MAINHAND projectile:", main.projectile.resource_path)
 			return main.projectile
-		else:
-			print("Default projectile")
+	
+	if index == 1:
+		var off = Inv.Inv[Inv.Slot.OFFHAND]
+		if off and off.projectile:
+			return off.projectile
 	return super.getEquippedProj(index)
 
 #apply the stats of items/skillpoints 

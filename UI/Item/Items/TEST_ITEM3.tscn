@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bc6nh4h2j7q2l"]
+
+[ext_resource type="Texture2D" uid="uid://ck2pxoap0tavf" path="res://Assets/Sprites/GD Icons/GD_White.tres" id="1_11alj"]
+[ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_paedb"]
+[ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="3_11alj"]
+
+[node name="TestItem" type="Sprite2D" unique_id=398207244]
+texture = ExtResource("1_11alj")
+script = ExtResource("2_paedb")
+itemName = "TEST_ITEM3"
+type = 5
+stats = Dictionary[int, int]({
+0: 5,
+1: 5,
+2: 5,
+3: 3,
+4: 3,
+5: 3,
+6: 1,
+7: 1,
+8: 99
+})
+projectile = ExtResource("3_11alj")
+metadata/_custom_type_script = "uid://dpbuam0tpmaha"

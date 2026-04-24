@@ -16,7 +16,8 @@ var specialItems : Array[Resource] = [ # Negative item IDs
 var items : Array[Resource] = [ # Index of this array == "itemID" used throughout the code
 	load("res://UI/Item/Items/Special/TEST_ITEM.tscn"), # NOTE: Present in both arrays at index 0
 	load("res://UI/Item/Items/test_chestplate.tscn"),
-	load("res://UI/Item/Items/TEST_ITEM2.tscn")
+	load("res://UI/Item/Items/TEST_ITEM2.tscn"),
+	load("res://UI/Item/Items/TEST_ITEM3.tscn")
 ]
 
 func SpawnItemByID(itemID : int, pos : Vector2): # Spawns items[itemID] at Pos(X,Y)
