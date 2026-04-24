@@ -131,7 +131,7 @@ func ShootProj(input : int, Aim : Vector2) -> void:
 			# <field 3>
 			#if field3: F = field3.instantiate()
 			# <FE 3>
-			#if fieldEffect3: FE = fieldEffect3.instantiate()
+			#if fieldEffect3: FE = fieldEffedct3.instantiate()
 			# <effect3>
 			#if effect3: E = effect3.instantiate() 
 			# <proj 3>
