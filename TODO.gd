@@ -80,18 +80,6 @@
 # adv proj patter, wing rings:  spawns concentric rings that emit from the center and rotate on offset sinewaves via bowtie
 
 
-## Inventory UI stuff
-# Quickloot: Loots potions, if there are more potions than you can use: "Greedy" option will just use them right out of the bag
-	# ex. You have 149/150 HP and 5/5 pots. quickloot will not pick up the pot. Greedy quickloot will
-	# ex. you have 1/150 HP and 5/5 pots. both options will use 1 pot, greedy will use 2 from bags. 
-	# Quickloot will never use your inventory's pots.
-	# ex. you have 149/150 HP and 4/5 pots. Both options will pick up a pot BUT NOT USE IT.
-	# Gear quickloot: Automatically upgrades your gear if availible, based on tiers. Can be turned on after you reach 
-		# a certain fame level or something idk. QOL to make leveling easier. Can be toggled on for characters under Level 20,
-		# will automatically equip higher tier gear than currently, if there is any in bags when you press quickloot.
-		# Replaces the bag items with your items, if you want to keep your old items, you have to put them in your inv manually still.
-
-
 ## Knockback stuff:
 # Introduce knockback as a important mechanic via pirate miniboss enemy in beach / pirate dungeon,
 	# He shoots cannonball with high piercing that has HUGE knockback, you get slammed into wall / off platform into water
@@ -119,19 +107,12 @@
 # idk, seems more efficient to me, compared to spawning individual rich text nodes and moving them or keeping all damage nums in status text
 
 
-## "Waygate" node is the player spawn points and teleport network. Interacting with one opens the map. 
+## "Waygate" node is the player spawn points and teleport network. Interacting with one opens the map.
 # The map btw can be revealed fully once you have all waygates in exchange for coins from an npc guy
 # One-way gates only tele one way and are used for dungeon entrances (into dungeon) and exits (back to nexus)
 # island has waygates around edge and in concentric rings going to center in each biome
-# can activate waygates by interacting with disabled ones, this is per character per acc
-	# Achievement for getting all waygates ofc
-# Enemies in biome drop keys to run dungeon for that biome, can bring key to the biome's dungeon door and use it to activate it once
-	# All players in a group must have a key to enter, as it is PER CHAR
-	# Keys are account bound, so can transfer to alts and level faster
-	# Keys dont take inv space? Store separately
 # Island is BIG, way bigger than mythfall's tiny ass island and bigger even than realm. I have big plans
 	# One biome in my island is probably like the whole map in mythfall, maybe a bit less than that idk, depends on the biome ofc.
-	# You can teleport to party members tho from the map
 
 
 ## Crystals / Essence
@@ -139,7 +120,6 @@
 # One of which is required to unlock the shrine (teleporter) for a biome. 
 # As a way to ensure the player has actually been in that area for a little bit.
 
-##Enemies should have an immoveable flag that doesn't allow them to move at all 
 
 ## I fuckin hate anchors. Why is it so hard to scale things to the screen? 
 # I litterally just locked the resolution of the game to 1280x720 to fix it "temporarily" (forever)
