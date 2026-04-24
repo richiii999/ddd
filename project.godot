@@ -31,6 +31,10 @@ window/size/resizable=false
 window/size/borderless=true
 window/stretch/mode="canvas_items"
 
+[dotnet]
+
+project/assembly_name="DotDD"
+
 [filesystem]
 
 import/blender/enabled=false
