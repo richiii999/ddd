@@ -25,14 +25,12 @@ var expiring : bool = false
 func _ready():
 	$Sprite2D.self_modulate = Color(color)
 	$GPUParticles2D.self_modulate = Color(color)
-	
 	#print("Spawned Field: " + str(effect.efname) + " (" + str(length) + "s)")
 	if permanent: $Timer.queue_free()
 	else: 
 		$Timer.timeout.connect(_on_Timer_timeout); 
 		$Timer.start(length)
 		#print("Field timer started: " + str(length) + "s")
-	
 	set_collision_mask_value(5, affectsPlayers)
 	set_collision_mask_value(9, affectsEnemies)
 	#set_collision_mask_value(6, affectsPlayers && affectsProjectiles)
@@ -40,9 +38,16 @@ func _ready():
 	
 	$GPUParticles2D.process_material.set_emission_ring_inner_radius($CollisionShape2D.shape.radius / 2)
 	$GPUParticles2D.process_material.set_emission_ring_radius($CollisionShape2D.shape.radius / 2)
+	
+func _physics_process(_delta):
+	for a in get_overlapping_areas():
+		var entity = Tools.FindParentByType(a, ENTITY)
+		print("AREA HIT:", entity)
+
 
 ## OVERRIDE FUNCS: SmartArea.gd funcs overridden by Field.gd
 func onEnter(entity : Node2D):
+	print(entity)
 	if not effect: return
 	if entity in activeEffects and activeEffects[entity].lingering: return #its already a lingering effect, so dont restart
 	var newEffect = effect.duplicate()

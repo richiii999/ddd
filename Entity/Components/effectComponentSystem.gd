@@ -7,6 +7,7 @@ class_name EffectComponentSystem extends Node2D ## EffectComponentSystem: Manage
 func _ready(): 
 	ClearEffects()
 	$Timer.timeout.connect(Tick)
+	$Timer.start()
 
 ## Apply effect ticks
 func Tick(): for E in GetEffects(): E.EffectTick()
@@ -22,6 +23,7 @@ func AddEffect(E: EffectBASE, constant:bool = false) -> void:
 	for childE in GetEffects():
 		if E.get_script() == childE.get_script(): # Effects are the same type
 			# Skip Fields, otherwise reset timer for duplicates
+			
 			if is_instance_valid(childE.field) or childE.lingering: return
 			elif not constant: childE.ResetTimer()
 			
