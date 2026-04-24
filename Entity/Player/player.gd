@@ -240,7 +240,7 @@ func get_input(): # TODO: replace this with _input() ?
 	if Input.is_action_just_pressed("F1"): # Controls toggle 'F1'
 		%ControlsText.visible = !(%ControlsText.visible)
 		%HiddenControlsText.visible = !(%HiddenControlsText.visible)
-	if Input.is_action_just_pressed("WaygateGUI"): toggleWaygateGUI() # WaygateGUI toggle 'F2'
+	if Input.is_action_just_pressed("WaygateGUI"): toggleWaygateGUI(!%WaygateGUI.visible) # WaygateGUI toggle 'F2'
 	if Input.is_action_just_pressed("RMenu Toggle"): 
 		%RMenu.visible = !(%RMenu.visible) # RMenu toggle 'F12'
 		%PlayerCam.setOffset(%RMenu.visible)
@@ -382,9 +382,9 @@ func LoadingScreenEnd() -> void: # Fade out the loading screen, this function is
 	await toggleBubble(false)
 
 ## UI toggle (called from outside so has to be it's own func)
-func toggleWaygateGUI(): 
-	%WaygateGUI.visible = !(%WaygateGUI.visible)
-	if %WaygateGUI.visible: %WaygateGUI.UpdateWaygateList() # Refreshes the list of usable waygates
+func toggleWaygateGUI(state:bool): 
+	%WaygateGUI.visible = state
+	if state: %WaygateGUI.UpdateWaygateList() # Refreshes the list of usable waygates
 func UpdateUIBars(): # All at once rather than spread out
 	%RMenu/HP_Bar.value = HP
 	%RMenu/MP_Bar.value = MP
@@ -423,6 +423,7 @@ func Death():
 func Damage(power : int):
 	super.Damage(power)
 	$HurtTimer.start(5.00)
+	print("AAA")
 
 
 # Singal function called when button is pressed, signals game maneger to handle hard reset

@@ -4,14 +4,22 @@ class_name EffectComponentSystem extends Node2D ## EffectComponentSystem: Manage
 # Effects which should be constant (always on, no timer, no dispell)
 @export var constantEffects : Array[PackedScene] = [] 
 
-func _ready(): ClearEffects()
-func _process(_delta): for E in get_children(): E.EffectTick()
+func _ready(): 
+	ClearEffects()
+	$Timer.timeout.connect(Tick)
+
+## Apply effect ticks
+func Tick(): for E in GetEffects(): E.EffectTick()
+
+## Return an array of all child effects
+func GetEffects() -> Array[Node]:
+	return get_children().filter(func(child): return child is not Timer)
 
 func AddEffect(E: EffectBASE, constant:bool = false) -> void:
 	if !E: return # null case
 	
 	# Check to see if theres already an existing effect of the same type
-	for childE in get_children():
+	for childE in GetEffects():
 		if E.get_script() == childE.get_script(): # Effects are the same type
 			# Skip Fields, otherwise reset timer for duplicates
 			if is_instance_valid(childE.field) or childE.lingering: return
@@ -27,11 +35,11 @@ func AddEffect(E: EffectBASE, constant:bool = false) -> void:
 # Can optionally skip the EndEffect()
 func RemoveEffect(E : EffectBASE, skipEndEffect : bool = false) -> void: 
 	if !E: return # null case
-	if E in get_children(): # Only remove this ECS's child effects
+	if E in GetEffects(): # Only remove this ECS's child effects
 		E.Destruct(skipEndEffect)
 
 ## Dispell all effects
 # Called mainly from nexus or other portaling, also from priests & boss deaths
 func ClearEffects() -> void: 
-	for E in get_children(): E.Destruct(true) # Remove all effects, skipping any end effects
+	for E in GetEffects(): E.Destruct(true) # Remove all effects, skipping any end effects
 	for E in constantEffects: AddEffect(E.instantiate(), true) # re-add constant effects (if any)

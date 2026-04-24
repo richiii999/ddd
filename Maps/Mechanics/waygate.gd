@@ -22,10 +22,12 @@ func _ready():
 	if itemPrice: itemPriceItem = itemPrice.instantiate()
 
 func WaygateInteract(P:Player):
-	# Player left range
-	if currPlayer and P == null: 
-		currPlayer.toggleWaygateGUI()
+	if P == null: # Player left range
+		if currPlayer: currPlayer.toggleWaygateGUI(false)
+		currPlayer = null
 		return
+	
+	currPlayer = P # Player interacted with waygate
 	
 	if !active: # Inactive, try to purchase
 		if itemPrice and P.Inv.HasItemName(itemPriceItem.itemName) == -1: # itemName since ID is 0
@@ -42,8 +44,7 @@ func WaygateInteract(P:Player):
 	
 	else: # Already active
 		if oneWayTarget: oneWayTarget.UseWaygate(P) # One-way gates activate immediately
-		else: # BUG: On game start this is reached with P=null
-			if P != null: P.toggleWaygateGUI() # Regular waygates open the GUI to select a destination
+		else: P.toggleWaygateGUI(true) # Regular waygates open the GUI to select a destination
 
 func UseWaygate(P:Player): # Teleports player to this waygate
 	await P.LoadingScreenStart() # Show loading screen before moving player & camera
