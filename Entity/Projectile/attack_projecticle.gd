@@ -5,3 +5,6 @@ extends Resource
 @export var field : PackedScene
 @export var fieldEffect : PackedScene
 @export var effect : PackedScene
+
+func make_unique():
+	return Resource.new()

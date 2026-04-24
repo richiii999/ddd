@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AttackData" format=3 uid="uid://6uxfkrkyiuvg"]
+
+[ext_resource type="PackedScene" uid="uid://bclrygg5d3dyn" path="res://Entity/Field.tscn" id="1_mqqej"]
+[ext_resource type="PackedScene" uid="uid://dko0els7hvmek" path="res://Entity/Projectile/ProjectileTest2.tscn" id="1_namkf"]
+[ext_resource type="Script" uid="uid://8aascd4pg6vc" path="res://Entity/Projectile/attack_projecticle.gd" id="2_mqqej"]
+[ext_resource type="PackedScene" uid="uid://c3ncyw407j31j" path="res://Entity/Components/Effects/Icy.tscn" id="2_ynsg1"]
+
+[resource]
+script = ExtResource("2_mqqej")
+projectile = ExtResource("1_namkf")
+field = ExtResource("1_mqqej")
+fieldEffect = ExtResource("2_ynsg1")
+metadata/_custom_type_script = "uid://8aascd4pg6vc"
