@@ -382,6 +382,8 @@ func UpdateUIBars(): # All at once rather than spread out
 	%RMenu/XP_Bar.value = XP
 	%RMenu/Fame_Bar.value = Fame
 	$DashBar.value = dashNum
+	%RMenu/HP_Bar.max_value = HPmax
+	%RMenu/MP_Bar.max_value = MPmax
 	
 	$CanvasLayer/RMenu/Utility/HPot_Button.text = str(HPotC) + "/" + str(HPotmax)
 	$CanvasLayer/SkillsUI/SkillPointsText/SkillPointsCount.text = str(skillPoints)

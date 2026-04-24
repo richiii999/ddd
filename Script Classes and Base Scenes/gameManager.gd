@@ -140,8 +140,8 @@ func SavaData():
 	var savedData:SavedData = SavedData.new()
 	savedData.max_player_health = player.HPmax
 	savedData.max_player_mp = player.MPmax
-	#savedData.current_hp = player.HP irrelevant? maybe, should be max on load i think
-	#savedData.current_mp = player.MP irrelevant? maybe, self regens soooo
+	savedData.current_hp = player.HP# irrelevant? maybe, should be max on load i think
+	savedData.current_mp = player.MP #irrelevant? maybe, self regens soooo
 	savedData.core_Stats = player.coreStats
 	savedData.coins = player.coins
 	savedData.fame = player.Fame
@@ -175,4 +175,5 @@ func LoadData():
 		player.skillPoints = savedData.skill_points
 		player.XP  = savedData.xp_current
 		player.XPmax = savedData.xp_max
-		pass
+		player.HP = savedData.current_hp
+		player.MP = savedData.current_mp
