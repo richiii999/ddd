@@ -84,7 +84,7 @@ func AreaCollide(area : Area2D) -> void: ## Entity collide
 		damage.connect(entity.Knockback, 4)
 		damage.emit(global_position, knockback)
 		
-		if effect: entity.AddEffect(effect)
+		if effect and entity.ECS: entity.AddEffect(effect)
 		
 		piercing -= 1
 		if(piercing): return # break early to prevent destruct
@@ -101,7 +101,16 @@ func Destruct(skipEndEffect : bool = false) -> void: ## "Destructor", called ins
 		Tools.ParticlePassOff($ProjParticles) # Let the particles expire rather than instantly disappearing
 		
 		if(field && !skipEndEffect): # Spawn a field (if set) on destruct
+			#get_parent().call_deferred("add_child", field)
+			#field.global_position = global_position # Have to do this, it doesnt just inherit
+			print("Projectile global:", global_position)
+
 			get_parent().call_deferred("add_child", field)
-			field.position = position # Have to do this, it doesnt just inherit
-		
+
+			# TEMP: wait one frame so it's actually in the scene tree
+			await get_tree().process_frame
+	
+			field.global_position = global_position
+	
+			print("Field global:", field.global_position)
 		queue_free()

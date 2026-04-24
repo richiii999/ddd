@@ -3,7 +3,7 @@
 
 ## BUG list
 # death screen sometimes fuck up
-# why does set_modulate break the entire game?
+# why does the enemy sometimes get burned in a field and other times doesn't when you charge and push out a field?
 
 ## Enemies and behaviors
 # Chase (slow strong zombies), spawn in large groups 
