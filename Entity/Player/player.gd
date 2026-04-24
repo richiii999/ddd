@@ -21,6 +21,7 @@ Stats.SPD: 1
 var gearStats := {}
 var effectStats := {}
 
+@export var defaultProjectile : PackedScene
 ## Pots
 var HPotmax : int = 5 # Max Potions you can carry
 var MPotmax : int = 10
@@ -63,7 +64,27 @@ signal Interact # Emitted with self to any connected interact component
 func getStats(stat : int) -> int: 
 	return coreStats.get(stat, 0) + gearStats.get(stat, 0) + effectStats.get(stat, 0 )
 
-#TODO: check to see if this even actually works
+#get the item in your main and offhand
+#func getMainHand():
+#	return %Inventory.Inv[%Inventory.Slot.MAINHAND]
+
+#func getOffHand():
+#	return %Inventory.Inv[%Inventory.Slot.OFFHAND]
+
+#func getEquippedProj() -> PackedScene:
+#	var main = getMainHand()
+#	var off = getOffHand()
+	
+	#check if the projectiles exist, then return
+#	if main and main.projectile:
+#		return main.projectile
+	
+#	if off and off.projectile:
+#		return off.projectile
+	
+#	return defaultProjectile
+
+#apply the stats of items/skillpoints 
 func applyStats(target: Dictionary, stats : Dictionary, mult : int = 1):
 	for key in stats: 
 		var new_val = target.get(key, 0) + stats[key] * mult
@@ -74,23 +95,24 @@ func applyStats(target: Dictionary, stats : Dictionary, mult : int = 1):
 		else:
 			target[key] = new_val
 #get the move speed buff
+
 func get_move_spd() -> float: 
 	var spd = getStats(Stats.SPD)
 	return 1.0 + (spd / (spd + 20.0))
 
 #debug testing
-func test_apply_stats():
-	var test_stats = {Stats.STR: 10, Stats.SPD: 5}
+#func test_apply_stats():
+	#var test_stats = {Stats.STR: 10, Stats.SPD: 5}
 	
 	#print("Before:", gearStats)
 
-	applyStats(gearStats, test_stats)
+	#applyStats(gearStats, test_stats)
 
 	#print("After add:", gearStats)
 	#print("Total STR:", getStats(Stats.STR)) # should be 5 (core) + 10 = 15
 	#print("Total SPD:", getStats(Stats.SPD)) # should be 1 (core) + 5 = 6
 
-	applyStats(gearStats, test_stats, -1)
+	#applyStats(gearStats, test_stats, -1)
 
 	#print("After remove:", gearStats)
 	#print("Total STR:", getStats(Stats.STR)) # back to 5
@@ -100,7 +122,7 @@ func _ready():
 	super._ready() # call ENTITY._ready() (sets HP and MP)
 	super.initEntityUI()
 	#print(get_tree_string_pretty()) #Debug print the nodetree
-	test_apply_stats()
+	#test_apply_stats()
 	%DeathScreen.find_child("Restart").pressed.connect(_OnDeathScreenButtonPushed)
 	%DeathScreen.find_child("DebugRestart").pressed.connect(_OnDebugRevive)
 	## Initialize the UI info

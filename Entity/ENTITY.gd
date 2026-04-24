@@ -81,8 +81,13 @@ func initEntityUI(): ## initializes UI stuff (instead of having all these in eac
 	if HPBar: HPBar.value = HP
 	if StatusLabel: StatusLabel.addStatusText("Status", "GRAY")
 
+#this will get overwritten by our player getEquippedProj
+func getEquippedProj() -> PackedScene:
+	return null
+
 ## ShootProj: Shoots one of the projectiles based on input and constructs them according to this entity's stats, effects, and fields
 func ShootProj(input : int, Aim : Vector2) -> void:
+	var proj_scene : PackedScene = null
 	var index := input - 1 #literally just var assignment
 	if index < 0 or index >= projs.size(): #check to see if the index that we pass in is even in the bounds of the projectiles we have set
 		push_error("Invalid projectile index: " + str(input))
@@ -100,6 +105,13 @@ func ShootProj(input : int, Aim : Vector2) -> void:
 		
 	if index < effects.size() and effects[index]:
 		E = effects[index].instantiate()
+		
+	#proj_scene = getEquippedProj()
+	#if proj_scene == null:
+	#	proj_scene = projs[index]
+	#if proj_scene:
+	#	P = proj_scene.instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing, kBstrength1, E, F)
+	
 	if projs[index]: #if the index exists in the projectiles array, instantiate our projectile
 		P = projs[index].instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing, kBstrength1, E, F)
 		
