@@ -20,12 +20,12 @@ active = true
 [node name="Rooms" type="Node2D" parent="." unique_id=1892436274]
 
 [node name="DungeonRoom_Test" parent="Rooms" unique_id=1922064856 instance=ExtResource("4_eji3h")]
-position = Vector2(704, 0)
+position = Vector2(768, 0)
 
 [node name="DungeonRoom_Test2" parent="Rooms" unique_id=2038708109 instance=ExtResource("4_eji3h")]
-position = Vector2(1476, -8)
+position = Vector2(1664, 0)
 
 [node name="DungeonBossRoom" parent="Rooms" unique_id=2045440863 instance=ExtResource("5_3faj6")]
-position = Vector2(2247, -8)
+position = Vector2(2560, 0)
 
 [node name="EnemySpawns" type="Node2D" parent="." unique_id=555905646]
