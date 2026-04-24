@@ -1,4 +1,4 @@
-class_name EnemyDungeonSpawner extends AnimatedSprite2D ## Plays an animation then spawns enemy
+class_name EnemyDungeonSpawner extends AnimatedSprite2D ## Plays an animation then spawns an enemy
 
 @export var enemyScene : PackedScene # Which enemy to spawn
 var spawnedEnemy: Enemy = null # Enemy instance once spawned
@@ -11,7 +11,7 @@ var spawnedEnemy: Enemy = null # Enemy instance once spawned
 
 # Set by a parent higher in the tree that wants to listen to the enemy death 
 # (e.g. dungeon room for counting deaths)
-var deathSignalConnection : Node = null 
+var deathSignalConnection : Node
 
 func _ready():
 	if enemyScene == null: 
@@ -28,8 +28,9 @@ func setEnabled(state:bool):
 	visible = state
 	speed_scale = float(state) * randf_range(0.5, 1.5) # Play/Pause anim (rng length looks better)
 	
-	SetupEnemy()
-	scale = spawnedEnemy.scale # Scale sprite to enemy size
+	if state:
+		SetupEnemy()
+		scale = spawnedEnemy.scale # Scale sprite to enemy size
 
 ## Prepares enemy to be spawned
 func SetupEnemy():
