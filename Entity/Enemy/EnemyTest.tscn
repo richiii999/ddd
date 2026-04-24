@@ -38,7 +38,6 @@ collision_mask = 267
 motion_mode = 1
 script = ExtResource("1_8dtga")
 projs = Array[PackedScene]([ExtResource("2_c7cqt"), ExtResource("2_c7cqt"), ExtResource("2_c7cqt")])
-wet = true
 
 [node name="Status" parent="." unique_id=869158990 instance=ExtResource("3_i0j2k")]
 offset_left = -72.0
