@@ -24,10 +24,10 @@ func displayText(): # Displays the text with the right sizing for linecount, sin
 #TODO: fix this so that we can have it actually flash and not knockback the player
 func setStatusColor(c : Color = Color("WHITE"), t : float = 0.00): # Used for lingering effects (e.g. poison)
 	if(t): $StatusColorTimer.start(t)
-	#get_parent().find_child("AnimatedSprite2D").set_self_modulate(c)
+	get_parent().modulate = c
 	
 	currStatusColor = c # Set the status color so long colors are not overridden by a short flashed colors
 
 func setStatusFlash(c : Color = currStatusColor, t : float = 0.00): # Used for damage flash (RED) and spellcast (BLUE), flashes over but doesnt end setStatusColor()
 	if(t): $StatusFlashTimer.start(t)
-	#get_parent().find_child("AnimatedSprite2D").set_self_modulate(c)
+	get_parent().modulate = c

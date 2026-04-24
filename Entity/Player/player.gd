@@ -402,7 +402,7 @@ func Death():
 	# TODO: keep a list / vector of the last N things that hurt you within 10s,then display them like in WoW
 	# death.emit(self); # print("[SIGNAL T] Death")
 	
-	%DeathScreen.visible = !(%DeathScreen.visible); # print("Death Screen Toggled")
+	%DeathScreen.visible = true # print("Death Screen Toggled")
 	
 	InputStatus = false
 	self.velocity = Vector2.ZERO
