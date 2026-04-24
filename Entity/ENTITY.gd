@@ -139,10 +139,10 @@ func ShootProj(input : int, Aim : Vector2) -> void:
 	
 	#need to add a check to make sure if P and manager are null, push an error to not break the game 
 	if P == null:
-		push_error("Shit broke")
+		push_error("P Shit broke")
 		return
 	if Manager == null: 
-		push_error("Shit broke")
+		push_error("Manager Shit broke")
 		return
 	Manager.add_child(P) # Reparent projectile to the world
 	P.global_position = global_position # Have to do this from here, not from p.Spawn()

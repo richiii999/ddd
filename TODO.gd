@@ -2,7 +2,9 @@
 # NOTE: We are NOT doing classes, instead there's a large skill tree that offers specializations
 
 ## BUG list
-# main menu and death screen fucked up again
+# death screen sometimes fuck up
+# in entity, why does P shit broke?
+# why does set_modulate break the entire game?
 
 
 ## Enemies and behaviors
