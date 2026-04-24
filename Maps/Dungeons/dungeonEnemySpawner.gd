@@ -1,30 +1,64 @@
-class_name EnemyDungeonSpawner extends AnimatedSprite2D ## Plays a short animation then spawns an enemy on top
+class_name EnemyDungeonSpawner extends AnimatedSprite2D ## Plays an animation then spawns enemy
 
-@export var EnemyToSpawn : PackedScene = null
-@export var randomizeSpawnLocation : bool = false # If true, ignores editor placement and randomly places this spawner somewhere in the room
-@export var Effects : Array[EffectBASE] = [] # if set, applies effects to the spawned enemy
+@export var enemyScene : PackedScene # Which enemy to spawn
+var spawnedEnemy: Enemy = null # Enemy instance once spawned
 
-var deathSignalConnection : Node = null # Set by a parent higher in the tree that wants to listen to the enemy death (e.g. dungeon room for counting deaths)
+# Apply effects to the spawned enemy
+@export var effects : Array[EffectBASE]
+
+# Adjust these to change enemy difficulty
+@export var statScale : Dictionary[String, float] = {"HP":1.00, "DMG":1.00, "SIZE":1.00, "SPD":1.00}
+
+# Set by a parent higher in the tree that wants to listen to the enemy death 
+# (e.g. dungeon room for counting deaths)
+var deathSignalConnection : Node = null 
 
 func _ready():
+	if enemyScene == null: 
+		push_error("Enemy not set on spawner!")
+		queue_free()
+		return
+	
+	animation_finished.connect(SpawnEnemy)
+	
 	setEnabled(false) # Spawners start disabled and are enabled by some parent (eg nextWave() in dungeonRoom)
-	# TODO: scale size to enemy sprite size
 
-func setEnabled(state:bool): # workaround since cant do just set_process(false) for some reason idk
+## Instantiates enemy, then plays anim
+func setEnabled(state:bool):
 	visible = state
-	speed_scale = float(state)
-	# perhaps if state: slightly randomize times from 1-3s to add slight rng in spawns
+	speed_scale = float(state) * randf_range(0.5, 1.5) # Play/Pause anim (rng length looks better)
+	
+	SetupEnemy()
+	scale = spawnedEnemy.scale # Scale sprite to enemy size
 
-func SpawnEnemy(): ## Signaled by 'animation_finished'
+## Prepares enemy to be spawned
+func SetupEnemy():
+	if spawnedEnemy != null: return # Enemy already setup
+	
+	spawnedEnemy = enemyScene.instantiate()
+	
+	# Scale stats
+	@warning_ignore_start("narrowing_conversion") # Enemy stats are ints, scale is floats
+	spawnedEnemy.HPmax *= statScale["HP"]
+	spawnedEnemy.HP *= statScale["HP"]
+	# TODO: dmg
+	spawnedEnemy.scale *= statScale["SIZE"]
+	spawnedEnemy.accel *= statScale["SPD"]
+
+## Spawns the enemy then frees
+func SpawnEnemy(): 
+	# TODO
 	# Particle instantiate
 	# particle pass off
 	
 	# play sound
-	# Depending on how big it is, play different sounds
 	
-	var enemy = EnemyToSpawn.instantiate()
-	get_parent().add_child(enemy)
-	if deathSignalConnection: enemy.death.connect(deathSignalConnection.onEnemyDeath) # Workaround for awkward signal connection
-	enemy.global_position = global_position
-	#for effect in Effects: enemy.applyEffect(effect)
+	SetupEnemy()
+	get_parent().add_child(spawnedEnemy)
+	if deathSignalConnection: spawnedEnemy.death.connect(deathSignalConnection.onEnemyDeath) # Workaround for awkward signal connection
+	spawnedEnemy.global_position = global_position
+	
+	if spawnedEnemy.ECS != null:
+		for E in effects: spawnedEnemy.ECS.AddEffect(E)
+	
 	queue_free()

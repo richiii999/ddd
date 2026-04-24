@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dx23kg5vk3spb" path="res://Entity/Components/Behaviors/Orbit.tscn" id="7_mktt5"]
 [ext_resource type="PackedScene" uid="uid://dk58kntas8hfd" path="res://Entity/Components/Behaviors/Wander.tscn" id="8_8h73f"]
 [ext_resource type="PackedScene" uid="uid://bntfe5iinhuu5" path="res://UI/Item/loot_table.tscn" id="9_bb34h"]
+[ext_resource type="PackedScene" uid="uid://dddy50t4saequ" path="res://Entity/Components/EffectComponentSystem.tscn" id="10_c7cqt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw8gt"]
 bg_color = Color(1, 0, 0, 1)
@@ -114,6 +115,8 @@ lootTable = Dictionary[int, int]({
 0: 0,
 1: 1
 })
+
+[node name="EffectsComponentSystem" parent="." unique_id=921567753 instance=ExtResource("10_c7cqt")]
 
 [connection signal="onEmpty" from="Sight" to="." method="SightIncrease" binds= [false]]
 [connection signal="onEmpty" from="Sight" to="ShootTimer1" method="set_paused" binds= [true]]

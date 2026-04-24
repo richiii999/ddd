@@ -11,7 +11,7 @@ func _ready():
 ## TP to a waygate when player clicks one of the Waygate buttons
 func useWaygateGUI(waygate : Waygate):
 	waygate.UseWaygate(player)
-	player.toggleWaygateGUI() # Close GUI after teleporting
+	player.toggleWaygateGUI(false) # Close GUI after teleporting
 
 ## Get a list of Active, 2-way gates, except the one in the nexus.
 # NOTE: Called on Player.ToggleWaygateGUI()

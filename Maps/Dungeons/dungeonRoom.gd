@@ -1,21 +1,16 @@
-class_name DungeonRoom extends TileMapLayer ## Controls spawning mob waves and locking / unlocking doors
-# Props are filled in to the max, so in the editor it looks crowded but they are RNG deleted to randomize room furniture and stuff
+class_name DungeonRoom extends TileMapLayer ## Controls mob waves and doors
 
 @onready var waves : Array[Node] = $Waves.get_children()
-@export var roomActive: bool = false # Has the room been activated? (Atleast 1 player entered)
-@export var roomClear : bool = false # has the room been cleared (all waves defeated or no waves)
+var roomActive: bool = false # Atleast 1 player entered the room
+var roomClear : bool = false # Waves defeated (or no waves)
 
-@export var isBossRoom: bool = false # If true, signals to parent dungeon node on room clear
-signal dungeonClear
+signal roomCleared
 
 var currWaveNumEnemies : int = 0
 
-@export var propFill : int = 20 # 0-100% of props removed
-
-func _ready(): 
-	#for prop in $Props.get_children(): if randi() <range 1-100> <= propFill: prop.queue_free() # TODO randomly disable props
-	
-	for door in $Doors.get_children(): door.get_node("PlayerDetector").body_entered.connect(onPlayerEnter)
+func _ready():
+	for door in $Doors.get_children(): 
+		door.get_node("PlayerDetector").body_entered.connect(onPlayerEnter)
 	
 	if !waves: return
 	for wave in waves: 
@@ -29,25 +24,24 @@ func NextWave():
 		spawner.setEnabled(true)
 		currWaveNumEnemies += 1
 
-func unlockDoors(): for door in $Doors.get_children(): door.Open()
+func UnlockDoors(): 
+	for door in $Doors.get_children(): door.Open()
 
 func RoomClear(): # Called when the room is cleared (all waves defeated, or no waves and player enters)
 	if roomClear: print_debug("Room cleared more than once"); return
 	roomClear = true
 	
-	unlockDoors()
+	UnlockDoors()
 	# TODO: Spawn reward sometimes or something idk
 	
-	if isBossRoom: dungeonClear.connect(get_parent().get_parent().onDungeonClear); dungeonClear.emit() # Connected by parent dungeon node
-
-func WaveClear(): NextWave() # TODO: perhaps display UI stuff about wave info, and spawn minor stuff like healing
+	roomCleared.connect(get_parent().get_parent().onDungeonClear); roomCleared.emit() # Connected by parent dungeon node
 
 func onEnemyDeath(): 
 	currWaveNumEnemies -= 1
-	if !currWaveNumEnemies: WaveClear() # Wave is complete when no enemies remain
+	if currWaveNumEnemies == 0: NextWave() # Wave is complete when no enemies remain
 
 func onPlayerEnter(_player): 
-	if !roomActive: 
+	if !roomActive: # Activate on first player entered
 		roomActive = true
 		NextWave()
 	else:
