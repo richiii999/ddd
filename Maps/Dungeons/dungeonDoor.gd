@@ -2,4 +2,7 @@ class_name DungeonDoor extends StaticBody2D ## Opens on trigger from parent (the
 
 # TODO: # DungeonRoomDoor also gets put on the main island boss arenas when boss is attacked
 
-func Open(): queue_free() # TODO: await opening animation, then free
+func SetOpen(state:bool): 
+	# TODO: opening/closing animation
+	$CollisionShape2D.disabled = state
+	$Veil.visible = !state

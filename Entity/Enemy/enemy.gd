@@ -7,7 +7,7 @@ var targetPosStopRadius : float = 50 # How close to targetPos will this enemy st
 
 func _ready():
 	super._ready() # call ENTITY._ready() (sets HP and MP)
-	initEntityUI()
+	EntityUI()
 	z_index = 2 # TODO: should probably write down what order things should be layers in
 	
 	$ShootTimer1.set_paused(true) # The shoot timers activate only when SightList has something in it
@@ -41,3 +41,6 @@ func Death():
 	
 	death.emit() # If has a parent spawner, this is already connected with bind(self)
 	queue_free()
+func EntityUI():
+	super.EntityUI()
+	if HPBar: HPBar.visible = (HPmax - HP)

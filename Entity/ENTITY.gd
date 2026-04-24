@@ -52,7 +52,7 @@ var HP    : int = 0 # Current HP / MP (gets set on ready)
 var MP    : int = 0
 
 # NOT A SETTER, it's an "incrementor" that also updates UI. Arguments passed will add, not assign
-func incHP(inc:int): HP += inc; if (HPBar): HPBar.value = HP; if HPBar: HPBar.visible = (HPmax - HP)
+func incHP(inc:int): HP += inc; if (HPBar): HPBar.value = HP
 func incMP(inc:int): MP += inc; if (MPBar): MPBar.value = MP
 
 ## Entity AI stuff
@@ -68,10 +68,9 @@ func setTargetFirstSight(): setTargetEntity(Sight.smartArea.front())
 
 signal death # Emitted when ded
 
-func initEntityUI(): ## initializes UI stuff (instead of having all these in each entity's script)
+func EntityUI(): ## Reads values to UI elements
 	if HPBar: HPBar.max_value = HPmax
 	if HPBar: HPBar.value = HP
-	if StatusLabel: StatusLabel.addStatusText("Status", "GRAY")
 
 #this will get overwritten by our player getEquippedProj
 func getEquippedProj(index : int) -> PackedScene:

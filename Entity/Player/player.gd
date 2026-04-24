@@ -123,7 +123,8 @@ func get_move_spd() -> float:
 
 func _ready():
 	super._ready() # call ENTITY._ready() (sets HP and MP)
-	super.initEntityUI()
+	super.EntityUI()
+	StatusLabel.addStatusText("Spawned in!")
 	print("Inventory node:", Inv)
 	#print(get_tree_string_pretty()) #Debug print the nodetree
 	#test_apply_stats()
@@ -420,7 +421,6 @@ func Death():
 func Damage(power : int):
 	super.Damage(power)
 	$HurtTimer.start(5.00)
-	print("AAA")
 
 
 # Singal function called when button is pressed, signals game maneger to handle hard reset

@@ -8,6 +8,7 @@ var spawnedEnemy: Enemy = null # Enemy instance once spawned
 
 # Adjust these to change enemy difficulty
 @export var statScale : Dictionary[String, float] = {"HP":1.00, "DMG":1.00, "SIZE":1.00, "SPD":1.00}
+var playerScale : int = 1 # Scales per player
 
 # Set by a parent higher in the tree that wants to listen to the enemy death 
 # (e.g. dungeon room for counting deaths)
@@ -26,7 +27,7 @@ func _ready():
 ## Instantiates enemy, then plays anim
 func setEnabled(state:bool):
 	visible = state
-	speed_scale = float(state) * randf_range(0.5, 1.5) # Play/Pause anim (rng length looks better)
+	speed_scale = float(state) * randf_range(0.8, 1.2) # Play/Pause anim (rng length looks better)
 	
 	if state:
 		SetupEnemy()
@@ -42,6 +43,8 @@ func SetupEnemy():
 	@warning_ignore_start("narrowing_conversion") # Enemy stats are ints, scale is floats
 	spawnedEnemy.HPmax *= statScale["HP"]
 	spawnedEnemy.HP *= statScale["HP"]
+	spawnedEnemy.HPmax *= (playerScale * 1.2)
+	spawnedEnemy.HP *= (playerScale * 1.2)
 	spawnedEnemy.mainStat *= statScale["DMG"]
 	spawnedEnemy.scale *= statScale["SIZE"]
 	spawnedEnemy.accel *= statScale["SPD"]

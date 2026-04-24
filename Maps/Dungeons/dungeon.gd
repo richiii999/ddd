@@ -5,14 +5,18 @@ class_name DungeonBASE extends WorldBASE ## Inspired by Gungeon, waves of enemie
 	# Gives lesser loot compared to boss, but easier. Can farm just this if you are too weak for boss
 # rng treasure rooms with a chest
 
+# TODO Displayed on entrance
 @export var DungeonTitle : String = "Dungeon"
 
-func _ready(): 
-	pass
+# TODO Dungeon music
+#@export var bkgMusic
 
 func onDungeonClear(): # Called by signal from boss room roomClear()
 	print_debug("Dungeon Clear")
 
-
-func _process(_delta):
-	pass
+func _process(_d):
+	if Input.is_action_just_pressed("V"): ResetDungeon()
+func ResetDungeon():
+	# TODO: Kick players out if they're still in it
+	for room in $Rooms.get_children():
+		room.Reset()
