@@ -18,7 +18,7 @@ class_name Field extends SmartArea ## Field: applies an effect to entities insid
 
 func _ready():
 	super._ready()
-	print("Spawned Field: " + str(effect.efname) + " (" + str(length) + "s)")
+	#print("Spawned Field: " + str(effect.efname) + " (" + str(length) + "s)")
 	
 	$Sprite2D.self_modulate = Color(fieldColor)
 	$GPUParticles2D.self_modulate = Color(particleColor)
@@ -36,7 +36,7 @@ func _ready():
 
 ## Add a constant effect while in the field
 func onEnter(entity : Node2D):
-	print("Enter field: " + str(entity))
+	#print("Enter field: " + str(entity))
 	if entity is ENTITY:
 		entity.ECS.RemoveEffectByName(effect.efname)
 		entity.ECS.AddEffect(effect.duplicate(), true)
@@ -45,7 +45,7 @@ func onEnter(entity : Node2D):
 ## Replace the constant field effect with a lingering effect
 # NOTE: This is also called when field expires
 func onLeave(entity : Node2D):
-	print("Exited field: " + str(entity))
+	#print("Exited field: " + str(entity))
 	if entity is ENTITY:
 		entity.ECS.RemoveEffectByName(effect.efname)
 		if lingering > 0.0: entity.ECS.AddEffect(effect.duplicate(), false, lingering)

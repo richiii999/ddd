@@ -29,7 +29,7 @@ func AddEffect(E: EffectBASE, constant:bool = false, length:float = E.length) ->
 		print("E already exists, re-applying")
 		RemoveEffect(E)
 	
-	print("Added " + E.efname + " (" + str(length) + "s)" + " const=" + str(constant))
+	#print("Added " + E.efname + " (" + str(length) + "s)" + " const=" + str(constant))
 	add_child(E)
 	
 	if not constant: get_tree().create_timer(length).timeout.connect(RemoveEffect.bind(E))
@@ -38,14 +38,14 @@ func AddEffect(E: EffectBASE, constant:bool = false, length:float = E.length) ->
 func RemoveEffect(E : EffectBASE) -> void: 
 	if !E: return # null case
 	if E in GetEffects(): # Only remove this ECS's child effects
-		print("removed effect " +str(E))
+		#print("removed effect " +str(E))
 		E.Destruct()
 
 ## Workaround to different instances not being equal
 func RemoveEffectByName(efname:String) -> void:
 	for E in GetEffects(): # Only remove this ECS's child effects
 		if E.efname == efname:
-			print("removed effect " +str(E))
+			#print("removed effect " +str(E))
 			E.Destruct()
 
 ## Dispell all effects

@@ -20,8 +20,7 @@ func _ready():
 		body_exited.connect(UpdateArray.bind(false)) 
 
 ## Add/remove entities to array when they enter/exit the Area2D
-func UpdateArray(N : Node2D, enter : bool): 
-	print("------" +str(N))
+func UpdateArray(N : Node2D, enter : bool):
 	if enter:
 		onEnter(N)
 		smartArea.append(N)
