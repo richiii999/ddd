@@ -5,6 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://ichvm2vrowp8" path="res://Assets/Sprites/EnemyDungeonSpawner_Frame2.png" id="2_hxqk0"]
 [ext_resource type="Texture2D" uid="uid://d28i0xf1ww0lg" path="res://Assets/Sprites/EnemyDungeonSpawner_Frame3.png" id="3_avq7k"]
 [ext_resource type="PackedScene" uid="uid://ccbgnraoi6fdf" path="res://Entity/Enemy/EnemyTest.tscn" id="5_3f0oe"]
+[ext_resource type="Texture2D" uid="uid://cp8emtaw312j2" path="res://Assets/References/star particle.png" id="6_bmsk1"]
+[ext_resource type="Material" uid="uid://r4t1ygvnei31" path="res://Assets/ParticleMaterials/ParticleRepelRandomLifetime.tres" id="7_tjn7t"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_axy1d"]
 animations = [{
@@ -28,3 +30,14 @@ sprite_frames = SubResource("SpriteFrames_axy1d")
 autoplay = "default"
 script = ExtResource("1_tjo7q")
 enemyScene = ExtResource("5_3f0oe")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=912263324]
+scale = Vector2(3, 3)
+emitting = false
+amount = 20
+texture = ExtResource("6_bmsk1")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.8
+randomness = 1.0
+process_material = ExtResource("7_tjn7t")

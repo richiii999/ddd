@@ -47,12 +47,11 @@ func SetupEnemy():
 	spawnedEnemy.accel *= statScale["SPD"]
 
 ## Spawns the enemy then frees
-func SpawnEnemy(): 
-	# TODO
-	# Particle instantiate
-	# particle pass off
+func SpawnEnemy():
+	$GPUParticles2D.restart()
+	Tools.ParticlePassOff($GPUParticles2D, false)
 	
-	# play sound
+	# TODO: play sound
 	
 	SetupEnemy()
 	get_parent().add_child(spawnedEnemy)
