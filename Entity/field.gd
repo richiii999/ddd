@@ -28,7 +28,7 @@ func _ready():
 	if length: get_tree().create_timer(length).timeout.connect(queue_free)
 	
 	set_collision_mask_value(5, affectsPlayers)
-	set_collision_mask_value(9, affectsEnemies)
+	set_collision_mask_value(11, affectsEnemies)
 	#set_collision_mask_value(6, affectsPlayers && affectsProjectiles)
 	#set_collision_mask_value(10, affectsEnemies && affectsProjectiles)
 
@@ -37,6 +37,8 @@ func _ready():
 ## Add a constant effect while in the field
 func onEnter(entity : Node2D):
 	#print("Enter field: " + str(entity))
+	if entity is not ENTITY: # Try to find parent Entity
+		entity = Tools.FindParentByType(entity, ENTITY)
 	if entity is ENTITY:
 		entity.ECS.RemoveEffectByName(effect.efname)
 		entity.ECS.AddEffect(effect.duplicate(), true)
@@ -46,6 +48,8 @@ func onEnter(entity : Node2D):
 # NOTE: This is also called when field expires
 func onLeave(entity : Node2D):
 	#print("Exited field: " + str(entity))
+	if entity is not ENTITY: # Try to find parent Entity
+		entity = Tools.FindParentByType(entity, ENTITY)
 	if entity is ENTITY:
 		entity.ECS.RemoveEffectByName(effect.efname)
 		if lingering > 0.0: entity.ECS.AddEffect(effect.duplicate(), false, lingering)
