@@ -86,6 +86,7 @@ func initEntityUI(): ## initializes UI stuff (instead of having all these in eac
 #	return null
 
 ## ShootProj: Shoots one of the projectiles based on input and constructs them according to this entity's stats, effects, and fields
+#TODO: figure out how to seperate enemy and player from ShootProj
 func ShootProj(input : int, Aim : Vector2) -> void:
 	#var proj_scene : PackedScene = null
 	var index := input - 1 #literally just var assignment
