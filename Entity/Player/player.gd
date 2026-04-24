@@ -151,7 +151,7 @@ func get_input(): # TODO: replace this with _input() ?
 		#get the speed and then cap it as you keep leveling up
 		var spd_mult := get_move_spd()
 		velocity += InputV * (accel * effectMoveSpeed * tileSpeed * spd_mult)
-		velocity *= Vector2(0.95,0.95) # slowdown / speed soft-clamp
+		
 	
 	# TODO: change aniframe and sprite flip direction based on direction / velocity for player, or if not moving, mousePos\ (DONE), now we need to get sprites
 	# The "velocity.length() > 10.0" tells us "are we moving fast enough to count as moving?", and the else gives us a vector pointing from the player toward the mouse 
@@ -243,7 +243,9 @@ func _physics_process(_delta):
 	## Movement
 	ReadTerrain()
 	get_input()
-	if not immovable: move_and_slide()
+	
+	if not dashing: EntityMovement()
+	else: move_and_slide()
 	
 	## MP
 	if(tilePain): Damage(tilePain)

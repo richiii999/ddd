@@ -21,9 +21,7 @@ func _physics_process(_delta):
 	ReadTerrain()
 	if(abs(global_position.x - targetPos.x) + abs(global_position.y - targetPos.y) > targetPosStopRadius ): velocity += (Vector2.from_angle(get_angle_to(targetPos))) * (accel * behaviorMoveSpeed * effectMoveSpeed * tileSpeed)
 	
-	velocity *= Vector2(0.95, 0.95)
-	
-	if not immovable: move_and_slide()
+	EntityMovement()
 
 func EnemyShoot(P : int, pos : Vector2 = targetEntity.global_position): ShootProj(P, pos) # Workaround for signal binds keeping one value and not updating each call
 

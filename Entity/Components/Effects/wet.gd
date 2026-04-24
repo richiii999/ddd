@@ -1,6 +1,8 @@
 extends EffectBASE ## Effect_Wet: Makes movement slippery (less friction)
 func InitialEffect(): 
-	# TODO: make movement slippery
-	pass
+	entity.wet = true
+	entity.effectMoveSpeed -= 0.7
 func EffectTick(): pass
-func EndEffect(): pass
+func EndEffect(): 
+	entity.wet = false
+	entity.effectMoveSpeed += 0.7

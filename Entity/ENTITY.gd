@@ -20,7 +20,6 @@ var SpawnNode : Node = null # Link to the entity's spawn node (if any) (ex. play
 
 ## Entity Stats
 @export var mainStat     : int = 10      # Main stat, less specific then the Player's 'core stats' since monsters dont care
-@export var accel        : float = 30.00 # Multiplied by a bunch of modifiers
 @export var projSpeed    : int = 10      # Projectile speed (px/s)
 @export var piercing     : int = 2       # How many enemies will your projectiles pass through?
 @export var aimSpread    : float = 30.0  # (Degrees) Range defining how tight the aim spread is
@@ -28,21 +27,25 @@ var SpawnNode : Node = null # Link to the entity's spawn node (if any) (ex. play
 @export var kBResistance : float = 0.50  # Knockback resistance (0 - 1.00), inverse of this multiplies Knockback()
 @export var kBstrength1  : float = 250.0 # Knockback strength (of projX) as an impulse of px/s
 @export var kBstrength2  : float = 500.0
-@export var elementResist: Dictionary = {} # Elemental resistiance, key = elem (string), val = tier resist (int). If applied elem < elemResist - 2, then immune, else reduced
+
+## Movement
+@export var maxVel : float = 800.0  # Hard cap
+@export var drag   : float = 0.94  # Soft cap
+@export var accel  : float = 30.00 # Multiplied by a bunch of modifiers
+# Movement Modifiers
+@export var immovable : bool = false # If true, skips physics
+@export var behaviorMoveSpeed : float = 1.00 # Multiplier to accel
+@export var effectMoveSpeed   : float = 1.00 # Multiplier to accel
+@export var wet : bool = false # if true, slippery movement (less drag)
 
 ## Terrain
 var currTile  : TileData = null # Current tile under player (can be null, ex. leave edge of map)
 var tileSpeed : float = 1.00    # multiplier to velocity (ex. water slows u down)
 var tilePain  : int = 0         # Every physics tick, minus health (ex. poison = 1, lava = 2)
 
-## Modifiers
-@export var immovable : bool = false # If true, skips physics
+## HP / MP
 @export var invulnerable : bool = false # If true, Damage() passes
 func setInvulnerable(state:bool): invulnerable = state
-@export var behaviorMoveSpeed : float = 1.00 # Multiplier to accel
-@export var effectMoveSpeed   : float = 1.00 # Multiplier to accel
-
-## HP / MP
 @export var HPmax : int = 150 # Max HP / MP
 @export var MPmax : int = 100
 var HP    : int = 0 # Current HP / MP (gets set on ready)
@@ -136,6 +139,12 @@ func ReadTerrain(): ## Read tile under the entity, assign tile's data to variabl
 
 ## Knockback (signaled from the colliding projectile): Applies an impluse to velocity in px/s (modified by KBresistance)
 func Knockback(from : Vector2, strength : float): if !invulnerable: velocity += Vector2.from_angle(from.angle_to_point(global_position)) * (1.00 - kBResistance) * strength
+
+## Apply movement, with some limits and modifiers
+func EntityMovement():
+	velocity *= drag if not wet else 0.99 # Softcap, no drag if wet
+	velocity = velocity.clampf(-maxVel, maxVel) # Hard clamp
+	if not immovable: move_and_slide()
 
 ## OVERRIDE funcs: Player and Enemy scripts override these and provide additional functionality
 func _ready(): 
