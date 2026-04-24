@@ -4,6 +4,7 @@ class_name DungeonDoor extends AnimatedSprite2D ## Opens on trigger from parent 
 
 func SetOpen(state:bool): 
 	# TODO: opening/closing animation
-	$Front/CollisionShape2D.disabled = state
-	$Back/CollisionShape2D.disabled = state
+	$Front/CollisionShape2D.set_deferred("disabled", state)
+	$Back/CollisionShape2D.set_deferred("disabled", state)
+	$PlayerDetector/CollisionShape2D.set_deferred("disabled", state)
 	visible = !state
