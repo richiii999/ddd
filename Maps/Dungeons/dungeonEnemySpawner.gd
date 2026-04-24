@@ -4,7 +4,7 @@ class_name EnemyDungeonSpawner extends AnimatedSprite2D ## Plays an animation th
 var spawnedEnemy: Enemy = null # Enemy instance once spawned
 
 # Apply effects to the spawned enemy
-@export var effects : Array[EffectBASE]
+@export var effects : Array[PackedScene]
 
 # Adjust these to change enemy difficulty
 @export var statScale : Dictionary[String, float] = {"HP":1.00, "DMG":1.00, "SIZE":1.00, "SPD":1.00}
@@ -41,7 +41,7 @@ func SetupEnemy():
 	@warning_ignore_start("narrowing_conversion") # Enemy stats are ints, scale is floats
 	spawnedEnemy.HPmax *= statScale["HP"]
 	spawnedEnemy.HP *= statScale["HP"]
-	# TODO: dmg
+	spawnedEnemy.mainStat *= statScale["DMG"]
 	spawnedEnemy.scale *= statScale["SIZE"]
 	spawnedEnemy.accel *= statScale["SPD"]
 
@@ -55,10 +55,11 @@ func SpawnEnemy():
 	
 	SetupEnemy()
 	get_parent().add_child(spawnedEnemy)
-	if deathSignalConnection: spawnedEnemy.death.connect(deathSignalConnection.onEnemyDeath) # Workaround for awkward signal connection
 	spawnedEnemy.global_position = global_position
+	# Workaround for awkward signal connection
+	if deathSignalConnection: spawnedEnemy.death.connect(deathSignalConnection.onEnemyDeath) 
 	
 	if spawnedEnemy.ECS != null:
-		for E in effects: spawnedEnemy.ECS.AddEffect(E)
+		for E in effects: spawnedEnemy.ECS.AddEffect(E.instantiate())
 	
 	queue_free()

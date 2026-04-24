@@ -23,9 +23,8 @@ animations = [{
 "speed": 2.0
 }]
 
-[node name="EnemyDungeonSpawner" type="AnimatedSprite2D" unique_id=1445437097 node_paths=PackedStringArray("effects")]
+[node name="EnemyDungeonSpawner" type="AnimatedSprite2D" unique_id=1445437097]
 sprite_frames = SubResource("SpriteFrames_axy1d")
 autoplay = "default"
 script = ExtResource("1_tjo7q")
 enemyScene = ExtResource("5_3f0oe")
-effects = [null]
