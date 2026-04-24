@@ -17,18 +17,6 @@ var SpawnNode : Node = null # Link to the entity's spawn node (if any) (ex. play
 @export var effects : Array[PackedScene] = [null, null, null]
 @export var fields : Array[PackedScene] = [null, null, null]
 @export var fieldEffects : Array[PackedScene] = [null, null, null]
-#@export var proj1  : PackedScene = null # Main attack projectile
-#@export var proj2  : PackedScene = null # Spell projectile
-#@export var proj3 : PackedScene = null # Opus projectile
-#@export var effect1: PackedScene = null # proj<X>'s effect and field (if any)
-#@export var effect2: PackedScene = null
-#@export var effect3: PackedScene = null
-#@export var field1 : PackedScene = null
-#@export var field2 : PackedScene = null
-#@export var field3 : PackedScene = null
-#@export var fieldEffect1: PackedScene = null # If there is a field, there has to be a corresponding field effect
-#@export var fieldEffect2: PackedScene = null
-#@export var fieldEffect3: PackedScene = null
 
 ## Entity Stats
 @export var mainStat     : int = 10      # Main stat, less specific then the Player's 'core stats' since monsters dont care
@@ -48,6 +36,7 @@ var tileSpeed : float = 1.00    # multiplier to velocity (ex. water slows u down
 var tilePain  : int = 0         # Every physics tick, minus health (ex. poison = 1, lava = 2)
 
 ## Modifiers
+@export var immovable : bool = false # If true, skips physics
 @export var invulnerable : bool = false # If true, Damage() passes
 func setInvulnerable(state:bool): invulnerable = state
 @export var behaviorMoveSpeed : float = 1.00 # Multiplier to accel
@@ -86,7 +75,6 @@ func initEntityUI(): ## initializes UI stuff (instead of having all these in eac
 #	return null
 
 ## ShootProj: Shoots one of the projectiles based on input and constructs them according to this entity's stats, effects, and fields
-#TODO: figure out how to seperate enemy and player from ShootProj
 func ShootProj(input : int, Aim : Vector2) -> void:
 	#var proj_scene : PackedScene = null
 	var index := input - 1 #literally just var assignment
@@ -106,36 +94,9 @@ func ShootProj(input : int, Aim : Vector2) -> void:
 		
 	if index < effects.size() and effects[index]:
 		E = effects[index].instantiate()
-		
-	#proj_scene = getEquippedProj()
-	#if proj_scene == null:
-	#	proj_scene = projs[index]
-	#if proj_scene:
-	#	P = proj_scene.instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing, kBstrength1, E, F)
 	
 	if projs[index]: #if the index exists in the projectiles array, instantiate our projectile
 		P = projs[index].instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing, kBstrength1, E, F)
-		
-	#match input: # TODO this is kinda a retarded way of doing it, has to be a better way with less duplication
-		#1: 
-			#if field1: F = field1.instantiate()
-			#if fieldEffect1: FE = fieldEffect1.instantiate()
-			#if effect1: E = effect1.instantiate()
-			#if proj1: P = proj1.instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing, kBstrength1, E, F)a
-		#2:
-			#if field2: F = field2.instantiate()
-			#if fieldEffect2: FE = fieldEffect2.instantiate()
-			#if effect2: E = effect2.instantiate()
-			#if proj2: P = proj2.instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing, kBstrength2, E, F)
-		#3: 
-			# <field 3>
-			#if field3: F = field3.instantiate()
-			# <FE 3>
-			#if fieldEffect3: FE = fieldEffedct3.instantiate()
-			# <effect3>
-			#if effect3: E = effect3.instantiate() 
-			# <proj 3>
-			#if proj3: P = proj3.instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing, kBstrength2, E, F)
 	
 	#need to add a check to make sure if P and manager are null, push an error to not break the game 
 	if P == null:
@@ -152,7 +113,6 @@ func ShootProj(input : int, Aim : Vector2) -> void:
 func ShootSmart(input : int): ShootProj(input, targetEntity.global_position + targetEntity.velocity * 20) ## Shoots at where targetEntity will be, instead of where it is now
 
 ## Damage / Heal: Called by signals, the incrementors handle UI
-# TODO: do stuff with sources idk, like for tracking stats
 func Damage(power : int):
 	if invulnerable: return
 	if !power: return # zero case

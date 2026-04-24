@@ -23,7 +23,7 @@ func _physics_process(_delta):
 	
 	velocity *= Vector2(0.95, 0.95)
 	
-	move_and_slide()
+	if not immovable: move_and_slide()
 
 func EnemyShoot(P : int, pos : Vector2 = targetEntity.global_position): ShootProj(P, pos) # Workaround for signal binds keeping one value and not updating each call
 

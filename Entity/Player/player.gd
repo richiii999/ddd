@@ -243,7 +243,7 @@ func _physics_process(_delta):
 	## Movement
 	ReadTerrain()
 	get_input()
-	move_and_slide()
+	if not immovable: move_and_slide()
 	
 	## MP
 	if(tilePain): Damage(tilePain)
