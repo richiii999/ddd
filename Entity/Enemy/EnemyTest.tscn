@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ccbgnraoi6fdf"]
 
 [ext_resource type="Script" uid="uid://dk75vwl8p2eck" path="res://Entity/Enemy/enemy.gd" id="1_8dtga"]
+[ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_c7cqt"]
 [ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="3_i0j2k"]
 [ext_resource type="Texture2D" uid="uid://dq6232arfxx81" path="res://Assets/Sprites/GD Icons/GD_Red.tres" id="4_cpnto"]
 [ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/smartArea.gd" id="5_8dtga"]
@@ -36,6 +37,7 @@ collision_layer = 256
 collision_mask = 267
 motion_mode = 1
 script = ExtResource("1_8dtga")
+projs = Array[PackedScene]([ExtResource("2_c7cqt"), null, null])
 
 [node name="Status" parent="." unique_id=869158990 instance=ExtResource("3_i0j2k")]
 offset_left = -72.0

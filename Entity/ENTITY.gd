@@ -82,12 +82,12 @@ func initEntityUI(): ## initializes UI stuff (instead of having all these in eac
 	if StatusLabel: StatusLabel.addStatusText("Status", "GRAY")
 
 #this will get overwritten by our player getEquippedProj
-func getEquippedProj() -> PackedScene:
-	return null
+#func getEquippedProj() -> PackedScene:
+#	return null
 
 ## ShootProj: Shoots one of the projectiles based on input and constructs them according to this entity's stats, effects, and fields
 func ShootProj(input : int, Aim : Vector2) -> void:
-	var proj_scene : PackedScene = null
+	#var proj_scene : PackedScene = null
 	var index := input - 1 #literally just var assignment
 	if index < 0 or index >= projs.size(): #check to see if the index that we pass in is even in the bounds of the projectiles we have set
 		push_error("Invalid projectile index: " + str(input))
@@ -120,7 +120,7 @@ func ShootProj(input : int, Aim : Vector2) -> void:
 			#if field1: F = field1.instantiate()
 			#if fieldEffect1: FE = fieldEffect1.instantiate()
 			#if effect1: E = effect1.instantiate()
-			#if proj1: P = proj1.instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing, kBstrength1, E, F)
+			#if proj1: P = proj1.instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing, kBstrength1, E, F)a
 		#2:
 			#if field2: F = field2.instantiate()
 			#if fieldEffect2: FE = fieldEffect2.instantiate()
