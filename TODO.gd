@@ -3,9 +3,7 @@
 
 ## BUG list
 # death screen sometimes fuck up
-# in entity, why does P shit broke?
 # why does set_modulate break the entire game?
-
 
 ## Enemies and behaviors
 # Chase (slow strong zombies), spawn in large groups 
