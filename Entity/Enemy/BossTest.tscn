@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://cah1krc5w5maw"]
 
 [ext_resource type="Script" uid="uid://dk75vwl8p2eck" path="res://Entity/Enemy/enemy.gd" id="1_53cjx"]
-[ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_7yqgg"]
 [ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="3_3s77v"]
 [ext_resource type="Texture2D" uid="uid://di6ytqcvdio6g" path="res://Assets/Sprites/GD Icons/GodotIconAtlas.png" id="4_wntmj"]
 [ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/smartArea.gd" id="5_nhkol"]
@@ -43,8 +42,6 @@ collision_layer = 256
 collision_mask = 267
 motion_mode = 1
 script = ExtResource("1_53cjx")
-proj1 = ExtResource("2_7yqgg")
-proj2 = ExtResource("2_7yqgg")
 kBResistance = 1.0
 HPmax = 500
 
