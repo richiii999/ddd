@@ -43,8 +43,6 @@ func SetupEnemy():
 	@warning_ignore_start("narrowing_conversion") # Enemy stats are ints, scale is floats
 	spawnedEnemy.HPmax *= statScale["HP"]
 	spawnedEnemy.HP *= statScale["HP"]
-	spawnedEnemy.HPmax *= (playerScale * 1.2)
-	spawnedEnemy.HP *= (playerScale * 1.2)
 	spawnedEnemy.mainStat *= statScale["DMG"]
 	spawnedEnemy.scale *= statScale["SIZE"]
 	spawnedEnemy.accel *= statScale["SPD"]
@@ -56,7 +54,10 @@ func SpawnEnemy():
 	
 	# TODO: play sound
 	
-	SetupEnemy()
+	SetupEnemy() # Playerscale might have changed between anim start and end
+	spawnedEnemy.HPmax *= (playerScale * 1.2)
+	spawnedEnemy.HP *= (playerScale * 1.2)
+	
 	get_parent().add_child(spawnedEnemy)
 	spawnedEnemy.global_position = global_position
 	# Workaround for awkward signal connection
