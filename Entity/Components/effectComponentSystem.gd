@@ -3,6 +3,7 @@ class_name EffectComponentSystem extends Node2D ## EffectComponentSystem: Manage
 
 # Effects which should be constant (always on, no timer, no dispell)
 @export var constantEffects : Array[PackedScene] = [] 
+@export var immuneToEffects : bool = false
 
 func _ready(): 
 	ClearEffects()
@@ -20,6 +21,7 @@ func GetEffects() -> Array[Node]:
 # Constant: Effect is permanent, usually from fields or worlds
 # Timeoverride: Effect's time is changed to this (if set), usually from fields with lingering set
 func AddEffect(E: EffectBASE, constant:bool = false, length:float = E.length) -> void:
+	if immuneToEffects: return
 	if E == null: 
 		push_error("Tried to add null effect")
 		return
@@ -50,6 +52,17 @@ func RemoveEffectByName(efname:String) -> void:
 
 ## Dispell all effects
 # Called mainly from nexus or other portaling, also from priests & boss deaths
-func ClearEffects() -> void: 
-	for E in GetEffects(): E.Destruct() # Remove all effects, skipping any end effects
-	for E in constantEffects: AddEffect(E.instantiate(), true) # re-add constant effects (if any)
+func ClearEffects(force:bool = false) -> void: 
+	print("AAA")
+	if force: 
+		for E in GetEffects(): 
+			print(E)
+			E.queue_free()
+	else: 
+		for E in GetEffects(): E.Destruct() # Remove all effects
+	for E in constantEffects: AddEffect(E.instantiate(), true) # re-apply constant effects
+	
+	# BUG: Instantly spawned enemies from packSpaners do not recieve worldeffects
+		# This may be a good thing actually, since we can burn incoming players but not enemies
+	if get_parent().currWorld: # Re-apply world effecfs
+		for E in get_parent().currWorld.WorldEffects: AddEffect(E.duplicate())

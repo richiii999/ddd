@@ -28,4 +28,6 @@ position = Vector2(1664, 0)
 [node name="DungeonBossRoom" parent="Rooms" unique_id=2045440863 instance=ExtResource("5_3faj6")]
 position = Vector2(2560, 0)
 
-[node name="EnemySpawns" type="Node2D" parent="." unique_id=555905646]
+[node name="Spawners" type="Node2D" parent="." unique_id=555905646]
+
+[node name="WorldEffects" type="Node" parent="." unique_id=1316366276]

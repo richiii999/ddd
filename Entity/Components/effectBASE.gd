@@ -1,7 +1,7 @@
 class_name EffectBASE extends GPUParticles2D ## BASE class for effects, effects inherit this
 # Contains the effect params, as well as virtual fn for Initial(), Tick(), and End()
 
-@onready var entity = Tools.FindParentByType(self, ENTITY) # Which Entity to apply effects?
+@onready var entity:ENTITY = Tools.FindParentByType(self, ENTITY) # Which Entity to apply effects?
 
 @export var icon     : Resource = null  # What is the effect's icon?
 @export var color    : String = "WHITE" # Color of status text / entity color change (as a string)
@@ -13,7 +13,8 @@ class_name EffectBASE extends GPUParticles2D ## BASE class for effects, effects 
 
 ## Setup the timer, send a status text, particles (if any), and apply initial effect
 func _ready():
-	if(entity.find_child("Status")): entity.find_child("Status").addStatusText(efname, color)
+	if not entity: return
+	if(entity.StatusLabel): entity.StatusLabel.addStatusText(efname, color)
 	
 	## Set the particle effect amount and radius by size of the entity
 	var HitboxSize = entity.find_child("Projectile_Hitbox").get_child(0).shape.size.x

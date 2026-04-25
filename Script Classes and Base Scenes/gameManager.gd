@@ -73,6 +73,7 @@ func InitialSetup():
 	player.global_position = nexus.Waygates[0].global_position
 	player.find_child("PlayerCam").InstantMove(player.global_position)
 	player.currWorld = nexus
+	player.ECS.ClearEffects()
 	
 	# quit game function that has a signal added during runtime for Mainmenu quit button handling
 	nexus.Waygates[0].EffectTrigger()
