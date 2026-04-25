@@ -1,6 +1,9 @@
 class_name Enemy extends ENTITY ## ENEMY: Base class for enemies, who are instantiated with params for their behavior and appearance
 # Controls enemy behavior, shooting, health, and death
 
+# Refs to nodes
+@onready var HurtTimer = find_child("HurtTimer") # May not exist (ex. training dummy)
+
 @export var XP : int = 10 # How much XP does the mob give on death? (Emitted with entity.death)
 
 var targetPosStopRadius : float = 50 # How close to targetPos will this enemy stop (values closer to 0 make movement rubberband when reach targetPos)
@@ -13,6 +16,7 @@ func _ready():
 	$ShootTimer2.set_paused(true) # ^ via onFirst() turning them on & onEmpty() turning them off
 	$Sight.onEmpty.connect(setTargetEntity.bind(self))
 	$Sight.onFirst.connect(setTargetFirstSight)
+	if HurtTimer: HurtTimer.timeout.connect(SightIncrease.bind(false))
 	setTargetPos()
 
 func _physics_process(_delta):
@@ -23,12 +27,32 @@ func _physics_process(_delta):
 
 func EnemyShoot(P : int, pos : Vector2 = targetEntity.global_position): ShootProj(P, pos) # Workaround for signal binds keeping one value and not updating each call
 
-func SightIncrease(enterOrExit:bool): # Called by $Sight onFirst() & onEmpty()
-	if enterOrExit: $Sight/CollisionShape2D.shape.radius += 250
-	else:           $Sight/CollisionShape2D.shape.radius -= 250
-	# TODO: if an enemy is hit from outside sight range, should increase also
+## End of Combat, revert to init behavior and heal
+func CheckEndOfCombat():
+	var Timeout:bool = (not HurtTimer or not HurtTimer.time_left) # Combat timeout
+	var NoPlayerInSight:bool = (not Sight or Sight.smartArea.is_empty()) # Sight empty
+	
+	if Behavior and Timeout and NoPlayerInSight:
+		Behavior.ChangeStateByIdx(0) # Revert to initial behavior
+		Heal(HPmax - HP)
+
+# Called by $Sight onFirst() & onEmpty(), also during hurtTimer duration
+func SightIncrease(enterOrExit:bool): 
+	if enterOrExit:
+		$Sight/CollisionShape2D.shape.radius += 300
+	else:
+		$Sight/CollisionShape2D.shape.radius -= 300
+		CheckEndOfCombat()
 
 ## OVERRIDE FUNCS: Entity Funcs overridden by Enemy.gd
+func Damage(power:int):
+	super.Damage(power)
+	
+	if HurtTimer: # Increase enemy sight when starting combat
+		if not HurtTimer.time_left:
+			SightIncrease(true)
+		HurtTimer.start(5.00)
+
 func Death():
 	for E in $Sight.smartArea: # For each Player in Sight
 		if E is Player: death.connect(E.GainXP.bind(XP))

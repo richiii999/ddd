@@ -100,9 +100,8 @@ autostart = true
 wait_time = 0.25
 one_shot = true
 
-[node name="FocusTimer" type="Timer" parent="." unique_id=1920357811]
-wait_time = 10.0
-autostart = true
+[node name="HurtTimer" type="Timer" parent="." unique_id=1920357811]
+one_shot = true
 
 [node name="BehaviorFSM" parent="." unique_id=1117611062 instance=ExtResource("6_85l20")]
 
@@ -128,4 +127,3 @@ lootTable = Dictionary[int, int]({
 [connection signal="timeout" from="ShootTimer1" to="." method="EnemyShoot" binds= [1]]
 [connection signal="timeout" from="ShootTimer2" to="." method="EnemyShoot" binds= [2]]
 [connection signal="timeout" from="DamageFlashTimer" to="." method="setStatusFlash"]
-[connection signal="timeout" from="FocusTimer" to="." method="FocusTick"]

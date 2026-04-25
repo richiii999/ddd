@@ -162,8 +162,6 @@ func Damage(power : int):
 	incHP(-power)
 	$Status.setStatusFlash("RED", 0.25)
 	if(HP <= 0 ): Death(); return # Return early on death
-	
-	if(HP < HPmax >> 2 && StatusLabel && !StatusLabel.textQueue.find("Low HP")): StatusLabel.setStatusText("Low HP", "RED") # Under 1/4 health, warn
 
 func Heal(power : int):
 	if !power: return # zero case
