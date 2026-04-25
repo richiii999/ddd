@@ -34,7 +34,11 @@ func AddEffect(E: EffectBASE, constant:bool = false, length:float = E.length) ->
 	#print("Added " + E.efname + " (" + str(length) + "s)" + " const=" + str(constant))
 	add_child(E)
 	
-	if not constant: get_tree().create_timer(length).timeout.connect(RemoveEffect.bind(E))
+	if not constant: 
+		var T = Timer.new() # NOTE: Cant use SceneTreeTimer since the effect may expire before timer
+		T.timeout.connect(RemoveEffect.bind(E))
+		E.add_child(T)
+		T.start(length)
 
 ## Remove an effect
 func RemoveEffect(E : EffectBASE) -> void: 
@@ -52,17 +56,11 @@ func RemoveEffectByName(efname:String) -> void:
 
 ## Dispell all effects
 # Called mainly from nexus or other portaling, also from priests & boss deaths
-func ClearEffects(force:bool = false) -> void: 
-	print("AAA")
-	if force: 
-		for E in GetEffects(): 
-			print(E)
-			E.queue_free()
-	else: 
-		for E in GetEffects(): E.Destruct() # Remove all effects
+func ClearEffects() -> void: 
+	for E in GetEffects(): E.Destruct() # Remove all effects
 	for E in constantEffects: AddEffect(E.instantiate(), true) # re-apply constant effects
 	
 	# BUG: Instantly spawned enemies from packSpaners do not recieve worldeffects
 		# This may be a good thing actually, since we can burn incoming players but not enemies
 	if get_parent().currWorld: # Re-apply world effecfs
-		for E in get_parent().currWorld.WorldEffects: AddEffect(E.duplicate())
+		for E in get_parent().currWorld.WorldEffects: AddEffect(E.duplicate(), true)

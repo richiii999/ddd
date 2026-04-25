@@ -50,7 +50,7 @@ func UseWaygate(P:Player): # Teleports player to this waygate
 	# Heal and dispell player
 	P.Heal(P.HPmax - P.HP)
 	P.ECS.immuneToEffects = true
-	P.ECS.ClearEffects(true)
+	P.ECS.ClearEffects()
 	
 	await P.LoadingScreenStart() # Show loading screen before moving player & camera
 	# TODO: When going from nex to world, play a short transition screen showing the world name and some info, player in center (with party to side)
