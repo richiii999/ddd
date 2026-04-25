@@ -59,8 +59,3 @@ position = Vector2(-6000, 2500)
 position = Vector2(841, 730)
 
 [node name="WorldEffects" type="Node" parent="." unique_id=1278702893]
-
-[connection signal="screen_entered" from="Spawners/EnemySpawnNode" to="Spawners/EnemySpawnNode" method="Visible" binds= [1]]
-[connection signal="screen_entered" from="Spawners/EnemySpawnNode" to="Spawners/EnemySpawnNode" method="Visible" binds= [1]]
-[connection signal="screen_exited" from="Spawners/EnemySpawnNode" to="Spawners/EnemySpawnNode" method="Visible" binds= [-1]]
-[connection signal="screen_exited" from="Spawners/EnemySpawnNode" to="Spawners/EnemySpawnNode" method="Visible" binds= [-1]]
