@@ -28,7 +28,7 @@ func AddEffect(E: EffectBASE, constant:bool = false, length:float = E.length) ->
 	
 	# Effect already exists
 	if E in GetEffects():
-		print("E already exists, re-applying")
+		#print("E already exists, re-applying")
 		RemoveEffect(E)
 	
 	#print("Added " + E.efname + " (" + str(length) + "s)" + " const=" + str(constant))

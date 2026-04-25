@@ -42,6 +42,6 @@ position = Vector2(512, -644)
 [node name="BankTest" parent="NPCs" unique_id=18598485 instance=ExtResource("8_22jxy")]
 position = Vector2(1, 831)
 
-[node name="WorldEffects" type="Node" parent="." unique_id=187706115]
+[node name="WorldEffects" type="Node2D" parent="." unique_id=242796999]
 
 [node name="Effect_Wet" parent="WorldEffects" unique_id=1148809086 instance=ExtResource("9_otrks")]

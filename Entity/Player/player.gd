@@ -364,6 +364,7 @@ func toggleBubble(state:bool) -> void: # Makes player invulnerable, disables inp
 	velocity = Vector2.ZERO
 	setInput(!state)
 	setInvulnerable(state)
+	set_collision_layer_value(5, !state)
 	
 	#TODO: replace with "await <bubble animation forward/reverse>"
 	if (state):

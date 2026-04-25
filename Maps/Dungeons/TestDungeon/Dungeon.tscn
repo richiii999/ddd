@@ -30,4 +30,4 @@ position = Vector2(2560, 0)
 
 [node name="Spawners" type="Node2D" parent="." unique_id=555905646]
 
-[node name="WorldEffects" type="Node" parent="." unique_id=1316366276]
+[node name="WorldEffects" type="Node2D" parent="." unique_id=732786577]

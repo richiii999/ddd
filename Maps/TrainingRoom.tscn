@@ -24,4 +24,4 @@ position = Vector2(88, -240)
 position = Vector2(672, 864)
 maxMobs = 2
 
-[node name="WorldEffects" type="Node" parent="." unique_id=1585099818]
+[node name="WorldEffects" type="Node2D" parent="." unique_id=1536365837]

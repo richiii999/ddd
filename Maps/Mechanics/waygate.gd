@@ -63,8 +63,9 @@ func UseWaygate(P:Player): # Teleports player to this waygate
 	P.LoadingScreenEnd()
 	
 	P.ECS.immuneToEffects = false
-	P.ECS.ClearEffects() # Re-apply ECS constant effects
-	for E in currWorld.WorldEffects: P.ECS.AddEffect(E.duplicate()) # Add world effects
+	# Re-apply constant effects
+	# NOTE: process_frame basically means do this on the next frame
+	get_tree().process_frame.connect(P.ECS.ClearEffects, CONNECT_ONE_SHOT)
 	
 	EffectTrigger()
 
