@@ -13,7 +13,7 @@
 # Detonate: enemy suicides and launches many projectiles when doing so
 	# Can use this after a short period of chase to make suicide bomber enemies
 # Think of 1-2 more behaviors and code them with an enemy to test it
-
+# Enemy that acts like the car from L4D2. Anytime a player is in its radius or doesn't kill it in time, it triggers a horde of enemies
 
 ## Main Menu - Initial Version Done: Needs more
 # Splash screen / intro on game launch, specifically a custom Godot Editor splash (cool version)
