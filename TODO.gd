@@ -3,7 +3,7 @@
 
 ## BUG list
 # death screen sometimes fuck up
-# why does the enemy sometimes get burned in a field and other times doesn't when you charge and push out a field?
+# whenever you hit the necromancer, its summons take damage (that's fine for now, but we could change this in the future)
 
 ## Enemies and behaviors
 # Chase (slow strong zombies), spawn in large groups 
@@ -13,7 +13,8 @@
 # Detonate: enemy suicides and launches many projectiles when doing so
 	# Can use this after a short period of chase to make suicide bomber enemies
 # Think of 1-2 more behaviors and code them with an enemy to test it
-# Enemy that acts like the car from L4D2. Anytime a player is in its radius or doesn't kill it in time, it triggers a horde of enemies
+# Enemy that acts like the car from L4D2. Anytime a player is in its radius or doesn't kill it in time, it triggers a horde of enemies (done, we added the necromancer)
+# Add a necromancer boss that is fast, but has low HP BUT summons 3 giant enemies and you can't kill the necromancer until those enemies die
 
 ## Main Menu - Initial Version Done: Needs more
 # Splash screen / intro on game launch, specifically a custom Godot Editor splash (cool version)
