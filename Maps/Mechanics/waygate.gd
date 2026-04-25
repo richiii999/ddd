@@ -47,8 +47,11 @@ func WaygateInteract(P:Player):
 		else: P.toggleWaygateGUI(true) # Regular waygates open the GUI to select a destination
 
 func UseWaygate(P:Player): # Teleports player to this waygate
-	P.ECS.ClearEffects()
+	# Heal and dispell player
 	P.Heal(P.HPmax - P.HP)
+	P.ECS.immuneToEffects = true
+	P.ECS.ClearEffects(true)
+	
 	await P.LoadingScreenStart() # Show loading screen before moving player & camera
 	# TODO: When going from nex to world, play a short transition screen showing the world name and some info, player in center (with party to side)
 		# and some quest details, and any other stuff like stats idk
@@ -58,6 +61,10 @@ func UseWaygate(P:Player): # Teleports player to this waygate
 	P.currWorld = currWorld # Set the player's currWorld to this one (otherwise reading tilemap breaks)
 	
 	P.LoadingScreenEnd()
+	
+	P.ECS.immuneToEffects = false
+	P.ECS.ClearEffects() # Re-apply ECS constant effects
+	for E in currWorld.WorldEffects: P.ECS.AddEffect(E.duplicate()) # Add world effects
 	
 	EffectTrigger()
 
