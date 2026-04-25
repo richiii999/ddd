@@ -47,6 +47,8 @@ func WaygateInteract(P:Player):
 		else: P.toggleWaygateGUI(true) # Regular waygates open the GUI to select a destination
 
 func UseWaygate(P:Player): # Teleports player to this waygate
+	P.ECS.ClearEffects()
+	P.Heal(P.HPmax - P.HP)
 	await P.LoadingScreenStart() # Show loading screen before moving player & camera
 	# TODO: When going from nex to world, play a short transition screen showing the world name and some info, player in center (with party to side)
 		# and some quest details, and any other stuff like stats idk

@@ -51,5 +51,5 @@ func RemoveEffectByName(efname:String) -> void:
 ## Dispell all effects
 # Called mainly from nexus or other portaling, also from priests & boss deaths
 func ClearEffects() -> void: 
-	for E in GetEffects(): E.Destruct(true) # Remove all effects, skipping any end effects
+	for E in GetEffects(): E.Destruct() # Remove all effects, skipping any end effects
 	for E in constantEffects: AddEffect(E.instantiate(), true) # re-add constant effects (if any)
