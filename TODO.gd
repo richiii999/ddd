@@ -4,6 +4,7 @@
 ## BUG list
 # death screen sometimes fuck up
 # whenever you hit the necromancer, its summons take damage (that's fine for now, but we could change this in the future)
+# Level bar doesn't change at the fame threshold, so it's only the level bar
 
 ## Enemies and behaviors
 # Chase (slow strong zombies), spawn in large groups 

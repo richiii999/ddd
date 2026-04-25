@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://57ucfjynaww3" path="res://Maps/Dungeons/TestDungeon/Dungeon.tscn" id="5_n2maq"]
 [ext_resource type="PackedScene" uid="uid://dm6wv0ic4m2so" path="res://Maps/TrainingRoom.tscn" id="5_pgajl"]
 [ext_resource type="PackedScene" uid="uid://dgtlakw8834qa" path="res://Entity/Enemy/Necromancer.tscn" id="9_74rsv"]
+[ext_resource type="Script" uid="uid://dk18bvrudxx3w" path="res://Maps/test_proj.gd" id="10_5c63y"]
+[ext_resource type="Script" uid="uid://cxshegflcbfxh" path="res://Entity/Projectile/projectile_pattern.gd" id="11_7is7o"]
+[ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="12_8f0kr"]
 
 [node name="Test_World" type="TileMapLayer" unique_id=1473374642]
 z_index = -10
@@ -57,3 +60,11 @@ position = Vector2(-6000, 2500)
 
 [node name="Necromancer" parent="." unique_id=654557338 instance=ExtResource("9_74rsv")]
 position = Vector2(841, 730)
+
+[node name="TestProj" type="Node2D" parent="." unique_id=1972414434]
+script = ExtResource("10_5c63y")
+
+[node name="ProjectilePattern" type="Node2D" parent="TestProj" unique_id=1650478678]
+script = ExtResource("11_7is7o")
+projectile_scene = ExtResource("12_8f0kr")
+metadata/_custom_type_script = "uid://cxshegflcbfxh"
