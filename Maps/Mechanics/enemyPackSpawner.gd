@@ -15,10 +15,15 @@ var packBoss: Node = null       # Link to the pack's boss (if any)
 @export var immediate : bool = false # If toggled, spawns a FULL pack immediately, otherwise starts empty and waits for timer (used for dungeons)
 @export var respawn   : bool = true  # Do mobs respawn or no? (Mostly used for dungeons)
 @export var spawnRadius: int = 150   # Within what radius to spawn mobs?
-
+@export var mob_visibility : bool = true
+signal screen_entered
+signal screen_exited
 func _ready():
 	if respawn: $RespawnTimer.timeout.connect(SpawnMobs)
 	if immediate: SpawnMobs(maxMobs) # Spawn a full pack based on setting
+	if mob_visibility: 
+		screen_entered.connect(Visible.bind(1))
+		screen_exited.connect(Visible.bind(-1))
 
 ## Function which actually spawns mobs, only spawns about (quarter + 1) at a time to prevent farming too fast
 func SpawnMobs( n : int = (maxMobs >> 2) + 1 ):

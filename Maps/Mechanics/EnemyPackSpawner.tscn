@@ -13,6 +13,3 @@ immediate = true
 process_mode = 1
 wait_time = 2.0
 autostart = true
-
-[connection signal="screen_entered" from="." to="." method="Visible" binds= [1]]
-[connection signal="screen_exited" from="." to="." method="Visible" binds= [-1]]

@@ -29,7 +29,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_g2hvx"]
 radius = 432.8233
 
-[node name="EnemyDungeonSpawner" type="AnimatedSprite2D" unique_id=1445437097]
+[node name="EnemySummoner" type="AnimatedSprite2D" unique_id=1445437097]
 sprite_frames = SubResource("SpriteFrames_axy1d")
 autoplay = "default"
 script = ExtResource("4_3ua3r")

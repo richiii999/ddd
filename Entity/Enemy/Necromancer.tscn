@@ -1,0 +1,140 @@
+[gd_scene format=3 uid="uid://dgtlakw8834qa"]
+
+[ext_resource type="Script" uid="uid://dk75vwl8p2eck" path="res://Entity/Enemy/enemy.gd" id="1_uvv2o"]
+[ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_6ytyj"]
+[ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="3_1bi2m"]
+[ext_resource type="Texture2D" uid="uid://dq6232arfxx81" path="res://Assets/Sprites/GD Icons/GD_Red.tres" id="4_y8q84"]
+[ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/smartArea.gd" id="5_kak8k"]
+[ext_resource type="PackedScene" uid="uid://dfcui8l7w2j3m" path="res://Entity/Components/BehaviorFSM.tscn" id="6_k13pl"]
+[ext_resource type="PackedScene" uid="uid://dk58kntas8hfd" path="res://Entity/Components/Behaviors/Wander.tscn" id="7_i8w8w"]
+[ext_resource type="PackedScene" uid="uid://dx23kg5vk3spb" path="res://Entity/Components/Behaviors/Orbit.tscn" id="8_bpstu"]
+[ext_resource type="PackedScene" uid="uid://bntfe5iinhuu5" path="res://UI/Item/loot_table.tscn" id="9_5p18q"]
+[ext_resource type="PackedScene" uid="uid://dddy50t4saequ" path="res://Entity/Components/EffectComponentSystem.tscn" id="10_na328"]
+[ext_resource type="PackedScene" uid="uid://blyjhm2j5onnb" path="res://Maps/Mechanics/EnemyPackSpawner.tscn" id="11_6ytyj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw8gt"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wjxar"]
+bg_color = Color(0, 1, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.501961, 0, 1)
+corner_detail = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2b4ng"]
+radius = 50.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o61b1"]
+size = Vector2(120, 120)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w6h3m"]
+resource_local_to_scene = true
+radius = 272.118
+
+[node name="Necromancer" type="CharacterBody2D" unique_id=654557338 groups=["Enemy"]]
+collision_layer = 256
+collision_mask = 267
+motion_mode = 1
+script = ExtResource("1_uvv2o")
+projs = Array[PackedScene]([ExtResource("2_6ytyj"), ExtResource("2_6ytyj"), ExtResource("2_6ytyj")])
+
+[node name="Status" parent="." unique_id=869158990 instance=ExtResource("3_1bi2m")]
+offset_left = -72.0
+offset_top = -120.0
+offset_right = 80.0
+offset_bottom = -72.0
+metadata/_edit_use_anchors_ = true
+
+[node name="HP_Bar" type="ProgressBar" parent="." unique_id=2129664652]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_top = 64.0
+offset_right = 64.0
+offset_bottom = 87.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 16
+theme_override_styles/background = SubResource("StyleBoxFlat_pw8gt")
+theme_override_styles/fill = SubResource("StyleBoxFlat_wjxar")
+value = 50.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1213981542]
+self_modulate = Color(0, 1, 0, 1)
+texture = ExtResource("4_y8q84")
+
+[node name="Physics_Hitbox" type="CollisionShape2D" parent="." unique_id=2055280999]
+shape = SubResource("CircleShape2D_2b4ng")
+
+[node name="Projectile_Hitbox" type="Area2D" parent="." unique_id=421250952]
+collision_layer = 1024
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Projectile_Hitbox" unique_id=401901389]
+shape = SubResource("RectangleShape2D_o61b1")
+
+[node name="Sight" type="Area2D" parent="." unique_id=1797314496]
+collision_layer = 0
+collision_mask = 16
+input_pickable = false
+monitorable = false
+script = ExtResource("5_kak8k")
+metadata/_custom_type_script = "uid://hi4e34yydb2t"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=1266922284]
+shape = SubResource("CircleShape2D_w6h3m")
+debug_color = Color(0.501961, 0.501961, 0.501961, 0.25098)
+
+[node name="ShootTimer1" type="Timer" parent="." unique_id=142791748]
+wait_time = 0.75
+autostart = true
+
+[node name="ShootTimer2" type="Timer" parent="." unique_id=1367343406]
+wait_time = 5.0
+autostart = true
+
+[node name="DamageFlashTimer" type="Timer" parent="." unique_id=116557462]
+wait_time = 0.25
+one_shot = true
+
+[node name="HurtTimer" type="Timer" parent="." unique_id=1920357811]
+one_shot = true
+
+[node name="BehaviorFSM" parent="." unique_id=1117611062 instance=ExtResource("6_k13pl")]
+
+[node name="behavior_wander" parent="BehaviorFSM" unique_id=65294224 instance=ExtResource("7_i8w8w")]
+
+[node name="behavior_orbit" parent="BehaviorFSM" unique_id=394172828 instance=ExtResource("8_bpstu")]
+
+[node name="LootTable" parent="." unique_id=1315550005 instance=ExtResource("9_5p18q")]
+lootTable = Dictionary[int, int]({
+0: 0,
+1: 1
+})
+
+[node name="EffectsComponentSystem" parent="." unique_id=921567753 instance=ExtResource("10_na328")]
+
+[node name="EnemySpawnNode" parent="." unique_id=1257634712 instance=ExtResource("11_6ytyj")]
+maxMobs = 3
+mob_visibility = false
+
+[node name="RespawnTimer" parent="EnemySpawnNode" index="0" unique_id=1959530611]
+wait_time = 3.0
+
+[connection signal="onEmpty" from="Sight" to="." method="SightIncrease" binds= [false]]
+[connection signal="onEmpty" from="Sight" to="ShootTimer1" method="set_paused" binds= [true]]
+[connection signal="onEmpty" from="Sight" to="ShootTimer2" method="set_paused" binds= [true]]
+[connection signal="onFirst" from="Sight" to="." method="SightIncrease" binds= [true]]
+[connection signal="onFirst" from="Sight" to="ShootTimer1" method="set_paused" binds= [false]]
+[connection signal="onFirst" from="Sight" to="ShootTimer2" method="set_paused" binds= [false]]
+[connection signal="onFirst" from="Sight" to="BehaviorFSM" method="ChangeStateByIdx" binds= [1]]
+[connection signal="timeout" from="ShootTimer1" to="." method="EnemyShoot" binds= [1]]
+[connection signal="timeout" from="ShootTimer2" to="." method="EnemyShoot" binds= [2]]
+[connection signal="timeout" from="DamageFlashTimer" to="." method="setStatusFlash"]
+
+[editable path="EnemySpawnNode"]
