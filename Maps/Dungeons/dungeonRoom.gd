@@ -20,7 +20,7 @@ func NextWave():
 	if !currWave: RoomClear(); return # All waves are clear (or no waves)
 	
 	for spawner in currWave.get_children():
-		print("Spawned")
+		#print("Spawned")
 		var dupe = spawner.duplicate() # Dupe spawner (to re-use on dungeon reset)
 		currWave.add_child(dupe)
 		dupe.global_position = spawner.global_position
@@ -59,7 +59,7 @@ func onPlayerEnter(_P):
 
 ## Resets the room
 func Reset():
-	print("roomReset")
+	#print("roomReset")
 	
 	currWave = null
 	roomActive = false
