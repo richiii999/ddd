@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://n5lq2kh6a5no"]
+
+[ext_resource type="Script" uid="uid://bi32colvijyhb" path="res://Entity/Components/damageNumber.gd" id="1_ovwdx"]
+
+[node name="DamageNumber" type="Label" unique_id=413550020]
+self_modulate = Color(1, 0, 0, 1)
+text = "XXX"
+script = ExtResource("1_ovwdx")

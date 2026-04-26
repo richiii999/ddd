@@ -2,6 +2,7 @@ class_name ENTITY extends CharacterBody2D ## Provides much useful functionality 
 # Used for players / enemies / neutrals
 
 ## References to nodes
+const dmgNumScn : PackedScene = preload("res://Entity/Components/DamageNumber.tscn") # To spawn dmgNums
 @onready var Manager : GameManager = get_node("/root/GameManager") # Reference to the WorldNode (so I dont have to call it every time)
 @onready var currWorld : WorldBASE = Tools.FindParentByType(self, WorldBASE)
 @onready var Sight : SmartArea = find_child("Sight") # Ref to this entity's sight smartarea (if any)
@@ -155,18 +156,22 @@ func ShootProj(input : int, Aim : Vector2) -> void:
 func ShootSmart(input : int): ShootProj(input, targetEntity.global_position + targetEntity.velocity * 20)
 
 ## Damage / Heal: Called by signals, the incrementors handle UI
-func Damage(power : int):
+func Damage(power : int, crit:bool=false):
 	if invulnerable: return
 	if !power: return # zero case
 	if (HPBar && !HPBar.visible): HPBar.visible = true
 	incHP(-power)
 	$Status.setStatusFlash("RED", 0.25)
 	if(HP <= 0 ): Death(); return # Return early on death
+	# Display damage number
+	Manager.get_child(2).add_child(dmgNumScn.instantiate().setup(global_position, power, crit))
 
 func Heal(power : int):
 	if !power: return # zero case
 	incHP(power)
 	StatusLabel.setStatusFlash("GREEN", 0.25)
+	# Display heal number
+	Manager.get_child(2).add_child(dmgNumScn.instantiate().setup(global_position, power, false, true))
 
 func ReadTerrain(): ## Read tile under the entity, assign tile's data to variables
 	if currWorld:

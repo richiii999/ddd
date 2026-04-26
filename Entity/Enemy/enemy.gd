@@ -45,8 +45,8 @@ func SightIncrease(enterOrExit:bool):
 		CheckEndOfCombat()
 
 ## OVERRIDE FUNCS: Entity Funcs overridden by Enemy.gd
-func Damage(power:int):
-	super.Damage(power)
+func Damage(power:int, crit:bool=false):
+	super.Damage(power, crit)
 	
 	if HurtTimer: # Increase enemy sight when starting combat
 		if not HurtTimer.time_left:
