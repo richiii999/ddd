@@ -156,7 +156,6 @@ func get_input(): # TODO: replace this with _input() ?
 		#get the speed and then cap it as you keep leveling up
 		var spd_mult := get_move_spd()
 		velocity += InputV * (accel * effectMoveSpeed * tileSpeed * spd_mult) + tilePush
-		print(tilePush)
 		
 	
 	# TODO: change aniframe and sprite flip direction based on direction / velocity for player, or if not moving, mousePos\ (DONE), now we need to get sprites
