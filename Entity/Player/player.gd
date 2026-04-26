@@ -411,8 +411,8 @@ func Death():
 	
 	get_tree().set_pause( true ) # Toggle pause
 
-func Damage(power : int):
-	super.Damage(power)
+func Damage(power : int, crit:bool=false):
+	super.Damage(power, crit)
 	$HurtTimer.start(5.00)
 
 

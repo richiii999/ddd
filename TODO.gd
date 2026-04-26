@@ -85,7 +85,7 @@
 	# He shoots cannonball with high piercing that has HUGE knockback, you get slammed into wall / off platform into water
 	# This tells player what knockback is, with minor consequences
 	# PirateSHIP boss, shoots rows of cannonballs across screen with 1 or 2 holes, this is like movement mechanic.
-		# If you get hit, fall off platform into wat	er which has pirhrana enemies that only can be in water and shoot very short range
+		# If you get hit, fall off platform into water which has pirhrana enemies that only can be in water and shoot very short range
 # Later in game, area / dungeon with lava on ground
 	# miniboss / boss with aoe knockback effect, if you get hit: knocked into lava
 	# This builds on the mechanic from earlier, placing higher consequences for failing the mechanic
