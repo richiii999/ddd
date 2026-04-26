@@ -5,10 +5,12 @@
 # death screen sometimes fuck up
 # whenever you hit the necromancer, its summons take damage (that's fine for now, but we could change this in the future)
 # Level bar doesn't change at the fame threshold, so it's only the level bar
+# Need to save the bank and skill tree information
+
 
 ## Enemies and behaviors
-# Chase (slow strong zombies), spawn in large groups 
-# Chase (fast weak flyers), spawn individually 
+# Chase (slow strong zombies), spawn in large groups (done)
+# Chase (fast weak flyers), spawn individually (done)
 # Flee, opposite of chase, fast treasure bunnies that drop good items but u have to catch them
 # Orbit (done)
 # Detonate: enemy suicides and launches many projectiles when doing so
