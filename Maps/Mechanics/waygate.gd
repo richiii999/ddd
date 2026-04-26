@@ -3,7 +3,7 @@ class_name Waygate extends GPUParticles2D ## Waygate: Node for teleporting playe
 
 @onready var currWorld : WorldBASE = Tools.FindParentByType(self, WorldBASE)
 @export var active : bool = false # Players can only spawn here if active
-@export var oneWayTarget : Waygate = null # Instantly tp to oneWayTarget, no GUI (ex. dung exit)
+@export var exit: bool = false # One-way teleport to Nexus, no GUI (ex. dungeon exit)
 
 var currPlayer : Player = null # Set when player interacts with this
 # TODO: This is used often for interactables, perhaps move it to there idk
@@ -15,7 +15,10 @@ var currPlayer : Player = null # Set when player interacts with this
 @export var itemPrice : PackedScene = null # put any Item.tscn in editor
 var itemPriceItem : Item = null # Actual item from ^
 
+signal arrived # Emitted when player arrives at this Waygate
+
 func _ready():
+	setActive(active)
 	$InteractComponent.Interact.connect(WaygateInteract)
 	$EffectTimer.timeout.connect(EffectTrigger.bind(false)) # Timer controls particle burst
 	
@@ -43,7 +46,7 @@ func WaygateInteract(P:Player):
 			setActive(true)
 	
 	else: # Already active
-		if oneWayTarget: oneWayTarget.UseWaygate(P) # One-way gates activate immediately
+		if exit: get_node("/root/GameManager/Maps/Nexus").ActiveWaygates[0].UseWaygate(P) # Exit gates are immediate
 		else: P.toggleWaygateGUI(true) # Regular waygates open the GUI to select a destination
 
 func UseWaygate(P:Player): # Teleports player to this waygate
@@ -60,6 +63,7 @@ func UseWaygate(P:Player): # Teleports player to this waygate
 	P.find_child("PlayerCam").InstantMove(global_position) # Force move camera without smoothing
 	P.currWorld = currWorld # Set the player's currWorld to this one (otherwise reading tilemap breaks)
 	
+	arrived.emit(P)
 	P.LoadingScreenEnd()
 	
 	P.ECS.immuneToEffects = false
@@ -69,7 +73,6 @@ func UseWaygate(P:Player): # Teleports player to this waygate
 	
 	EffectTrigger()
 
-# BUG: The nexus waygate gets set twice when the game is started, something in gameManager
 func setActive(state:bool):
 	EffectTrigger(state)
 	$Sprite2D_ON.visible = state;
