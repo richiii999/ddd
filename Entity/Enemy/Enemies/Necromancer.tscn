@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dgtlakw8834qa"]
 
-[ext_resource type="Script" uid="uid://dk75vwl8p2eck" path="res://Entity/Enemy/enemy.gd" id="1_uvv2o"]
+[ext_resource type="Script" uid="uid://ncx0o5gc4pic" path="res://Entity/Enemy/Enemies/necromancer.gd" id="1_ydshy"]
 [ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_6ytyj"]
 [ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="3_1bi2m"]
 [ext_resource type="Texture2D" uid="uid://dq6232arfxx81" path="res://Assets/Sprites/GD Icons/GD_Red.tres" id="4_y8q84"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bntfe5iinhuu5" path="res://UI/Item/loot_table.tscn" id="9_5p18q"]
 [ext_resource type="PackedScene" uid="uid://dddy50t4saequ" path="res://Entity/Components/EffectComponentSystem.tscn" id="10_na328"]
 [ext_resource type="PackedScene" uid="uid://blyjhm2j5onnb" path="res://Maps/Mechanics/EnemyPackSpawner.tscn" id="11_6ytyj"]
+[ext_resource type="Script" uid="uid://cxshegflcbfxh" path="res://Entity/Projectile/projectile_pattern.gd" id="12_r3k2w"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw8gt"]
 bg_color = Color(1, 0, 0, 1)
@@ -38,7 +39,7 @@ radius = 272.118
 collision_layer = 256
 collision_mask = 267
 motion_mode = 1
-script = ExtResource("1_uvv2o")
+script = ExtResource("1_ydshy")
 projs = Array[PackedScene]([ExtResource("2_6ytyj"), ExtResource("2_6ytyj"), ExtResource("2_6ytyj")])
 
 [node name="Status" parent="." unique_id=869158990 instance=ExtResource("3_1bi2m")]
@@ -125,6 +126,11 @@ mob_visibility = false
 
 [node name="RespawnTimer" parent="EnemySpawnNode" index="0" unique_id=1959530611]
 wait_time = 3.0
+
+[node name="ProjectilePattern" type="Node2D" parent="." unique_id=998689461]
+script = ExtResource("12_r3k2w")
+projectile_scene = ExtResource("2_6ytyj")
+metadata/_custom_type_script = "uid://cxshegflcbfxh"
 
 [connection signal="onEmpty" from="Sight" to="." method="SightIncrease" binds= [false]]
 [connection signal="onEmpty" from="Sight" to="ShootTimer1" method="set_paused" binds= [true]]

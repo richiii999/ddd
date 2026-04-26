@@ -40,17 +40,16 @@ func _make_proj(dir: float, opts: Dictionary) -> Projectile:
 	
 	#instantiate a projectile and then spawn it
 	var proj : Projectile = projectile_scene.instantiate()
-	#proj.Spawn(
-		#get_parent(),# source
-		#dir,# rotation / direction
-		#opts.get("speed", 400), #modifiers (can comment this out for now)
-		#opts.get("power", 1),
-		#opts.get("piercing", 1),
-		#opts.get("knockback", 150.0),
-		#opts.get("effect", null),
-		#opts.get("field", null)
-	#)
-	proj.Spawn(get_parent(), dir)
+	proj.Spawn(
+		get_parent(),# source
+		dir,# rotation / direction
+		opts.get("speed", 10), #modifiers (can comment this out for now)
+		opts.get("power", 1),
+		opts.get("piercing", 1),
+		opts.get("knockback", 150.0),
+		opts.get("effect", null),
+		opts.get("field", null)
+	)
 	return proj
 
 #use this to actually spawn the projectile on the screen
