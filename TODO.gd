@@ -4,20 +4,9 @@
 ## BUG list
 # death screen sometimes fuck up
 # whenever you hit the necromancer, its summons take damage (that's fine for now, but we could change this in the future)
-# Level bar doesn't change at the fame threshold, so it's only the level bar
+# Level bar doesn't change at the fame threshold, so it's only the level bar (only when loading a saved player)
 # Need to save the bank and skill tree information
 
-
-## Enemies and behaviors
-# Chase (slow strong zombies), spawn in large groups (done)
-# Chase (fast weak flyers), spawn individually (done)
-# Flee, opposite of chase, fast treasure bunnies that drop good items but u have to catch them
-# Orbit (done)
-# Detonate: enemy suicides and launches many projectiles when doing so
-	# Can use this after a short period of chase to make suicide bomber enemies
-# Think of 1-2 more behaviors and code them with an enemy to test it
-# Enemy that acts like the car from L4D2. Anytime a player is in its radius or doesn't kill it in time, it triggers a horde of enemies (done, we added the necromancer)
-# Add a necromancer boss that is fast, but has low HP BUT summons 3 giant enemies and you can't kill the necromancer until those enemies die
 
 ## Main Menu - Initial Version Done: Needs more
 # Splash screen / intro on game launch, specifically a custom Godot Editor splash (cool version)
@@ -55,11 +44,18 @@
 ## Various enemy ideas
 # Big slime boss that splits up in some phases and you can kill parts, but they break up into smaller parts that can reform
 	# Changes color to show what damage type you need to use to kill it (e.g. green = poison, red = fire, etc.)
-
+# Chase (slow strong zombies), spawn in large groups (done)
+# Chase (fast weak flyers), spawn individually (done)
+# Flee, opposite of chase, fast treasure bunnies that drop good items but u have to catch them
+# Orbit (done)
+# Detonate: enemy suicides and launches many projectiles when doing so
+	# Can use this after a short period of chase to make suicide bomber enemies
+# Think of 1-2 more behaviors and code them with an enemy to test it
+# Enemy that acts like the car from L4D2. Anytime a player is in its radius or doesn't kill it in time, it triggers a horde of enemies (done, we added the necromancer)
+# Add a necromancer boss that is fast, but has low HP BUT summons 3 giant enemies and you can't kill the necromancer until those enemies die
 
 ## Audio
 # Sounds, music, sound effects, UI noises on focus and click, items have special pickup/drop sounds etc. etc.
-	# ytdl the rotmg OST
 	# Other music, open source (kevin macleod)
 
 
@@ -84,7 +80,7 @@
 # adv proj patter, wing rings:  spawns concentric rings that emit from the center and rotate on offset sinewaves via bowtie
 
 
-## Knockback stuff:
+## Knockback content:
 # Introduce knockback as a important mechanic via pirate miniboss enemy in beach / pirate dungeon,
 	# He shoots cannonball with high piercing that has HUGE knockback, you get slammed into wall / off platform into water
 	# This tells player what knockback is, with minor consequences
@@ -111,10 +107,8 @@
 # idk, seems more efficient to me, compared to spawning individual rich text nodes and moving them or keeping all damage nums in status text
 
 
-## "Waygate" node is the player spawn points and teleport network. Interacting with one opens the map.
-# The map btw can be revealed fully once you have all waygates in exchange for coins from an npc guy
-# One-way gates only tele one way and are used for dungeon entrances (into dungeon) and exits (back to nexus)
-# island has waygates around edge and in concentric rings going to center in each biome
+## World map ideas
+# island has 1 waygate per biome
 # Island is BIG, way bigger than mythfall's tiny ass island and bigger even than realm. I have big plans
 	# One biome in my island is probably like the whole map in mythfall, maybe a bit less than that idk, depends on the biome ofc.
 
@@ -124,16 +118,6 @@
 # One of which is required to unlock the shrine (teleporter) for a biome. 
 # As a way to ensure the player has actually been in that area for a little bit.
 
-
-## I fuckin hate anchors. Why is it so hard to scale things to the screen? 
-# I litterally just locked the resolution of the game to 1280x720 to fix it "temporarily" (forever)
-# TODO: ^ probably should lock it to 2k res and use scaling or whatever.
-
-
-## Effects management stuff:
-# TODO: UI stuff display icons and timers or soemthing (graphically transparent circles like wow)
-# UI display effects similar to wow with little squares in tr or soemthing and an icon
-# TODO: when nexus, clear all effects and stuff, heal you, etc.
 
 ## Effect content ideas:
 # Effect that gets spammed alot, whole mechanic is about not reaching too high of a timer
@@ -147,12 +131,3 @@
 # Damage NOTE: done
 # Speed up / slow down
 # Can also have tiles that have effects beyond just hurting you or whatever, conveyor belts, slippery ice, status effect goo
-	
-## Constant effects, not the same thing as perma or untimed effects. 
-# Constant effects are stored on the player, and applied even when effects are wiped (e.g. nexus)
-# Example could be: Everyone gets a constant effect for holidays or something idk.
-# Constant effects for certain classes in the form of perma-buffs?
-# Constant effects applied from gear? e.g. constantly regen HP, or soemthing
-# Effects applied by tiles? Effects applied by worlds or dungeons?
-# as mentioned, Effects are cleared when nexus, and some other times. 
-	# Priests and other supports can also clear negative effects and stuff, idk how exactly that's gonna work
