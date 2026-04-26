@@ -130,7 +130,7 @@ func ShootProj(input : int, Aim : Vector2) -> void:
 		#P = proj_scene.instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing, kBstrength1, E, F)
 	
 	if attack.projectile: #if the projectile exists, instantiate our projectile
-		P = attack.projectile.instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing, kBstrength1, E, F)
+		P = attack.projectile.instantiate().Spawn(self, Tools.NudgeFloat(global_position.angle_to_point(Aim), deg_to_rad(aimSpread)), projSpeed, mainStat, piercing if index == 0 else 1, kBstrength1, E, F)
 	else: 
 		push_error("AttackData missing projectile")
 		return
