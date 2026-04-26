@@ -99,14 +99,6 @@
 	# Little tornado enemies, wind gust effect fields applied randomly around the place, sky-related bosses (e.g. stormcloud shoots lightning)
 
 
-## Random idea: Damage nums as particles (heal nums too)
-# Since damage nums are so tight in range, would it be more efficient to use particles?
-# Test many many damage in a row with status text spawns and despawns on timer
-# compared to using switch-case and spawning the right particle from 1-99
-# Can have a "damage nums" GPUparticles node and it emits once per damage() with the correct sprite (from an atlas)
-# idk, seems more efficient to me, compared to spawning individual rich text nodes and moving them or keeping all damage nums in status text
-
-
 ## World map ideas
 # island has 1 waygate per biome
 # Island is BIG, way bigger than mythfall's tiny ass island and bigger even than realm. I have big plans

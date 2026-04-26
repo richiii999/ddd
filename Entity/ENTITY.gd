@@ -43,6 +43,7 @@ var SpawnNode : Node = null # Link to the entity's spawn node (if any), Set by t
 var currTile  : TileData = null # Current tile under player (can be null, ex. leave edge of map)
 var tileSpeed : float = 1.00    # multiplier to velocity (ex. water slows u down)
 var tilePain  : int = 0         # Every physics tick, minus health (ex. poison = 1, lava = 2)
+var tilePush : Vector2 = Vector2.ZERO # add to velocity based on tile direction
 
 ## HP / MP
 @export var invulnerable : bool = false # If true, Damage() passes
@@ -176,8 +177,10 @@ func Heal(power : int):
 func ReadTerrain(): ## Read tile under the entity, assign tile's data to variables
 	if currWorld:
 		currTile = currWorld.get_cell_tile_data(currWorld.local_to_map(currWorld.to_local(global_position)))
-		tileSpeed = currTile.get_custom_data("Speed") if currTile else 1.00
-		tilePain  = currTile.get_custom_data("Pain")  if currTile else 0
+		if currTile != null:
+			tileSpeed = currTile.get_custom_data("Speed")
+			tilePain  = currTile.get_custom_data("Pain")
+			tilePush  = Vector2(float(currTile.get_custom_data("PushH")), float(currTile.get_custom_data("PushV")))
 
 ## Knockback (signaled from the colliding projectile): Applies an impluse to velocity in px/s (modified by KBresistance)
 func Knockback(from : Vector2, strength : float): if !invulnerable: velocity += Vector2.from_angle(from.angle_to_point(global_position)) * (1.00 - kBResistance) * strength
