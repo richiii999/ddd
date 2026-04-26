@@ -182,7 +182,8 @@ func LoadData():
 ## Get all active waygates in all worlds
 func GetActiveWaygates() -> Array[Waygate]:
 	var gates : Array[Waygate] = []
-	for map in $Maps.get_children().filter(func(map): return map.name != "Nexus"):
+	for map in $Maps.get_children():
 		for wg in map.ActiveWaygates:
 			gates.append(wg)
+	gates.erase(nexus.ActiveWaygates[0]) # Not including the Nexus Waygate
 	return gates

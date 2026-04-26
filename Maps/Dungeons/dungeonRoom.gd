@@ -1,4 +1,5 @@
 class_name DungeonRoom extends TileMapLayer ## Controls mob waves and doors
+# NOTE: Must have child nodes: "Doors", Waves", "Props"
 
 @onready var waves : Array[Node] = $Waves.get_children()
 var currWave : Node = null
@@ -12,11 +13,6 @@ var currWaveNumEnemies : int = 0
 func _ready():
 	for door in $Doors.get_children(): 
 		door.get_node("PlayerDetector").body_entered.connect(onPlayerEnter)
-	
-	if !waves: return
-	for wave in waves:
-		# Hacky way to connect signals, since the enemy doesnt exist yet
-		for spawner in wave.get_children(): spawner.deathSignalConnection = self 
 
 ## Activate all spawners in the next wave
 func NextWave(): 
@@ -24,7 +20,12 @@ func NextWave():
 	if !currWave: RoomClear(); return # All waves are clear (or no waves)
 	
 	for spawner in currWave.get_children():
-		spawner.setEnabled(true)
+		#print("Spawned")
+		var dupe = spawner.duplicate() # Dupe spawner (to re-use on dungeon reset)
+		currWave.add_child(dupe)
+		dupe.global_position = spawner.global_position
+		dupe.setEnabled(true)
+		dupe.deathSignalConnection = self # Hacky way to connect signals, enemy doesnt exist yet
 		currWaveNumEnemies += 1
 
 func SetDoors(state:bool): 
@@ -37,7 +38,6 @@ func RoomClear():
 	
 	SetDoors(true) # Unlock
 	
-	roomCleared.connect(get_parent().get_parent().onDungeonClear, CONNECT_ONE_SHOT)
 	roomCleared.emit()
 
 func onEnemyDeath(): 
@@ -59,12 +59,15 @@ func onPlayerEnter(_P):
 
 ## Resets the room
 func Reset():
-	print("roomReset")
+	#print("roomReset")
 	
 	currWave = null
 	roomActive = false
 	roomClear = false
 	
 	SetDoors(false) # Lock
+	waves = $Waves.get_children() # Reset waves
 	
-	
+	for wave in waves: # Delete stray enemies
+		for child in wave.get_children():
+			if child is Enemy: child.queue_free()
