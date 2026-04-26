@@ -23,18 +23,35 @@ enum PatternType {
 
 func Emit(type: PatternType, count: int, opts: Dictionary = {}) -> void:
 	match type:
-		PatternType.CIRCLE: _emit_circle(count, opts)
+		PatternType.CIRCLE: emit_circle(count, opts)
+		PatternType.ARC: emit_arc(count, opts)
 
 #this will basically do a circle that does N projectles in a 360 (aka a circle)
 #so if you pass in say (circle, 3), then you get a triangle
 #(circle, 6) gives you a hexagon, and (circle, 1000) gives you an aneurysm
-func _emit_circle(count: int, opts: Dictionary) -> void:
+func emit_circle(count: int, opts: Dictionary) -> void:
 	var offset: float = opts.get("offset_angle", 0.0) #we are grabbing the rotation offset from the opts dictionary (which is defaulted to 0)
 	var step: float = TAU / count #this basically generates our first step in the circle (think of the unit circle, TAU is 2pi... so 2pi / count)
 	for i in count: #loop through the count and repeat until you get a projectile that's a circle
-		_spawn_proj(step * i + offset, opts)
+		spawn_proj(step * i + offset, opts)
 
-func _make_proj(dir: float, opts: Dictionary) -> Projectile:
+#creates an arc that has some projectiles
+# so like (arc, 5) gives you a cone like consistency
+func emit_arc(count: int, opts: Dictionary) -> void:
+	var spread: float = opts.get("spread", PI / 4.0) #how wide our arc is gonna be 
+	var offset: float = opts.get("offset_angle", 0.0) #same as circle offset
+	var base: float = offset #center direction of the arc
+	
+	if count == 1: #if its one projectile, just send it
+		spawn_proj(base, opts)
+		return
+	
+	var step: float = spread / (count - 1) #angle between each projectile
+	var start: float = base - spread / 2.0 #angle for our first projectile
+	for i in count: #same thing as circle, generates the arc
+		spawn_proj(start + step * i, opts)
+
+func make_proj(dir: float, opts: Dictionary) -> Projectile:
 	#check to see if the projectile scene even exists 
 	if projectile_scene == null: return null
 	
@@ -53,8 +70,8 @@ func _make_proj(dir: float, opts: Dictionary) -> Projectile:
 	return proj
 
 #use this to actually spawn the projectile on the screen
-func _spawn_proj(dir: float, opts: Dictionary) -> void:
-	var proj := _make_proj(dir, opts)
+func spawn_proj(dir: float, opts: Dictionary) -> void:
+	var proj := make_proj(dir, opts)
 	if proj == null: return
 	get_node("/root/GameManager/Projectiles").add_child(proj)
 	proj.global_position = global_position
