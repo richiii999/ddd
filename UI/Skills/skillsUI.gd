@@ -1,14 +1,19 @@
 extends Panel ## SkillsUI: Controls skills states (closed / availible / active)
 
-@onready var player = find_parent("Player") # Player ref
+var player : Node = null # player init
 var chosen_class : String = "" #since its empty, they haven't chosen a class yet
 
 func _ready(): 
-	connect_skill_signals()
+	#connect_skill_signals()
 	#for skill in get_children().filter(func(node): return node is skillButton): skill.skillUpdate.connect(skillUpdate) # Connect signals
-	$SkillPointsText/SkillPointsCount.text = str(player.skillPoints) # Update skill point counter
+	#$SkillPointsText/SkillPointsCount.text = str(player.skillPoints) # Update skill point counter
 	$OpenClass.visible = false
 	$OpenClass.pressed.connect(reopen_subtree)
+
+func setup(p: Node) -> void: #pass in the player node
+	player = p
+	connect_skill_signals()
+	$SkillPointsText/SkillPointsCount.text = str(player.skillPoints)
 
 func connect_skill_signals() -> void: 
 	for skill in get_skills():

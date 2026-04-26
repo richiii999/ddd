@@ -79,6 +79,8 @@ func InitialSetup():
 	if not player.get_parent(): $Players.add_child(player)
 	nexus.ActiveWaygates[0].UseWaygate(player)
 	
+	#setup the player so that anytime you die or respawn, it resets everything in terms of skills 
+	player.find_child("SkillsUI").setup(player)
 	## Initial items
 	var nexOffset = nexus.global_position
 	# Some coins
