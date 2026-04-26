@@ -1,15 +1,15 @@
 [gd_scene format=3 uid="uid://cah1krc5w5maw"]
 
-[ext_resource type="Script" uid="uid://dk75vwl8p2eck" path="res://Entity/Enemy/enemy.gd" id="1_53cjx"]
-[ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="3_3s77v"]
-[ext_resource type="Texture2D" uid="uid://di6ytqcvdio6g" path="res://Assets/Sprites/GD Icons/GodotIconAtlas.png" id="4_wntmj"]
-[ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/smartArea.gd" id="5_nhkol"]
-[ext_resource type="PackedScene" uid="uid://dfcui8l7w2j3m" path="res://Entity/Components/BehaviorFSM.tscn" id="6_2j2hh"]
-[ext_resource type="PackedScene" uid="uid://byp1r1vlopabi" path="res://Entity/Components/Behaviors/Boss/Boss1.tscn" id="7_3s77v"]
-[ext_resource type="PackedScene" uid="uid://blcgtxx2m6ge6" path="res://Entity/Components/Behaviors/Boss/BossHeal.tscn" id="8_wntmj"]
-[ext_resource type="PackedScene" uid="uid://vosbka7lsvf0" path="res://Entity/Components/Behaviors/Boss/Boss2.tscn" id="9_nhkol"]
-[ext_resource type="PackedScene" uid="uid://bexluv4wwnwxr" path="res://Entity/Components/BossBar.tscn" id="10_wntmj"]
-[ext_resource type="PackedScene" uid="uid://bntfe5iinhuu5" path="res://UI/Item/loot_table.tscn" id="11_nhkol"]
+[ext_resource type="Script" uid="uid://dk75vwl8p2eck" path="res://Entity/Enemy/enemy.gd" id="1_k51ts"]
+[ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="2_4h0c1"]
+[ext_resource type="Texture2D" uid="uid://di6ytqcvdio6g" path="res://Assets/Sprites/GD Icons/GodotIconAtlas.png" id="3_e2618"]
+[ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/smartArea.gd" id="4_eqluo"]
+[ext_resource type="PackedScene" uid="uid://dfcui8l7w2j3m" path="res://Entity/Components/BehaviorFSM.tscn" id="5_j4rks"]
+[ext_resource type="PackedScene" uid="uid://byp1r1vlopabi" path="res://Entity/Components/Behaviors/Boss/Boss1.tscn" id="6_6sh2x"]
+[ext_resource type="PackedScene" uid="uid://blcgtxx2m6ge6" path="res://Entity/Components/Behaviors/Boss/BossHeal.tscn" id="7_s7r8e"]
+[ext_resource type="PackedScene" uid="uid://vosbka7lsvf0" path="res://Entity/Components/Behaviors/Boss/Boss2.tscn" id="8_h2xyi"]
+[ext_resource type="PackedScene" uid="uid://bexluv4wwnwxr" path="res://Entity/Components/BossBar.tscn" id="9_aplmu"]
+[ext_resource type="PackedScene" uid="uid://bntfe5iinhuu5" path="res://UI/Item/loot_table.tscn" id="10_hy2l8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw8gt"]
 bg_color = Color(1, 0, 0, 1)
@@ -24,7 +24,7 @@ border_color = Color(0, 0.501961, 0, 1)
 corner_detail = 1
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lg3er"]
-atlas = ExtResource("4_wntmj")
+atlas = ExtResource("3_e2618")
 region = Rect2(128, 128, 128, 128)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2b4ng"]
@@ -41,11 +41,11 @@ scale = Vector2(2, 2)
 collision_layer = 256
 collision_mask = 267
 motion_mode = 1
-script = ExtResource("1_53cjx")
+script = ExtResource("1_k51ts")
 kBResistance = 1.0
 HPmax = 500
 
-[node name="Status" parent="." unique_id=1170503114 instance=ExtResource("3_3s77v")]
+[node name="Status" parent="." unique_id=1170503114 instance=ExtResource("2_4h0c1")]
 offset_left = -72.0
 offset_top = -120.0
 offset_right = 80.0
@@ -85,7 +85,7 @@ collision_layer = 0
 collision_mask = 16
 input_pickable = false
 monitorable = false
-script = ExtResource("5_nhkol")
+script = ExtResource("4_eqluo")
 metadata/_custom_type_script = "uid://hi4e34yydb2t"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=1965683690]
@@ -108,20 +108,20 @@ one_shot = true
 wait_time = 10.0
 autostart = true
 
-[node name="BehaviorFSM" parent="." unique_id=669444931 node_paths=PackedStringArray("initState") instance=ExtResource("6_2j2hh")]
+[node name="BehaviorFSM" parent="." unique_id=669444931 node_paths=PackedStringArray("initState") instance=ExtResource("5_j4rks")]
 initState = NodePath("behavior_boss1")
 
-[node name="behavior_boss1" parent="BehaviorFSM" unique_id=109561774 instance=ExtResource("7_3s77v")]
+[node name="behavior_boss1" parent="BehaviorFSM" unique_id=109561774 instance=ExtResource("6_6sh2x")]
 
-[node name="behavior_bossHeal" parent="BehaviorFSM" unique_id=152317940 instance=ExtResource("8_wntmj")]
+[node name="behavior_bossHeal" parent="BehaviorFSM" unique_id=152317940 instance=ExtResource("7_s7r8e")]
 
-[node name="behavior_boss2" parent="BehaviorFSM" unique_id=1341389818 instance=ExtResource("9_nhkol")]
+[node name="behavior_boss2" parent="BehaviorFSM" unique_id=1341389818 instance=ExtResource("8_h2xyi")]
 wait_time = 5.0
 healthThreshold = 0.0
 
-[node name="BossBar" parent="." unique_id=1422355881 instance=ExtResource("10_wntmj")]
+[node name="BossBar" parent="." unique_id=1422355881 instance=ExtResource("9_aplmu")]
 
-[node name="LootTable" parent="." unique_id=727939910 instance=ExtResource("11_nhkol")]
+[node name="LootTable" parent="." unique_id=727939910 instance=ExtResource("10_hy2l8")]
 numRolls = 3
 lootTable = Dictionary[int, int]({
 -2: 5,

@@ -1,24 +1,34 @@
-class_name GameManager extends Node ## Controls the game, opens and closes worlds / dungeons / etc.
-# Moves players and other scenes around the tree
+class_name GameManager extends Node ## Controls the game. The "Main" scene of the game
 
-# "ParticleTrasher" Node is where a projectile GPUParticle2D's go while they are expiring, since they can't stay with their already free'd parent
+# "ParticleTrasher" Node is where a projectile GPUParticle2D's go while they are expiring
+	# Needed since if you just free() a particle, they immediately dissapear instead of expiring.
 # "ItemSpawner" Node gets signaled by various things to spawn items in the world (ex. when a mob dies)
 
-
-@export var nexus_tscn: PackedScene ## Scenes
+@export var nexus_tscn: PackedScene
 @export var world_tscn: PackedScene
-@export var player_tscn: PackedScene # TODO: obv this is passed from somewhere else, but for now there isnt mp so just load the one player
+@export var dungeons: Array[PackedScene]
+var mapOffset : Vector2 = Vector2(99999,0) # Offset each added map by this much
+func AddMap(map): $Maps.add_child(map); map.global_position += mapOffset; mapOffset += mapOffset
+
+## Player
+# TODO: for now there isnt multiplayer so just load the one player
+@export var player_tscn: PackedScene 
 @export var mainmenu_tscn: PackedScene
 
-@onready var nexus: WorldBASE = nexus_tscn.instantiate() ## Refs
+## Refs to Stuff
+@onready var nexus: WorldBASE = nexus_tscn.instantiate()
 @onready var world: WorldBASE = world_tscn.instantiate()
 @onready var player: Player = player_tscn.instantiate()
 @onready var mainMenu: MainMenu = mainmenu_tscn.instantiate()
 
 func _ready():
-	add_child(nexus) # put the nexus, world, and player into the scene tree
-	$WorldSlot.add_child(world)
-	world.add_child(player)
+	# Put the Nexus, OpenWorld, and Player into the scene tree
+	AddMap(nexus)
+	AddMap(world)
+	for DG in dungeons: AddMap(DG.instantiate())
+	$Players.add_child(player)
+	
+	# Setup player, but disable controls for now
 	player.death.connect(DeathHandling)
 	player.hide()
 	player.find_child("RMenu").hide()
@@ -38,7 +48,7 @@ func _ready():
 	mainMenu.playPressed.connect(Play)
 	mainMenu.escHandling.connect(ActivatingMainMenu)
 	player.find_child("PlayerCam").InstantMove(mainMenu.global_position)
-	
+
 # signal function when play is pressed that starts player movement
 func Play():
 	LoadData()
@@ -65,18 +75,10 @@ func ActivatingMainMenu():
 
 # Reused initial setup for player
 func InitialSetup():
-	# put the player in the nexus to start
-	#print("Waygates: " + str(nexus.Waygates))
+	# Put the player in the Nexus to start
 	if player.get_parent(): player.get_parent().remove_child(player)
 	nexus.add_child(player)
-	nexus.Waygates[0].setActive(true)
-	player.global_position = nexus.Waygates[0].global_position
-	player.find_child("PlayerCam").InstantMove(player.global_position)
-	player.currWorld = nexus
-	player.ECS.ClearEffects()
-	
-	# quit game function that has a signal added during runtime for Mainmenu quit button handling
-	nexus.Waygates[0].EffectTrigger()
+	nexus.ActiveWaygates[0].UseWaygate(player)
 	
 	## Initial items
 	# Some coins
@@ -178,3 +180,11 @@ func LoadData():
 		player.XPmax = savedData.xp_max
 		player.HP = savedData.current_hp
 		player.MP = savedData.current_mp
+
+## Get all active waygates in all worlds
+func GetActiveWaygates() -> Array[Waygate]:
+	var gates : Array[Waygate] = []
+	for map in $Maps.get_children().filter(func(map): return map.name != "Nexus"):
+		for wg in map.ActiveWaygates:
+			gates.append(wg)
+	return gates

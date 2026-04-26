@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://cq8sges6clqip" path="res://Maps/NPC/Bank/BankTest.tscn" id="8_22jxy"]
 [ext_resource type="PackedScene" uid="uid://bbmy3615xp8ba" path="res://Maps/NPC/DialogueTest.tscn" id="8_cyj7h"]
 [ext_resource type="PackedScene" uid="uid://d1qn6ah5n7134" path="res://Maps/NPC/Shop/ShopTest.tscn" id="9_22jxy"]
-[ext_resource type="PackedScene" uid="uid://cwlq1pkagvxiq" path="res://Entity/Components/Effects/Wet.tscn" id="9_otrks"]
 
 [node name="Nexus" type="TileMapLayer" unique_id=961261896 groups=["World"]]
 z_index = -10
@@ -19,9 +18,12 @@ tile_set = ExtResource("1_yfjvj")
 physics_quadrant_size = 1
 script = ExtResource("2_vtrqu")
 
+[node name="WorldEffects" type="Node2D" parent="." unique_id=242796999]
+
 [node name="Waygates" type="Node2D" parent="." unique_id=1607068241]
 
 [node name="NexusWaygate" parent="Waygates" unique_id=104340103 instance=ExtResource("3_rty01")]
+active = true
 
 [node name="Spawners" type="Node2D" parent="." unique_id=1828511297]
 
@@ -41,7 +43,3 @@ position = Vector2(512, -644)
 
 [node name="BankTest" parent="NPCs" unique_id=18598485 instance=ExtResource("8_22jxy")]
 position = Vector2(1, 831)
-
-[node name="WorldEffects" type="Node2D" parent="." unique_id=242796999]
-
-[node name="Effect_Wet" parent="WorldEffects" unique_id=1148809086 instance=ExtResource("9_otrks")]

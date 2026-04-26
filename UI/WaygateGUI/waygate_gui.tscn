@@ -31,7 +31,7 @@ grow_vertical = 2
 text = "Waygate GUI"
 horizontal_alignment = 1
 
-[node name="NexButton" type="Button" parent="." unique_id=462703087]
+[node name="WGButton" type="Button" parent="." unique_id=462703087]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 1
 anchors_preset = -1
@@ -45,7 +45,7 @@ icon = ExtResource("3_xbl6y")
 icon_alignment = 1
 expand_icon = true
 
-[node name="ButtonText" type="Label" parent="NexButton" unique_id=438722127]
+[node name="ButtonText" type="Label" parent="WGButton" unique_id=438722127]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

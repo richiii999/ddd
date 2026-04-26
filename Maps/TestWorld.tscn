@@ -5,10 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://blyjhm2j5onnb" path="res://Maps/Mechanics/EnemyPackSpawner.tscn" id="4_5iikc"]
 [ext_resource type="PackedScene" uid="uid://tcx34hy287cs" path="res://Maps/Mechanics/Waygate.tscn" id="4_bvj08"]
 [ext_resource type="PackedScene" uid="uid://cd6fjuhanrh2a" path="res://UI/Item/Items/Special/TEST_ITEM.tscn" id="4_mehv6"]
-[ext_resource type="PackedScene" uid="uid://tq8hs5inekce" path="res://Entity/Enemy/Enemies/ChaseZombie.tscn" id="5_473rr"]
-[ext_resource type="PackedScene" uid="uid://57ucfjynaww3" path="res://Maps/Dungeons/TestDungeon/Dungeon.tscn" id="5_n2maq"]
-[ext_resource type="PackedScene" uid="uid://dm6wv0ic4m2so" path="res://Maps/TrainingRoom.tscn" id="5_pgajl"]
-[ext_resource type="PackedScene" uid="uid://dgtlakw8834qa" path="res://Entity/Enemy/Necromancer.tscn" id="9_74rsv"]
+[ext_resource type="PackedScene" uid="uid://dgtlakw8834qa" path="res://Entity/Enemy/Enemies/Necromancer.tscn" id="9_74rsv"]
 
 [node name="Test_World" type="TileMapLayer" unique_id=1473374642]
 z_index = -10
@@ -19,14 +16,16 @@ tile_set = ExtResource("1_wfs0s")
 physics_quadrant_size = 1
 script = ExtResource("2_aam50")
 
+[node name="WorldEffects" type="Node2D" parent="." unique_id=1667008555]
+
 [node name="Waygates" type="Node2D" parent="." unique_id=673112732]
 z_index = 1
 
-[node name="Testworld Beach" parent="Waygates" unique_id=780580875 instance=ExtResource("4_bvj08")]
+[node name="Beach" parent="Waygates" unique_id=780580875 instance=ExtResource("4_bvj08")]
 position = Vector2(128, 128)
 active = true
 
-[node name="Testworld Grass" parent="Waygates" unique_id=1832319352 instance=ExtResource("4_bvj08")]
+[node name="Grass" parent="Waygates" unique_id=1832319352 instance=ExtResource("4_bvj08")]
 position = Vector2(-2944, -1280)
 coinPrice = 2
 itemPrice = ExtResource("4_mehv6")
@@ -36,26 +35,7 @@ z_index = 2
 position = Vector2(88, -240)
 
 [node name="EnemySpawnNode" parent="Spawners" unique_id=775781557 instance=ExtResource("4_5iikc")]
-position = Vector2(-2520, 1200)
-Mob = ExtResource("5_473rr")
+position = Vector2(1192, 1688)
+Mob = ExtResource("9_74rsv")
 maxMobs = 1
 spawnRadius = 0
-
-[node name="Dungeons" type="Node2D" parent="." unique_id=979277306]
-z_index = 3
-
-[node name="test_Dungeon" parent="Dungeons" unique_id=155665991 instance=ExtResource("5_n2maq")]
-z_index = -10
-z_as_relative = false
-position = Vector2(-1500, 3000)
-physics_quadrant_size = 1
-
-[node name="Training_Room" parent="Dungeons" unique_id=1010495984 instance=ExtResource("5_pgajl")]
-z_index = -10
-z_as_relative = false
-position = Vector2(-6000, 2500)
-
-[node name="Necromancer" parent="." unique_id=654557338 instance=ExtResource("9_74rsv")]
-position = Vector2(841, 730)
-
-[node name="WorldEffects" type="Node2D" parent="." unique_id=1667008555]
