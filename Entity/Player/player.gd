@@ -227,7 +227,8 @@ func get_input(): # TODO: replace this with _input() ?
 	## Utility button keys
 	if Input.is_action_just_pressed("HPot"): HPot() # HPot with 'H'
 	if Input.is_action_just_pressed("MPot"): MPot() # MPot with 'G'
-	if Input.is_action_just_pressed("Nexus"): Nexus() # Nex with 'N'
+	if Input.is_action_just_pressed("Nexus"): # TP back to Nexus with 'N'
+		get_node("/root/GameManager/Maps/Nexus/Waygates/NexusWaygate").UseWaygate(self)
 	if Input.is_action_just_pressed("Loot"): Inv.Loot() # Loot with 'Q'
 	
 	## UI Toggles 
@@ -296,15 +297,6 @@ func incHPot(i:int):
 func incMPot(i:int):
 	MPotC += i 
 	$CanvasLayer/RMenu/Utility/MPot_Button.text = str(MPotC) + "/" + str(MPotmax)
-
-func Nexus(): ## Nexus: On press, makes you invincible for a moment then transports you to the nexus
-	print("Nexus!")
-	var nexusWaygate = get_node_or_null("/root/GameManager/Nexus/Waygates/NexusWaygate")
-	if nexusWaygate: nexusWaygate.UseWaygate(self)
-	#Added hp increment can be removed if behavior is unintended
-	#incHP(HPmax)
-	
-
 
 ## XP / Leveling: Called by signals from enemy deaths, quest rewards, and other things
 func GainXP(xp : int = 0):

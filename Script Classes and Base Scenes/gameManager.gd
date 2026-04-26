@@ -76,39 +76,39 @@ func ActivatingMainMenu():
 # Reused initial setup for player
 func InitialSetup():
 	# Put the player in the Nexus to start
-	if player.get_parent(): player.get_parent().remove_child(player)
-	nexus.add_child(player)
+	if not player.get_parent(): $Players.add_child(player)
 	nexus.ActiveWaygates[0].UseWaygate(player)
 	
 	## Initial items
+	var nexOffset = nexus.global_position
 	# Some coins
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.Coin, Vector2(-300, 0))
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.Coin, Vector2(-400, -100))
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.Coin, Vector2(-400, 100))
+	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.Coin, nexOffset + Vector2(-300, 0))
+	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.Coin, nexOffset + Vector2(-400, -100))
+	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.Coin, nexOffset + Vector2(-400, 100))
 	# HPots and MPots
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.HPot, Vector2(-200, 0))
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.HPot, Vector2(-200, 50))
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.HPot, Vector2(-200, 75))
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.HPot, Vector2(-200, 100))
+	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.HPot, nexOffset + Vector2(-200, 0))
+	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.HPot, nexOffset + Vector2(-200, 50))
+	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.HPot, nexOffset + Vector2(-200, 75))
+	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.HPot, nexOffset + Vector2(-200, 100))
 	
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.MPot, Vector2(-175, 0))
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.MPot, Vector2(-175, 25))
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.MPot, Vector2(-175, 50))
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.MPot, Vector2(-175, 75))
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.MPot, Vector2(-175, 100))
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.MPot, Vector2(-175, 125))
+	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.MPot, nexOffset + Vector2(-175, 0))
+	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.MPot, nexOffset + Vector2(-175, 25))
+	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.MPot, nexOffset + Vector2(-175, 50))
+	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.MPot, nexOffset + Vector2(-175, 75))
+	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.MPot, nexOffset + Vector2(-175, 100))
+	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.MPot, nexOffset + Vector2(-175, 125))
 	# 9 items to fill inventory
-	$ItemSpawner.SpawnItemByID(1, Vector2(-600, 0))
-	$ItemSpawner.SpawnItemByID(1, Vector2(-700, 0))
-	$ItemSpawner.SpawnItemByID(1, Vector2(-800, 0))
-	$ItemSpawner.SpawnItemByID(1, Vector2(-600, 100))
-	$ItemSpawner.SpawnItemByID(1, Vector2(-700, 100))
-	$ItemSpawner.SpawnItemByID(1, Vector2(-800, 100))
-	$ItemSpawner.SpawnItemByID(1, Vector2(-600, 200))
-	$ItemSpawner.SpawnItemByID(1, Vector2(-700, 200))
-	$ItemSpawner.SpawnItemByID(1, Vector2(-800, 200))
-	$ItemSpawner.SpawnItemByID(2, Vector2(-500, 200))
-	$ItemSpawner.SpawnItemByID(3, Vector2(-600, 200))
+	$ItemSpawner.SpawnItemByID(1, nexOffset + Vector2(-600, 0))
+	$ItemSpawner.SpawnItemByID(1, nexOffset + Vector2(-700, 0))
+	$ItemSpawner.SpawnItemByID(1, nexOffset + Vector2(-800, 0))
+	$ItemSpawner.SpawnItemByID(1, nexOffset + Vector2(-600, 100))
+	$ItemSpawner.SpawnItemByID(1, nexOffset + Vector2(-700, 100))
+	$ItemSpawner.SpawnItemByID(1, nexOffset + Vector2(-800, 100))
+	$ItemSpawner.SpawnItemByID(1, nexOffset + Vector2(-600, 200))
+	$ItemSpawner.SpawnItemByID(1, nexOffset + Vector2(-700, 200))
+	$ItemSpawner.SpawnItemByID(1, nexOffset + Vector2(-800, 200))
+	$ItemSpawner.SpawnItemByID(2, nexOffset + Vector2(-500, 200))
+	$ItemSpawner.SpawnItemByID(3, nexOffset + Vector2(-600, 200))
 	
 func quitGame():
 	print("manager: quitting game")
@@ -122,11 +122,9 @@ func DeathHandling():
 	#pause the game
 	get_tree().set_pause(false)
 	#basically delete the player node and the information for the player
-	if player.get_parent(): player.get_parent().remove_child(player)
 	player.queue_free()
 	#make a new instance of the player and add that to the world, then show the player to the world
 	player = player_tscn.instantiate()
-	nexus.add_child(player)
 	player.death.connect(DeathHandling)
 	player.show()
 	player.InputStatus = true
