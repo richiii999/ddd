@@ -56,7 +56,7 @@ func _make_proj(dir: float, opts: Dictionary) -> Projectile:
 func _spawn_proj(dir: float, opts: Dictionary) -> void:
 	var proj := _make_proj(dir, opts)
 	if proj == null: return
-	get_parent().add_child(proj)
+	get_node("/root/GameManager/Projectiles").add_child(proj)
 	proj.global_position = global_position
 	
 	

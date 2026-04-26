@@ -27,3 +27,5 @@ position = Vector2(30000, 0)
 [node name="ParticleTrasher" type="Node" parent="." unique_id=407857117]
 
 [node name="ItemSpawner" parent="." unique_id=1318176200 instance=ExtResource("5_8vor3")]
+
+[node name="Projectiles" type="Node2D" parent="." unique_id=2123273897]
