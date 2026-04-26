@@ -4,5 +4,6 @@
 
 [node name="DamageNumber" type="Label" unique_id=413550020]
 self_modulate = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
 text = "XXX"
 script = ExtResource("1_ovwdx")
