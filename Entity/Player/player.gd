@@ -27,7 +27,6 @@ var HPotmax : int = 5 # Max Potions you can carry
 var MPotmax : int = 10
 var HPotC   : int = 3 # Current Potion count
 var MPotC   : int = 5
-var potionFactor : float = 1.00 # Multiplier to potion effects
 
 ## XP
 var Level : int = 1   # maxes out at 25
@@ -278,18 +277,17 @@ func WepPower() -> int:
 	return 0
 
 ## Consumables
-# TODO: UI flash red the MPot button (& healthpot aswell)
 func HPot(): # Health Potion: Called when press 'H' to restore HP
 	if !HPotC: $Status.addStatusText("Out of Health pots!", "GOLD") # First, if you are out of pots, fail and show UI
 	else: # Use a HPot
 		incHPot(-1)
-		incHP((int)(60 * potionFactor))
+		incHP((int)(HPmax * 0.3))
 		$Status.addStatusText("Used health potion", "RED") # Show status text
 func MPot(): # Mana Potion: Called when press 'G' to restore MP
 	if !MPotC: $Status.addStatusText("Out of Mana pots!", "GOLD") # First, if you are out of pots, fail and show UI
 	else: # Use a MPot
 		incMPot(-1)
-		incMP((int)(100 * potionFactor))
+		incMP((int)(MPmax * 0.6))
 		$Status.addStatusText("Used mana potion", "BLUE") # Show status text
 func incHPot(i:int):
 	HPotC += i 
@@ -300,18 +298,16 @@ func incMPot(i:int):
 
 ## XP / Leveling: Called by signals from enemy deaths, quest rewards, and other things
 func GainXP(xp : int = 0):
-	# Statistics
-	
-	# XP & leveling
 	XP += xp
 	$Status.addStatusText( ("XP: " + str(xp)), "GREEN")
 	if(Level < 25): $CanvasLayer/RMenu/XP_Bar.value = XP 
 	else: $CanvasLayer/RMenu/Fame_Bar.value = XP
-	while (XP >= XPmax): LevelUp() # "While" instead of "if" for rare cases where you level up more than once in a tick
+	while (XP >= XPmax): LevelUp() # "While" for rare cases where you level up more than once
+
 func LevelUp(): 
 	if (Level < 25): # If not maxed yet
 		Level += 1; $Status.addStatusText( ("Level " + str(Level) + "!"), "ORANGE")
-		XP -= XPmax; XPmax = (int)(XPmax * XPScaleFactor) # WARNING: Narrowing conversion ( int *= float ) (3 instances of this in this func)
+		XP -= XPmax; XPmax = (int)(XPmax * XPScaleFactor) # WARNING: Narrowing conversion
 		$CanvasLayer/RMenu/XP_Bar.max_value = XPmax
 		$CanvasLayer/RMenu/XP_Bar.value = XP
 		
@@ -322,7 +318,7 @@ func LevelUp():
 		$CanvasLayer/SkillsUI/SkillPointsText/SkillPointsCount.text = str(skillPoints)
 		
 		## Switch(level): unlock things at certain levels
-		if (Level == 25): # At L25 (max level), adjust scale and switch to fame mechanics
+		if (Level == 25): # Atmax level, adjust scale and switch to fame mechanics
 			XPmax = (int)(XPmax * 0.60)
 			$CanvasLayer/RMenu/Fame_Bar.max_value = XPmax
 			$CanvasLayer/RMenu/Fame_Bar.value = XP
@@ -357,8 +353,8 @@ func UpdateStats(increase: bool, stats: Dictionary) -> void:
 	#print("GEAR STATS:", gearStats)
 	#print("FINAL SPD:", getStats(Stats.SPD))
 	
-## Transitional stuff: Used when the player is teleporting, loading into the world, or otherwise changing in a way that they must wait for
-func toggleBubble(state:bool) -> void: # Makes player invulnerable, disables input, and puts a bubble around player
+## Transitional stuff: Player is teleporting, loading into the world, or otherwise waiting
+func toggleBubble(state:bool) -> void: # Makes player invulnerable, disables input, bubble around player
 	velocity = Vector2.ZERO
 	setInput(!state)
 	setInvulnerable(state)
