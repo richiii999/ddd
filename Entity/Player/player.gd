@@ -341,13 +341,21 @@ func LevelUp():
 	incHP(HPmax)
 	incMP(MPmax)
 
+#updates the projectile stats
+func UpdateProjStats(): 
+	projSpeed  = 300 + coreStats.get(Stats.AGI, 0) * 2
+	mainStat   = 10  + coreStats.get(Stats.STR, 0) / 10
+	piercing   = 1   + coreStats.get(Stats.DEX, 0) / 20
+	kBstrength1 = 150.0 + coreStats.get(Stats.STR, 0) * 2
+
 #TODO: update this function to take in an item rather than bool, type, sourcestats since item has all of that garbagio
 func UpdateStats(increase: bool, stats: Dictionary) -> void:
 	if increase: #if its a stat increase, increase the stat
 		applyStats(gearStats, stats)
 	else:
 		applyStats(gearStats, stats, -1)
-
+	
+	UpdateProjStats() #recalculate proj stats after any gear change
 	#print("GEAR STATS:", gearStats)
 	#print("FINAL SPD:", getStats(Stats.SPD))
 	
