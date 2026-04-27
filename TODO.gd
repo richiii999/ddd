@@ -18,6 +18,9 @@
 # Level bar doesn't change at the fame threshold, so it's only the level bar (only when loading a saved player)
 # Need to save the bank and skill tree information
 
+# ItemPrice for buying waygates broken
+# Boss cant get effects
+
 
 ## Main Menu - Initial Version Done: Needs more
 # Splash screen / intro on game launch, specifically a custom Godot Editor splash (cool version)

@@ -14,9 +14,8 @@ func _ready():
 		var slot = invSlot.instantiate()
 		$ShopGUI/GridContainer.add_child(slot)
 		
-		# TODO Price and label
-		#var itemLabel = 
-		#var priceLabel
+		# TODO Price
+		# var priceLabel
 		
 		slot.slotNumber = i
 		slot.slotClicked.connect(BuyItem) # SlotN is emitted with this signal

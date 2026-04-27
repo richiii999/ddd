@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://dk75vwl8p2eck" path="res://Entity/Enemy/enemy.gd" id="1_k51ts"]
 [ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="2_4h0c1"]
+[ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_e2618"]
 [ext_resource type="Texture2D" uid="uid://di6ytqcvdio6g" path="res://Assets/Sprites/GD Icons/GodotIconAtlas.png" id="3_e2618"]
+[ext_resource type="PackedScene" uid="uid://b7jer77opiti2" path="res://Entity/Components/Effects/Burn.tscn" id="3_eqluo"]
 [ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/smartArea.gd" id="4_eqluo"]
 [ext_resource type="PackedScene" uid="uid://dfcui8l7w2j3m" path="res://Entity/Components/BehaviorFSM.tscn" id="5_j4rks"]
 [ext_resource type="PackedScene" uid="uid://byp1r1vlopabi" path="res://Entity/Components/Behaviors/Boss/Boss1.tscn" id="6_6sh2x"]
@@ -42,6 +44,8 @@ collision_layer = 256
 collision_mask = 267
 motion_mode = 1
 script = ExtResource("1_k51ts")
+projs = Array[PackedScene]([ExtResource("2_e2618"), null, null])
+effects = Array[PackedScene]([ExtResource("3_eqluo"), null, null])
 kBResistance = 1.0
 HPmax = 500
 

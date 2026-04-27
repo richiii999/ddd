@@ -79,7 +79,7 @@ func AreaCollide(area : Area2D) -> void: ## Entity collide
 		damage.connect(entity.Knockback, 4)
 		damage.emit(global_position, knockback)
 		
-		if effect and entity.ECS: entity.AddEffect(effect)
+		if effect and entity.ECS: entity.ECS.AddEffect(effect)
 		
 		piercing -= 1
 		if(piercing): return # break early to prevent destruct

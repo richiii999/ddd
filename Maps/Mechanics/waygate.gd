@@ -32,7 +32,7 @@ func WaygateInteract(P:Player):
 	currPlayer = P # Player interacted with waygate
 	
 	if !active: # Inactive, try to purchase
-		if itemPrice and P.Inv.HasItemName(itemPriceItem.itemName) == -1: # itemName since ID is 0
+		if itemPrice and P.Inv.HasItemName(itemPriceItem) == -1: # itemName since ID is 0
 			P.StatusLabel.addStatusText("Missing Item: " + str(itemPriceItem.name), "RED")
 		elif P.coins < coinPrice:
 			P.StatusLabel.addStatusText("Need " + str(coinPrice) + " Coins", "RED")
