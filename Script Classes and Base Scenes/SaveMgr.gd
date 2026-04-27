@@ -61,7 +61,6 @@ func SaveGame(P:Player, B:Bank) -> void:
 ## NOTE: Load functions split in two, to make it easier
 
 ## Read bankData from a file, returns array of itemIDs
-# 90% copy-pasted from the godot docs
 # Returns [] if nothing found
 func LoadBank() -> Array[int]:
 	print("Loading bank data from " + str(bankFilePath))
@@ -82,6 +81,7 @@ func LoadPlayer() -> Dictionary:
 	return ReadFile(playerFilePath)
 
 ## Read a json file into a Dict
+# 90% copy-pasted from the godot docs
 func ReadFile(filePath:String) -> Dictionary:
 	if not FileAccess.file_exists(filePath):
 		push_warning("File not found on disk: " + filePath)
