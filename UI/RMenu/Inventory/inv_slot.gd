@@ -10,12 +10,13 @@ func _ready(): UpdateSlot()
 
 # Changes the item (Called by the inventory)
 func UpdateSlot(newItem:Item = null, setName:bool=false) -> void: 
-	item = newItem
-	if newItem:
+	if newItem != null:
+		item = newItem.duplicate() # Internal state = item properties
 		$Display_Sprite.texture = newItem.texture
 		$BorderSprite.self_modulate = rarityColors[newItem.tier]
 		$ItemName.text = String(item.name) if setName else ""
 	else:
+		item = null
 		$Display_Sprite.texture = null
 		$BorderSprite.self_modulate = Color.TRANSPARENT
 		$ItemName.text = ""

@@ -76,11 +76,11 @@ func getStats(stat : int) -> int:
 
 func getEquippedAttack(index : int) -> AttackData:
 	#check to make sure the inventory node is not null
-	if Inv == null or Inv.Inv == null:
+	if Inv == null:
 		return null
 		
-	var main = Inv.Inv[Inv.Slot.MAINHAND]
-	var off = Inv.Inv[Inv.Slot.OFFHAND]
+	var main = Inv.ItemInSlot(Inv.Slot.MAINHAND)
+	var off = Inv.ItemInSlot(Inv.Slot.OFFHAND)
 	
 	#check if the projectiles exist and left click is pressed, then return
 	if index == 0 and main:

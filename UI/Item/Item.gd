@@ -1,7 +1,7 @@
 class_name Item extends Sprite2D ## Item stats and info
 
 @export var price : int = 1 # Price to buy this item from a shop
-var ID : int = 0 # Set by ItemSpawner when items are created
+@export var ID : int = 0 # Set by ItemSpawner when items are created
 
 # Item rarity, gives border color
 @export_enum("Common", "Uncommon", "Rare", "Epic", "Quest") var tier : int = 0 
