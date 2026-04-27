@@ -3,7 +3,6 @@ class_name EffectBASE extends GPUParticles2D ## BASE class for effects, effects 
 
 @onready var entity:ENTITY = Tools.FindParentByType(self, ENTITY) # Which Entity to apply effects?
 
-@export var icon     : Resource = null  # What is the effect's icon?
 @export var color    : String = "WHITE" # Color of status text / entity color change (as a string)
 @export var efname   : String = "BASE"  # Reapplications of the same effect adds to timer 
 # NOTE: "efname" since "name" is a reserved word
