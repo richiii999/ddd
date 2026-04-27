@@ -157,8 +157,12 @@ func LoadData(P:Player, B:Bank):
 	print("Loaded playerData: " + str(playerData))
 	if playerData != {}:
 		# Progress
-		P.Fame = playerData.Fame
-		P.Level = playerData.Level
+		while playerData.Level > 1: 
+			P.LevelUp()
+			playerData.Level -= 1
+		while playerData.Fame > 0: 
+			P.LevelUp()
+			playerData.Fame -= 1
 		P.XP = playerData.XP
 		# Consumables
 		P.HPotC = playerData.HPotC
@@ -166,22 +170,22 @@ func LoadData(P:Player, B:Bank):
 		P.coins = playerData.Coins
 		# Items: Store the ID only, when loading the ID can be used to spawn them in again
 		# Gear
-		P.Inv.PutItemInSlot(P.Inv.Slot.HELM, $ItemSpawner.ItemByID(playerData.Helm))
-		P.Inv.PutItemInSlot(P.Inv.Slot.CHEST, $ItemSpawner.ItemByID(playerData.Chest))
-		P.Inv.PutItemInSlot(P.Inv.Slot.MAINHAND, $ItemSpawner.ItemByID(playerData.Main))
-		P.Inv.PutItemInSlot(P.Inv.Slot.OFFHAND, $ItemSpawner.ItemByID(playerData.Off))
-		P.Inv.PutItemInSlot(P.Inv.Slot.RING1, $ItemSpawner.ItemByID(playerData.Ring1))
-		P.Inv.PutItemInSlot(P.Inv.Slot.RING2, $ItemSpawner.ItemByID(playerData.Ring2))
+		if playerData.Helm  > 0: P.Inv.PutItemInSlot(P.Inv.Slot.HELM,     $ItemSpawner.ItemByID(playerData.Helm))
+		if playerData.Chest > 0: P.Inv.PutItemInSlot(P.Inv.Slot.CHEST,    $ItemSpawner.ItemByID(playerData.Chest))
+		if playerData.Main  > 0: P.Inv.PutItemInSlot(P.Inv.Slot.MAINHAND, $ItemSpawner.ItemByID(playerData.Main))
+		if playerData.Off   > 0: P.Inv.PutItemInSlot(P.Inv.Slot.OFFHAND,  $ItemSpawner.ItemByID(playerData.Off))
+		if playerData.Ring1 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.RING1,    $ItemSpawner.ItemByID(playerData.Ring1))
+		if playerData.Ring2 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.RING2,    $ItemSpawner.ItemByID(playerData.Ring2))
 		# Inventory
-		P.Inv.PutItemInSlot(P.Inv.Slot.INV0, $ItemSpawner.ItemByID(playerData.Inv0))
-		P.Inv.PutItemInSlot(P.Inv.Slot.INV1, $ItemSpawner.ItemByID(playerData.Inv1))
-		P.Inv.PutItemInSlot(P.Inv.Slot.INV2, $ItemSpawner.ItemByID(playerData.Inv2))
-		P.Inv.PutItemInSlot(P.Inv.Slot.INV3, $ItemSpawner.ItemByID(playerData.Inv3))
-		P.Inv.PutItemInSlot(P.Inv.Slot.INV4, $ItemSpawner.ItemByID(playerData.Inv4))
-		P.Inv.PutItemInSlot(P.Inv.Slot.INV5, $ItemSpawner.ItemByID(playerData.Inv5))
-		P.Inv.PutItemInSlot(P.Inv.Slot.INV6, $ItemSpawner.ItemByID(playerData.Inv6))
-		P.Inv.PutItemInSlot(P.Inv.Slot.INV7, $ItemSpawner.ItemByID(playerData.Inv7))
-		P.Inv.PutItemInSlot(P.Inv.Slot.INV8, $ItemSpawner.ItemByID(playerData.Inv8))
+		if playerData.Inv0 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV0, $ItemSpawner.ItemByID(playerData.Inv0))
+		if playerData.Inv1 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV1, $ItemSpawner.ItemByID(playerData.Inv1))
+		if playerData.Inv2 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV2, $ItemSpawner.ItemByID(playerData.Inv2))
+		if playerData.Inv3 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV3, $ItemSpawner.ItemByID(playerData.Inv3))
+		if playerData.Inv4 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV4, $ItemSpawner.ItemByID(playerData.Inv4))
+		if playerData.Inv5 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV5, $ItemSpawner.ItemByID(playerData.Inv5))
+		if playerData.Inv6 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV6, $ItemSpawner.ItemByID(playerData.Inv6))
+		if playerData.Inv7 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV7, $ItemSpawner.ItemByID(playerData.Inv7))
+		if playerData.Inv8 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV8, $ItemSpawner.ItemByID(playerData.Inv8))
 
 ## Get all active waygates in all worlds
 func GetActiveWaygates() -> Array[Waygate]:
