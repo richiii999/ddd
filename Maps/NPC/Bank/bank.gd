@@ -1,7 +1,6 @@
 class_name Bank extends Node ## Bank: Players can store items that persist through death.
 
 var currPlayer = null # Ref to player (set when u open the bank)
-@export var items : Array[PackedScene] # Put item scenes in editor
 
 @export var bankSlots : int = 8 # How many bankslots?
 
@@ -16,7 +15,6 @@ func _ready():
 		
 		slot.slotNumber = i
 		slot.slotClicked.connect(BankSwap) # SlotN is emitted with this signal
-		if i < len(items) - 1: slot.UpdateSlot(items[i].instantiate(), true) # Add item to slot (if present)
 
 # Dialogue text is visible for a few seconds then goes away automatically
 func ToggleBankGUI(player):

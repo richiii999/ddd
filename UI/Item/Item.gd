@@ -9,7 +9,8 @@ var ID : int = 0 # Set by ItemSpawner when items are created
 @export_enum("Common", "Uncommon", "Rare", "Epic", "Quest") var tier : int = 0 
 
 enum Types {INV, HELM, CHEST, RING, MAINHAND, OFFHAND, UNDROPPABLE}
-@export var type : int = -1 # -1=unset, should be one of ^
+@export_enum("Item", "Helm", "Chest", "Ring", "Mainhand", "Offhand", "Undroppable") var type : int = -1 
+# -1=unset, should be one of ^
 
 ## Stats: Adds Player's gear stats
 @warning_ignore("int_as_enum_without_cast")
@@ -21,4 +22,5 @@ enum Types {INV, HELM, CHEST, RING, MAINHAND, OFFHAND, UNDROPPABLE}
 
 func _ready(): 
 	scale = Vector2(0.5,0.5) # Items are small
+	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST # fix blurry pixelart
 	if itemName == "": push_warning("ItemName not set! " + str(self))

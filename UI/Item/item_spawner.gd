@@ -17,7 +17,26 @@ var items : Array[Resource] = [ # Index of this array == "itemID" used throughou
 	load("res://UI/Item/Items/Special/TEST_ITEM.tscn"), # NOTE: Present in both arrays at index 0
 	load("res://UI/Item/Items/test_chestplate.tscn"),
 	load("res://UI/Item/Items/TEST_ITEM2.tscn"),
-	load("res://UI/Item/Items/TEST_ITEM3.tscn")
+	load("res://UI/Item/Items/TEST_ITEM3.tscn"), # 3
+	
+	# MC Test items
+	load("res://UI/Item/Items/MCTest/T1_Chest.tscn"),
+	load("res://UI/Item/Items/MCTest/T1_Helm.tscn"), # 5
+	load("res://UI/Item/Items/MCTest/T1_Offhand.tscn"),
+	load("res://UI/Item/Items/MCTest/T1_Sword.tscn"),
+	load("res://UI/Item/Items/MCTest/T2_Chest.tscn"),
+	load("res://UI/Item/Items/MCTest/T2_Helm.tscn"),
+	load("res://UI/Item/Items/MCTest/T2_Offhand.tscn"), # 10
+	load("res://UI/Item/Items/MCTest/T2_Sword.tscn"),
+	load("res://UI/Item/Items/MCTest/T3_Chest.tscn"),
+	load("res://UI/Item/Items/MCTest/T3_Helm.tscn"),
+	load("res://UI/Item/Items/MCTest/T3_Offhand.tscn"),
+	load("res://UI/Item/Items/MCTest/T3_Sword.tscn"), # 15
+	load("res://UI/Item/Items/MCTest/T4_Chest.tscn"),
+	load("res://UI/Item/Items/MCTest/T4_Helm.tscn"),
+	load("res://UI/Item/Items/MCTest/T4_Offhand.tscn"),
+	load("res://UI/Item/Items/MCTest/T4_Sword.tscn"),
+	load("res://UI/Item/Items/MCTest/TX_Diamond.tscn") # 20
 ]
 
 func SpawnItemByID(itemID : int, pos : Vector2): # Spawns items[itemID] at Pos(X,Y)

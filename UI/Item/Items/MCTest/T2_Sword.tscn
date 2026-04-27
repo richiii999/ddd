@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://de4fxcifqqu2k"]
+
+[ext_resource type="Texture2D" uid="uid://bw864s2ehu68b" path="res://Assets/References/Minecraft/Invicon_Iron_Sword.png" id="1_h268r"]
+[ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_8q3j7"]
+[ext_resource type="Resource" uid="uid://6uxfkrkyiuvg" path="res://Entity/Projectile/Attack/attack_test2.tres" id="3_f1bv6"]
+
+[node name="TestItem" type="Sprite2D" unique_id=398207244]
+texture = ExtResource("1_h268r")
+script = ExtResource("2_8q3j7")
+itemName = "T1_Helm"
+type = 1
+stats = Dictionary[int, int]({
+0: 5,
+1: 5,
+2: 5,
+3: 3,
+4: 3,
+5: 3,
+6: 1,
+7: 1,
+8: 99
+})
+attack = ExtResource("3_f1bv6")
+metadata/_custom_type_script = "uid://dpbuam0tpmaha"
