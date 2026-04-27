@@ -69,24 +69,33 @@ func LoadBank() -> Array[int]:
 		SaveToFile({}, bankFilePath)
 		print("You got robbed LMAO")
 	
-	if not FileAccess.file_exists(bankFilePath):
-		push_warning("BankData not found on disk")
-		return []
+	var bankFile = ReadFile(bankFilePath)
+	
+	var bankData : Array[int] = [] # Append IDs to bankData (including slots with ID=0, they are just empty)
+	for slot in bankFile: bankData.append(bankFile[slot])
+	
+	return bankData
+
+## Read playerData from a file, returns giant dict (See PlayerData())
+func LoadPlayer() -> Dictionary:
+	print("Loading player data from " + str(playerFilePath))
+	return ReadFile(playerFilePath)
+
+## Read a json file into a Dict
+func ReadFile(filePath:String) -> Dictionary:
+	if not FileAccess.file_exists(filePath):
+		push_warning("File not found on disk: " + filePath)
+		return {}
 	
 	# Open the file
-	var bankFile = FileAccess.open(bankFilePath, FileAccess.READ)
+	var file = FileAccess.open(filePath, FileAccess.READ)
 	
 	# Creates the helper class to interact with JSON.
 	var json = JSON.new()
-	while bankFile.get_position() < bankFile.get_length():
-		var json_string = bankFile.get_line()
+	while file.get_position() < file.get_length():
+		var json_string = file.get_line()
 		
-		# Check if there is any error while parsing the JSON string, skip in case of failure.
-		if not json.parse(json_string) == OK:
+		if not json.parse(json_string) == OK: # Error checking
 			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
-			continue
 	
-	var bankData : Array[int] = [] # Append IDs to bankData (including slots with ID=0, they are just empty)
-	for slot in json.data: bankData.append(json.data[slot])
-	
-	return bankData
+	return json.data

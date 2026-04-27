@@ -29,7 +29,12 @@ func ItemIDInSlot(slotN:int) -> int:
 	else: return 0
 
 ## Put item in slotN
-func PutItemInSlot(slotN:int, item:Item): $BankGUI/GridContainer.get_child(slotN).UpdateSlot(item, true)
+func PutItemInSlot(slotN:int, item:Item): 
+	if $BankGUI/GridContainer.get_child(slotN) == null: 
+		push_error("IndexOOB on BankSlot")
+		return
+	
+	$BankGUI/GridContainer.get_child(slotN).UpdateSlot(item, true)
 
 func BankSwap(bankSlotN:int):
 	if bankSlotN > $BankGUI/GridContainer.get_child_count() - 1: push_error("IndexOOB on bank slot"); return

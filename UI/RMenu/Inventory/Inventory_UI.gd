@@ -42,19 +42,17 @@ func _ready():
 	for i in len(Slots):
 		Slots[i].slotNumber = i # Assign slotNumber
 		Slots[i].slotClicked.connect(SlotClick) # Connect the slot's signal
-	
-	# TODO: remove this
-	# Default inventory, debug items
-	var testItem = load("res://UI/Item/Items/Special/TEST_ITEM.tscn").instantiate()
-	# Deferred since player isnt ready() yet
-	call_deferred("PutItemInSlot", 8, testItem)
-	call_deferred("PutItemInSlot", 12, testItem)
-	call_deferred("PutItemInSlot", 16, testItem)
-
 
 func _process(_delta): 
 	if ItemInSlot(Slot.MOUSE): # Move the mouse slot to the mouse
 		$MouseSlot.position = Tools.VecSub(get_global_mouse_position(), MouseOffset)
+
+## Initialize stats from a fresh inventory
+# NOTE: This should only be called after loading inventory from a save, otherwise it may dupe stats
+func InitStats() -> void:
+	for slotN in range(Slot.HELM, Slot.INV0): # Gear slots
+		if ItemInSlot(slotN) != null:
+			UpdateInvStats.emit(true, ItemInSlot(slotN).stats)
 
 func ValidateSlot(SlotN : int, item : Item) -> bool:
 	return ( 
@@ -85,13 +83,13 @@ func SlotClick(SlotA:Slot, SlotB:Slot = Slot.MOUSE) -> void:
 	# Remove ground items (e.g. after dropping an item), prevent duplication
 	PutItemInSlot(Slot.GROUND, null) 
 	
-	# Update player stats if changing a gear slot (0's if no item)
+	# Update player stats if changing a gear slot
 	if SlotA in range(Slot.HELM, Slot.INV1):
 	# REMOVE old item
-		if ItemInSlot(SlotB):
+		if ItemInSlot(SlotB) != null:
 			UpdateInvStats.emit(false, ItemInSlot(SlotB).stats)
 	# ADD new item
-		if ItemInSlot(SlotA):
+		if ItemInSlot(SlotA) != null:
 			UpdateInvStats.emit(true, ItemInSlot(SlotA).stats)
 
 ## Returns first empty inventory slot [8-16] or -1 if full

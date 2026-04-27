@@ -53,7 +53,7 @@ func _ready():
 
 # signal function when play is pressed that starts player movement
 func Play():
-	LoadData()
+	LoadData(player, nexus.find_child("Bank"))
 	InitialSetup()
 	player.show()
 	player.InputStatus = true
@@ -146,31 +146,42 @@ func DeathHandling():
 	InitialSetup()
 
 ## Load player and bank data
-func LoadData():
+func LoadData(P:Player, B:Bank):
 	var bankData = Save.LoadBank()
-	print("AAAAA Loaded bankdata: " +str(bankData))
+	print("Loaded bankdata: " +str(bankData))
 	for i in range(len(bankData)): 
 		if bankData[i] == 0: continue
-		nexus.find_child("Bank").PutItemInSlot(i, $ItemSpawner.ItemByID(bankData[i]))
+		B.PutItemInSlot(i, $ItemSpawner.ItemByID(bankData[i]))
 		
-	
-	#if savedData != null:
-		#print("DataLoaded")
-		#player.HPmax = savedData.max_player_health
-		#player.MPmax = savedData.max_player_mp
-		#player.coreStats = savedData.core_Stats
-		#player.coins = savedData.coins
-		#player.Fame = savedData.fame
-		#player.HPotC = savedData.hp_pot_current
-		#player.HPotmax = savedData.hp_pot_max
-		#player.Level = savedData.level
-		#player.MPotC = savedData.mp_pot_current
-		#player.MPotmax = savedData.mp_pot_max
-		#player.skillPoints = savedData.skill_points
-		#player.XP  = savedData.xp_current
-		#player.XPmax = savedData.xp_max
-		#player.HP = savedData.current_hp
-		#player.MP = savedData.current_mp
+	var playerData = Save.LoadPlayer()
+	print("Loaded playerData: " + str(playerData))
+	if playerData != {}:
+		# Progress
+		P.Fame = playerData.Fame
+		P.Level = playerData.Level
+		P.XP = playerData.XP
+		# Consumables
+		P.HPotC = playerData.HPotC
+		P.MPotC = playerData.MPotC
+		P.coins = playerData.Coins
+		# Items: Store the ID only, when loading the ID can be used to spawn them in again
+		# Gear
+		P.Inv.PutItemInSlot(P.Inv.Slot.HELM, $ItemSpawner.ItemByID(playerData.Helm))
+		P.Inv.PutItemInSlot(P.Inv.Slot.CHEST, $ItemSpawner.ItemByID(playerData.Chest))
+		P.Inv.PutItemInSlot(P.Inv.Slot.MAINHAND, $ItemSpawner.ItemByID(playerData.Main))
+		P.Inv.PutItemInSlot(P.Inv.Slot.OFFHAND, $ItemSpawner.ItemByID(playerData.Off))
+		P.Inv.PutItemInSlot(P.Inv.Slot.RING1, $ItemSpawner.ItemByID(playerData.Ring1))
+		P.Inv.PutItemInSlot(P.Inv.Slot.RING2, $ItemSpawner.ItemByID(playerData.Ring2))
+		# Inventory
+		P.Inv.PutItemInSlot(P.Inv.Slot.INV0, $ItemSpawner.ItemByID(playerData.Inv0))
+		P.Inv.PutItemInSlot(P.Inv.Slot.INV1, $ItemSpawner.ItemByID(playerData.Inv1))
+		P.Inv.PutItemInSlot(P.Inv.Slot.INV2, $ItemSpawner.ItemByID(playerData.Inv2))
+		P.Inv.PutItemInSlot(P.Inv.Slot.INV3, $ItemSpawner.ItemByID(playerData.Inv3))
+		P.Inv.PutItemInSlot(P.Inv.Slot.INV4, $ItemSpawner.ItemByID(playerData.Inv4))
+		P.Inv.PutItemInSlot(P.Inv.Slot.INV5, $ItemSpawner.ItemByID(playerData.Inv5))
+		P.Inv.PutItemInSlot(P.Inv.Slot.INV6, $ItemSpawner.ItemByID(playerData.Inv6))
+		P.Inv.PutItemInSlot(P.Inv.Slot.INV7, $ItemSpawner.ItemByID(playerData.Inv7))
+		P.Inv.PutItemInSlot(P.Inv.Slot.INV8, $ItemSpawner.ItemByID(playerData.Inv8))
 
 ## Get all active waygates in all worlds
 func GetActiveWaygates() -> Array[Waygate]:
