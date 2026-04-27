@@ -30,6 +30,7 @@ func onSkillUpdate(newSkill) -> void:
 	player.skillPoints -= 1
 	$SkillPointsText/SkillPointsCount.text = str(player.skillPoints)
 	for stat in newSkill.stats: player.coreStats[stat] += newSkill.stats[stat]
+	player.UpdateProjStats() #recalculate proj stats after skill purchase
 	#check to see if the class is open to the player, otherwise lock it
 	if newSkill.class_id != "" and chosen_class == "":
 		chosen_class = newSkill.class_id
