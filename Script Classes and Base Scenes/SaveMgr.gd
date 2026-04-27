@@ -51,37 +51,42 @@ func SaveToFile(data:Dictionary, filePath:String) -> void:
 	FileAccess.open(filePath, FileAccess.WRITE).store_line(JSON.stringify(data))
 
 ## Saves the given player & bank information to separate files
+# Linux: ~/.local/share/godot/app_userdata/DotDD/
+# Windows: TODO: somebody put the windows location here
 func SaveGame(P:Player, B:Bank) -> void:
-	print("Saving game...")
-	var PD = PlayerData(P)
-	var BD = BankData(B)
-	
-	SaveToFile(PD, playerFilePath)
-	SaveToFile(BD, bankFilePath)
+	print("Saving game to " + str(OS.get_data_dir()))
+	SaveToFile(PlayerData(P), playerFilePath)
+	SaveToFile(BankData(B), bankFilePath)
 
 ## NOTE: Load functions split in two, to make it easier
-# Loading funcs return {} if no file found
 
 ## Read bankData from a file, returns array of itemIDs
 # 90% copy-pasted from the godot docs
+# Returns [] if nothing found
 func LoadBank() -> Array[int]:
+	print("Loading bank data from " + str(bankFilePath))
+	if randi() % 10000 == 1: # RNG delete entire bank
+		SaveToFile({}, bankFilePath)
+		print("You got robbed LMAO")
+	
 	if not FileAccess.file_exists(bankFilePath):
 		push_warning("BankData not found on disk")
 		return []
 	
+	# Open the file
 	var bankFile = FileAccess.open(bankFilePath, FileAccess.READ)
+	
+	# Creates the helper class to interact with JSON.
+	var json = JSON.new()
 	while bankFile.get_position() < bankFile.get_length():
 		var json_string = bankFile.get_line()
 		
-		# Creates the helper class to interact with JSON.
-		var json = JSON.new()
-		
 		# Check if there is any error while parsing the JSON string, skip in case of failure.
-		var parse_result = json.parse(json_string)
-		if not parse_result == OK:
+		if not json.parse(json_string) == OK:
 			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
 			continue
-		
-		print(json.data)
 	
-	return []
+	var bankData : Array[int] = [] # Append IDs to bankData (including slots with ID=0, they are just empty)
+	for slot in json.data: bankData.append(json.data[slot])
+	
+	return bankData
