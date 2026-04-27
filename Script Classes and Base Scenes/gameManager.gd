@@ -157,10 +157,10 @@ func LoadData(P:Player, B:Bank):
 	print("Loaded playerData: " + str(playerData))
 	if playerData != {}:
 		# Progress
-		while playerData.Level > 1: 
+		while playerData.Level > 1: # Level starts from 1
 			P.LevelUp()
 			playerData.Level -= 1
-		while playerData.Fame > 0: 
+		while playerData.Fame > 0: # Fame starts from 0
 			P.LevelUp()
 			playerData.Fame -= 1
 		P.XP = playerData.XP
