@@ -9,15 +9,16 @@ var rarityColors : Array[Color] = [Color.WHITE, Color.GREEN, Color.BLUE, Color.P
 func _ready(): UpdateSlot()
 
 # Changes the item (Called by the inventory)
-func UpdateSlot(newItem:Item = null) -> void: 
+func UpdateSlot(newItem:Item = null, setName:bool=false) -> void: 
 	item = newItem
 	if newItem:
 		$Display_Sprite.texture = newItem.texture
 		$BorderSprite.self_modulate = rarityColors[newItem.tier]
+		$ItemName.text = String(item.name) if setName else ""
 	else:
 		$Display_Sprite.texture = null
 		$BorderSprite.self_modulate = Color.TRANSPARENT
-	
+		$ItemName.text = ""
 
 signal slotClicked
 

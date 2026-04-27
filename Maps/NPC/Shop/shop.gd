@@ -20,7 +20,7 @@ func _ready():
 		
 		slot.slotNumber = i
 		slot.slotClicked.connect(BuyItem) # SlotN is emitted with this signal
-		slot.UpdateSlot(items[i].instantiate()) # Add item to slot
+		slot.UpdateSlot(items[i].instantiate(), true) # Add item to slot
 		i += 1
 
 # Dialogue text is visible for a few seconds then goes away automatically

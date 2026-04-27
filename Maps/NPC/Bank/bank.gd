@@ -16,7 +16,7 @@ func _ready():
 		
 		slot.slotNumber = i
 		slot.slotClicked.connect(BankSwap) # SlotN is emitted with this signal
-		if i < len(items) - 1: slot.UpdateSlot(items[i].instantiate()) # Add item to slot (if present)
+		if i < len(items) - 1: slot.UpdateSlot(items[i].instantiate(), true) # Add item to slot (if present)
 
 # Dialogue text is visible for a few seconds then goes away automatically
 func ToggleBankGUI(player):
@@ -24,7 +24,7 @@ func ToggleBankGUI(player):
 	currPlayer = player
 
 func GetItemSlot(slotN:int) -> Item: return $BankGUI/GridContainer.get_child(slotN).item
-func SetItemSlot(slotN:int, item:Item): $BankGUI/GridContainer.get_child(slotN).UpdateSlot(item)
+func SetItemSlot(slotN:int, item:Item): $BankGUI/GridContainer.get_child(slotN).UpdateSlot(item, true)
 
 func BankSwap(bankSlotN:int):
 	if bankSlotN > $BankGUI/GridContainer.get_child_count() - 1: push_error("IndexOOB on bank slot"); return
