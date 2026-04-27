@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://3srv66mglq52"]
 
-[ext_resource type="Texture2D" uid="uid://c80a8k6yudymt" path="res://Assets/References/Minecraft/Invicon_Leather_Tunic.png" id="1_f6lx1"]
+[ext_resource type="Texture2D" uid="uid://cwvlv8ag5teew" path="res://Assets/References/Minecraft/Invicon_Leather_Tunic.png" id="1_f6lx1"]
 [ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_2pp7w"]
 [ext_resource type="Resource" uid="uid://6uxfkrkyiuvg" path="res://Entity/Projectile/Attack/attack_test2.tres" id="3_ikkhw"]
 
-[node name="TestItem" type="Sprite2D" unique_id=398207244]
+[node name="LeatherChest" type="Sprite2D" unique_id=398207244]
 texture = ExtResource("1_f6lx1")
 script = ExtResource("2_2pp7w")
 itemName = "T1_Chest"

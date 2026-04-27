@@ -1,15 +1,13 @@
 class_name Item extends Sprite2D ## Item stats and info
 
-# TODO: itemname is filename without underscores
-@export var itemName : String = name 
 @export var price : int = 1 # Price to buy this item from a shop
 var ID : int = 0 # Set by ItemSpawner when items are created
 
 # Item rarity, gives border color
 @export_enum("Common", "Uncommon", "Rare", "Epic", "Quest") var tier : int = 0 
 
-enum Types {INV, HELM, CHEST, RING, MAINHAND, OFFHAND, UNDROPPABLE}
-@export_enum("Item", "Helm", "Chest", "Ring", "Mainhand", "Offhand", "Undroppable") var type : int = -1 
+enum Types {INV, HELM, CHEST, RING, MAINHAND, OFFHAND}
+@export_enum("Item", "Helm", "Chest", "Ring", "Mainhand", "Offhand") var type : int = -1 
 # -1=unset, should be one of ^
 
 ## Stats: Adds Player's gear stats
@@ -23,4 +21,3 @@ enum Types {INV, HELM, CHEST, RING, MAINHAND, OFFHAND, UNDROPPABLE}
 func _ready(): 
 	scale = Vector2(0.5,0.5) # Items are small
 	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST # fix blurry pixelart
-	if itemName == "": push_warning("ItemName not set! " + str(self))

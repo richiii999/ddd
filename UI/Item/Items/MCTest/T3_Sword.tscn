@@ -4,10 +4,9 @@
 [ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_dp0sp"]
 [ext_resource type="Resource" uid="uid://6uxfkrkyiuvg" path="res://Entity/Projectile/Attack/attack_test2.tres" id="3_qck8u"]
 
-[node name="TestItem" type="Sprite2D" unique_id=398207244]
+[node name="GoldSword" type="Sprite2D" unique_id=398207244]
 texture = ExtResource("1_luhs5")
 script = ExtResource("2_dp0sp")
-itemName = "T3_Sword"
 tier = 2
 type = 1
 stats = Dictionary[int, int]({

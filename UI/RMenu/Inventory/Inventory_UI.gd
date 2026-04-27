@@ -178,7 +178,11 @@ func PickItem() -> void:
 
 ## Drop the item in mouse on the ground
 func DropItem():
-	if MouseHasItem(): dropItem.emit(Inv[Slot.MOUSE], player.global_position)
+	if MouseHasItem(): 
+		if Inv[Slot.MOUSE].tier == 4: # Quest Item
+			player.StatusLabel.addStatusText("Cant drop Quest Item!")
+			return
+		dropItem.emit(Inv[Slot.MOUSE], player.global_position)
 	else: push_warning("Tried to drop null item") # Null case: shouldnt happen, see Loot()
 	
 	SlotClick(Slot.MOUSE, Slot.GROUND) # Delete item in MOUSE
