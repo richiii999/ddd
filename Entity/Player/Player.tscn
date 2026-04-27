@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://nquy6bnqhiwd"]
 
 [ext_resource type="Script" uid="uid://28yokghggm42" path="res://Entity/Player/player.gd" id="1_pnyfx"]
+[ext_resource type="PackedScene" uid="uid://cs61kw023xsp4" path="res://Entity/Player/Pet.tscn" id="2_3vnax"]
 [ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_7hmw6"]
 [ext_resource type="PackedScene" uid="uid://dko0els7hvmek" path="res://Entity/Projectile/ProjectileTest2.tscn" id="3_pnyfx"]
 [ext_resource type="PackedScene" uid="uid://bclrygg5d3dyn" path="res://Entity/Field.tscn" id="4_cretm"]
@@ -75,6 +76,7 @@ collision_layer = 16
 collision_mask = 385
 motion_mode = 1
 script = ExtResource("1_pnyfx")
+pet = ExtResource("2_3vnax")
 projs = Array[PackedScene]([ExtResource("2_7hmw6"), ExtResource("3_pnyfx"), ExtResource("2_7hmw6")])
 fields = Array[PackedScene]([null, ExtResource("4_cretm"), null])
 fieldEffects = Array[PackedScene]([null, ExtResource("5_pnyfx"), null])
@@ -115,7 +117,9 @@ Nexus: N
 Hide Rmenu: F12
 HP- : 0
 HP+: Shift+0
-XP+: 9"
+XP+: 9
+Show Pet: X
+Hide Pet: Z"
 
 [node name="RMenu" parent="CanvasLayer" unique_id=675567958 instance=ExtResource("6_s48lg")]
 unique_name_in_owner = true

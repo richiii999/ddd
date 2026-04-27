@@ -28,6 +28,10 @@ var MPotmax : int = 10
 var HPotC   : int = 3 # Current Potion count
 var MPotC   : int = 5
 
+## Pet
+@export var pet: PackedScene
+var pet_instance = null
+
 ## XP
 var Level : int = 1   # maxes out at 25
 var XPmax : int = 100 # XP needed for a given level (scales up, see LevelUp())
@@ -229,6 +233,8 @@ func get_input(): # TODO: replace this with _input() ?
 	if Input.is_action_just_pressed("Nexus"): # TP back to Nexus with 'N'
 		get_node("/root/GameManager/Maps/Nexus/Waygates/NexusWaygate").UseWaygate(self)
 	if Input.is_action_just_pressed("Loot"): Inv.Loot() # Loot with 'Q'
+	if Input.is_action_just_pressed("spawn-pet"): SpawnPet() # Spawn pet with 'X'
+	if Input.is_action_just_pressed("delete-pet"): DeletePet() # Delete pet with 'Z'
 	
 	## UI Toggles 
 	if Input.is_action_just_pressed("Loading Screen Toggle"):
@@ -303,6 +309,22 @@ func GainXP(xp : int = 0):
 	if(Level < 25): $CanvasLayer/RMenu/XP_Bar.value = XP 
 	else: $CanvasLayer/RMenu/Fame_Bar.value = XP
 	while (XP >= XPmax): LevelUp() # "While" for rare cases where you level up more than once
+	
+## Spawn the pet (For now we are just going to spawn the pet)
+## TODO: Interact with pets and possibly add them to inventory
+func SpawnPet():
+	if pet_instance == null:
+		pet_instance = pet.instantiate()
+		get_parent().add_child(pet_instance)
+		
+		pet_instance.global_position = global_position + Vector2(50, 0)
+		pet_instance.player = self # Set the player variable for the instantiated pet
+		
+# Deletes the player's pet
+func DeletePet():
+	if is_instance_valid(pet_instance):
+		pet_instance.queue_free()
+		pet_instance = null
 
 func LevelUp(): 
 	if (Level < 25): # If not maxed yet
