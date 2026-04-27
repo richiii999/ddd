@@ -336,11 +336,28 @@ func LevelUp():
 	incMP(MPmax)
 
 #updates the projectile stats
+# TODO: Possibly add modifiers?
 func UpdateProjStats(): 
-	projSpeed  = 300 + coreStats.get(Stats.AGI, 0) * 2
-	mainStat   = 10  + coreStats.get(Stats.STR, 0) / 10
-	piercing   = 1   + coreStats.get(Stats.DEX, 0) / 20
-	kBstrength1 = 150.0 + coreStats.get(Stats.STR, 0) * 2
+	# Base values
+	var base_speed = 10
+	var base_power = 10
+	var base_pierce = 2
+	var base_kB = 250.0
+	
+	# Gear stat values
+	var gear_agi = gearStats.get(Stats.AGI, 0)
+	var gear_str = gearStats.get(Stats.STR, 0)
+	var gear_dex = gearStats.get(Stats.DEX, 0)
+	
+	projSpeed  = base_speed + gear_agi
+	mainStat   = base_power + gear_str
+	piercing   = base_pierce + gear_dex
+	kBstrength1 = base_kB + gear_str
+	
+	#projSpeed  = 10 + getStats(Stats.AGI)
+	#mainStat   = 10 + getStats(Stats.STR)
+	#piercing   = 2 + getStats(Stats.DEX)
+	#kBstrength1 = 250.0 + getStats(Stats.STR)
 
 #TODO: update this function to take in an item rather than bool, type, sourcestats since item has all of that garbagio
 func UpdateStats(increase: bool, stats: Dictionary) -> void:
