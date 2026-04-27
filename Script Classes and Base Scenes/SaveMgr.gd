@@ -1,5 +1,9 @@
 class_name SaveMgr extends Node
-## Contains functions for saving and loading from a file
+## SaveMgr: Contains functions for saving and loading player & bank data from files
+# [https://docs.godotengine.org/en/stable/tutorials/io/saving_games.html]
+
+var playerFilePath : String = "user://PlayerData.ddd"
+var bankFilePath : String = "user://BankData.ddd"
 
 ## Returns data from the passed player for saving
 # TODO: For now, dont save their stats or skills, must re-pick skills when reloading a save
@@ -33,14 +37,51 @@ func PlayerData(P:Player) -> Dictionary:
 	print("Saving PlayerData as: " + str(playerData))
 	return playerData
 
-#func BankData(B:Bank) -> Dictionary:
-	#var bankData = {
-		#"Bank0" : B.Inv.ItemIDInSlot(P.Inv.Slot.INV0),
-	#}
-	#print("Saving BankData as: " + str(bankData))
-	#return bankData
+## Returns itemIDs for each bankslot
+# Format: "Bank<slotN>": <itemID>
+func BankData(B:Bank) -> Dictionary:
+	var bankData = {} # Read each bank slot and put it in the dict
+	for i in range(B.bankSlots): bankData["Bank"+str(i)] = B.ItemIDInSlot(i)
+	
+	print("Saving BankData as: " + str(bankData))
+	return bankData
+
+## Save data to filePath
+func SaveToFile(data:Dictionary, filePath:String) -> void:
+	FileAccess.open(filePath, FileAccess.WRITE).store_line(JSON.stringify(data))
 
 ## Saves the given player & bank information to separate files
 func SaveGame(P:Player, B:Bank) -> void:
-	var playerData = PlayerData(P)
-	#var bankData = BankData(B)
+	print("Saving game...")
+	var PD = PlayerData(P)
+	var BD = BankData(B)
+	
+	SaveToFile(PD, playerFilePath)
+	SaveToFile(BD, bankFilePath)
+
+## NOTE: Load functions split in two, to make it easier
+# Loading funcs return {} if no file found
+
+## Read bankData from a file, returns array of itemIDs
+# 90% copy-pasted from the godot docs
+func LoadBank() -> Array[int]:
+	if not FileAccess.file_exists(bankFilePath):
+		push_warning("BankData not found on disk")
+		return []
+	
+	var bankFile = FileAccess.open(bankFilePath, FileAccess.READ)
+	while bankFile.get_position() < bankFile.get_length():
+		var json_string = bankFile.get_line()
+		
+		# Creates the helper class to interact with JSON.
+		var json = JSON.new()
+		
+		# Check if there is any error while parsing the JSON string, skip in case of failure.
+		var parse_result = json.parse(json_string)
+		if not parse_result == OK:
+			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+			continue
+		
+		print(json.data)
+	
+	return []

@@ -123,7 +123,7 @@ func quitGame():
 	#await SavaData() # Old saving interface
 	
 	var Save = SaveMgr.new() # Create a SaveMgr instance to allow for saving
-	var playerData = Save.PlayerData(player)
+	Save.SaveGame(player, nexus.find_child("Bank")) # Player and bank saved separately
 	
 	get_tree().quit() # Actually quit the game
 
