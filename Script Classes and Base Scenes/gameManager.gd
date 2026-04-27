@@ -120,7 +120,10 @@ func InitialSetup():
 func quitGame():
 	print("manager: quitting game")
 	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST) # Notify whole tree (so player can save and other stuff)
-	await SavaData()
+	#await SavaData() # Old saving interface
+	
+	var Save = SaveMgr.new() # Create a SaveMgr instance to allow for saving
+	var playerData = Save.PlayerData(player)
 	
 	get_tree().quit() # Actually quit the game
 
