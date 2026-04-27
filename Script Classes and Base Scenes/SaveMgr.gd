@@ -32,3 +32,15 @@ func PlayerData(P:Player) -> Dictionary:
 	}
 	print("Saving PlayerData as: " + str(playerData))
 	return playerData
+
+#func BankData(B:Bank) -> Dictionary:
+	#var bankData = {
+		#"Bank0" : B.Inv.ItemIDInSlot(P.Inv.Slot.INV0),
+	#}
+	#print("Saving BankData as: " + str(bankData))
+	#return bankData
+
+## Saves the given player & bank information to separate files
+func SaveGame(P:Player, B:Bank) -> void:
+	var playerData = PlayerData(P)
+	#var bankData = BankData(B)

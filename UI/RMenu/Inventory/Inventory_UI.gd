@@ -82,9 +82,6 @@ func SlotClick(SlotA:Slot, SlotB:Slot = Slot.MOUSE) -> void:
 	PutItemInSlot(SlotA, ItemInSlot(SlotB))
 	PutItemInSlot(SlotB, tmp)
 	
-	# Adjust Mouse UI visibility
-	%MouseSlot.visible = (ItemInSlot(Slot.MOUSE) != null)
-	
 	# Remove ground items (e.g. after dropping an item), prevent duplication
 	PutItemInSlot(Slot.GROUND, null) 
 	
@@ -102,11 +99,6 @@ func FirstEmptyInvSlot() -> int:
 	for slotN in range(Slot.INV0, Slot.INV8 + 1):
 		if ItemInSlot(slotN) == null: return slotN
 	return -1
-
-## Put an item in inv slot
-# NOTE: Item may not be a valid type for the slot
-# NOTE: This will overwrite any existing item in the slot
-func PutItemInSlot(slotN:int, item:Item): Slots[slotN].UpdateSlot(item)
 
 ## 'Q' to pickup / drop items on ground
 func Loot() -> void: 
@@ -191,3 +183,10 @@ func ItemIDInSlot(slotN:Slot) -> int:
 	var item = ItemInSlot(slotN)
 	if item != null: return Slots[slotN].item.ID 
 	else: return 0
+
+## Put an item in inv slot
+# NOTE: Item may not be a valid type for the slot
+# NOTE: This will overwrite any existing item in the slot
+func PutItemInSlot(slotN:int, item:Item): 
+	Slots[slotN].UpdateSlot(item)
+	%MouseSlot.visible = (ItemInSlot(Slot.MOUSE) != null) # Adjust Mouse UI visibility
