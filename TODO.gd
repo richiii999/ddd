@@ -2,12 +2,15 @@
 # NOTE: We are NOT doing classes, instead there's a large skill tree that offers specializations
 
 # TODO z idx list
-## Z-Index list (all values absolute):
+## Z-Index list (all values should be absolute):
+# 10: PLAYER, player projectiles
 # 2:  enemies
-# 1:  asdf
-# 0:  asdf
-# -1: asdf
-# -2: asdf
+# 1:  -
+# 0:  -
+# -1: -
+# -2: -
+# -10: WorldBase
+# -99: WorldEffects, should never be seen (hidden behind world)
 
 ## BUG list
 # death screen sometimes fuck up
