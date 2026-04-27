@@ -3,7 +3,8 @@ class_name EnemyPackSpawner extends Node2D ## EnemySpawnNode: Spawns mobs in pac
 
 ## Slots for prefabs
 @export var Mob : PackedScene      # The mob of this node
-@export var PackBoss : PackedScene # The pack boss of this node (TODO: can just be another mob with better stats and scaled up)
+# TODO: can just be another mob with better stats and scaled up
+@export var PackBoss : PackedScene # The pack boss of this node 
 
 ## Links to children (can probably replace these by just calling children and using signals)
 var mobList : Array[Node] = []  # Links to the pack's mobs

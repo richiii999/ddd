@@ -11,7 +11,7 @@ var targetPosStopRadius : float = 50 # How close to targetPos will this enemy st
 func _ready():
 	super._ready() # call ENTITY._ready() (sets HP and MP)
 	EntityUI()
-	z_index = 2 # TODO: should probably write down what order things should be layers in
+	z_index = 2
 	$ShootTimer1.set_paused(true) # The shoot timers activate only when SightList has something in it
 	$ShootTimer2.set_paused(true) # ^ via onFirst() turning them on & onEmpty() turning them off
 	$Sight.onEmpty.connect(setTargetEntity.bind(self))

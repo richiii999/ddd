@@ -7,7 +7,7 @@ extends Camera2D ## Camera script: Typically follows player, maybe add cutscene 
 	# trace a circle of radius R around player, where R is the strenght of the debuff
 
 @onready var Follow : Node = get_parent() # link to what the camera is following (just parent for now)
-var Res : Vector2 = Vector2(1280, 720) # Game resolution # TODO: there has to be a way to get this easily
+var Res : Vector2 = Vector2(1280, 720) # Game resolution
 
 var lookAtCursor : bool = false # Camera does/not move towards cursor
 var lookRate: float = 7.00 # How much the camera moves with the mouse

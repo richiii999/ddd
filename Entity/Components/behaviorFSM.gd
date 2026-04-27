@@ -1,6 +1,5 @@
-class_name BehaviorFSM extends Timer ## BehaviorFSM: Manages Entity behaviors via a finite state machine pattern
+class_name BehaviorFSM extends Timer ## BehaviorFSM: Manages Entity behaviors via a FSM pattern
 # Extends Timer, since this uses a timer anyways to check for changing states every 0.5s
-# Learned about FSMs from this great YT vid: [TODO yt link]
 
 @export var Sight : SmartArea = null # Refereance to the entity's sight node (if any). Used for many enemy behaviors
 

@@ -1,9 +1,7 @@
 class_name Destructible extends Node ## Component that attaches to walls and stuff
 # If a projectile collides with this node's parent, it will signal to this script's WallDamage()
 
-## TODO: Change this to work for entities
-
-@export var HitsMax  : int = 10 # "Hits" instead of HP, destructibles take X number of hits, regardless of a projectile's power
+@export var HitsMax  : int = 10 # Destructibles take X number of hits, regardless of a proj's power
 @export var HitsLeft : int = HitsMax
 
 @onready var ParentSprite : Node = get_parent().find_child("Sprite2D")

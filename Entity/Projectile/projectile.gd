@@ -25,29 +25,20 @@ func Spawn( Source : Node = null,
 			Effect : EffectBASE = null, 
 			endField : Field = null
 			# ScaleFactor : float = 1.00, # Scales the size
-			# Location : Vector2 = Vector2(0,0) # Where to spawn it relative to source (Usually spawn at the center of source)
-			# Trail : PackedScene = null # What happens when the projectile is shot? (e.g. special travel path)
-			# Pattern # Spawn a pattern of bullets (e.g. in a circle, three in a row)
 			) -> Projectile :
-	#print("Direction: " + str(Direction) + "  " + "Shot by: " + str(Source))
 	
 	## Set stuff from Params
 	source = Source
-	player = Source.is_in_group("Player") # is it a player proj or enemy proj (determines collision masks)
+	player = Source.is_in_group("Player") # Player proj or Enemy proj (determines collision masks)
 	rotation = Rotation
-	linear_velocity = Vector2.from_angle(rotation) * Speed # "LINEAR" velocity for rigidbody2d type to make the proj go forwards towards the mouse click
-	# TODO: ^^ inherit source's velocity (not just source.velocity + other, bug: goes too fast) 
-		# but you have to dampen it otherwise it's too OP, so maybe only like 25% for players and 50% for mobs
+	linear_velocity = Vector2.from_angle(rotation) * Speed # Make the proj go forwards towards the mouse click
 	power = Power
 	piercing = Piercing
 	knockback = KnockbackAmt
 	effect = Effect
 	field = endField
-	#$Sprite2D.apply_scale(Vector2(ScaleFactor, ScaleFactor)) # Scales the proj TODO: WTF! can't just scale the root node? "Overriden by physics engine"
-	#$CollisionBox2D.apply_scale(Vector2(ScaleFactor, ScaleFactor))
-	#position = Location
-	#add_child(Trail.instantiate())
-	#add_child(Explosion.instantiate())
+	#$Sprite2D.apply_scale(Vector2(ScaleFactor, ScaleFactor)) # Scales the proj
+	# TODO: WTF! can't just scale the root node? "Overriden by physics engine"
 	
 	var projLayer = 6 if (player) else 10
 	var projMask = 7 if (!player) else 11
@@ -71,7 +62,7 @@ func BodyCollideRID(rid: RID, body: Node2D, _body_shape_idx: int, _local_shape_i
 		var tileCoords = body.get_coords_for_body_rid(rid)
 		#print(tileCoords)
 		var tile = body.get_cell_tile_data(tileCoords)
-		if tile.get_custom_data("Destructible"): # TODO: "if true" vvv change condition to check if destroyed tile exists based on current tile coords + 1 row or whatever
+		if tile.get_custom_data("Destructible"):
 			if true: body.set_cell(tileCoords, 0, Vector2i(2,1)) # Tile switches to destroyed version which has no collision and a different texture
 			else: body.erase_cell(tileCoords) # Failsafe: If the tilemap atlas is messed up, just erase the tile
 		Destruct()

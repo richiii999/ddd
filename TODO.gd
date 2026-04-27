@@ -1,6 +1,14 @@
 ## TODO.gd: Using to store my TODO's and ideas
 # NOTE: We are NOT doing classes, instead there's a large skill tree that offers specializations
 
+# TODO z idx list
+## Z-Index list (all values absolute):
+# 2:  enemies
+# 1:  asdf
+# 0:  asdf
+# -1: asdf
+# -2: asdf
+
 ## BUG list
 # death screen sometimes fuck up
 # whenever you hit the necromancer, its summons take damage (that's fine for now, but we could change this in the future)

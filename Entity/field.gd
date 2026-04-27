@@ -1,9 +1,6 @@
 class_name Field extends SmartArea ## Field: applies an effect to entities inside the area
 # Fields are spawned from projectiles
 
-# TODO: implement projectile interactions with this (like projectile repulsion / magnet field). 
-	# For now, just doing entities
-
 @export var fieldColor  : String = "WHITE"
 @export var particleColor : String = "WHITE"
 
@@ -12,7 +9,6 @@ class_name Field extends SmartArea ## Field: applies an effect to entities insid
 @export var lingering : float = 2.00 # How long does the effect last after leaving the field?
 
 # Does this field affect <X>? (sets masks in ready())
-#@export var affectsProjectiles: bool = false 
 @export var affectsPlayers : bool = true
 @export var affectsEnemies : bool = true
 
@@ -29,8 +25,6 @@ func _ready():
 	
 	set_collision_mask_value(5, affectsPlayers)
 	set_collision_mask_value(11, affectsEnemies)
-	#set_collision_mask_value(6, affectsPlayers && affectsProjectiles)
-	#set_collision_mask_value(10, affectsEnemies && affectsProjectiles)
 
 ## OVERRIDE FUNCS: SmartArea.gd funcs overridden by Field.gd
 

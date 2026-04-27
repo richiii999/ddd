@@ -6,7 +6,6 @@ class_name Waygate extends GPUParticles2D ## Waygate: Node for teleporting playe
 @export var exit: bool = false # One-way teleport to Nexus, no GUI (ex. dungeon exit)
 
 var currPlayer : Player = null # Set when player interacts with this
-# TODO: This is used often for interactables, perhaps move it to there idk
 
 # Activation cost
 # NOTE: Consumed upon activation, if free, can just press 'E' to activate
@@ -56,8 +55,6 @@ func UseWaygate(P:Player): # Teleports player to this waygate
 	P.ECS.ClearEffects()
 	
 	await P.LoadingScreenStart() # Show loading screen before moving player & camera
-	# TODO: When going from nex to world, play a short transition screen showing the world name and some info, player in center (with party to side)
-		# and some quest details, and any other stuff like stats idk
 	
 	P.global_position = global_position # Move player 
 	P.find_child("PlayerCam").InstantMove(global_position) # Force move camera without smoothing

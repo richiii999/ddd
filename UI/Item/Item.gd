@@ -1,6 +1,7 @@
 class_name Item extends Sprite2D ## Item stats and info
 
-@export var itemName : String = "" #TODO: itemname is filename without underscores
+# TODO: itemname is filename without underscores
+@export var itemName : String = name 
 @export var price : int = 1 # Price to buy this item from a shop
 var ID : int = 0 # Set by ItemSpawner when items are created
 

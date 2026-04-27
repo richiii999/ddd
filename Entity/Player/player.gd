@@ -27,7 +27,7 @@ var HPotmax : int = 5 # Max Potions you can carry
 var MPotmax : int = 10
 var HPotC   : int = 3 # Current Potion count
 var MPotC   : int = 5
-var potionFactor : float = 1.00 # Multiplier to potion effects # TODO: (applies to status potions timers also). Changed by gear, skills, perks, status effects, etc.
+var potionFactor : float = 1.00 # Multiplier to potion effects
 
 ## XP
 var Level : int = 1   # maxes out at 25
@@ -158,7 +158,7 @@ func get_input(): # TODO: replace this with _input() ?
 		velocity += InputV * (accel * effectMoveSpeed * tileSpeed * spd_mult) + tilePush
 		
 	
-	# TODO: change aniframe and sprite flip direction based on direction / velocity for player, or if not moving, mousePos\ (DONE), now we need to get sprites
+	## Change sprite frame and flip direction based on direction / velocity for player
 	# The "velocity.length() > 10.0" tells us "are we moving fast enough to count as moving?", and the else gives us a vector pointing from the player toward the mouse 
 	var facingDir : Vector2 = velocity if velocity.length() > 10.0 else (get_global_mouse_position() - global_position)
 	# Flip the sprite horizontally when facing the left 
@@ -189,7 +189,7 @@ func get_input(): # TODO: replace this with _input() ?
 	# if charge over 100: can discharge but hurts self, aim for 100 exactly or go over to do more but hurts more.
 	# if under 25 charge: fizzle out. If under 10 (quick tap on accident), do nothing.
 	# TODO: Play a chargegup sound that gets higher pitched sound that plateaus around 85-100,
-	# ^ then jumps up after 100 until 125, on release, play a shoot sound, at 125, play a boom sound.
+		# ^ then jumps up after 100 until 125, on release, play a shoot sound, at 125, play a boom sound.
 	if Input.is_action_pressed("space"): # Holding space to charge up 
 		charge += 1 # "charge" up spellcast attack by holding space
 		%Charge_Label.value = charge
@@ -204,8 +204,8 @@ func get_input(): # TODO: replace this with _input() ?
 				incMP(-HPmax >> 1) # cost extra MP @ 2:1 HP
 				$Status.addStatusText("Boom! (" + str(HPmax >> 2) + ")", "RED")
 				$Status.addStatusText("Manaburn (" + str(HPmax >> 1) + ")", "RED")
-			else: #TODO: implement opus somehow
-				$Status.addStatusText("Casting OPUS!")
+			else:
+				$Status.addStatusText("OPUS!")
 				ShootProj(3, get_global_mouse_position())
 	if Input.is_action_just_released("space"): # Release space to cast spell based on charge
 		%Charge_Label.visible = false
@@ -322,8 +322,6 @@ func LevelUp():
 		$CanvasLayer/SkillsUI/SkillPointsText/SkillPointsCount.text = str(skillPoints)
 		
 		## Switch(level): unlock things at certain levels
-		if (Level == 10): return # TODO: At L10, unlock class specs
-		if (Level == 20): return # TODO: At L20, unlock opus (3rd ability)
 		if (Level == 25): # At L25 (max level), adjust scale and switch to fame mechanics
 			XPmax = (int)(XPmax * 0.60)
 			$CanvasLayer/RMenu/Fame_Bar.max_value = XPmax
@@ -358,10 +356,10 @@ func toggleBubble(state:bool) -> void: # Makes player invulnerable, disables inp
 	setInvulnerable(state)
 	set_collision_layer_value(5, !state)
 	
-	#TODO: replace with "await <bubble animation forward/reverse>"
+	#TODO: replace with "<bubble animation forward/reverse>"
 	if (state):
 		modulate = Color(0,0,1)
-		await get_tree().create_timer(1.00).timeout
+		#await get_tree().create_timer(1.00).timeout # NOTE: This causes the game's start to lag
 	else:
 		await get_tree().create_timer(1.00).timeout
 		modulate = Color(1,1,1)
@@ -393,36 +391,26 @@ func UpdateUIBars(): # All at once rather than spread out
 	%RMenu/XP_Bar/XP_Text.text = "%s / %s" % [XP, XPmax]
 	%RMenu/Fame_Bar/Fame_Text.text = "%s" % [Fame]
 
-## Items
-# TODO wip move
-
 ## OVERRIDE FUNCS: Entity Overridden funcs by Player.gd
 func Death(): 
-	# BUG: When ded, can togle loading screen and will unded due to natural regen, # probably gonna be removed later when other death stuff is added, so leaving for now (as of v0.7)
-	# TODO: keep a list / vector of the last N things that hurt you within 10s,then display them like in WoW
-	# death.emit(self); # print("[SIGNAL T] Death")
-	
-	%DeathScreen.visible = true # print("Death Screen Toggled")
+	%DeathScreen.visible = true
 	
 	InputStatus = false
 	self.velocity = Vector2.ZERO
 	
-	#incHP(HPmax) ## Debug: just reset HP when ded
-	
-	get_tree().set_pause( true ) # Toggle pause
+	get_tree().set_pause( true )
 
 func Damage(power : int, crit:bool=false):
 	super.Damage(power, crit)
 	$HurtTimer.start(5.00)
 
-
-# Singal function called when button is pressed, signals game maneger to handle hard reset
+# Signal function called when button is pressed, signals game maneger to handle hard reset
 func _OnDeathScreenButtonPushed() -> void:
 	%DeathScreen.visible = false
 	get_node("/root/GameManager").DeathHandling()
 	
 
-# signal function called when debug is pressed, revives player on the spot
+# Signal function called when debug is pressed, revives player on the spot
 func _OnDebugRevive() -> void:
 	%DeathScreen.visible = !(%DeathScreen.visible)
 	get_tree().set_pause(false)

@@ -11,13 +11,14 @@ func _ready():
 	body_exited.connect(EnterOrExit.bind(false))
 	setInteractable(interactable)
 
-func EnterOrExit(body : Node2D, enterOrExit): # Area2D Enter/Exit: Connect / disconnect signals for Players in range
-	#print("EnterOrExit: " + str(get_parent().name) + " | body: " + str(body.name) + " | enter: " + str(enterOrExit))
-	get_parent().self_modulate = Color("BLUE") if enterOrExit else Color("WHITE") # Changes color when in Interact range #TODO make it a highlight outline
+## Area2D Enter/Exit: Connect / disconnect signals for Players in range
+# Interactable changes color when in range
+func EnterOrExit(body : Node2D, enterOrExit):
 	if get_parent() is Waygate:
-		#the sprites HAVE to be the first 2 children, otherwise it breaks, but does the same as the interact for NPC
+		# NOTE: Sprites MUST to be the first 2 children, otherwise it breaks
 		get_parent().get_child(0).self_modulate = Color("BLUE") if enterOrExit else Color("WHITE")
 		get_parent().get_child(1).self_modulate = Color("BLUE") if enterOrExit else Color("WHITE")
+	else: get_parent().self_modulate = Color("BLUE") if enterOrExit else Color("WHITE") 
 	
 	# Enter / Exit range
 	if enterOrExit: 
@@ -26,10 +27,12 @@ func EnterOrExit(body : Node2D, enterOrExit): # Area2D Enter/Exit: Connect / dis
 		Interact.emit(null) # So interactables can do cleanup (ex. close GUIs)
 		body.Interact.disconnect(Interaction)
 
+## Setter, also removes leftover connections
 func setInteractable(state:bool):
 	if get_child_count(): get_child(0).set_deferred("disabled", not state) # Docs say to use defer
 	RemoveAllConnections() # Remove any leftover connections
 
-func RemoveAllConnections() -> void: # Removes all signal connections
+## Removes all signal connections
+func RemoveAllConnections() -> void: 
 	for conn in Interact.get_connections():
 		disconnect(conn["signal"].get_name(), conn["callable"])

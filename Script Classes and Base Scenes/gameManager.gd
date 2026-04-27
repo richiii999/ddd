@@ -11,7 +11,6 @@ var mapOffset : Vector2 = Vector2(99999,0) # Offset each added map by this much
 func AddMap(map): $Maps.add_child(map); map.global_position += mapOffset; mapOffset += mapOffset
 
 ## Player
-# TODO: for now there isnt multiplayer so just load the one player
 @export var player_tscn: PackedScene 
 @export var mainmenu_tscn: PackedScene
 
