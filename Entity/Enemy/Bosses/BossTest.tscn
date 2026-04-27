@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://vosbka7lsvf0" path="res://Entity/Components/Behaviors/Boss/Boss2.tscn" id="8_h2xyi"]
 [ext_resource type="PackedScene" uid="uid://bexluv4wwnwxr" path="res://Entity/Components/BossBar.tscn" id="9_aplmu"]
 [ext_resource type="PackedScene" uid="uid://bntfe5iinhuu5" path="res://UI/Item/loot_table.tscn" id="10_hy2l8"]
+[ext_resource type="PackedScene" uid="uid://dddy50t4saequ" path="res://Entity/Components/EffectComponentSystem.tscn" id="13_eqluo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw8gt"]
 bg_color = Color(1, 0, 0, 1)
@@ -132,6 +133,8 @@ lootTable = Dictionary[int, int]({
 0: 1,
 1: 3
 })
+
+[node name="EffectsComponentSystem" parent="." unique_id=921567753 instance=ExtResource("13_eqluo")]
 
 [connection signal="onEmpty" from="Sight" to="." method="SightIncrease" binds= [false]]
 [connection signal="onEmpty" from="Sight" to="ShootTimer1" method="set_paused" binds= [true]]
