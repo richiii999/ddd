@@ -156,6 +156,10 @@ func SavaData():
 	savedData.xp_current = player.XP
 	savedData.xp_max = player.XPmax
 	
+	#Item Saving for player bank
+	var bank = get_node("Maps/Nexus/NPCs/BankTest") as Bank
+	#TODO: Store items properly
+	
 	ResourceSaver.save(savedData, "user://savegame.tres")
 	
 # Main load function that should
@@ -179,6 +183,12 @@ func LoadData():
 		player.XPmax = savedData.xp_max
 		player.HP = savedData.current_hp
 		player.MP = savedData.current_mp
+		
+		#Item loading for player  bank
+		var bank = get_node("Maps/Nexus/NPCs/BankTest") as Bank
+		#TODO: Retrive bank items and store them in the slots
+
+		
 
 ## Get all active waygates in all worlds
 func GetActiveWaygates() -> Array[Waygate]:
