@@ -8,6 +8,7 @@ var bankFilePath : String = "user://BankData.ddd"
 ## Returns data from the passed player for saving
 # TODO: For now, dont save their stats or skills, must re-pick skills when reloading a save
 func PlayerData(P:Player) -> Dictionary:
+	print(OS.get_data_dir())
 	var playerData = {
 		# Progress
 		"Fame" : P.Fame,
@@ -52,7 +53,7 @@ func SaveToFile(data:Dictionary, filePath:String) -> void:
 
 ## Saves the given player & bank information to separate files
 # Linux: ~/.local/share/godot/app_userdata/DotDD/
-# Windows: TODO: somebody put the windows location here
+# Winbloat: C:/Users/{User}/AppData/Roaming
 func SaveGame(P:Player, B:Bank) -> void:
 	print("Saving game to " + str(OS.get_data_dir()))
 	SaveToFile(PlayerData(P), playerFilePath)
