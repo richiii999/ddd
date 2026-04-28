@@ -6,7 +6,7 @@ enum PatternType {
 	CIRCLE,
 	ARC, 
 	BOWTIE, 
-	#GRID, 
+	GRID, 
 	#CHAIN,
 	#WING_RINGS
 }
@@ -26,6 +26,7 @@ func Emit(type: PatternType, count: int, opts: Dictionary = {}) -> void:
 		PatternType.CIRCLE: emit_circle(count, opts)
 		PatternType.ARC: emit_arc(count, opts)
 		PatternType.BOWTIE: emit_bowtie(count, opts)
+		PatternType.GRID: emit_grid(opts)
 
 #this will basically do a circle that does N projectles in a 360 (aka a circle)
 #so if you pass in say (circle, 3), then you get a triangle
@@ -70,7 +71,35 @@ func emit_bowtie(count: int, opts: Dictionary) -> void:
 	opts_back["spread"] = lobe_spread
 	opts_back["offset_angle"] = opts.get("offset_angle", 0.0) + PI #the opposite direction
 	emit_arc(count - half, opts_back) #need to do count - half to deal with the odd counts
+
+#grid is just bullet hell... gonna have so many projectiles on the screen 
+func emit_grid(opts: Dictionary) -> void:
+	var cols: int = opts.get("cols", 3) #3 columns
+	var rows: int = opts.get("rows", 3) #3 rows
+	var cell_size: float = opts.get("cell_size", 40.0) #how big our cells are going to be 
+	var offset: float = opts.get("offset_angle", 0.0) #same thing as the other ones
+	var dir = rotation + offset
 	
+	#need to center the grid on the emitter
+	var grid_w : float = (cols - 1) * cell_size
+	var grid_h : float = (rows - 1) * cell_size
+	
+	#loop through our rows and columns
+	for r in rows:
+		for c in cols:
+			#need to get the local offset
+			var local_x: float = c * cell_size - grid_w / 2.0
+			var local_y: float = r * cell_size - grid_h / 2.0
+			
+			#now we need to rotate the local offset by the emitters direction
+			var rotated: Vector2 = Vector2(local_x, local_y).rotated(dir)
+			
+			#now make the projectile 
+			var proj := make_proj(dir, opts)
+			if proj == null: continue
+			get_parent().add_child(proj)
+			proj.global_position = global_position + rotated
+
 func make_proj(dir: float, opts: Dictionary) -> Projectile:
 	#check to see if the projectile scene even exists 
 	if projectile_scene == null: return null

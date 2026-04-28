@@ -10,9 +10,16 @@ func EnemyShoot(P: int, pos: Vector2 = targetEntity.global_position):
 	#	"offset_angle": dir_to_player
 	#})
 	#pattern.Emit(ProjectilePattern.PatternType.CIRCLE, 8, {"power" : P})
-	pattern.Emit(ProjectilePattern.PatternType.BOWTIE, 6, {
-		"power": P,
-		"spread": PI / 2.0,
-		"safe_angle": PI / 4.0,
-		"offset_angle": dir_to_player
+	#pattern.Emit(ProjectilePattern.PatternType.BOWTIE, 6, {
+	#	"power": P,
+	#	"spread": PI / 2.0,
+	#	"safe_angle": PI / 4.0,
+	#	"offset_angle": dir_to_player
+	#})
+	pattern.Emit(ProjectilePattern.PatternType.GRID, 0, {
+	"power": P,
+	"cols": 3,
+	"rows": 3,
+	"cell_size": 40.0,
+	"offset_angle": dir_to_player
 	})
