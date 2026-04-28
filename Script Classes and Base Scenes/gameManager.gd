@@ -1,23 +1,22 @@
 class_name GameManager extends Node ## Controls the game. The "Main" scene of the game
 
-# "ParticleTrasher" Node is where a projectile GPUParticle2D's go while they are expiring
-	# Needed since if you just free() a particle, they immediately dissapear instead of expiring.
-# "ItemSpawner" Node gets signaled by various things to spawn items in the world (ex. when a mob dies)
+## Child node descriptions:
+# ParticleTrasher: is where a projectile GPUParticle2D's go while they are expiring
+# ItemSpawner: gets signaled by various things to spawn items in the world
+# Projectiles: Projectiles are reparented to here, prevents inheriting entity velocity
 
-@export var nexus_tscn: PackedScene
-@export var world_tscn: PackedScene
 @export var dungeons: Array[PackedScene]
 var mapOffset : Vector2 = Vector2(99999,0) # Offset each added map by this much
 func AddMap(map): $Maps.add_child(map); map.global_position += mapOffset; mapOffset += mapOffset
 
 ## Player
-@export var player_tscn: PackedScene 
 @export var mainmenu_tscn: PackedScene
+@export var player_tscn: PackedScene 
+var player: Player = null # Set by the loading funcs
 
 ## Refs to Stuff
-@onready var nexus: WorldBASE = nexus_tscn.instantiate()
-@onready var world: WorldBASE = world_tscn.instantiate()
-@onready var player: Player = player_tscn.instantiate()
+@onready var nexus: WorldBASE = load("res://Maps/Nexus.tscn").instantiate()
+@onready var world: WorldBASE = load("res://Maps/TestWorld.tscn").instantiate()
 @onready var mainMenu: MainMenu = mainmenu_tscn.instantiate()
 
 ## Save Manager instance
@@ -155,37 +154,40 @@ func LoadData(P:Player, B:Bank):
 		
 	var playerData = Save.LoadPlayer()
 	print("Loaded playerData: " + str(playerData))
-	if playerData != {}:
-		# Progress
-		while playerData.Level > 1: # Level starts from 1
-			P.LevelUp()
-			playerData.Level -= 1
-		while playerData.Fame > 0: # Fame starts from 0
-			P.LevelUp()
-			playerData.Fame -= 1
-		P.XP = playerData.XP
-		# Consumables
-		P.HPotC = playerData.HPotC
-		P.MPotC = playerData.MPotC
-		P.coins = playerData.Coins
-		# Items: Store the ID only, when loading the ID can be used to spawn them in again
-		# Gear
-		if playerData.Helm  > 0: P.Inv.PutItemInSlot(P.Inv.Slot.HELM,     $ItemSpawner.ItemByID(playerData.Helm))
-		if playerData.Chest > 0: P.Inv.PutItemInSlot(P.Inv.Slot.CHEST,    $ItemSpawner.ItemByID(playerData.Chest))
-		if playerData.Main  > 0: P.Inv.PutItemInSlot(P.Inv.Slot.MAINHAND, $ItemSpawner.ItemByID(playerData.Main))
-		if playerData.Off   > 0: P.Inv.PutItemInSlot(P.Inv.Slot.OFFHAND,  $ItemSpawner.ItemByID(playerData.Off))
-		if playerData.Ring1 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.RING1,    $ItemSpawner.ItemByID(playerData.Ring1))
-		if playerData.Ring2 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.RING2,    $ItemSpawner.ItemByID(playerData.Ring2))
-		# Inventory
-		if playerData.Inv0 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV0, $ItemSpawner.ItemByID(playerData.Inv0))
-		if playerData.Inv1 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV1, $ItemSpawner.ItemByID(playerData.Inv1))
-		if playerData.Inv2 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV2, $ItemSpawner.ItemByID(playerData.Inv2))
-		if playerData.Inv3 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV3, $ItemSpawner.ItemByID(playerData.Inv3))
-		if playerData.Inv4 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV4, $ItemSpawner.ItemByID(playerData.Inv4))
-		if playerData.Inv5 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV5, $ItemSpawner.ItemByID(playerData.Inv5))
-		if playerData.Inv6 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV6, $ItemSpawner.ItemByID(playerData.Inv6))
-		if playerData.Inv7 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV7, $ItemSpawner.ItemByID(playerData.Inv7))
-		if playerData.Inv8 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV8, $ItemSpawner.ItemByID(playerData.Inv8))
+	if playerData == {}:
+		print("No data found")
+		return
+		
+	# Progress
+	while playerData.Level > 1: # Level starts from 1
+		P.LevelUp()
+		playerData.Level -= 1
+	while playerData.Fame > 0: # Fame starts from 0
+		P.LevelUp()
+		playerData.Fame -= 1
+	P.XP = playerData.XP
+	# Consumables
+	P.HPotC = playerData.HPotC
+	P.MPotC = playerData.MPotC
+	P.coins = playerData.Coins
+	# Items: Store the ID only, when loading the ID can be used to spawn them in again
+	# Gear
+	if playerData.Helm  > 0: P.Inv.PutItemInSlot(P.Inv.Slot.HELM,     $ItemSpawner.ItemByID(playerData.Helm))
+	if playerData.Chest > 0: P.Inv.PutItemInSlot(P.Inv.Slot.CHEST,    $ItemSpawner.ItemByID(playerData.Chest))
+	if playerData.Main  > 0: P.Inv.PutItemInSlot(P.Inv.Slot.MAINHAND, $ItemSpawner.ItemByID(playerData.Main))
+	if playerData.Off   > 0: P.Inv.PutItemInSlot(P.Inv.Slot.OFFHAND,  $ItemSpawner.ItemByID(playerData.Off))
+	if playerData.Ring1 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.RING1,    $ItemSpawner.ItemByID(playerData.Ring1))
+	if playerData.Ring2 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.RING2,    $ItemSpawner.ItemByID(playerData.Ring2))
+	# Inventory
+	if playerData.Inv0 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV0, $ItemSpawner.ItemByID(playerData.Inv0))
+	if playerData.Inv1 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV1, $ItemSpawner.ItemByID(playerData.Inv1))
+	if playerData.Inv2 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV2, $ItemSpawner.ItemByID(playerData.Inv2))
+	if playerData.Inv3 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV3, $ItemSpawner.ItemByID(playerData.Inv3))
+	if playerData.Inv4 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV4, $ItemSpawner.ItemByID(playerData.Inv4))
+	if playerData.Inv5 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV5, $ItemSpawner.ItemByID(playerData.Inv5))
+	if playerData.Inv6 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV6, $ItemSpawner.ItemByID(playerData.Inv6))
+	if playerData.Inv7 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV7, $ItemSpawner.ItemByID(playerData.Inv7))
+	if playerData.Inv8 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV8, $ItemSpawner.ItemByID(playerData.Inv8))
 
 ## Get all active waygates in all worlds
 func GetActiveWaygates() -> Array[Waygate]:
