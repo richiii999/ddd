@@ -10,30 +10,30 @@ var mapOffset : Vector2 = Vector2(99999,0) # Offset each added map by this much
 func AddMap(map): $Maps.add_child(map); map.global_position += mapOffset; mapOffset += mapOffset
 
 ## Player
-@export var mainmenu_tscn: PackedScene
 @export var player_tscn: PackedScene 
 var player: Player = null # Set by the loading funcs
 
 ## Refs to Stuff
 @onready var nexus: WorldBASE = load("res://Maps/Nexus.tscn").instantiate()
 @onready var world: WorldBASE = load("res://Maps/TestWorld.tscn").instantiate()
-@onready var mainMenu: MainMenu = mainmenu_tscn.instantiate()
+@onready var mainMenu: MainMenu = load("res://UI/MainMenu/main_menu.tscn").instantiate()
 
 ## Save Manager instance
 var Save = SaveMgr.new() # Create a SaveMgr instance to allow for saving
 
 func _ready():
-	# Put the Nexus, OpenWorld, and Player into the scene tree
+	# Load all maps into the game
 	AddMap(nexus)
 	AddMap(world)
 	for DG in dungeons: AddMap(DG.instantiate())
-	$Players.add_child(player)
 	
-	# Setup player, but disable controls for now
-	player.death.connect(DeathHandling)
-	player.hide()
-	player.find_child("RMenu").hide()
-	player.InputStatus = false
+	
+	## Setup player, but disable controls for now
+	#$Players.add_child(player)
+	#player.death.connect(DeathHandling)
+	#player.hide()
+	#player.find_child("RMenu").hide()
+	#player.InputStatus = false
 
 	
 	#Main Menu Handling
@@ -42,18 +42,23 @@ func _ready():
 	add_child(canvas)
 	canvas.add_child(mainMenu)
 	
-	mainMenu.escapeMenu = player.find_child("EscMenu") #pass in the child directly rather than us just hardcoding this shit in
-	mainMenu.escapeMenu.mainMenuButton.connect(mainMenu.ActivateMainMenu)
+	#mainMenu.escapeMenu = player.find_child("EscMenu") #pass in the child directly rather than us just hardcoding this shit in
+	#mainMenu.escapeMenu.mainMenuButton.connect(mainMenu.ActivateMainMenu)
 	mainMenu.show()
-	mainMenu.quitPressed.connect(quitGame)
-	mainMenu.playPressed.connect(Play)
+	mainMenu.quitPressed.connect(Quit)
+	mainMenu.playPressed.connect(MainMenuPlay)
 	mainMenu.escHandling.connect(ActivatingMainMenu)
-	player.find_child("PlayerCam").InstantMove(mainMenu.global_position)
 
-# signal function when play is pressed that starts player movement
-func Play():
+## Main Menu Play: Load any saves, then put player in the world
+func MainMenuPlay():
+	player = player_tscn.instantiate()
+	print("Playerset")
 	LoadData(player, nexus.find_child("Bank"))
+	#setup the player so that anytime you die or respawn, it resets everything in terms of skills 
+	player.find_child("SkillsUI").setup(player)
+	
 	InitialSetup()
+	
 	player.show()
 	player.InputStatus = true
 	player.find_child("RMenu").show()
@@ -74,14 +79,12 @@ func ActivatingMainMenu():
 	#player.find_child("PlayerCam").InstantMove(mainMenu.global_position)
 
 
-# Reused initial setup for player
+## NexusSetup: Put the player in the nexus, and spawn items on the ground
 func InitialSetup():
-	# Put the player in the Nexus to start
-	if not player.get_parent(): $Players.add_child(player)
+	# Put player in nexus via waygate
+	$Players.add_child(player)
 	nexus.ActiveWaygates[0].UseWaygate(player)
 	
-	#setup the player so that anytime you die or respawn, it resets everything in terms of skills 
-	player.find_child("SkillsUI").setup(player)
 	## Initial items
 	var nexOffset = nexus.global_position
 	# Some coins
@@ -119,12 +122,14 @@ func InitialSetup():
 	$ItemSpawner.SpawnItemByID(19, nexOffset + Vector2(-600, 500))
 	$ItemSpawner.SpawnItemByID(20, nexOffset + Vector2(-700, 500))
 	
-func quitGame():
-	print("manager: quitting game")
-	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST) # Notify whole tree (so player can save and other stuff)
-	#await SavaData() # Old saving interface
+func Quit():
+	print("Quitting game...")
 	
-	Save.SaveGame(player, nexus.find_child("Bank")) # Player and bank saved separately
+	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST) # Notify whole tree 
+	# TODO: Does this even do anything? Can prob remove
+	
+	if player: # Player may be null if never started the game
+		Save.SaveGame(player, nexus.find_child("Bank")) # Player and bank saved separately
 	
 	get_tree().quit() # Actually quit the game
 
