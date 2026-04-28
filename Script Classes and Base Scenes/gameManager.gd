@@ -16,7 +16,6 @@ var player: Player = null # Set by the loading funcs
 ## Refs to Stuff
 @onready var nexus: WorldBASE = load("res://Maps/Nexus.tscn").instantiate()
 @onready var world: WorldBASE = load("res://Maps/TestWorld.tscn").instantiate()
-@onready var mainMenu: MainMenu = load("res://UI/MainMenu/main_menu.tscn").instantiate()
 
 ## Save Manager instance
 var Save = SaveMgr.new() # Create a SaveMgr instance to allow for saving
@@ -27,43 +26,22 @@ func _ready():
 	AddMap(world)
 	for DG in dungeons: AddMap(DG.instantiate())
 	
-	
-	## Setup player, but disable controls for now
-	#$Players.add_child(player)
-	#player.death.connect(DeathHandling)
-	#player.hide()
-	#player.find_child("RMenu").hide()
-	#player.InputStatus = false
-
-	
 	#Main Menu Handling
-	#canvas allows us to keep the main menu seperate from all the other assets in the game (TLDR)
-	var canvas = CanvasLayer.new() 
-	add_child(canvas)
-	canvas.add_child(mainMenu)
-	
-	#mainMenu.escapeMenu = player.find_child("EscMenu") #pass in the child directly rather than us just hardcoding this shit in
-	#mainMenu.escapeMenu.mainMenuButton.connect(mainMenu.ActivateMainMenu)
-	mainMenu.show()
-	mainMenu.quitPressed.connect(Quit)
-	mainMenu.playPressed.connect(MainMenuPlay)
-	mainMenu.escHandling.connect(ActivatingMainMenu)
+	#%MainMenu.escapeMenu = player.find_child("EscMenu") #pass in the child directly rather than us just hardcoding this shit in
+	#%MainMenu.escapeMenu.mainMenuButton.connect(mainMenu.ActivateMainMenu)
+	%MainMenu.show()
+	%MainMenu.quitPressed.connect(Quit)
+	%MainMenu.playPressed.connect(MainMenuPlay)
+	%MainMenu.escHandling.connect(ActivatingMainMenu)
 
 ## Main Menu Play: Load any saves, then put player in the world
 func MainMenuPlay():
 	player = player_tscn.instantiate()
-	print("Playerset")
-	LoadData(player, nexus.find_child("Bank"))
-	#setup the player so that anytime you die or respawn, it resets everything in terms of skills 
-	player.find_child("SkillsUI").setup(player)
+	LoadPlayer(player)
+	LoadBank(nexus.find_child("Bank"))
+	player.find_child("SkillsUI").setup(player) # On death, reset skills 
 	
-	InitialSetup()
-	
-	player.show()
-	player.InputStatus = true
-	player.find_child("RMenu").show()
-	#update player UI
-	player.UpdateUIBars()
+	InitialSetup() # Put player in nexus and spawn items
 
 func ActivatingMainMenu():
 	#print("ActivatingMainMenu called")
@@ -74,7 +52,7 @@ func ActivatingMainMenu():
 	player.hide()
 	player.find_child("RMenu").hide()
 	player.find_child("EscMenu").hide()
-	mainMenu.show()
+	%MainMenu.show()
 	#print("mainMenu visible: " + str(mainMenu.visible))
 	#player.find_child("PlayerCam").InstantMove(mainMenu.global_position)
 
@@ -84,6 +62,11 @@ func InitialSetup():
 	# Put player in nexus via waygate
 	$Players.add_child(player)
 	nexus.ActiveWaygates[0].UseWaygate(player)
+	
+	player.show()
+	player.InputStatus = true
+	player.find_child("RMenu").show()
+	player.UpdateUIBars()
 	
 	## Initial items
 	var nexOffset = nexus.global_position
@@ -124,10 +107,6 @@ func InitialSetup():
 	
 func Quit():
 	print("Quitting game...")
-	
-	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST) # Notify whole tree 
-	# TODO: Does this even do anything? Can prob remove
-	
 	if player: # Player may be null if never started the game
 		Save.SaveGame(player, nexus.find_child("Bank")) # Player and bank saved separately
 	
@@ -145,24 +124,23 @@ func DeathHandling():
 	player.show()
 	player.InputStatus = true
 	player.find_child("RMenu").show() #reconnect the main menu escape reference to new player
-	mainMenu.escapeMenu = player.find_child("EscMenu")
-	mainMenu.escapeMenu.mainMenuButton.connect(mainMenu.ActivateMainMenu)
+	%MainMenu.escapeMenu = player.find_child("EscMenu")
+	%MainMenu.escapeMenu.mainMenuButton.connect(%MainMenu.ActivateMainMenu)
 	InitialSetup()
 
-## Load player and bank data
-func LoadData(P:Player, B:Bank):
+## Load BankData from bankData.ddd
+func LoadBank(B:Bank):
 	var bankData = Save.LoadBank()
 	print("Loaded bankdata: " +str(bankData))
 	for i in range(len(bankData)): 
 		if bankData[i] == 0: continue
 		B.PutItemInSlot(i, $ItemSpawner.ItemByID(bankData[i]))
-		
+
+## Load PlayerData from playerData.ddd
+func LoadPlayer(P:Player):
 	var playerData = Save.LoadPlayer()
 	print("Loaded playerData: " + str(playerData))
-	if playerData == {}:
-		print("No data found")
-		return
-		
+	
 	# Progress
 	while playerData.Level > 1: # Level starts from 1
 		P.LevelUp()
