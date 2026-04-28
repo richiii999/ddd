@@ -5,9 +5,9 @@ class_name ProjectilePattern extends Node2D #all this file is gonna do is spawn 
 enum PatternType {
 	CIRCLE,
 	ARC, 
-	#BOWTIE, 
+	BOWTIE, 
 	#GRID, 
-	CHAIN,
+	#CHAIN,
 	#WING_RINGS
 }
 
@@ -25,6 +25,7 @@ func Emit(type: PatternType, count: int, opts: Dictionary = {}) -> void:
 	match type:
 		PatternType.CIRCLE: emit_circle(count, opts)
 		PatternType.ARC: emit_arc(count, opts)
+		PatternType.BOWTIE: emit_bowtie(count, opts)
 
 #this will basically do a circle that does N projectles in a 360 (aka a circle)
 #so if you pass in say (circle, 3), then you get a triangle
@@ -51,6 +52,25 @@ func emit_arc(count: int, opts: Dictionary) -> void:
 	for i in count: #same thing as circle, generates the arc
 		spawn_proj(start + step * i, opts)
 
+#bowtie is like two opposing arcs which make a bow like shape (based off what google said)
+func emit_bowtie(count: int, opts: Dictionary) -> void:
+	var half: int = count / 2 #one half of the arc
+	var safe: float =  opts.get("safe_angle", PI / 4.0) #the total gap in the bowtie
+	var lobe_spread: float = opts.get("spread", PI - safe) #how much each lobe is filled
+	var offset: float = opts.get("offset_angle", 0.0) #basically rotates our entire pattern
+	
+	#create the forward lobe by defining the spread and offset angle, then passing it into our arc function
+	var opts_fwd:= opts.duplicate()
+	opts_fwd["spread"] = lobe_spread
+	opts_fwd["offset_angle"] = opts.get("offset_angle", 0.0) 
+	emit_arc(half, opts_fwd)
+	
+	#create the rear lobe, which is just 180 degrees in the opposite direction
+	var opts_back:= opts.duplicate()
+	opts_back["spread"] = lobe_spread
+	opts_back["offset_angle"] = opts.get("offset_angle", 0.0) + PI #the opposite direction
+	emit_arc(count - half, opts_back) #need to do count - half to deal with the odd counts
+	
 func make_proj(dir: float, opts: Dictionary) -> Projectile:
 	#check to see if the projectile scene even exists 
 	if projectile_scene == null: return null
