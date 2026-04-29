@@ -18,8 +18,8 @@ func EnemyShoot(P: int, pos: Vector2 = targetEntity.global_position):
 	#})
 	pattern.Emit(ProjectilePattern.PatternType.GRID, 0, {
 	"power": P,
-	"cols": 10,
-	"rows": 10,
+	"cols": 2,
+	"rows": 2,
 	"cell_size": 100.0,
 	"offset_angle": dir_to_player
 	})
