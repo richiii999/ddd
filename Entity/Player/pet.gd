@@ -6,7 +6,7 @@ var player = null
 var speed = 200.0
 var follow_distance = 75.0
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if player == null:
 		return
 
@@ -21,7 +21,7 @@ func _physics_process(delta):
 		
 		# Use player speed and enforce a minimum speed of 50 so the pet can catch up
 		var base_speed = player.velocity.length()
-		var speed = max(base_speed, 50.0)
+		speed = max(base_speed, 50.0)
 		
 		# Calculate velocity
 		velocity = direction * speed

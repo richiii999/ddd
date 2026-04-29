@@ -165,7 +165,7 @@ func DropItem():
 func HasItem(item:Item) -> int: return HasItemID(item.ID)
 func HasItemName(itemName:String) -> int:
 	for i in range(len(Slots)):
-		if ItemInSlot(i) != null and ItemInSlot(i).itemName == itemName: return i
+		if ItemInSlot(i) != null and ItemInSlot(i).name == itemName: return i
 	return -1
 func HasItemID(id:int) -> int:
 	if id == 0: push_warning("Searching for ItemID:0")

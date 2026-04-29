@@ -55,6 +55,7 @@ func emit_arc(count: int, opts: Dictionary) -> void:
 
 #bowtie is like two opposing arcs which make a bow like shape (based off what google said)
 func emit_bowtie(count: int, opts: Dictionary) -> void:
+	@warning_ignore("integer_division")
 	var half: int = count / 2 #one half of the arc
 	var safe: float =  opts.get("safe_angle", PI / 4.0) #the total gap in the bowtie
 	var lobe_spread: float = opts.get("spread", PI - safe) #how much each lobe is filled
@@ -124,13 +125,3 @@ func spawn_proj(dir: float, opts: Dictionary) -> void:
 	if proj == null: return
 	get_node("/root/GameManager/Projectiles").add_child(proj)
 	proj.global_position = global_position
-	
-	
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

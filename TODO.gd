@@ -15,14 +15,9 @@
 # -99: WorldEffects, should never be seen (hidden behind world)
 
 ## BUG list
-# death screen sometimes fuck up
 # whenever you hit the necromancer, its summons take damage (that's fine for now, but we could change this in the future)
-# Level bar doesn't change at the fame threshold, so it's only the level bar (only when loading a saved player)
-# Need to save the bank and skill tree information
-# When you die in a lava tile, the lava is still ticking damage past the death screen, so we need to fix this otherwise it stays on the loading screen when you respawn 
-# When you die and respawn, the game crashes because it's trying to access null datatypes on the player for some reason
+# save doesnt save skill tree information
 # ItemPrice for buying waygates broken
-# Whenever you either dash or take damage and run into a wall, you get glitched and can't move... why
 
 ## Main Menu - Initial Version Done: Needs more
 # Splash screen / intro on game launch, specifically a custom Godot Editor splash (cool version)
@@ -30,21 +25,6 @@
 # Loading screen (game launch): press space to skip all intros and just load to main asap.
 # main menu music and animation
 # BASIC options menu, may or may not rebind keys
-# quit game button (ofc)
-
-
-## Save feature for player
-# Saves only player info like stats, inventory, etc.
-# Also saves bank, not lost on death
-# read on game launch, if present, uses the save file
-# if not present, just makes a new player
-
-
-## Pets
-# pet follows player: 
-	# Player.pos - pet.pos (+- offset based on direction or whatever), 
-	# if nonzero, divide by some small number and subtract by a constant 
-# Cosmetic first, then functional like stat boost or something
 
 
 ## Hall of Fame
@@ -69,6 +49,7 @@
 # Think of 1-2 more behaviors and code them with an enemy to test it
 # Enemy that acts like the car from L4D2. Anytime a player is in its radius or doesn't kill it in time, it triggers a horde of enemies (done, we added the necromancer)
 # Add a necromancer boss that is fast, but has low HP BUT summons 3 giant enemies and you can't kill the necromancer until those enemies die
+
 
 ## Audio
 # Sounds, music, sound effects, UI noises on focus and click, items have special pickup/drop sounds etc. etc.
@@ -140,10 +121,9 @@
 # Speed up / slow down
 # Can also have tiles that have effects beyond just hurting you or whatever, conveyor belts, slippery ice, status effect goo
 
-## CONTENT
-
+#### CONTENT
 ## Tutorial 
-# Tutorial will be a dungeon with several rooms (i was thinking maybe 7 - 8?), each showcasing different abilities of the player and possibly the enemy/dungeon itself
+# Tutorial will be a dungeon with several rooms (i was thinking maybe 6-7?), each showcasing different abilities of the player and possibly the enemy/dungeon itself
 	# Dungeon will include: traps, base enemies, doorways, nexus gateway, item usage, very basic boss (and probably more things)
 	# Loot in this dungeon should probably be fixed, just to showcase the loot and what it does
 	# In order to access the other parts of the game, they have to do the tutorial dungeon
