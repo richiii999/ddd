@@ -19,6 +19,7 @@ func onEnter(): # Begin wandering about spawnpoint (if any) or current position,
 	Entity.set_collision_mask_value(9, false)
 	Entity.StatusLabel.addStatusText("Wander", "WHITE")
 	Wander()
+	print(Tools.FindParentByType(self, Enemy))
 	start()
 
 func onLeave(): # Reset movespeed and collision
