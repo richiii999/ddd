@@ -1,22 +1,34 @@
-class_name DungeonBASE extends WorldBASE ## Inspired by Gungeon, waves of enemies spawn in randomly generated rooms. 
-# The root dungeon node has a 'DungeonID' which is given to the Dungeon generator, 
-	# which generates the dungeon by picking rooms with the same ID from a set
-	# It places the portal room first at the center, and the boss room last after the outermost room (by # of rooms from spawn)
-# Boss room has exit portal, activates when boss dies 
-	# (boss death signal emits to dungeon which then calls waygate.activate and spawns chest)
-# Miniboss in each dungeon
-	# Gives lesser loot compared to boss, but easier. Can farm just this if you are too weak for boss
-# rng treasure rooms with a chest
+class_name DungeonBASE extends WorldBASE ## Inspired by Gungeon, waves of enemies spawn in rooms
+# NOTE: The boss room should be the last child of $Rooms
 
-@export var DungeonID : int = 0
+# TODO: RNG treasure rooms with a chest
 
-func _ready(): 
-	pass
-	#await DungeonGenerator.Generate(DungeonID) # Generate a new dungeon based on the ID
+# TODO Displayed on entrance
+@export var DungeonTitle : String = "Dungeon"
 
-func onDungeonClear(): # Called by signal from boss room roomClear()
-	print_debug("Dungeon Clear")
+# TODO Dungeon music
+#@export var bkgMusic
 
+var exitWaygate : Waygate = null # ref to exitWaygate (if any)
 
-func _process(_delta):
-	pass
+func _ready():
+	$Waygates.get_child(0).arrived.connect(ResetDungeon)
+	$Rooms.get_children().pop_back().roomCleared.connect(onDungeonClear)
+
+func onDungeonClear(): # Called by signal from bossRoom's roomClear()
+	print_debug("Dungeon Clear!")
+	
+	for room in $Rooms.get_children():
+		room.SetDoors(true) # Unlock any leftover doors
+	
+	# Exit Waygate spawned on dungeon clear, takes player back to nexus and resets dungeon
+	# NOTE: Unbind(1) in the last line here means ignore the passed arg (free doesnt have params)
+	exitWaygate = load("res://Maps/Mechanics/Waygate.tscn").instantiate()
+	$Rooms.get_children().pop_back().add_child(exitWaygate)
+	exitWaygate.exit = true
+	exitWaygate.setActive(true)
+	exitWaygate.find_child("InteractComponent").Interact.connect(exitWaygate.queue_free.unbind(1))
+
+func ResetDungeon(_P): # Trash player argument from exitWaygate.Interact
+	for room in $Rooms.get_children(): room.Reset()
+	if exitWaygate != null: exitWaygate.queue_free() # Clear leftover exit

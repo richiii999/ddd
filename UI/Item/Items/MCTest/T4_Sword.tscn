@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://b6arxyl0x87nd"]
+
+[ext_resource type="Texture2D" uid="uid://bocdrjou2ncqg" path="res://Assets/References/Minecraft/Invicon_Diamond_Sword.png" id="1_b1u3m"]
+[ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_bs2uj"]
+[ext_resource type="Resource" uid="uid://6uxfkrkyiuvg" path="res://Entity/Projectile/Attack/attack_test2.tres" id="3_kcb4h"]
+
+[node name="DiamondSword" type="Sprite2D" unique_id=398207244]
+texture = ExtResource("1_b1u3m")
+script = ExtResource("2_bs2uj")
+tier = 3
+type = 4
+stats = Dictionary[int, int]({
+0: 5,
+1: 5,
+2: 5,
+3: 3,
+4: 3,
+5: 3,
+6: 1,
+7: 1,
+8: 99
+})
+attack = ExtResource("3_kcb4h")
+metadata/_custom_type_script = "uid://dpbuam0tpmaha"

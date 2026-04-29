@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dx23kg5vk3spb" path="res://Entity/Components/Behaviors/Orbit.tscn" id="7_mktt5"]
 [ext_resource type="PackedScene" uid="uid://dk58kntas8hfd" path="res://Entity/Components/Behaviors/Wander.tscn" id="8_8h73f"]
 [ext_resource type="PackedScene" uid="uid://bntfe5iinhuu5" path="res://UI/Item/loot_table.tscn" id="9_bb34h"]
+[ext_resource type="PackedScene" uid="uid://dddy50t4saequ" path="res://Entity/Components/EffectComponentSystem.tscn" id="10_c7cqt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw8gt"]
 bg_color = Color(1, 0, 0, 1)
@@ -99,9 +100,8 @@ autostart = true
 wait_time = 0.25
 one_shot = true
 
-[node name="FocusTimer" type="Timer" parent="." unique_id=1920357811]
-wait_time = 10.0
-autostart = true
+[node name="HurtTimer" type="Timer" parent="." unique_id=1920357811]
+one_shot = true
 
 [node name="BehaviorFSM" parent="." unique_id=1117611062 instance=ExtResource("6_85l20")]
 
@@ -115,6 +115,8 @@ lootTable = Dictionary[int, int]({
 1: 1
 })
 
+[node name="EffectsComponentSystem" parent="." unique_id=921567753 instance=ExtResource("10_c7cqt")]
+
 [connection signal="onEmpty" from="Sight" to="." method="SightIncrease" binds= [false]]
 [connection signal="onEmpty" from="Sight" to="ShootTimer1" method="set_paused" binds= [true]]
 [connection signal="onEmpty" from="Sight" to="ShootTimer2" method="set_paused" binds= [true]]
@@ -125,4 +127,3 @@ lootTable = Dictionary[int, int]({
 [connection signal="timeout" from="ShootTimer1" to="." method="EnemyShoot" binds= [1]]
 [connection signal="timeout" from="ShootTimer2" to="." method="EnemyShoot" binds= [2]]
 [connection signal="timeout" from="DamageFlashTimer" to="." method="setStatusFlash"]
-[connection signal="timeout" from="FocusTimer" to="." method="FocusTick"]

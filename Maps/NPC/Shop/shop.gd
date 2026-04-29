@@ -14,13 +14,12 @@ func _ready():
 		var slot = invSlot.instantiate()
 		$ShopGUI/GridContainer.add_child(slot)
 		
-		# TODO Price and label
-		#var itemLabel = 
-		#var priceLabel
+		# TODO Price
+		# var priceLabel
 		
 		slot.slotNumber = i
 		slot.slotClicked.connect(BuyItem) # SlotN is emitted with this signal
-		slot.UpdateSlot(items[i].instantiate()) # Add item to slot
+		slot.UpdateSlot(items[i].instantiate(), true) # Add item to slot
 		i += 1
 
 # Dialogue text is visible for a few seconds then goes away automatically
@@ -36,8 +35,7 @@ func BuyItem(slotN:int):
 	
 	var item = ItemInSlot(slotN)
 	print("Player tried to buy " + str(item))
-	if not currPlayer.Inv.FirstEmptyInvSlot():
-		# BUG: Full inv is not triggering
+	if currPlayer.Inv.FirstEmptyInvSlot() == -1:
 		currPlayer.StatusLabel.addStatusText("Full Inv!", "RED")
 	elif currPlayer.coins < item.price:
 		currPlayer.StatusLabel.addStatusText("U R BROKE!", "RED")

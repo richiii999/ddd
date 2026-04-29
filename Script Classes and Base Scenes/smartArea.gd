@@ -1,23 +1,26 @@
-class_name SmartArea extends Area2D ## Keeps an array of the nodes inside of an area (& supports additional logic via signals)
+class_name SmartArea extends Area2D ## Keeps an array of the nodes inside of an area 
+# Supports additional logic via signals
 
-@export var AreaOrBody : bool = false # Detect area or bodies? default body
+@export var area : bool = true # Detect areas?
+@export var body : bool = true # Detect bodies?
 
 @export var smartArea : Array[Node] = [] # Array which stores all nodes inside the area
 @export var threshold : int = 0 # When the array reaches a certain size, emit onThreshold
 
 signal onFirst     # When array.size() goes from 0 -> 1 
 signal onEmpty     # When array.size() goes from 1 -> 0
-signal onThreshold # When array.size() reaches (nonzero) threshold with true (reached threshold) or false (went below threshold)
+signal onThreshold # When array.size() = threshold with true (++) or false (--)
 
-func _ready(): # NOTE: have to connect signals from this script since they dont save from editor when you instantiate the scene
-	if AreaOrBody:
+func _ready():
+	if area:
 		area_entered.connect(UpdateArray.bind(true))
 		area_exited.connect(UpdateArray.bind(false))
-	else: 
+	if body:
 		body_entered.connect(UpdateArray.bind(true))
 		body_exited.connect(UpdateArray.bind(false)) 
 
-func UpdateArray(N : Node2D, enter : bool): ## Add/remove entities to array when they enter/exit the Area2D
+## Add/remove entities to array when they enter/exit the Area2D
+func UpdateArray(N : Node2D, enter : bool):
 	if enter:
 		onEnter(N)
 		smartArea.append(N)

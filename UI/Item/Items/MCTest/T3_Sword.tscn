@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dy0xtdoiylh18"]
+
+[ext_resource type="Texture2D" uid="uid://d35qdjflapwbk" path="res://Assets/References/Minecraft/Invicon_Golden_Sword.png" id="1_luhs5"]
+[ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_dp0sp"]
+[ext_resource type="Resource" uid="uid://6uxfkrkyiuvg" path="res://Entity/Projectile/Attack/attack_test2.tres" id="3_qck8u"]
+
+[node name="GoldSword" type="Sprite2D" unique_id=398207244]
+texture = ExtResource("1_luhs5")
+script = ExtResource("2_dp0sp")
+tier = 2
+type = 1
+stats = Dictionary[int, int]({
+0: 5,
+1: 5,
+2: 5,
+3: 3,
+4: 3,
+5: 3,
+6: 1,
+7: 1,
+8: 99
+})
+attack = ExtResource("3_qck8u")
+metadata/_custom_type_script = "uid://dpbuam0tpmaha"

@@ -1,5 +1,11 @@
-class_name DungeonDoor extends StaticBody2D ## Opens on trigger from parent (the room)
+class_name DungeonDoor extends AnimatedSprite2D ## Opens on trigger from parent (the room)
+# DungeonRoomDoors also get put on the world arenas when the boss is attacked
 
-# TODO: # DungeonRoomDoor also gets put on the main island boss arenas when boss is attacked
+# TODO: arenas
 
-func Open(): queue_free() # TODO: await opening animation, then free
+func SetOpen(state:bool): 
+	# TODO: opening/closing animation
+	$Front/CollisionShape2D.set_deferred("disabled", state)
+	$Back/CollisionShape2D.set_deferred("disabled", state)
+	$PlayerDetector/CollisionShape2D.set_deferred("disabled", state)
+	visible = !state

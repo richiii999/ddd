@@ -10,6 +10,9 @@ class_name skillButton extends Button ## SkillButton: Able to be clicked only wh
 @export var closedIcon = preload("res://Assets/UI/Inventory/inv_slot.png")
 @export var openIcon = preload("res://Assets/UI/Inventory/inv_slotWhite.png")
 @export var activeIcon = preload("res://Assets/UI/Inventory/inv_slotPurple.png")
+@export var is_class_choice : bool = false
+@export var class_id : String = "" #can do like berserker, mage, etc
+@export var subtree_scene : PackedScene = null #for our class popup
 func setSkillIcon() -> void: icon = activeIcon if active else openIcon if availible else closedIcon
 
 @warning_ignore("int_as_enum_without_cast")
@@ -24,7 +27,9 @@ Stats.BLK: 1,
 Stats.WIL: 1, 
 Stats.SPD: 1
 }
-signal skillUpdate # emitted to the SkillsUI when a skill is bought
+
+var permanently_locked : bool = false
+signal on_skill_bought # emitted to the SkillsUI when a skill is bought
 
 func _ready(): 
 	pressed.connect(activateSkill)
@@ -32,7 +37,13 @@ func _ready():
 	$SkillText.text = skillText
 
 func checkAvailible() -> bool: # Checks if this is now availible, called on all nodes when any skill is activated
+	if permanently_locked: return false
 	if active: return false # The skill is not available for the player to obtain
+	if is_class_choice: #check to see if they even have a class available, if not then update UI
+		var ui = find_parent("SkillsUI")
+		if ui and ui.chosen_class != "":
+			return false
+			
 	for skill in parentSkills: 
 		if not skill.active:
 			return false # Inactive parent, not availible
@@ -47,5 +58,5 @@ func activateSkill() -> String: # Tries to activate the skill, costs a skillpoin
 	availible = false
 	active = true
 	setSkillIcon()
-	skillUpdate.emit(self)
+	on_skill_bought.emit(self)
 	return "Skill bought!"

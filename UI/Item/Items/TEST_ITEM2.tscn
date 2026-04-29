@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://bt0k5w8xqyhj5" path="res://Assets/Sprites/GD Icons/GD_Grey.tres" id="1_7uxoj"]
 [ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_3t0sl"]
-[ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="3_kasdc"]
+[ext_resource type="Resource" uid="uid://b75yjmcdr5vks" path="res://Entity/Projectile/Attack/attack_test.tres" id="3_7uxoj"]
 
-[node name="TestItem" type="Sprite2D" unique_id=398207244]
+[node name="TestItem2" type="Sprite2D" unique_id=398207244]
 texture = ExtResource("1_7uxoj")
 script = ExtResource("2_3t0sl")
 itemName = "TEST_ITEM2"
@@ -20,5 +20,5 @@ stats = Dictionary[int, int]({
 7: 1,
 8: 99
 })
-projectile = ExtResource("3_kasdc")
+attack = ExtResource("3_7uxoj")
 metadata/_custom_type_script = "uid://dpbuam0tpmaha"

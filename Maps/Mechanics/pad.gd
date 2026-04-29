@@ -1,6 +1,8 @@
 extends Area2D ## Pressure Plate: Sprite when stepped on, sends a signal
 # NOTE: Connections are made from the reciever node, not from this!
 
+# TODO: Test this out
+
 # Inspector bools to set the masks automatically
 @export var detectPlayer: bool = false
 @export var detectEnemy : bool = false

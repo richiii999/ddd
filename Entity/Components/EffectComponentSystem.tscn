@@ -2,5 +2,9 @@
 
 [ext_resource type="Script" uid="uid://bpi8akammw01e" path="res://Entity/Components/effectComponentSystem.gd" id="1_6n1ty"]
 
-[node name="EffectsComponentSystem" type="Node2D" unique_id=12836084]
+[node name="EffectsComponentSystem" type="Node2D" unique_id=921567753]
 script = ExtResource("1_6n1ty")
+
+[node name="Timer" type="Timer" parent="." unique_id=1113727311]
+wait_time = 0.25
+autostart = true

@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dldt74d5wk85d"]
+
+[ext_resource type="Texture2D" uid="uid://cktlhgltnn6h1" path="res://Assets/References/Minecraft/Invicon_Shield.png" id="1_ecyt6"]
+[ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_gqu0t"]
+[ext_resource type="Resource" uid="uid://6uxfkrkyiuvg" path="res://Entity/Projectile/Attack/attack_test2.tres" id="3_xa2vf"]
+
+[node name="ShieldT2" type="Sprite2D" unique_id=398207244]
+texture = ExtResource("1_ecyt6")
+script = ExtResource("2_gqu0t")
+tier = 1
+type = 5
+stats = Dictionary[int, int]({
+0: 5,
+1: 5,
+2: 5,
+3: 3,
+4: 3,
+5: 3,
+6: 1,
+7: 1,
+8: 99
+})
+attack = ExtResource("3_xa2vf")
+metadata/_custom_type_script = "uid://dpbuam0tpmaha"

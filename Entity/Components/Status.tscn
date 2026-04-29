@@ -14,13 +14,6 @@ script = ExtResource("1_f2ruy")
 [node name="StatusTextTimer" type="Timer" parent="." unique_id=1495577754]
 one_shot = true
 
-[node name="StatusColorTimer" type="Timer" parent="." unique_id=2076482883]
-one_shot = true
-
 [node name="StatusFlashTimer" type="Timer" parent="." unique_id=1572143681]
 wait_time = 0.5
 one_shot = true
-
-[connection signal="timeout" from="StatusTextTimer" to="." method="statusTextTimer" binds= [true]]
-[connection signal="timeout" from="StatusColorTimer" to="." method="setStatusColor"]
-[connection signal="timeout" from="StatusFlashTimer" to="." method="setStatusFlash"]

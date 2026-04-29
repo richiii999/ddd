@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://c2lryasv0namt"]
 
 [ext_resource type="Script" uid="uid://dk75vwl8p2eck" path="res://Entity/Enemy/enemy.gd" id="1_17rlh"]
-[ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_l1ai2"]
 [ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="3_6b84h"]
 [ext_resource type="Texture2D" uid="uid://di6ytqcvdio6g" path="res://Assets/Sprites/GD Icons/GodotIconAtlas.png" id="4_tbnwm"]
 [ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/smartArea.gd" id="5_0hipr"]
 [ext_resource type="PackedScene" uid="uid://dfcui8l7w2j3m" path="res://Entity/Components/BehaviorFSM.tscn" id="6_ptp2k"]
+[ext_resource type="PackedScene" uid="uid://dddy50t4saequ" path="res://Entity/Components/EffectComponentSystem.tscn" id="7_0hipr"]
 [ext_resource type="PackedScene" uid="uid://dk58kntas8hfd" path="res://Entity/Components/Behaviors/Wander.tscn" id="7_vuxob"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw8gt"]
@@ -38,10 +38,8 @@ collision_layer = 256
 collision_mask = 267
 motion_mode = 1
 script = ExtResource("1_17rlh")
-proj1 = ExtResource("2_l1ai2")
-proj2 = ExtResource("2_l1ai2")
-accel = 0.0
 kBResistance = 1.0
+accel = 0.0
 HPmax = 999999
 
 [node name="Status" parent="." unique_id=218576894 instance=ExtResource("3_6b84h")]
@@ -112,6 +110,8 @@ autostart = true
 initState = NodePath("behavior_wander")
 
 [node name="behavior_wander" parent="BehaviorFSM" unique_id=492589810 instance=ExtResource("7_vuxob")]
+
+[node name="EffectsComponentSystem" parent="." unique_id=921567753 instance=ExtResource("7_0hipr")]
 
 [connection signal="onEmpty" from="Sight" to="." method="SightIncrease" binds= [false]]
 [connection signal="onEmpty" from="Sight" to="ShootTimer1" method="set_paused" binds= [true]]

@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cokxulwlr7sv6" path="res://UI/Skills/skillsUI.gd" id="1_ne31x"]
 [ext_resource type="PackedScene" uid="uid://bnwioo2u0cgq2" path="res://UI/Skills/skill_button.tscn" id="1_oyd6t"]
+[ext_resource type="PackedScene" uid="uid://11o1ypwtrjtu" path="res://UI/Skills/Classes/berserker.tscn" id="3_1uy7s"]
+[ext_resource type="PackedScene" uid="uid://b8bg130wcy65a" path="res://UI/Skills/Classes/mage.tscn" id="4_g2e51"]
 
 [node name="SkillsUI" type="Panel" unique_id=965317542]
 custom_minimum_size = Vector2(256, 416)
@@ -117,3 +119,28 @@ stats = Dictionary[int, int]({
 7: 0,
 8: 99
 })
+
+[node name="berseker" parent="." unique_id=331613725 instance=ExtResource("1_oyd6t")]
+layout_mode = 0
+skillText = "Berseker"
+is_class_choice = true
+class_id = "berserker"
+subtree_scene = ExtResource("3_1uy7s")
+
+[node name="mage" parent="." unique_id=2031093468 instance=ExtResource("1_oyd6t")]
+layout_mode = 0
+offset_left = 502.0
+offset_top = 343.0
+offset_right = 574.0
+offset_bottom = 415.0
+skillText = "Mage"
+is_class_choice = true
+class_id = "mage"
+subtree_scene = ExtResource("4_g2e51")
+
+[node name="OpenClass" type="Button" parent="." unique_id=1395218759]
+layout_mode = 0
+offset_left = 528.0
+offset_right = 576.0
+offset_bottom = 31.0
+text = "Class"

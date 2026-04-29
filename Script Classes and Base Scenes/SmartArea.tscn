@@ -2,8 +2,5 @@
 
 [ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/smartArea.gd" id="1_qntch"]
 
-[node name="SmartArea" type="Area2D"]
+[node name="SmartArea" type="Area2D" unique_id=1213420166]
 script = ExtResource("1_qntch")
-
-[connection signal="body_entered" from="." to="." method="UpdateArray" binds= [true]]
-[connection signal="body_exited" from="." to="." method="UpdateArray" binds= [false]]

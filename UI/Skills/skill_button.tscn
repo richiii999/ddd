@@ -8,19 +8,19 @@
 atlas = ExtResource("2_ncwhr")
 region = Rect2(128, 0, 128, 128)
 
-[node name="Skill_Button" type="Button"]
+[node name="Skill_Button" type="Button" unique_id=331613725]
 offset_right = 72.0
 offset_bottom = 72.0
 icon = ExtResource("1_xixp4")
 icon_alignment = 1
 script = ExtResource("2_xokeq")
 
-[node name="Display_Sprite" type="Sprite2D" parent="."]
+[node name="Display_Sprite" type="Sprite2D" parent="." unique_id=1190960225]
 position = Vector2(36, 36)
 scale = Vector2(0.45, 0.45)
 texture = SubResource("AtlasTexture_xokeq")
 
-[node name="SkillText" type="RichTextLabel" parent="."]
+[node name="SkillText" type="RichTextLabel" parent="." unique_id=111711781]
 layout_mode = 0
 offset_left = -24.0
 offset_top = 56.0

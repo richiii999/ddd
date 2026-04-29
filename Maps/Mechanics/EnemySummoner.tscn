@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://h1tj26pfcxa1"]
+
+[ext_resource type="Texture2D" uid="uid://cx8la75kvhbps" path="res://Assets/Sprites/EnemyDungeonSpawner_Frame1.png" id="1_f2bxh"]
+[ext_resource type="Texture2D" uid="uid://ichvm2vrowp8" path="res://Assets/Sprites/EnemyDungeonSpawner_Frame2.png" id="2_r3vfw"]
+[ext_resource type="Texture2D" uid="uid://d28i0xf1ww0lg" path="res://Assets/Sprites/EnemyDungeonSpawner_Frame3.png" id="3_i8ajw"]
+[ext_resource type="Script" uid="uid://vi6rw8a1kfdv" path="res://Maps/Dungeons/dungeonEnemySpawner.gd" id="4_3ua3r"]
+[ext_resource type="PackedScene" uid="uid://ccbgnraoi6fdf" path="res://Entity/Enemy/EnemyTest.tscn" id="5_rmwx6"]
+[ext_resource type="Texture2D" uid="uid://cp8emtaw312j2" path="res://Assets/References/star particle.png" id="6_f4y54"]
+[ext_resource type="Material" uid="uid://r4t1ygvnei31" path="res://Assets/ParticleMaterials/ParticleRepelRandomLifetime.tres" id="7_7mpqr"]
+[ext_resource type="PackedScene" uid="uid://jirxg1144i67" path="res://Script Classes and Base Scenes/SmartArea.tscn" id="7_nud7w"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_axy1d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_f2bxh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_r3vfw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_i8ajw")
+}],
+"loop": false,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g2hvx"]
+radius = 432.8233
+
+[node name="EnemySummoner" type="AnimatedSprite2D" unique_id=1445437097]
+sprite_frames = SubResource("SpriteFrames_axy1d")
+autoplay = "default"
+script = ExtResource("4_3ua3r")
+enemyScene = ExtResource("5_rmwx6")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=912263324]
+scale = Vector2(3, 3)
+emitting = false
+amount = 20
+texture = ExtResource("6_f4y54")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.8
+randomness = 1.0
+process_material = ExtResource("7_7mpqr")
+
+[node name="SmartArea" parent="." unique_id=1213420166 instance=ExtResource("7_nud7w")]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmartArea" unique_id=854204159]
+shape = SubResource("CircleShape2D_g2hvx")
+
+[connection signal="onFirst" from="SmartArea" to="." method="setEnabled" binds= [true]]

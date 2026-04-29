@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://nquy6bnqhiwd"]
 
 [ext_resource type="Script" uid="uid://28yokghggm42" path="res://Entity/Player/player.gd" id="1_pnyfx"]
+[ext_resource type="PackedScene" uid="uid://cs61kw023xsp4" path="res://Entity/Player/Pet.tscn" id="2_3vnax"]
 [ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_7hmw6"]
 [ext_resource type="PackedScene" uid="uid://dko0els7hvmek" path="res://Entity/Projectile/ProjectileTest2.tscn" id="3_pnyfx"]
 [ext_resource type="PackedScene" uid="uid://bclrygg5d3dyn" path="res://Entity/Field.tscn" id="4_cretm"]
-[ext_resource type="PackedScene" uid="uid://camr7ev4ss5vd" path="res://Entity/Components/Effects/Speed.tscn" id="4_u55sb"]
+[ext_resource type="PackedScene" uid="uid://b7cfsiy7p7ath" path="res://Entity/Components/Effects/Confused.tscn" id="5_pnyfx"]
 [ext_resource type="PackedScene" uid="uid://e5fewqnk5nty" path="res://UI/RMenu/r_menu.tscn" id="6_s48lg"]
 [ext_resource type="PackedScene" uid="uid://jkkh88r7c0fe" path="res://UI/LoadingScreen/loading_screen.tscn" id="7_2h57d"]
 [ext_resource type="PackedScene" uid="uid://ckppam3wv3dxn" path="res://UI/Death/death_screen.tscn" id="8_pt1bs"]
@@ -74,10 +75,13 @@ scale = Vector2(0.75, 0.75)
 collision_layer = 16
 collision_mask = 385
 motion_mode = 1
+wall_min_slide_angle = 0.17453292
+safe_margin = 0.25
 script = ExtResource("1_pnyfx")
+pet = ExtResource("2_3vnax")
 projs = Array[PackedScene]([ExtResource("2_7hmw6"), ExtResource("3_pnyfx"), ExtResource("2_7hmw6")])
 fields = Array[PackedScene]([null, ExtResource("4_cretm"), null])
-fieldEffects = Array[PackedScene]([null, ExtResource("4_u55sb"), null])
+fieldEffects = Array[PackedScene]([null, ExtResource("5_pnyfx"), null])
 aimSpread = 0.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1109501273]
@@ -115,7 +119,9 @@ Nexus: N
 Hide Rmenu: F12
 HP- : 0
 HP+: Shift+0
-XP+: 9"
+XP+: 9
+Show Pet: X
+Hide Pet: Z"
 
 [node name="RMenu" parent="CanvasLayer" unique_id=675567958 instance=ExtResource("6_s48lg")]
 unique_name_in_owner = true
@@ -222,7 +228,6 @@ collision_layer = 0
 collision_mask = 4
 monitorable = false
 script = ExtResource("16_5ay3i")
-AreaOrBody = true
 metadata/_custom_type_script = "uid://hi4e34yydb2t"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemPickupRange" unique_id=1834462106]

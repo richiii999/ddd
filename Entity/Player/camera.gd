@@ -3,11 +3,10 @@ extends Camera2D ## Camera script: Typically follows player, maybe add cutscene 
 # Position Smoothing: 5px/s
 # Position.x = 160, offset to account for RMenu
 
-## TODO: confusion debuff makes camera spin around player in circle or something 
-	# trace a circle of radius R around player, where R is the strenght of the debuff
+@export var confused : bool = false # If set, camera zooms in / out
 
 @onready var Follow : Node = get_parent() # link to what the camera is following (just parent for now)
-var Res : Vector2 = Vector2(1280, 720) # Game resolution # TODO: there has to be a way to get this easily
+var Res : Vector2 = Vector2(1280, 720) # Game resolution
 
 var lookAtCursor : bool = false # Camera does/not move towards cursor
 var lookRate: float = 7.00 # How much the camera moves with the mouse
@@ -32,6 +31,7 @@ func _process(_delta):
 	if Input.get_axis("minus", "plus"): Zoom(Input.get_axis("minus", "plus"))
 	
 	if lookAtCursor: offset = (get_viewport().get_mouse_position() / lookRate).clamp(lookMin, lookMax)
+	if confused: Zoom(0.1 * sin(Time.get_ticks_msec() / 1000.0))
 
 func camReset() -> void : zoom = Vector2(1.00,1.00)
 

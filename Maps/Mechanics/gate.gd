@@ -1,6 +1,8 @@
 extends StaticBody2D ## Gate: Membrane that can open / close on a trigger
 # Certain things can go through while others are blocked (player/enemy)
 
+# TODO: test this out
+
 # What is this connected to?
 @export var Connection : Node = null
 
