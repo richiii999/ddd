@@ -15,7 +15,6 @@
 # -99: WorldEffects, should never be seen (hidden behind world)
 
 ## BUG list
-# whenever you hit the necromancer, its summons take damage (that's fine for now, but we could change this in the future)
 # save doesnt save skill tree information
 
 ## Main Menu - Initial Version Done: Needs more
@@ -61,17 +60,6 @@
 # Fancy particle effects, still pixelated but cool lighting and stuff
 # Get a pixel art text font
 # Glowing lighting and shining stuff, daytime / nighttime effect perhaps? Or oryx can cause an eclipse which darkens the world for 10 mins then final boss
-
-
-## Projectile Patterns: can spawn projectile's in special patterns
-# Possibly can group pattern projectiles via one parent node that has only ONE timer
-# interface can be like pattern(type, num, [color optional]) where type is like, circle, 2pair 3p,4p,np, 
-# chain (which is a repetition of some other pattern multiple times)
-# ex: (circle, 3) makes a triangle, and (circle,40) is a bullet hell
-# (bowtie, 20, 50degrees, 45egrees) is a bowtie shape with a safezone of 50deg and a 45deg offset from the rotation of the boss
-# Proj pattern example, for loop spaws a grid of projectiles tat moves across the screen on a line or a curved path
-# adv patter, block: spawns a 3x3 grid or whatever predefined shape that moves along a path
-# adv proj patter, wing rings:  spawns concentric rings that emit from the center and rotate on offset sinewaves via bowtie
 
 
 ## Knockback content:

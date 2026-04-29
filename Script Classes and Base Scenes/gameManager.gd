@@ -174,7 +174,7 @@ func LoadPlayer(P:Player):
 	
 	# Prevent "Level X!" spam
 	print(player.StatusLabel.textQueue)
-	player.StatusLabel.textQueue = [] # Prevent "Level X!" spam
+	player.StatusLabel.textQueue = []
 	player.StatusLabel.addStatusText("Spawned in!", "BLUE")
 
 
