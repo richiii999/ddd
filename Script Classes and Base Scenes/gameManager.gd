@@ -105,10 +105,12 @@ func PlayerSetup():
 	player.InputStatus = true
 	player.death.connect(DeathHandling)
 	player.find_child("RMenu").show()
-	%MainMenu.escapeMenu = player.find_child("EscMenu")
-	%MainMenu.escapeMenu.mainMenuButton.connect(%MainMenu.ActivateMainMenu)
 	player.UpdateUIBars()
 	player.find_child("SkillsUI").setup(player) # On death, reset skills 
+	
+	# Main Menu connection
+	%MainMenu.escapeMenu = player.find_child("EscMenu")
+	%MainMenu.escapeMenu.mainMenuButton.connect(%MainMenu.ActivateMainMenu)
 
 func Quit():
 	print("Quitting game...")
@@ -169,6 +171,12 @@ func LoadPlayer(P:Player):
 	if playerData.Inv6 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV6, $ItemSpawner.ItemByID(playerData.Inv6))
 	if playerData.Inv7 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV7, $ItemSpawner.ItemByID(playerData.Inv7))
 	if playerData.Inv8 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV8, $ItemSpawner.ItemByID(playerData.Inv8))
+	
+	# Prevent "Level X!" spam
+	print(player.StatusLabel.textQueue)
+	player.StatusLabel.textQueue = [] # Prevent "Level X!" spam
+	player.StatusLabel.addStatusText("Spawned in!", "BLUE")
+
 
 ## Get all active waygates in all worlds
 func GetActiveWaygates() -> Array[Waygate]:

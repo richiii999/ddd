@@ -127,7 +127,7 @@ func get_move_spd() -> float:
 func _ready():
 	super._ready() # call ENTITY._ready() (sets HP and MP)
 	super.EntityUI()
-	StatusLabel.addStatusText("Spawned in!")
+	StatusLabel.addStatusText("Spawned in!", "BLUE")
 	#print(get_tree_string_pretty()) #Debug print the nodetree
 	#test_apply_stats()
 	%DeathScreen.find_child("Restart").pressed.connect(_OnDeathScreenButtonPushed)
@@ -235,6 +235,7 @@ func get_input(): # TODO: replace this with _input() ?
 	if Input.is_action_just_pressed("MPot"): MPot() # MPot with 'G'
 	if Input.is_action_just_pressed("Nexus"): # TP back to Nexus with 'N'
 		get_node("/root/GameManager/Maps/Nexus/Waygates/NexusWaygate").UseWaygate(self)
+		$Status.addStatusText("Nexus!", "BLUE")
 	if Input.is_action_just_pressed("Loot"): Inv.Loot() # Loot with 'Q'
 	if Input.is_action_just_pressed("spawn-pet"): SpawnPet() # Spawn pet with 'X'
 	if Input.is_action_just_pressed("delete-pet"): DeletePet() # Delete pet with 'Z'
@@ -403,7 +404,6 @@ func toggleBubble(state:bool) -> void: # Makes player invulnerable, disables inp
 	#TODO: replace with "<bubble animation forward/reverse>"
 	if (state):
 		$Status.setStatusFlash(Color("BLUE"), 1.50)
-		$Status.addStatusText("Nexus!", "BLUE")
 		#await get_tree().create_timer(1.00).timeout # NOTE: This causes the game's start to lag
 	else:
 		await get_tree().create_timer(1.00).timeout
