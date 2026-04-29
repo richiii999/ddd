@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://blyjhm2j5onnb" path="res://Maps/Mechanics/EnemyPackSpawner.tscn" id="4_5iikc"]
 [ext_resource type="PackedScene" uid="uid://tcx34hy287cs" path="res://Maps/Mechanics/Waygate.tscn" id="4_bvj08"]
 [ext_resource type="PackedScene" uid="uid://3srv66mglq52" path="res://UI/Item/Items/MCTest/T1_Chest.tscn" id="4_tklj8"]
+[ext_resource type="PackedScene" uid="uid://tq8hs5inekce" path="res://Entity/Enemy/Enemies/ChaseZombie.tscn" id="7_4aram"]
 [ext_resource type="PackedScene" uid="uid://dgtlakw8834qa" path="res://Entity/Enemy/Enemies/Necromancer.tscn" id="9_74rsv"]
 
 [node name="Test_World" type="TileMapLayer" unique_id=1473374642]
@@ -38,4 +39,8 @@ position = Vector2(88, -240)
 position = Vector2(1192, 1688)
 Mob = ExtResource("9_74rsv")
 maxMobs = 1
-spawnRadius = 0
+
+[node name="EnemySpawnNode2" parent="Spawners" unique_id=1257634712 instance=ExtResource("4_5iikc")]
+position = Vector2(-1385, 417)
+Mob = ExtResource("7_4aram")
+maxMobs = 5
