@@ -173,7 +173,6 @@ func LoadPlayer(P:Player):
 	if playerData.Inv8 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV8, $ItemSpawner.ItemByID(playerData.Inv8))
 	
 	# Prevent "Level X!" spam
-	print(player.StatusLabel.textQueue)
 	player.StatusLabel.textQueue = []
 	player.StatusLabel.addStatusText("Spawned in!", "BLUE")
 

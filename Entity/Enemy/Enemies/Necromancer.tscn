@@ -124,7 +124,7 @@ lootTable = Dictionary[int, int]({
 [node name="EnemySpawnNode" parent="." unique_id=1257634712 instance=ExtResource("11_6ytyj")]
 Mob = ExtResource("12_r81hf")
 maxMobs = 3
-mob_visibility = false
+onlyWhenOffScreen = false
 
 [node name="RespawnTimer" parent="EnemySpawnNode" index="0" unique_id=1959530611]
 wait_time = 3.0

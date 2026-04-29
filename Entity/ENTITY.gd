@@ -58,12 +58,12 @@ func incHP(inc:int): HP += inc; if (HPBar): HPBar.value = HP
 func incMP(inc:int): MP += inc; if (MPBar): MPBar.value = MP
 
 ## Entity AI stuff
-@onready var targetEntity : ENTITY = self # What entity is this entity targeting? (ex. player targeted by enemy)
+var targetEntity : ENTITY = self # What entity is this entity targeting? (ex. player targeted by enemy)
 
 @onready var targetPos : Vector2 = global_position # movement target (global position) for pathfinding to (players dont use this)
 
-func setTargetEntity(T : ENTITY = self): targetEntity = T if T is ENTITY else self # Failsafe
-func setTargetPos(T : Vector2 = Vector2(0,0)): targetPos = T # TODO: Pathfinding
+func setTargetEntity(T : ENTITY): targetEntity = T
+func setTargetPos(T : Vector2): targetPos = T # TODO: Pathfinding
 
 # Workaround for double signal binding (enemy Sight.onFirst sets target entity to whatever was seen)
 func setTargetFirstSight(): setTargetEntity(Sight.smartArea.front())

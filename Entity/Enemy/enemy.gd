@@ -5,7 +5,9 @@ class_name Enemy extends ENTITY ## ENEMY: Base class for enemies, who are instan
 @onready var HurtTimer = find_child("HurtTimer") # May not exist (ex. training dummy)
 
 @export var XP : int = 10 # How much XP does the mob give on death? (Emitted with entity.death)
+@export var targetOnSight:bool = true # Target player when spotted?
 
+var following:Enemy = null # Set by parent enemy's spawner (ex. NecroSkull Orbiters)
 var targetPosStopRadius : float = 50 # How close to targetPos will this enemy stop (values closer to 0 make movement rubberband when reach targetPos)
 
 func _ready():
@@ -14,10 +16,15 @@ func _ready():
 	z_index = 2
 	$ShootTimer1.set_paused(true) # The shoot timers activate only when SightList has something in it
 	$ShootTimer2.set_paused(true) # ^ via onFirst() turning them on & onEmpty() turning them off
-	$Sight.onEmpty.connect(setTargetEntity.bind(self))
-	$Sight.onFirst.connect(setTargetFirstSight)
+	
+	if following: setTargetEntity(following)
+	
+	if targetOnSight:
+		if following: $Sight.onEmpty.connect(setTargetEntity.bind(following))
+		else: $Sight.onEmpty.connect(setTargetEntity.bind(self))
+		$Sight.onFirst.connect(setTargetFirstSight)
+	
 	if HurtTimer: HurtTimer.timeout.connect(SightIncrease.bind(false))
-	setTargetPos()
 
 func _physics_process(_delta):
 	ReadTerrain()
