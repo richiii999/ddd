@@ -50,7 +50,7 @@ var dashing : bool = false # Dashing state, if true, cannot move with WASD
 var dashMax : float = 2.00 # Max dashes stored
 var dashNum : float = 0.00 # Current dashes stored (use 1.00 per dash)
 var dashRec : float = 0.005 # Dash recovered per frame (def: 0.005)
-var dashLen : float = 100  # (px) Length of dash
+var dashLen : float = 0.2  # (s) Length of dash
 var dashSpd : float = 600  # (px/s) Speed of dash
 func setDashing(B:bool): dashing = B # needed cause signal (vvv)
 # $DashTimer.timeout -> setDashing(false)
@@ -181,8 +181,8 @@ func get_input(): # TODO: replace this with _input() ?
 		$ShotTimer.start(max((0.30 / atkSpeed), 0.05)) # Max AtkSpeed is 0.05s per shot (AtkSpeed == 6.00), any higher does nothing
 		ShootProj(1, get_global_mouse_position())
 	if (Input.is_action_pressed("RMB") && dashNum >= 1.00 && %DashTimer.is_stopped() && InputV && charge == 0):
-		%DashTimer.start(dashLen / dashSpd)
-		#print(%DashTimer.time_left)
+		%DashTimer.start(dashLen)
+		print(%DashTimer.time_left)
 		setDashing(true) # Disables WASD movement
 		$Projectile_Hitbox.set_collision_layer_value(7, false) # Disable projectile hitbox
 		dashNum -= 1.00
