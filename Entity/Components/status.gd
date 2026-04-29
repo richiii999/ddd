@@ -41,7 +41,6 @@ func displayText():
 	
 	for i in textQueue.size(): # Add text one at a time and resize accordingly
 		text += textQueue[i]
-		if i == 5: break # The textQueue can still have more than 5, but only 5 are shown at once
 		if i == 5: break # Only 5 are shown at once
 
 ## Change the color of the parent Entity for a moment
