@@ -41,13 +41,12 @@ func _ready():
 
 ## Main Menu Play: Load any saves, then put player in the world
 func MainMenuPlay():
-	player = player_tscn.instantiate()
-	LoadPlayer(player)
-	LoadBank(nexus.find_child("Bank"))
-	player.find_child("SkillsUI").setup(player) # On death, reset skills 
 	
 	NexusSetup() # Spawn items in the nexus
-	PlayerSetup() # Put the 
+	PlayerSetup() # Create a new player
+	
+	LoadPlayer(player) # Load the player and bank saves
+	LoadBank(nexus.find_child("Bank"))
 
 func ActivatingMainMenu():
 	#print("ActivatingMainMenu called")
@@ -120,6 +119,7 @@ func PlayerSetup():
 	%MainMenu.escapeMenu = player.find_child("EscMenu")
 	%MainMenu.escapeMenu.mainMenuButton.connect(%MainMenu.ActivateMainMenu)
 	player.UpdateUIBars()
+	player.find_child("SkillsUI").setup(player) # On death, reset skills 
 
 func Quit():
 	print("Quitting game...")
@@ -132,7 +132,9 @@ func Quit():
 func DeathHandling():
 	get_tree().set_pause(false) # Player.Death() paused the game, need to unpause
 	player.queue_free()
-	call_deferred("PlayerSetup") # On the next frame, setup a new player
+	
+	# NOTE: process_frame basically means do this on the next frame
+	get_tree().process_frame.connect(PlayerSetup, CONNECT_ONE_SHOT)
 
 ## Load BankData from bankData.ddd
 func LoadBank(B:Bank):
