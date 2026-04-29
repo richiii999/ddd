@@ -402,11 +402,11 @@ func toggleBubble(state:bool) -> void: # Makes player invulnerable, disables inp
 	
 	#TODO: replace with "<bubble animation forward/reverse>"
 	if (state):
-		modulate = Color(0,0,1)
+		$Status.setStatusFlash(Color("BLUE"), 1.50)
+		$Status.addStatusText("Nexus!", "BLUE")
 		#await get_tree().create_timer(1.00).timeout # NOTE: This causes the game's start to lag
 	else:
 		await get_tree().create_timer(1.00).timeout
-		modulate = Color(1,1,1)
 func LoadingScreenStart() -> void: # Display the loading screen, this function is awaited by the caller
 	await toggleBubble(true)
 	%LoadingScreen.Enable()

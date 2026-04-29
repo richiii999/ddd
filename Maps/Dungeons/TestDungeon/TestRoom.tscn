@@ -4,7 +4,6 @@
 [ext_resource type="TileSet" uid="uid://cnvmagl4xkjae" path="res://Maps/TileSet.tres" id="1_t28yb"]
 [ext_resource type="PackedScene" uid="uid://t77auhbqet13" path="res://Maps/Dungeons/DungeonEnemySpawner.tscn" id="3_l7lgy"]
 [ext_resource type="PackedScene" uid="uid://g7spcuqqx1mx" path="res://Maps/Dungeons/dungeonDoor.tscn" id="3_yqhc4"]
-[ext_resource type="PackedScene" uid="uid://cah1krc5w5maw" path="res://Entity/Enemy/Bosses/BossTest.tscn" id="5_e82ut"]
 
 [node name="DungeonRoom_Test" type="TileMapLayer" unique_id=1223308819]
 use_parent_material = true
@@ -30,7 +29,6 @@ position = Vector2(8, 0)
 
 [node name="EnemyDungeonSpawner" parent="Waves/Wave1" unique_id=546534452 instance=ExtResource("3_l7lgy")]
 position = Vector2(-160, -160)
-enemyScene = ExtResource("5_e82ut")
 
 [node name="EnemyDungeonSpawner2" parent="Waves/Wave1" unique_id=105423285 instance=ExtResource("3_l7lgy")]
 position = Vector2(160, -160)
