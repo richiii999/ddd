@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dk75vwl8p2eck" path="res://Entity/Enemy/enemy.gd" id="1_rj2pp"]
 [ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_vvp5b"]
 [ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="3_84nuw"]
-[ext_resource type="Texture2D" uid="uid://dq6232arfxx81" path="res://Assets/Sprites/GD Icons/GD_Red.tres" id="4_2oj4o"]
+[ext_resource type="Texture2D" uid="uid://cndixy7pe4sjy" path="res://Assets/ItchIO/pixelGuyIdk/Basic Monster Animations/Swamp Troll/SwampTroll.png" id="4_rj2pp"]
 [ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/smartArea.gd" id="5_rj2pp"]
 [ext_resource type="PackedScene" uid="uid://dfcui8l7w2j3m" path="res://Entity/Components/BehaviorFSM.tscn" id="6_2wcg3"]
 [ext_resource type="PackedScene" uid="uid://dk58kntas8hfd" path="res://Entity/Components/Behaviors/Wander.tscn" id="7_4vlkc"]
@@ -21,6 +21,42 @@ border_width_bottom = 2
 border_color = Color(0, 0.501961, 0, 1)
 corner_detail = 1
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvp5b"]
+atlas = ExtResource("4_rj2pp")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84nuw"]
+atlas = ExtResource("4_rj2pp")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2oj4o"]
+atlas = ExtResource("4_rj2pp")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kihv6"]
+atlas = ExtResource("4_rj2pp")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2wcg3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvp5b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84nuw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2oj4o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kihv6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_2b4ng"]
 radius = 50.0
 
@@ -36,8 +72,7 @@ collision_layer = 256
 collision_mask = 267
 motion_mode = 1
 script = ExtResource("1_rj2pp")
-proj1 = ExtResource("2_vvp5b")
-proj2 = ExtResource("2_vvp5b")
+projs = Array[PackedScene]([ExtResource("2_vvp5b"), null, null])
 HPmax = 100
 
 [node name="Status" parent="." unique_id=904833884 instance=ExtResource("3_84nuw")]
@@ -62,8 +97,11 @@ theme_override_styles/background = SubResource("StyleBoxFlat_pw8gt")
 theme_override_styles/fill = SubResource("StyleBoxFlat_wjxar")
 value = 50.0
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1430648148]
-texture = ExtResource("4_2oj4o")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1751218315]
+texture_filter = 1
+scale = Vector2(8, 8)
+sprite_frames = SubResource("SpriteFrames_2wcg3")
+autoplay = "default"
 
 [node name="Physics_Hitbox" type="CollisionShape2D" parent="." unique_id=342320193]
 shape = SubResource("CircleShape2D_2b4ng")
@@ -104,8 +142,7 @@ one_shot = true
 wait_time = 10.0
 autostart = true
 
-[node name="BehaviorFSM" parent="." unique_id=1391725515 node_paths=PackedStringArray("initState") instance=ExtResource("6_2wcg3")]
-initState = NodePath("behavior_wander")
+[node name="BehaviorFSM" parent="." unique_id=1391725515 instance=ExtResource("6_2wcg3")]
 
 [node name="behavior_wander" parent="BehaviorFSM" unique_id=250405658 instance=ExtResource("7_4vlkc")]
 

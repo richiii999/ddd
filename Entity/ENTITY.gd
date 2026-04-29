@@ -30,13 +30,13 @@ var SpawnNode : Node = null # Link to the entity's spawn node (if any), Set by t
 @export var kBstrength2  : float = 500.0
 
 ## Movement
-@export var maxVel : float = 800.0  # Hard cap
-@export var drag   : float = 0.94  # Soft cap
-@export var accel  : float = 30.00 # Multiplied by a bunch of modifiers
+var maxVel : float = 800.0  # Hard cap
+var drag   : float = 0.94  # Soft cap
+var accel  : float = 30.00 # Multiplied by a bunch of modifiers
 # Movement Modifiers
 @export var immovable : bool = false # If true, skips physics
-@export var behaviorMoveSpeed : float = 1.00 # Multiplier to accel
-@export var effectMoveSpeed   : float = 1.00 # Multiplier to accel
+var behaviorMoveSpeed : float = 1.00 # Multiplier to accel
+var effectMoveSpeed   : float = 1.00 # Multiplier to accel
 @export var wet : bool = false # if true, slippery movement (less drag)
 
 ## Terrain
