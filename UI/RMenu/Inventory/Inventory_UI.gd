@@ -84,7 +84,7 @@ func SlotClick(SlotA:Slot, SlotB:Slot = Slot.MOUSE) -> void:
 	PutItemInSlot(Slot.GROUND, null) 
 	
 	# Update player stats if changing a gear slot
-	if SlotA in range(Slot.HELM, Slot.INV1):
+	if SlotA in range(Slot.HELM, Slot.INV0):
 	# REMOVE old item
 		if ItemInSlot(SlotB) != null:
 			UpdateInvStats.emit(false, ItemInSlot(SlotB).stats)
