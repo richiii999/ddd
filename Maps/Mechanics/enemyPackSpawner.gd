@@ -37,12 +37,9 @@ func SpawnMobs( n : int = (maxMobs >> 2) + 1 ):
 				
 				# Some mobs spawn other mobs, the new mob should follow parent
 				# Ex. NecroSkull orbiters
-				if get_parent() is Enemy: 
-					newMob.following = get_parent()
+				if get_parent() is Enemy: newMob.following = get_parent()
 				
 				add_child(newMob)
-				print(newMob.targetEntity)
-				#print("Mob Spawned")
 	elif(PackBoss && !packBoss): # If already full of mobs (or max = 0), spawn the pack boss
 		var newBoss = packBoss.instantiate()
 		# <set params on the new spawn>
