@@ -7,6 +7,6 @@ func EnemyShoot(P: int, pos: Vector2 = targetEntity.global_position):
 	"power": P,
 	"cols": 2,
 	"rows": 4,
-	"cell_size": 100.0,
+	"cell_size": 40.0,
 	"offset_angle": dir_to_player
 	})
