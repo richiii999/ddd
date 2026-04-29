@@ -19,7 +19,8 @@
 # whenever you hit the necromancer, its summons take damage (that's fine for now, but we could change this in the future)
 # Level bar doesn't change at the fame threshold, so it's only the level bar (only when loading a saved player)
 # Need to save the bank and skill tree information
-
+# When you die in a lava tile, the lava is still ticking damage past the death screen, so we need to fix this otherwise it stays on the loading screen when you respawn 
+# When you die and respawn, the game crashes because it's trying to access null datatypes on the player for some reason
 # ItemPrice for buying waygates broken
 
 ## Main Menu - Initial Version Done: Needs more
