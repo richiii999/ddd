@@ -438,7 +438,7 @@ func UpdateUIBars(): # All at once rather than spread out
 func Death(): 
 	%DeathScreen.visible = true
 	
-	InputStatus = false
+	toggleBubble(true)
 	self.velocity = Vector2.ZERO
 	
 	get_tree().set_pause( true )
