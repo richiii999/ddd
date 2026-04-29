@@ -30,6 +30,7 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_h83wo")
 
 [node name="ProjTime" type="Timer" parent="." unique_id=1506985516]
+wait_time = 4.0
 one_shot = true
 autostart = true
 
