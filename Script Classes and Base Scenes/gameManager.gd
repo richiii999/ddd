@@ -31,9 +31,7 @@ func _ready():
 	AddMap(world)
 	for DG in dungeons: AddMap(DG.instantiate())
 	
-	#Main Menu Handling
-	#%MainMenu.escapeMenu = player.find_child("EscMenu") #pass in the child directly rather than us just hardcoding this shit in
-	#%MainMenu.escapeMenu.mainMenuButton.connect(mainMenu.ActivateMainMenu)
+	# Main Menu Handling
 	%MainMenu.show()
 	%MainMenu.quitPressed.connect(Quit)
 	%MainMenu.playPressed.connect(MainMenuPlay)
@@ -41,7 +39,6 @@ func _ready():
 
 ## Main Menu Play: Load any saves, then put player in the world
 func MainMenuPlay():
-	
 	NexusSetup() # Spawn items in the nexus
 	PlayerSetup() # Create a new player
 	
@@ -49,17 +46,10 @@ func MainMenuPlay():
 	LoadBank(nexus.find_child("Bank"))
 
 func ActivatingMainMenu():
-	#print("ActivatingMainMenu called")
-	player.InputStatus = false
-	player.velocity = Vector2.ZERO
-	#mainMenu.set_position(player.position)
-	#print("player pos: " + str(player.position) + " | mainMenu pos: " + str(mainMenu.position))
-	player.hide()
-	player.find_child("RMenu").hide()
-	player.find_child("EscMenu").hide()
+	if player: # Player may be null if never started the game
+		Save.SaveGame(player, nexus.find_child("Bank")) # Player and bank saved separately
+		player.queue_free()
 	%MainMenu.show()
-	#print("mainMenu visible: " + str(mainMenu.visible))
-	#player.find_child("PlayerCam").InstantMove(mainMenu.global_position)
 
 
 ## NexusSetup: Spawn items on the ground in the nexus
