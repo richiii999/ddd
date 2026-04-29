@@ -27,7 +27,7 @@ var Save = SaveMgr.new() # Create a SaveMgr instance to allow for saving
 func _ready():
 	# Load all maps into the game
 	AddMap(nexus)
-	NexusSetup()
+	NexusSetup() # Spawn items in the nexus
 	AddMap(world)
 	for DG in dungeons: AddMap(DG.instantiate())
 	
@@ -39,7 +39,6 @@ func _ready():
 
 ## Main Menu Play: Load any saves, then put player in the world
 func MainMenuPlay():
-	NexusSetup() # Spawn items in the nexus
 	PlayerSetup() # Create a new player
 	
 	LoadPlayer(player) # Load the player and bank saves

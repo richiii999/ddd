@@ -5,7 +5,7 @@
 
 # TODO z idx list
 ## Z-Index list (all values should be absolute):
-# 10: PLAYER, player projectiles
+# 10: PLAYER, player projectiles, groundItems
 # 2:  enemies
 # 1:  -
 # 0:  -

@@ -145,6 +145,7 @@ func PickItem() -> void:
 			return
 		
 		else:
+			print("AAA")
 			PutItemInSlot(openSlot, item)
 			groundItem.queue_free() # Delete grounditem after
 			return # Only pick up 1 item per press
