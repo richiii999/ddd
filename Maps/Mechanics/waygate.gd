@@ -49,6 +49,10 @@ func WaygateInteract(P:Player):
 		else: P.toggleWaygateGUI(true) # Regular waygates open the GUI to select a destination
 
 func UseWaygate(P:Player): # Teleports player to this waygate
+	if P == null:
+		push_error("P is null")
+		return
+	
 	# Heal and dispell player
 	P.Heal(P.HPmax - P.HP)
 	P.ECS.immuneToEffects = true

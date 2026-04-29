@@ -1,9 +1,13 @@
 class_name GameManager extends Node ## Controls the game. The "Main" scene of the game
 
 ## Child node descriptions:
+# Maps: Game maps like Nexus, World, and many dungeons are children of this. 
+	# Use AddMap() to put a map into the world
 # ParticleTrasher: is where a projectile GPUParticle2D's go while they are expiring
+	# Tools.ParticlePassOff() sends them here automatically
 # ItemSpawner: gets signaled by various things to spawn items in the world
 # Projectiles: Projectiles are reparented to here, prevents inheriting entity velocity
+# CanvasLayer: Shows the Main menu for the game
 
 @export var dungeons: Array[PackedScene]
 var mapOffset : Vector2 = Vector2(99999,0) # Offset each added map by this much
@@ -23,6 +27,7 @@ var Save = SaveMgr.new() # Create a SaveMgr instance to allow for saving
 func _ready():
 	# Load all maps into the game
 	AddMap(nexus)
+	NexusSetup()
 	AddMap(world)
 	for DG in dungeons: AddMap(DG.instantiate())
 	
@@ -41,7 +46,8 @@ func MainMenuPlay():
 	LoadBank(nexus.find_child("Bank"))
 	player.find_child("SkillsUI").setup(player) # On death, reset skills 
 	
-	InitialSetup() # Put player in nexus and spawn items
+	NexusSetup() # Spawn items in the nexus
+	PlayerSetup() # Put the 
 
 func ActivatingMainMenu():
 	#print("ActivatingMainMenu called")
@@ -57,17 +63,8 @@ func ActivatingMainMenu():
 	#player.find_child("PlayerCam").InstantMove(mainMenu.global_position)
 
 
-## NexusSetup: Put the player in the nexus, and spawn items on the ground
-func InitialSetup():
-	# Put player in nexus via waygate
-	$Players.add_child(player)
-	nexus.ActiveWaygates[0].UseWaygate(player)
-	
-	player.show()
-	player.InputStatus = true
-	player.find_child("RMenu").show()
-	player.UpdateUIBars()
-	
+## NexusSetup: Spawn items on the ground in the nexus
+func NexusSetup():
 	## Initial items
 	var nexOffset = nexus.global_position
 	# Some coins
@@ -104,7 +101,26 @@ func InitialSetup():
 	$ItemSpawner.SpawnItemByID(18, nexOffset + Vector2(-800, 400))
 	$ItemSpawner.SpawnItemByID(19, nexOffset + Vector2(-600, 500))
 	$ItemSpawner.SpawnItemByID(20, nexOffset + Vector2(-700, 500))
+
+## PlayerSetup: Places a new player into the game
+# NOTE: Any existing player should be freed before calling this func on the next frame.
+func PlayerSetup():
+	if player != null: push_error("Player already setup!")
+	player = player_tscn.instantiate()
 	
+	# Put player in nexus via waygate
+	$Players.add_child(player)
+	nexus.ActiveWaygates[0].UseWaygate(player)
+	
+	# Show player, setup UI, and enable input
+	player.show()
+	player.InputStatus = true
+	player.death.connect(DeathHandling)
+	player.find_child("RMenu").show()
+	%MainMenu.escapeMenu = player.find_child("EscMenu")
+	%MainMenu.escapeMenu.mainMenuButton.connect(%MainMenu.ActivateMainMenu)
+	player.UpdateUIBars()
+
 func Quit():
 	print("Quitting game...")
 	if player: # Player may be null if never started the game
@@ -112,21 +128,11 @@ func Quit():
 	
 	get_tree().quit() # Actually quit the game
 
-# Handles signal death from player which deletes player and adds a new player for perma death behavior
+## Permadeath: Reset the player
 func DeathHandling():
-	#pause the game
-	get_tree().set_pause(false)
-	#basically delete the player node and the information for the player
+	get_tree().set_pause(false) # Player.Death() paused the game, need to unpause
 	player.queue_free()
-	#make a new instance of the player and add that to the world, then show the player to the world
-	player = player_tscn.instantiate()
-	player.death.connect(DeathHandling)
-	player.show()
-	player.InputStatus = true
-	player.find_child("RMenu").show() #reconnect the main menu escape reference to new player
-	%MainMenu.escapeMenu = player.find_child("EscMenu")
-	%MainMenu.escapeMenu.mainMenuButton.connect(%MainMenu.ActivateMainMenu)
-	InitialSetup()
+	call_deferred("PlayerSetup") # On the next frame, setup a new player
 
 ## Load BankData from bankData.ddd
 func LoadBank(B:Bank):
@@ -140,6 +146,7 @@ func LoadBank(B:Bank):
 func LoadPlayer(P:Player):
 	var playerData = Save.LoadPlayer()
 	print("Loaded playerData: " + str(playerData))
+	if playerData == {}: return # Save doesnt exist: Just skip
 	
 	# Progress
 	while playerData.Level > 1: # Level starts from 1
