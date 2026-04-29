@@ -48,7 +48,7 @@ func incCoins(i:int): coins += i; %RMenu/Coins.text = str(coins)
 ## Dashing
 var dashing : bool = false # Dashing state, if true, cannot move with WASD
 var dashMax : float = 2.00 # Max dashes stored
-var dashNum : float = 0.00 # Current dashes stored (use 1.00 per dash)
+var dashNum : float = dashMax # Current dashes stored (use 1.00 per dash)
 var dashRec : float = 0.005 # Dash recovered per frame (def: 0.005)
 var dashLen : float = 0.2  # (s) Length of dash
 var dashSpd : float = 600  # (px/s) Speed of dash
@@ -63,9 +63,9 @@ var InputV : Vector2 = Vector2.ZERO # Input vector
 var charge : int = 0 # (Spacebar) Charge incrementor for spellcasting
 signal Interact # Emitted with self to any connected interact component
 
-#get all of your stats 
-func getStats(stat : int) -> int: 
-	return coreStats.get(stat, 0) + gearStats.get(stat, 0) + effectStats.get(stat, 0 )
+# Get overall stat value for a given stat
+func getStats(stat:int) -> int: 
+	return coreStats.get(stat, 0) + gearStats.get(stat, 0) + effectStats.get(stat, 0)
 
 #get the item in your main and offhand
 #func getMainHand():
@@ -128,7 +128,6 @@ func _ready():
 	super._ready() # call ENTITY._ready() (sets HP and MP)
 	super.EntityUI()
 	StatusLabel.addStatusText("Spawned in!")
-	print("Inventory node:", Inv)
 	#print(get_tree_string_pretty()) #Debug print the nodetree
 	#test_apply_stats()
 	%DeathScreen.find_child("Restart").pressed.connect(_OnDeathScreenButtonPushed)
@@ -177,16 +176,22 @@ func get_input(): # TODO: replace this with _input() ?
 		#insert something like $AnimatedSprite2D.play("idle")
 
 	## Mouse inputs: "pressed" NOT "just_pressed" so player can hold shoot / dash
+	# Left Click: Shoot1
 	if (Input.is_action_pressed("LMB") && $ShotTimer.is_stopped()):
 		$ShotTimer.start(max((0.30 / atkSpeed), 0.05)) # Max AtkSpeed is 0.05s per shot (AtkSpeed == 6.00), any higher does nothing
 		ShootProj(1, get_global_mouse_position())
+	
+	# Right Click: Dash
 	if (Input.is_action_pressed("RMB") && dashNum >= 1.00 && %DashTimer.is_stopped() && InputV && charge == 0):
-		%DashTimer.start(dashLen)
-		print(%DashTimer.time_left)
 		setDashing(true) # Disables WASD movement
 		$Projectile_Hitbox.set_collision_layer_value(7, false) # Disable projectile hitbox
+		# Min dash of 0.1s, max of 0.5s, so very high speed values dont have long dashes
+		%DashTimer.start(clampf(dashLen + getStats(Stats.SPD) * 0.02, 0.1, 0.5))
+		#print(%DashTimer.time_left)
+		
 		dashNum -= 1.00
 		velocity += InputV * dashSpd
+	
 	## Spacebar: Charged shots by holding then releasing space with mana
 	# charge linearly by holding space (up to 125%)
 	# if charge over 100: can discharge but hurts self, aim for 100 exactly or go over to do more but hurts more.
