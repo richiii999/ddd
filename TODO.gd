@@ -17,14 +17,11 @@
 ## BUG list
 # whenever you hit the necromancer, its summons take damage (that's fine for now, but we could change this in the future)
 # save doesnt save skill tree information
-# ItemPrice for buying waygates broken
 
 ## Main Menu - Initial Version Done: Needs more
 # Splash screen / intro on game launch, specifically a custom Godot Editor splash (cool version)
-# credits with dev nicknames and roles
 # Loading screen (game launch): press space to skip all intros and just load to main asap.
 # main menu music and animation
-# BASIC options menu, may or may not rebind keys
 
 
 ## Hall of Fame
