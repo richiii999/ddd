@@ -15,9 +15,9 @@ enum PatternType {
 @export var projectile_scene : PackedScene
 
 #chain settings - don't know if this is correct so will change this later
-#var _chain_timer : Timer = null
-#var _chain_config : Dictionary = {}
-#var _chain_rep_left : int = 0
+var chain_timer : Timer = null
+var chain_config : Dictionary = {}
+var chain_rep_left : int = 0
 
 #main emit function that needs to be called
 
@@ -100,6 +100,14 @@ func emit_grid(opts: Dictionary) -> void:
 			if proj == null: continue
 			get_parent().add_child(proj)
 			proj.global_position = global_position + rotated
+
+#chain just allows them to do chain attacks of patterns 
+func start_chain(count: int, opts: Dictionary) -> void:
+	#since we're starting a chain, we want to stop any existing chain 
+	if chain_timer and chain_timer.is_inside_tree():
+		chain_timer.stop()
+		chain_timer.queue_free()
+	
 
 func make_proj(dir: float, opts: Dictionary) -> Projectile:
 	#check to see if the projectile scene even exists 
