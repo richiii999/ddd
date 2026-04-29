@@ -54,6 +54,8 @@ func UseWaygate(P:Player): # Teleports player to this waygate
 		return
 	
 	# Heal and dispell player
+	if P == null: 
+		push_error("player is null")
 	P.Heal(P.HPmax - P.HP)
 	P.ECS.immuneToEffects = true
 	P.ECS.ClearEffects()

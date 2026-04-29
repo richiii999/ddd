@@ -22,6 +22,7 @@
 # When you die in a lava tile, the lava is still ticking damage past the death screen, so we need to fix this otherwise it stays on the loading screen when you respawn 
 # When you die and respawn, the game crashes because it's trying to access null datatypes on the player for some reason
 # ItemPrice for buying waygates broken
+# Whenever you either dash or take damage and run into a wall, you get glitched and can't move... why
 
 ## Main Menu - Initial Version Done: Needs more
 # Splash screen / intro on game launch, specifically a custom Godot Editor splash (cool version)

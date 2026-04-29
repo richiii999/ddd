@@ -3,8 +3,8 @@
 [ext_resource type="TileSet" uid="uid://cnvmagl4xkjae" path="res://Maps/TileSet.tres" id="1_lmddn"]
 [ext_resource type="Script" uid="uid://bhqsdd2qy8h5w" path="res://Maps/Dungeons/dungeon.gd" id="2_ffpe7"]
 [ext_resource type="PackedScene" uid="uid://tcx34hy287cs" path="res://Maps/Mechanics/Waygate.tscn" id="3_t8yh5"]
-[ext_resource type="PackedScene" uid="uid://b2q5p8heg3qm2" path="res://Maps/Dungeons/TestDungeon/TestRoom.tscn" id="4_g3c7f"]
-[ext_resource type="PackedScene" uid="uid://c5q4b6fpchbsi" path="res://Maps/Dungeons/TestDungeon/BossRoom.tscn" id="5_gxfxc"]
+[ext_resource type="PackedScene" uid="uid://b26urdve2jdba" path="res://Maps/Dungeons/TutorialDungeon/TutorialRoom.tscn" id="4_xqppy"]
+[ext_resource type="PackedScene" uid="uid://cfrr8g6iuqus8" path="res://Maps/Dungeons/TutorialDungeon/TutorialCorridor1.tscn" id="5_30drn"]
 
 [node name="TutorialDungeon" type="TileMapLayer" unique_id=563884137]
 use_parent_material = true
@@ -16,18 +16,15 @@ script = ExtResource("2_ffpe7")
 
 [node name="Waygates" type="Node2D" parent="." unique_id=902142817]
 
-[node name="TestDungeon" parent="Waygates" unique_id=991796255 instance=ExtResource("3_t8yh5")]
+[node name="TutorialDungeon" parent="Waygates" unique_id=991796255 instance=ExtResource("3_t8yh5")]
 active = true
 
 [node name="Rooms" type="Node2D" parent="." unique_id=1892436274]
 
-[node name="DungeonRoom_Test" parent="Rooms" unique_id=1922064856 instance=ExtResource("4_g3c7f")]
-position = Vector2(768, 0)
+[node name="DungeonRoom_Test" parent="Rooms" unique_id=1223308819 instance=ExtResource("4_xqppy")]
+position = Vector2(-1451, 3044)
 
-[node name="DungeonRoom_Test2" parent="Rooms" unique_id=2038708109 instance=ExtResource("4_g3c7f")]
-position = Vector2(1664, 0)
-
-[node name="DungeonBossRoom" parent="Rooms" unique_id=2045440863 instance=ExtResource("5_gxfxc")]
-position = Vector2(2560, 0)
+[node name="DungeonRoom_Test2" parent="Rooms" unique_id=1735399232 instance=ExtResource("5_30drn")]
+position = Vector2(766, 0)
 
 [node name="Spawners" type="Node2D" parent="." unique_id=555905646]
