@@ -2,8 +2,8 @@ extends BehaviorBASE ## ChaseFlee: Goes directly towards / away from a target
 
 @export var chaseOrFlee : bool = true # True: Chase towards False: Flee from
 @export var TargetEntity : bool = false # If false, targets point, if true, targets Entity.targetEntity
-@export var Target : Vector2 = Vector2(0,0)
-@export var speed : float = 1.50
+var targetPos : Vector2 = Vector2(0,0) # Used for actual movement
+@export var speed : float = 1.25
 
 ## Override funcs: behaviorBASE funcs overridden by ChaseFlee
 func onEnter(): # Adjust movement for the Entity and begin orbiting
@@ -18,7 +18,13 @@ func onLeave(): # Stop timer, reset movement stuff
 	Entity.set_collision_layer_value(9, true)
 
 func BehaviorTick(): # every frame, set target pos farther along a circle with radius orbitRadius via timer
-	if chaseOrFlee && Entity.targetEntity != Entity : Target = Entity.targetEntity.global_position # Chase target
-	elif !chaseOrFlee && Entity.targetEntity != Entity : Target = Entity.targetEntity.global_position + Vector2(1000,0) # Flee from target
+	# Chase target
+	if chaseOrFlee && Entity.targetEntity != Entity: 
+		targetPos = Entity.targetEntity.global_position
+		Entity.targetPos = targetPos
+	
+	# Flee from target
+	elif !chaseOrFlee && Entity.targetEntity != Entity: 
+		targetPos = Entity.targetEntity.global_position + Vector2(1000,0) 
 	
 	# TODO Change flee to git the difference between this pos and target pos (= directional vector) then mult by alot to make it go far away
