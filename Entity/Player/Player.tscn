@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://b286d5w4sx2m8" path="res://UI/WaygateGUI/waygate_gui.tscn" id="10_4q2yq"]
 [ext_resource type="PackedScene" uid="uid://blxsgjk3fmr0e" path="res://UI/Skills/skills.tscn" id="11_2efty"]
 [ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="12_be5jb"]
+[ext_resource type="PackedScene" uid="uid://ccj4e6ctlf042" path="res://UI/CharMenu/CharMenu.tscn" id="13_3vnax"]
 [ext_resource type="PackedScene" uid="uid://bo88q26eog6w" path="res://Entity/Player/Camera.tscn" id="13_23qwt"]
 [ext_resource type="PackedScene" uid="uid://dddy50t4saequ" path="res://Entity/Components/EffectComponentSystem.tscn" id="15_si366"]
 [ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/smartArea.gd" id="16_5ay3i"]
@@ -77,17 +78,6 @@ collision_mask = 385
 motion_mode = 1
 wall_min_slide_angle = 0.17453292
 script = ExtResource("1_pnyfx")
-coreStats = Dictionary[int, int]({
-0: 303,
-1: 5,
-2: 5,
-3: 3,
-4: 3,
-5: 3,
-6: 1,
-7: 1,
-8: 1
-})
 pet = ExtResource("2_3vnax")
 projs = Array[PackedScene]([ExtResource("2_7hmw6"), ExtResource("3_pnyfx"), ExtResource("2_7hmw6")])
 fields = Array[PackedScene]([null, ExtResource("4_cretm"), null])
@@ -165,6 +155,10 @@ offset_left = 304.0
 offset_top = 160.0
 offset_right = 880.0
 offset_bottom = 576.0
+
+[node name="CharMenu" parent="CanvasLayer" unique_id=1899022427 instance=ExtResource("13_3vnax")]
+unique_name_in_owner = true
+visible = false
 
 [node name="Status" parent="." unique_id=651066457 instance=ExtResource("12_be5jb")]
 offset_left = -72.0
