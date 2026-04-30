@@ -14,4 +14,4 @@ func _ready():
 func onEnter(): pass # What to do when this behavior is triggered
 func onLeave(): pass # What to do when this behavior is ended
 func BehaviorTick(): pass # What to do each frame during this behavior
-func checkConditions(): pass # Checks conditions, if met, signals the parent FSM to change to the passed state
+func checkConditions() -> bool: return true # Checks conditions, if met, signals the parent FSM to change to the passed state

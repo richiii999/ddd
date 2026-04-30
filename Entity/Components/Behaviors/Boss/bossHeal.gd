@@ -14,7 +14,6 @@ func onLeave(): # Reset movement stuff
 	Entity.immovable = false
 	Entity.setInvulnerable(false)
 
-func checkConditions(): 
-	Entity.Heal( int(Entity.HPmax * (healRate / 2.00)) ) # /2 since every 0.5s 
-	if (Entity.HPBar.ratio >= healMax): 
-		changeStateByIdx.emit(self.get_index() + 1) # Go to next phase
+func BehaviorTick(): Entity.Heal( int(Entity.HPmax * (healRate / 2.00)) ) # /2 since every 0.5s 
+
+func checkConditions() -> bool: return (Entity.HPBar.ratio >= healMax)

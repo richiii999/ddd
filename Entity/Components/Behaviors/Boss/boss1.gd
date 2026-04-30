@@ -11,6 +11,4 @@ func onEnter(): # Boss stands still
 func onLeave(): # Reset movement stuff
 	Entity.immovable = false
 
-func checkConditions(): 
-	if (Entity.HPBar.ratio <= healthThreshold): 
-		changeStateByIdx.emit(get_index() + 1) # Go to next phase
+func checkConditions() -> bool: return (Entity.HPBar.ratio <= healthThreshold)
