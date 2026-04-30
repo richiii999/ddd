@@ -240,6 +240,7 @@ func get_input(): # TODO: replace this with _input() ?
 	if Input.is_action_just_pressed("MPot"): MPot() # MPot with 'G'
 	if Input.is_action_just_pressed("Nexus"): Nexus() # TP back to Nexus with 'N'
 	if Input.is_action_just_pressed("Loot"): Inv.Loot() # Loot with 'Q'
+	if Input.is_action_just_pressed("PetTrick"): PetTrick() # Pet do trick with 'X'
 	if Input.is_action_just_pressed("delete-pet"): DeletePet() # Delete pet with 'Z'
 	
 	## UI Toggles 
@@ -353,6 +354,9 @@ func DeletePet():
 	if is_instance_valid(pet_instance):
 		pet_instance.queue_free()
 		pet_instance = null
+
+## Makes Player's Pet do a trick
+func PetTrick(): if pet_instance != null: pet_instance.Trick()
 
 func LevelUp(): 
 	if (Level < 25): # If not maxed yet

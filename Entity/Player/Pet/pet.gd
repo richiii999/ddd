@@ -1,6 +1,7 @@
 class_name Pet extends CharacterBody2D
 
-var player = null
+var player : Player = null # Player to follow
+var doingTrick : bool = false # Currently doing trick (spin in circle)
 
 # Movement variables, I mean duh just look at the names
 var speed = 200.0
@@ -27,4 +28,16 @@ func _physics_process(_delta):
 	else:
 		velocity = Vector2.ZERO
 	
+	if doingTrick: rotate(deg_to_rad(6)) # Spin around
+	
 	move_and_slide()
+
+## Trick: Pet spins around in a circle
+func Trick():
+	if doingTrick: return # Wait for trick to finish before doing another
+	doingTrick = true
+	
+	# Timer to stop trick
+	var T = get_tree().create_timer(1)
+	T.timeout.connect(set_rotation.bind(0))
+	T.timeout.connect(set_deferred.bind("doingTrick", false))
