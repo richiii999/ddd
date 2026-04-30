@@ -133,8 +133,8 @@ func _ready():
 	%DeathScreen.find_child("Restart").pressed.connect(_OnDeathScreenButtonPushed)
 	%DeathScreen.find_child("DebugRestart").pressed.connect(_OnDebugRevive)
 	## Initialize the UI info
-	%RMenu/Utility/MPot_Button.text = "%s/%s" % [MPotC, MPotmax]
-	%RMenu/Utility/HPot_Button.text = "%s/%s" % [HPotC, HPotmax]
+	%RMenu/Utility/MPot_Button/Label.text = "%s/%s" % [MPotC, MPotmax]
+	%RMenu/Utility/HPot_Button/Label.text = "%s/%s" % [HPotC, HPotmax]
 	%RMenu/MP_Bar.max_value = MPmax
 	%RMenu/XP_Bar.max_value = XPmax
 	%RMenu/HP_Bar.visible = true
@@ -303,10 +303,24 @@ func MPot(): # Mana Potion: Called when press 'G' to restore MP
 		$Status.addStatusText("Used mana potion", "BLUE") # Show status text
 func incHPot(i:int):
 	HPotC += i 
-	$CanvasLayer/RMenu/Utility/HPot_Button.text = str(HPotC) + "/" + str(HPotmax)
+	
+	%RMenu/Utility/HPot_Button/Label.text = str(HPotC) + "/" + str(HPotmax)
+	if HPotC == 0: # Empty sprite
+		%RMenu/Utility/HPot_Button/HPotIconFull.visible = false
+		%RMenu/Utility/HPot_Button/HPotIconEmpty.visible = true
+	elif HPotC == i: # No longer empty
+		%RMenu/Utility/HPot_Button/HPotIconFull.visible = true
+		%RMenu/Utility/HPot_Button/HPotIconEmpty.visible = false
 func incMPot(i:int):
 	MPotC += i 
-	$CanvasLayer/RMenu/Utility/MPot_Button.text = str(MPotC) + "/" + str(MPotmax)
+	
+	%RMenu/Utility/MPot_Button/Label.text = str(MPotC) + "/" + str(MPotmax)
+	if MPotC == 0: # Empty sprite
+		%RMenu/Utility/MPot_Button/MPotIconFull.visible = false
+		%RMenu/Utility/MPot_Button/MPotIconEmpty.visible = true
+	elif MPotC == i: # No longer empty
+		%RMenu/Utility/MPot_Button/MPotIconFull.visible = true
+		%RMenu/Utility/MPot_Button/MPotIconEmpty.visible = false
 
 ## XP / Leveling: Called by signals from enemy deaths, quest rewards, and other things
 func GainXP(xp : int = 0):

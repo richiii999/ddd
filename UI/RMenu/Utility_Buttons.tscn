@@ -44,17 +44,21 @@ scale = Vector2(1.8, 1.8)
 texture = ExtResource("2_ajnqo")
 
 [node name="HPotIconEmpty" type="Sprite2D" parent="HPot_Button" unique_id=1521987495]
+visible = false
 position = Vector2(23.8, 28.9)
 scale = Vector2(1.8, 1.8)
 texture = ExtResource("3_2sk3e")
 
 [node name="Label" type="Label" parent="HPot_Button" unique_id=1021174846]
-self_modulate = Color(1, 0, 0, 1)
 layout_mode = 0
 offset_left = 2.999999
 offset_top = 47.0
 offset_right = 43.0
 offset_bottom = 70.0
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 2
 text = "X"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -87,17 +91,21 @@ scale = Vector2(1.8, 1.8)
 texture = ExtResource("5_bqpn1")
 
 [node name="MPotIconEmpty" type="Sprite2D" parent="MPot_Button" unique_id=1174136227]
+visible = false
 position = Vector2(23.8, 28.9)
 scale = Vector2(1.8, 1.8)
 texture = ExtResource("6_he72y")
 
 [node name="Label" type="Label" parent="MPot_Button" unique_id=801709585]
-self_modulate = Color(0, 0, 1, 1)
 layout_mode = 0
 offset_left = 2.999999
 offset_top = 47.0
 offset_right = 43.0
 offset_bottom = 70.0
+theme_override_colors/font_shadow_color = Color(0, 0, 1, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 4
 text = "X"
 horizontal_alignment = 1
 vertical_alignment = 1
