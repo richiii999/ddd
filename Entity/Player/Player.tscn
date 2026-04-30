@@ -127,8 +127,34 @@ Hide Pet: Z"
 unique_name_in_owner = true
 metadata/_edit_use_anchors_ = true
 
+[node name="HP_Text" parent="CanvasLayer/RMenu/HP_Bar" parent_id_path=PackedInt32Array(675567958, 436757496) index="0" unique_id=1865393913]
+offset_top = -7.9999237
+offset_bottom = 8.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 1
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/normal_font_size = 20
+
 [node name="MP_Bar" parent="CanvasLayer/RMenu" index="4" unique_id=1104932176]
 allow_greater = true
+
+[node name="MP_Text" parent="CanvasLayer/RMenu/MP_Bar" index="0" unique_id=1384016067]
+offset_top = -8.0
+offset_bottom = 7.999939
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 1
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/normal_font_size = 20
+
+[node name="XP_Text" parent="CanvasLayer/RMenu/XP_Bar" parent_id_path=PackedInt32Array(675567958, 218592652) index="0" unique_id=1117124343]
+offset_top = -8.000244
+offset_bottom = 7.9996796
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/normal_font_size = 20
 
 [node name="LoadingScreen" parent="CanvasLayer" unique_id=1453508200 instance=ExtResource("7_2h57d")]
 unique_name_in_owner = true
