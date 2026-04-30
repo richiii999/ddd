@@ -133,8 +133,11 @@ func _ready():
 	%DeathScreen.find_child("Restart").pressed.connect(_OnDeathScreenButtonPushed)
 	%DeathScreen.find_child("DebugRestart").pressed.connect(_OnDebugRevive)
 	## Initialize the UI info
-	%RMenu/Utility/MPot_Button/Label.text = "%s/%s" % [MPotC, MPotmax]
-	%RMenu/Utility/HPot_Button/Label.text = "%s/%s" % [HPotC, HPotmax]
+	%RMenu/Utility/Nex_Button.pressed.connect(Nexus)
+	%RMenu/Utility/HPot_Button.pressed.connect(HPot)
+	%RMenu/Utility/MPot_Button.pressed.connect(MPot)
+	%RMenu/Utility/HPot_Button/HPotValue.text = "%s/%s" % [HPotC, HPotmax]
+	%RMenu/Utility/MPot_Button/MPotValue.text = "%s/%s" % [MPotC, MPotmax]
 	%RMenu/MP_Bar.max_value = MPmax
 	%RMenu/XP_Bar.max_value = XPmax
 	%RMenu/HP_Bar.visible = true
@@ -235,9 +238,7 @@ func get_input(): # TODO: replace this with _input() ?
 	## Utility button keys
 	if Input.is_action_just_pressed("HPot"): HPot() # HPot with 'H'
 	if Input.is_action_just_pressed("MPot"): MPot() # MPot with 'G'
-	if Input.is_action_just_pressed("Nexus"): # TP back to Nexus with 'N'
-		get_node("/root/GameManager/Maps/Nexus/Waygates/NexusWaygate").UseWaygate(self)
-		$Status.addStatusText("Nexus!", "BLUE")
+	if Input.is_action_just_pressed("Nexus"): Nexus() # TP back to Nexus with 'N'
 	if Input.is_action_just_pressed("Loot"): Inv.Loot() # Loot with 'Q'
 	if Input.is_action_just_pressed("spawn-pet"): SpawnPet() # Spawn pet with 'X'
 	if Input.is_action_just_pressed("delete-pet"): DeletePet() # Delete pet with 'Z'
@@ -304,7 +305,7 @@ func MPot(): # Mana Potion: Called when press 'G' to restore MP
 func incHPot(i:int):
 	HPotC += i 
 	
-	%RMenu/Utility/HPot_Button/Label.text = str(HPotC) + "/" + str(HPotmax)
+	%RMenu/Utility/HPot_Button/HPotValue.text = str(HPotC) + "/" + str(HPotmax)
 	if HPotC == 0: # Empty sprite
 		%RMenu/Utility/HPot_Button/HPotIconFull.visible = false
 		%RMenu/Utility/HPot_Button/HPotIconEmpty.visible = true
@@ -314,13 +315,17 @@ func incHPot(i:int):
 func incMPot(i:int):
 	MPotC += i 
 	
-	%RMenu/Utility/MPot_Button/Label.text = str(MPotC) + "/" + str(MPotmax)
+	%RMenu/Utility/MPot_Button/MPotValue.text = str(MPotC) + "/" + str(MPotmax)
 	if MPotC == 0: # Empty sprite
 		%RMenu/Utility/MPot_Button/MPotIconFull.visible = false
 		%RMenu/Utility/MPot_Button/MPotIconEmpty.visible = true
 	elif MPotC == i: # No longer empty
 		%RMenu/Utility/MPot_Button/MPotIconFull.visible = true
 		%RMenu/Utility/MPot_Button/MPotIconEmpty.visible = false
+
+func Nexus():
+	get_node("/root/GameManager/Maps/Nexus/Waygates/NexusWaygate").UseWaygate(self)
+	$Status.addStatusText("Nexus!", "BLUE")
 
 ## XP / Leveling: Called by signals from enemy deaths, quest rewards, and other things
 func GainXP(xp : int = 0):
