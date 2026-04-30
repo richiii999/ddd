@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://fb0magvji858"
-path="res://.godot/imported/HPot Button.png-019b07c12545ce1ed3d4fce338035af2.ctex"
+uid="uid://bk717q8rtmc5l"
+path="res://.godot/imported/HPotFull.png-0fb7d168ed980ef793a1bfed85a0c599.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/HPot Button.png"
-dest_files=["res://.godot/imported/HPot Button.png-019b07c12545ce1ed3d4fce338035af2.ctex"]
+source_file="res://Assets/UI/HPotFull.png"
+dest_files=["res://.godot/imported/HPotFull.png-0fb7d168ed980ef793a1bfed85a0c599.ctex"]
 
 [params]
 
