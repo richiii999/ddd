@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ncx0o5gc4pic" path="res://Entity/Enemy/Enemies/necromancer.gd" id="1_aeh2d"]
 [ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_sxqug"]
+[ext_resource type="PackedScene" uid="uid://b7jer77opiti2" path="res://Entity/Components/Effects/Burn.tscn" id="3_7bg11"]
 [ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="3_k2kys"]
 [ext_resource type="Texture2D" uid="uid://d2oum50pfm7sq" path="res://Assets/ItchIO/pixelGuyIdk/basic magical animations/adept necromancer/AdeptNecromancer.png" id="4_r7g44"]
 [ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/smartArea.gd" id="5_mvaqv"]
@@ -73,11 +74,14 @@ resource_local_to_scene = true
 radius = 272.118
 
 [node name="Necromancer" type="CharacterBody2D" unique_id=654557338 groups=["Enemy"]]
+scale = Vector2(2, 2)
 collision_layer = 256
 collision_mask = 267
 motion_mode = 1
 script = ExtResource("1_aeh2d")
 projs = Array[PackedScene]([ExtResource("2_sxqug"), ExtResource("2_sxqug"), ExtResource("2_sxqug")])
+effects = Array[PackedScene]([ExtResource("3_7bg11"), null, null])
+immovable = true
 
 [node name="Status" parent="." unique_id=869158990 instance=ExtResource("3_k2kys")]
 offset_left = -72.0
@@ -162,6 +166,7 @@ lootTable = Dictionary[int, int]({
 [node name="EffectsComponentSystem" parent="." unique_id=921567753 instance=ExtResource("10_kkr1s")]
 
 [node name="EnemySpawnNode" parent="." unique_id=1257634712 instance=ExtResource("11_f6r6l")]
+scale = Vector2(0.5, 0.5)
 show_rect = false
 Mob = ExtResource("12_mqwax")
 maxMobs = 3
