@@ -9,7 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://bbmy3615xp8ba" path="res://Maps/NPC/DialogueNPC.tscn" id="8_cyj7h"]
 [ext_resource type="PackedScene" uid="uid://d1qn6ah5n7134" path="res://Maps/NPC/Shop/ShopTest.tscn" id="9_22jxy"]
 [ext_resource type="PackedScene" uid="uid://dq3y8uc1n57l4" path="res://Entity/Player/Pet/PetPickup.tscn" id="9_otrks"]
-[ext_resource type="Texture2D" uid="uid://kvedle5n3nvh" path="res://Assets/Sprites/Duck.png" id="10_otrks"]
+[ext_resource type="Texture2D" uid="uid://kvedle5n3nvh" path="res://Assets/Sprites/Pets/Duck.png" id="10_otrks"]
+[ext_resource type="Texture2D" uid="uid://dsaqnss63f1sd" path="res://Assets/Sprites/Pets/Lizard.png" id="10_qugiy"]
+[ext_resource type="PackedScene" uid="uid://dbkto02kcwybg" path="res://Entity/Player/Pet/PetLizard.tscn" id="11_nqe2l"]
 
 [node name="Nexus" type="TileMapLayer" unique_id=961261896 groups=["World"]]
 z_index = -10
@@ -61,8 +63,14 @@ position = Vector2(512, -644)
 [node name="Bank" parent="NPCs" unique_id=18598485 instance=ExtResource("8_22jxy")]
 position = Vector2(1, 831)
 
-[node name="PetPickup" parent="NPCs" unique_id=1082199575 instance=ExtResource("9_otrks")]
+[node name="PetPickupDuck" parent="NPCs" unique_id=1082199575 instance=ExtResource("9_otrks")]
 position = Vector2(-640, 895.99994)
+
+[node name="PetPickupLizard" parent="NPCs" unique_id=154059293 instance=ExtResource("9_otrks")]
+position = Vector2(783.99994, 1184)
+texture = ExtResource("10_qugiy")
+flip_h = true
+Pet = ExtResource("11_nqe2l")
 
 [node name="Decor" type="Node2D" parent="." unique_id=1912334095]
 

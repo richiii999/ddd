@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c7wctnq2tvedw" path="res://Entity/Player/Pet/petPickup.gd" id="2_6sake"]
 [ext_resource type="PackedScene" uid="uid://c8y460v3po8xh" path="res://Script Classes and Base Scenes/Interactable.tscn" id="2_nae7t"]
-[ext_resource type="Texture2D" uid="uid://kvedle5n3nvh" path="res://Assets/Sprites/Duck.png" id="2_xulvg"]
+[ext_resource type="Texture2D" uid="uid://kvedle5n3nvh" path="res://Assets/Sprites/Pets/Duck.png" id="2_xulvg"]
 [ext_resource type="PackedScene" uid="uid://cs61kw023xsp4" path="res://Entity/Player/Pet/PetDuck.tscn" id="3_42om1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_is5pi"]

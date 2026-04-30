@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://kvedle5n3nvh"
-path="res://.godot/imported/Duck.png-fb1ceea6b1cc280e10b9fef01173f1df.ctex"
+uid="uid://dsaqnss63f1sd"
+path="res://.godot/imported/Lizard.png-dca7811c9c8c806dd86c83f014334e34.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Duck.png"
-dest_files=["res://.godot/imported/Duck.png-fb1ceea6b1cc280e10b9fef01173f1df.ctex"]
+source_file="res://Assets/Sprites/Pets/Lizard.png"
+dest_files=["res://.godot/imported/Lizard.png-dca7811c9c8c806dd86c83f014334e34.ctex"]
 
 [params]
 
