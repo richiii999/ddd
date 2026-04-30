@@ -189,6 +189,8 @@ func get_input(): # TODO: replace this with _input() ?
 		
 		dashNum -= 1.00
 		velocity += InputV * dashSpd
+		
+		ResetTile() # No tile effects while dashing
 	
 	## Spacebar: Charged shots by holding then releasing space with mana
 	# charge linearly by holding space (up to 125%)
@@ -254,7 +256,7 @@ func get_input(): # TODO: replace this with _input() ?
 
 func _physics_process(_delta):
 	## Movement
-	ReadTerrain()
+	if not dashing: ReadTerrain()
 	get_input()
 	
 	if not dashing: EntityMovement()
