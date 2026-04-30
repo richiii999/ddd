@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ciy5nuokhwstc" path="res://Assets/UI/HPotEmpty.png" id="3_2sk3e"]
 [ext_resource type="Texture2D" uid="uid://kiqf4mk7st5y" path="res://Assets/UI/MPotFull.png" id="5_bqpn1"]
 [ext_resource type="Texture2D" uid="uid://dubkle56g6o1c" path="res://Assets/UI/MPotEmpty.png" id="6_he72y"]
+[ext_resource type="Texture2D" uid="uid://cassmco45pf63" path="res://Assets/UI/NexusButton.png" id="7_bqpn1"]
 
 [node name="Utility" type="Panel" unique_id=742165527]
 anchors_preset = -1
@@ -49,7 +50,7 @@ position = Vector2(23.8, 28.9)
 scale = Vector2(1.8, 1.8)
 texture = ExtResource("3_2sk3e")
 
-[node name="Label" type="Label" parent="HPot_Button" unique_id=1021174846]
+[node name="HPotValue" type="Label" parent="HPot_Button" unique_id=1021174846]
 layout_mode = 0
 offset_left = 2.999999
 offset_top = 47.0
@@ -59,7 +60,7 @@ theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
 theme_override_constants/shadow_outline_size = 2
-text = "X"
+text = "X/X"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -96,7 +97,7 @@ position = Vector2(23.8, 28.9)
 scale = Vector2(1.8, 1.8)
 texture = ExtResource("6_he72y")
 
-[node name="Label" type="Label" parent="MPot_Button" unique_id=801709585]
+[node name="MPotValue" type="Label" parent="MPot_Button" unique_id=801709585]
 layout_mode = 0
 offset_left = 2.999999
 offset_top = 47.0
@@ -106,7 +107,7 @@ theme_override_colors/font_shadow_color = Color(0, 0, 1, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
 theme_override_constants/shadow_outline_size = 4
-text = "X"
+text = "X/X"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -139,8 +140,27 @@ offset_left = -3.05176e-05
 offset_top = 0.00799942
 offset_bottom = -0.00800323
 focus_mode = 0
-text = "Nexus
-"
+flat = true
 icon_alignment = 1
 expand_icon = true
 metadata/_edit_use_anchors_ = true
+
+[node name="NexusIcon" type="Sprite2D" parent="Nex_Button" unique_id=972271847]
+texture_filter = 1
+position = Vector2(45, 28)
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("7_bqpn1")
+
+[node name="NexusText" type="Label" parent="Nex_Button" unique_id=454415072]
+layout_mode = 0
+offset_left = 9.999999
+offset_top = 15.0
+offset_right = 81.0
+offset_bottom = 38.0
+theme_override_colors/font_shadow_color = Color(1, 1, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 1
+text = "RECALL"
+horizontal_alignment = 1
+vertical_alignment = 1
