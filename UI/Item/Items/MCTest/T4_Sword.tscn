@@ -10,15 +10,15 @@ script = ExtResource("2_bs2uj")
 tier = 3
 type = 4
 stats = Dictionary[int, int]({
-0: 5,
-1: 5,
+0: 7,
+1: 0,
 2: 5,
-3: 3,
-4: 3,
-5: 3,
-6: 1,
-7: 1,
-8: 99
+3: 0,
+4: 0,
+5: 6,
+6: 0,
+7: 0,
+8: 3
 })
 attack = ExtResource("3_kcb4h")
 metadata/_custom_type_script = "uid://dpbuam0tpmaha"
