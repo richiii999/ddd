@@ -42,9 +42,14 @@ func ChangeStateByIdx(newStateChildIdx : int = -1) -> void:
 	if newStateChildIdx < 0: 
 		print_debug("newStateChildIdx < 0, keeping current state for Entity")
 		return
-	if newStateChildIdx > self.get_child_count() - 1: 
+	if newStateChildIdx > self.get_child_count(): 
 		print_debug("newStateChildIdx == outOfRange, keeping current state for Entity")
+		print(newStateChildIdx)
 		return
+		
+	# Non-final state, loop back to idx 0
+	if newStateChildIdx == self.get_child_count(): newStateChildIdx = 0
+	
 	currState.onLeave()
 	currState = get_child(newStateChildIdx)
 	currState.onEnter()

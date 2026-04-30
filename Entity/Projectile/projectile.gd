@@ -63,8 +63,11 @@ func BodyCollideRID(rid: RID, body: Node2D, _body_shape_idx: int, _local_shape_i
 		#print(tileCoords)
 		var tile = body.get_cell_tile_data(tileCoords)
 		if tile.get_custom_data("Destructible"):
-			if true: body.set_cell(tileCoords, 0, Vector2i(2,1)) # Tile switches to destroyed version which has no collision and a different texture
-			else: body.erase_cell(tileCoords) # Failsafe: If the tilemap atlas is messed up, just erase the tile
+			# TODO: change this to work for multiple different wall tiles
+			# Tile switches to destroyed version which has no collision and a different texture
+			if true: body.set_cell(tileCoords, 0, Vector2i(2,1)) 
+			# Failsafe: If the tilemap atlas is messed up, just erase the tile
+			else: body.erase_cell(tileCoords) 
 		Destruct()
 	#else: pass
 
