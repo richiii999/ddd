@@ -35,7 +35,7 @@ position = Vector2(766, 0)
 position = Vector2(893, 4864)
 
 [node name="Tutorial_Room2" parent="Rooms" unique_id=987869851 instance=ExtResource("7_lo2xd")]
-position = Vector2(2816, 3712)
+position = Vector2(2688, 2944)
 
 [node name="Tutorial_Boss_Room" parent="Rooms" unique_id=424399930 instance=ExtResource("8_2xxxx")]
 position = Vector2(4472, 3392)
