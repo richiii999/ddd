@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dg6bbuxx6p2sf"
-path="res://.godot/imported/MPot Button.png-aec79332e1a4e8e864f9546daa676085.ctex"
+uid="uid://dubkle56g6o1c"
+path="res://.godot/imported/MPotEmpty.png-2b27228fa84733b483bdfe38718268ca.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/MPot Button.png"
-dest_files=["res://.godot/imported/MPot Button.png-aec79332e1a4e8e864f9546daa676085.ctex"]
+source_file="res://Assets/UI/MPotEmpty.png"
+dest_files=["res://.godot/imported/MPotEmpty.png-2b27228fa84733b483bdfe38718268ca.ctex"]
 
 [params]
 
