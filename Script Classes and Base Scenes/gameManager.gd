@@ -11,7 +11,11 @@ class_name GameManager extends Node ## Controls the game. The "Main" scene of th
 
 @export var dungeons: Array[PackedScene]
 var mapOffset : Vector2 = Vector2(99999,0) # Offset each added map by this much
-func AddMap(map): $Maps.add_child(map); map.global_position += mapOffset; mapOffset += mapOffset
+func AddMap(map): 
+	$Maps.add_child(map)
+	map.global_position += mapOffset
+	mapOffset += mapOffset
+	map.z_index = -10
 
 ## Player
 @export var player_tscn: PackedScene 
