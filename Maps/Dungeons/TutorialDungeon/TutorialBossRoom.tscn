@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://g7spcuqqx1mx" path="res://Maps/Dungeons/dungeonDoor.tscn" id="3_tllhq"]
 [ext_resource type="PackedScene" uid="uid://t77auhbqet13" path="res://Maps/Dungeons/DungeonEnemySpawner.tscn" id="4_dvk5h"]
 [ext_resource type="PackedScene" uid="uid://bx6nhpoc0gjgt" path="res://Entity/Enemy/Bosses/NecromancerBoss.tscn" id="5_ivpcq"]
+[ext_resource type="PackedScene" uid="uid://1cp77605pfhe" path="res://Entity/Enemy/Enemies/NecroSkull.tscn" id="6_tllhq"]
 
 [node name="Tutorial_Room" type="TileMapLayer" unique_id=1223308819]
 use_parent_material = true
@@ -34,18 +35,26 @@ position = Vector2(8, 0)
 [node name="EnemyDungeonSpawner4" parent="Waves/Wave1" unique_id=1788395925 instance=ExtResource("4_dvk5h")]
 position = Vector2(600, -0.0001063061)
 enemyScene = ExtResource("5_ivpcq")
-statScale = Dictionary[String, float]({
-"DMG": 1.0,
-"HP": 1.0,
-"SIZE": 1.0,
-"SPD": 0.0
-})
 
 [node name="EnemyDungeonSpawner5" parent="Waves/Wave1" unique_id=1445437097 instance=ExtResource("4_dvk5h")]
 position = Vector2(-8.000108, -616)
+enemyScene = ExtResource("6_tllhq")
+statScale = Dictionary[String, float]({
+"DMG": 1.0,
+"HP": 1.0,
+"SIZE": 1.5,
+"SPD": 0.5
+})
 
 [node name="EnemyDungeonSpawner6" parent="Waves/Wave1" unique_id=421291035 instance=ExtResource("4_dvk5h")]
 position = Vector2(-7.999892, 616)
+enemyScene = ExtResource("6_tllhq")
+statScale = Dictionary[String, float]({
+"DMG": 1.0,
+"HP": 1.0,
+"SIZE": 1.5,
+"SPD": 0.5
+})
 
 [node name="Props" type="Node2D" parent="." unique_id=2020528078]
 position = Vector2(8, 0)
