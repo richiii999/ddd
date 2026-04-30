@@ -174,13 +174,21 @@ func Heal(power : int):
 	# Display heal number
 	Manager.get_child(2).add_child(dmgNumScn.instantiate().setup(global_position, power, false, true))
 
-func ReadTerrain(): ## Read tile under the entity, assign tile's data to variables
+## Read tile under the entity, assign tile's data to variables
+func ReadTerrain(): 
 	if currWorld:
 		currTile = currWorld.get_cell_tile_data(currWorld.local_to_map(currWorld.to_local(global_position)))
-		if currTile != null:
+		if currTile == null: ResetTile()
+		else: 
 			tileSpeed = currTile.get_custom_data("Speed")
 			tilePain  = currTile.get_custom_data("Pain")
 			tilePush  = Vector2(float(currTile.get_custom_data("PushH")), float(currTile.get_custom_data("PushV")))
+
+## Resets tile data
+func ResetTile():
+	tileSpeed = 1.0
+	tilePain = 0
+	tilePush = Vector2.ZERO
 
 ## Knockback (signaled from the colliding projectile): Applies an impluse to velocity in px/s (modified by KBresistance)
 func Knockback(from : Vector2, strength : float): if !invulnerable: velocity += Vector2.from_angle(from.angle_to_point(global_position)) * (1.00 - kBResistance) * strength
