@@ -20,10 +20,15 @@ func _ready():
 	timeout.connect(BehaviorTick)
 
 func BehaviorTick(): 
-	if currState: currState.BehaviorTick() # Tick current behavior each frame
-	if currState: currState.checkConditions() # On timeout (0.5s rather than every frame): check if behavior should change from currState
+	if currState: 
+		currState.BehaviorTick() # Tick current behavior each frame
+		
+		# On timeout (0.5s rather than every frame): check if behavior should change from currState
+		if currState.checkConditions():
+			ChangeStateByIdx(currState.get_index() + 1) # Go to next phase
 
-func ChangeState(newState : BehaviorBASE = null) -> void: # Change state: currState -> newState, calling their respective onLeave/onEnter functions
+## Change state: currState -> newState, calling their respective onLeave/onEnter functions
+func ChangeState(newState : BehaviorBASE = null) -> void: 
 	if !newState: print_debug("newState == null, keeping current state for Entity")
 	if newState == currState: print_debug("newState == currState, keeping current state for Entity")
 	else: # Valid newState
