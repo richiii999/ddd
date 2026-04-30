@@ -21,6 +21,7 @@ func onLeave(): # Stop timer, reset movement stuff
 	Entity.targetPosStopRadius = 10.00
 	Entity.set_collision_layer_value(9, true)
 	stop()
+
 func BehaviorTick(): # every frame, set target pos farther along a circle with radius orbitRadius via timer
 	if orbitsTargetEntity && Entity.targetEntity != Entity : setOrbit(Entity.targetEntity.global_position) # Follow targetEntity's position
 	Entity.setTargetPos(orbitTarget + (Vector2.RIGHT.rotated( (time_left/wait_time) * 6.00 ) * orbitRadius)) # set Entity.targetPos to a position along a circle of radius orbitRadius

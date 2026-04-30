@@ -29,6 +29,7 @@ func BehaviorTick():
 
 ## Change state: currState -> newState, calling their respective onLeave/onEnter functions
 func ChangeState(newState : BehaviorBASE = null) -> void: 
+	if currState.isFinal: return
 	if !newState: print_debug("newState == null, keeping current state for Entity")
 	if newState == currState: print_debug("newState == currState, keeping current state for Entity")
 	else: # Valid newState
@@ -37,9 +38,13 @@ func ChangeState(newState : BehaviorBASE = null) -> void:
 		currState.onEnter()
 
 func ChangeStateByIdx(newStateChildIdx : int = -1) -> void:
-	#return rather than else statmenet, since its not going to change anything and leave it as is
-	if newStateChildIdx < 0: print_debug("newStateChildIdx < 0, keeping current state for Entity"); return
-	if newStateChildIdx > self.get_child_count() - 1: print_debug("newStateChildIdx == outOfRange, keeping current state for Entity"); return
+	if currState.isFinal: return
+	if newStateChildIdx < 0: 
+		print_debug("newStateChildIdx < 0, keeping current state for Entity")
+		return
+	if newStateChildIdx > self.get_child_count() - 1: 
+		print_debug("newStateChildIdx == outOfRange, keeping current state for Entity")
+		return
 	currState.onLeave()
 	currState = get_child(newStateChildIdx)
 	currState.onEnter()
