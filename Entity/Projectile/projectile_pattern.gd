@@ -7,11 +7,10 @@ enum PatternType {
 	ARC, 
 	BOWTIE, 
 	GRID, 
-	#CHAIN,
-	#WING_RINGS
+	CHAIN,
+	WING_RINGS
 }
 
-#TODO: this is our projectile scene to instantiate, we have to set this on the node in the editor or before calling Emit()
 @export var projectile_scene : PackedScene
 
 #chain settings - don't know if this is correct so will change this later
@@ -27,6 +26,8 @@ func Emit(type: PatternType, count: int, opts: Dictionary = {}) -> void:
 		PatternType.ARC: emit_arc(count, opts)
 		PatternType.BOWTIE: emit_bowtie(count, opts)
 		PatternType.GRID: emit_grid(opts)
+		PatternType.CHAIN: start_chain(count, opts)
+		PatternType.WING_RINGS: emit_wing_rings(count, opts)
 
 #this will basically do a circle that does N projectles in a 360 (aka a circle)
 #so if you pass in say (circle, 3), then you get a triangle
@@ -108,6 +109,63 @@ func start_chain(count: int, opts: Dictionary) -> void:
 		chain_timer.stop()
 		chain_timer.queue_free()
 	
+	#get the configuration for the chain
+	chain_config = {
+		"sub_type": opts.get("sub_type", PatternType.CIRCLE),
+		"sub_count": opts.get("sub_count", count),
+		"sub_opts": opts.get("sub_opts", {})
+	}
+	chain_rep_left = opts.get("reps", 3)
+	
+	#fire the chain once, then use a start timer for the rest of them
+	fire_chain_rep()
+	
+	#if there's 0 chains left, return
+	if chain_rep_left <= 0: return
+	
+	#initialize our timer
+	chain_timer = Timer.new()
+	chain_timer.wait_time = opts.get("interval", 0.5)
+	chain_timer.one_shot = false
+	chain_timer.timeout.connect(on_chain_tick)
+	add_child(chain_timer)
+	chain_timer.start()
+
+#have it keep chaining until reaching 0, then clear out our timer
+func on_chain_tick() -> void:
+	fire_chain_rep()
+	if chain_rep_left <= 0:
+		chain_timer.stop()
+		chain_timer.queue_free()
+		chain_timer = null
+
+#fires our chain out
+func fire_chain_rep() -> void:
+	if chain_rep_left <= 0: return
+	Emit(chain_config["sub_type"], chain_config["sub_count"], chain_config["sub_opts"])
+	chain_rep_left -= 1
+
+#wing rings are rings of projectiles that shoot out 
+func emit_wing_rings(count: int, opts: Dictionary) -> void:
+	var ring_count: int = opts.get("ring_count", 3) #how many rings
+	var sine_amp: float = opts.get("sine_amp", 0.4) #math shit i found online
+	var sine_freq: float = opts.get("sine_freq", 2.0)
+	var time_offset: float = opts.get("time_offset", 0.0)
+
+	for ring_idx in ring_count:
+		#each ring gets a phase-shifted sinusoidal rotation offset
+		var phase   : float = float(ring_idx) / ring_count * TAU
+		var ang_off : float = sin(time_offset * sine_freq + phase) * sine_amp
+
+		var ring_opts := opts.duplicate()
+		ring_opts["offset_angle"] = opts.get("offset_angle", 0.0) + ang_off
+
+		#alternate CW / CCW spin direction per ring for the wing effect
+		if ring_idx % 2 == 1:
+			ring_opts["offset_angle"] += PI / count  #half-step offset between rings
+
+		emit_circle(count, ring_opts)
+
 
 func make_proj(dir: float, opts: Dictionary) -> Projectile:
 	#check to see if the projectile scene even exists 

@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dgtlakw8834qa"]
+[gd_scene format=3 uid="uid://bca2k1o6q71dn"]
 
 [ext_resource type="Script" uid="uid://ncx0o5gc4pic" path="res://Entity/Enemy/Enemies/necromancer.gd" id="1_6tkx8"]
 [ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_7i3r3"]
