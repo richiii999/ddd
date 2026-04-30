@@ -240,7 +240,6 @@ func get_input(): # TODO: replace this with _input() ?
 	if Input.is_action_just_pressed("MPot"): MPot() # MPot with 'G'
 	if Input.is_action_just_pressed("Nexus"): Nexus() # TP back to Nexus with 'N'
 	if Input.is_action_just_pressed("Loot"): Inv.Loot() # Loot with 'Q'
-	if Input.is_action_just_pressed("spawn-pet"): SpawnPet() # Spawn pet with 'X'
 	if Input.is_action_just_pressed("delete-pet"): DeletePet() # Delete pet with 'Z'
 	
 	## UI Toggles 
@@ -335,18 +334,22 @@ func GainXP(xp : int = 0):
 	else: $CanvasLayer/RMenu/Fame_Bar.value = XP
 	while (XP >= XPmax): LevelUp() # "While" for rare cases where you level up more than once
 	
-## Spawn the pet (For now we are just going to spawn the pet)
-## TODO: Interact with pets and possibly add them to inventory
-func SpawnPet():
-	if pet_instance == null:
-		pet_instance = pet.instantiate()
-		get_parent().add_child(pet_instance)
-		
-		pet_instance.global_position = global_position + Vector2(50, 0)
-		pet_instance.player = self # Set the player variable for the instantiated pet
-		
-# Deletes the player's pet
-func DeletePet():
+## Spawn the given Pet
+func SpawnPet(pet:PackedScene):
+	if pet_instance != null:
+		$Status.addStatusText("You have a Pet!", "BLUE")
+		$Status.addStatusText("'Z' to abandon Pet!", "BLUE")
+		return
+	
+	pet_instance = pet.instantiate()
+	get_parent().add_child(pet_instance)
+	
+	pet_instance.global_position = global_position + Vector2(50, 0)
+	pet_instance.player = self # Set the player variable for the instantiated pet
+	$Status.addStatusText("You gained a pet!", "BLUE")
+
+## Deletes the player's Pet
+func DeletePet(): 
 	if is_instance_valid(pet_instance):
 		pet_instance.queue_free()
 		pet_instance = null
