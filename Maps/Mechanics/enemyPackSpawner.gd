@@ -18,6 +18,7 @@ signal screen_entered
 signal screen_exited
 
 func _ready():
+	if Mob == null: push_error("Mob not set on EnemySpawnNode!" , self); return
 	if respawn: $RespawnTimer.timeout.connect(SpawnMobs)
 	if immediate: SpawnMobs(maxMobs) # Spawn a full pack based on setting
 	if onlyWhenOffScreen: 
