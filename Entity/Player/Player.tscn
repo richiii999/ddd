@@ -120,6 +120,7 @@ Hide Rmenu: F12
 HP- : 0
 HP+: Shift+0
 XP+: 9
+Pet Trick: X
 Abandon Pet: Z"
 
 [node name="RMenu" parent="CanvasLayer" unique_id=675567958 instance=ExtResource("6_s48lg")]
