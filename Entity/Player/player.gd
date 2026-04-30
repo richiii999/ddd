@@ -257,6 +257,7 @@ func get_input(): # TODO: replace this with _input() ?
 func _physics_process(_delta):
 	## Movement
 	if not dashing: ReadTerrain()
+	#print(currTile)
 	get_input()
 	
 	if not dashing: EntityMovement()

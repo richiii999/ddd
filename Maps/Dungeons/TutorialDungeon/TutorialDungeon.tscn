@@ -38,9 +38,9 @@ position = Vector2(893, 4864)
 position = Vector2(2688, 2944)
 
 [node name="Tutorial_Boss_Room" parent="Rooms" unique_id=424399930 instance=ExtResource("8_2xxxx")]
-position = Vector2(4472, 3392)
+position = Vector2(4480, 3328)
 
 [node name="Tutorial_Exit" parent="Rooms" unique_id=394915165 instance=ExtResource("9_nckbr")]
-position = Vector2(6264, 3456)
+position = Vector2(6272, 3392)
 
 [node name="Spawners" type="Node2D" parent="." unique_id=555905646]

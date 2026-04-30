@@ -5,6 +5,7 @@ class_name DungeonBASE extends WorldBASE ## Inspired by Gungeon, waves of enemie
 
 # TODO Displayed on entrance
 @export var DungeonTitle : String = "Dungeon"
+var currRoom = self # Set by each room's entrance door
 
 # TODO Dungeon music
 #@export var bkgMusic
