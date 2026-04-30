@@ -37,6 +37,7 @@ collision_layer = 256
 collision_mask = 267
 motion_mode = 1
 script = ExtResource("1_icryi")
+XP = 5
 projs = Array[PackedScene]([ExtResource("2_11o8n"), ExtResource("2_11o8n"), ExtResource("2_11o8n")])
 
 [node name="Status" parent="." unique_id=869158990 instance=ExtResource("3_ethji")]
