@@ -462,3 +462,4 @@ func _OnDebugRevive() -> void:
 	get_tree().set_pause(false)
 	self.InputStatus = true
 	HP = HPmax
+	toggleBubble(false)

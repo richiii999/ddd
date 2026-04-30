@@ -76,7 +76,6 @@ collision_layer = 16
 collision_mask = 385
 motion_mode = 1
 wall_min_slide_angle = 0.17453292
-safe_margin = 0.25
 script = ExtResource("1_pnyfx")
 pet = ExtResource("2_3vnax")
 projs = Array[PackedScene]([ExtResource("2_7hmw6"), ExtResource("3_pnyfx"), ExtResource("2_7hmw6")])

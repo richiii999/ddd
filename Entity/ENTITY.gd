@@ -203,5 +203,6 @@ func EntityMovement():
 func _ready(): 
 	incHP(HPmax)
 	incMP(MPmax)
+	safe_margin = 0.5 # Prevent getting stuck on corners / walls
 
 func Death(): death.emit(self) ## Death: Default func for entities just emits the signal
