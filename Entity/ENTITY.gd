@@ -176,6 +176,7 @@ func Heal(power : int):
 
 ## Read tile under the entity, assign tile's data to variables
 func ReadTerrain(): 
+	if currWorld == null: ResetTile(); return
 	if currWorld is DungeonBASE: # Dungeons have multiple different TileMapLayers as rooms
 		currTile = currWorld.currRoom.get_cell_tile_data(currWorld.currRoom.local_to_map(currWorld.currRoom.to_local(global_position)))
 	else: 
