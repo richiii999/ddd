@@ -21,3 +21,5 @@ scale = Vector2(0.5046412, 0.57505465)
 
 [node name="Props" type="Node2D" parent="." unique_id=2020528078]
 position = Vector2(8, 0)
+
+[node name="Waves" type="Node2D" parent="." unique_id=1410421527]
