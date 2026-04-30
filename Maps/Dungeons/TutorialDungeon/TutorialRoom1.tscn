@@ -15,9 +15,14 @@ script = ExtResource("2_cxgta")
 position = Vector2(8, 0)
 
 [node name="DungeonRoomDoor" parent="Doors" unique_id=1423699728 instance=ExtResource("3_uy3et")]
-position = Vector2(56.15388, -576)
+position = Vector2(55.999996, -576)
 rotation = -6.2831855
-scale = Vector2(0.5046412, 0.57505465)
+scale = Vector2(0.512, 0.64)
+
+[node name="DungeonRoomDoor2" parent="Doors" unique_id=1479086620 instance=ExtResource("3_uy3et")]
+position = Vector2(-7.999996, 1088)
+rotation = -3.1415927
+scale = Vector2(0.512, 0.64)
 
 [node name="Waves" type="Node2D" parent="." unique_id=1998990127]
 position = Vector2(8, 0)
