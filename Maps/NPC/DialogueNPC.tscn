@@ -7,7 +7,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_ty5tp"]
 radius = 106.004715
 
-[node name="Sprite2D" type="Sprite2D" unique_id=1821983141]
+[node name="DialogueNPC" type="Sprite2D" unique_id=1821983141]
 texture = ExtResource("2_4fo1f")
 script = ExtResource("1_5av4h")
 repeatable = false

@@ -12,6 +12,7 @@ func _physics_process(_delta):
 	
 	# Calculate distance to player
 	var distance = global_position.distance_to(player.global_position)
+	$Sprite2D.flip_h = (global_position.x - player.global_position.x < 0)
 	
 	# Follow player, may have to teleport to them
 	if distance > maxDistance: global_position = player.global_position
