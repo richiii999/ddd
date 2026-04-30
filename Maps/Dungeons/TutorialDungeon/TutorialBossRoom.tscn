@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cnjedl2iok75y" path="res://Maps/Dungeons/dungeonRoom.gd" id="2_ivpcq"]
 [ext_resource type="PackedScene" uid="uid://g7spcuqqx1mx" path="res://Maps/Dungeons/dungeonDoor.tscn" id="3_tllhq"]
 [ext_resource type="PackedScene" uid="uid://t77auhbqet13" path="res://Maps/Dungeons/DungeonEnemySpawner.tscn" id="4_dvk5h"]
-[ext_resource type="PackedScene" uid="uid://dgtlakw8834qa" path="res://Entity/Enemy/Enemies/Necromancer.tscn" id="5_ivpcq"]
+[ext_resource type="PackedScene" uid="uid://bx6nhpoc0gjgt" path="res://Entity/Enemy/Bosses/NecromancerBoss.tscn" id="5_ivpcq"]
 
 [node name="Tutorial_Room" type="TileMapLayer" unique_id=1223308819]
 use_parent_material = true
