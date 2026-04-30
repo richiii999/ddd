@@ -44,9 +44,10 @@ func onEnemyDeath():
 	currWaveNumEnemies -= 1
 	if currWaveNumEnemies == 0: NextWave() # Wave is complete when no enemies remain
 
-func onPlayerEnter(_P):
+func onPlayerEnter(P):
 	if !roomActive: # Activate on first player entered
 		roomActive = true
+		get_parent().get_parent().currRoom = self # Set Dungeon currRoom
 		NextWave()
 	else: # Scale enemies for each extra player
 		for child in currWave.get_children():
