@@ -10,7 +10,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("1_luhs5")
 script = ExtResource("2_dp0sp")
 tier = 2
-type = 1
+type = 4
 stats = Dictionary[int, int]({
 0: 5,
 1: 0,
