@@ -1,17 +1,25 @@
 [gd_scene format=3 uid="uid://bkpkshofyjcse"]
 
-[ext_resource type="Texture2D" uid="uid://drfpfdw05ump0" path="res://Assets/Sprites/GD Icons/GD_Yellow.tres" id="1_buae7"]
-[ext_resource type="Texture2D" uid="uid://3baec8vvuxpd" path="res://Assets/Sprites/GD Icons/GD_Orange.tres" id="2_d7een"]
+[ext_resource type="Texture2D" uid="uid://bnwql7xu6fqns" path="res://Assets/ItchIO/2D Pixel Dungeon Asset Pack v2.0/2D Pixel Dungeon Asset Pack/items and trap_animation/coin/coin_1.png" id="2_ax4sp"]
 [ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_fcwoc"]
+[ext_resource type="Texture2D" uid="uid://bee8eqy76tkh8" path="res://Assets/ItchIO/2D Pixel Dungeon Asset Pack v2.0/2D Pixel Dungeon Asset Pack/items and trap_animation/coin/coin_2.png" id="3_hhvuh"]
+[ext_resource type="Texture2D" uid="uid://dv13pfsfiu33h" path="res://Assets/ItchIO/2D Pixel Dungeon Asset Pack v2.0/2D Pixel Dungeon Asset Pack/items and trap_animation/coin/coin_3.png" id="4_w5ade"]
+[ext_resource type="Texture2D" uid="uid://bubx87ws608b2" path="res://Assets/ItchIO/2D Pixel Dungeon Asset Pack v2.0/2D Pixel Dungeon Asset Pack/items and trap_animation/coin/coin_4.png" id="5_goykw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_buae7"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_buae7")
+"texture": ExtResource("2_ax4sp")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_d7een")
+"texture": ExtResource("3_hhvuh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_w5ade")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_goykw")
 }],
 "loop": true,
 "name": &"default",
@@ -20,12 +28,12 @@ animations = [{
 
 [node name="Coin" type="Sprite2D" unique_id=1667245125]
 script = ExtResource("2_fcwoc")
-itemName = "Coin"
 type = -2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1259461133]
+texture_filter = 1
+scale = Vector2(8, 8)
 sprite_frames = SubResource("SpriteFrames_buae7")
 autoplay = "default"
-frame = 1
 frame_progress = 0.5181447
 speed_scale = 0.5
