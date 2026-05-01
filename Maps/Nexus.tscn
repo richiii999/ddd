@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://kvedle5n3nvh" path="res://Assets/Sprites/Pets/Duck.png" id="10_otrks"]
 [ext_resource type="Texture2D" uid="uid://dsaqnss63f1sd" path="res://Assets/Sprites/Pets/Lizard.png" id="10_qugiy"]
 [ext_resource type="PackedScene" uid="uid://dbkto02kcwybg" path="res://Entity/Player/Pet/PetLizard.tscn" id="11_nqe2l"]
+[ext_resource type="PackedScene" uid="uid://dkky8m348k6w7" path="res://Maps/Props/Torch.tscn" id="14_up7ug"]
 
 [node name="Nexus" type="TileMapLayer" unique_id=961261896 groups=["World"]]
 z_index = -10
@@ -22,6 +23,11 @@ tile_map_data = PackedByteArray("AAD/////AAACAAEAAAAAAP//AAACAAEAAAABAP//AAACAAE
 tile_set = ExtResource("1_yfjvj")
 physics_quadrant_size = 1
 script = ExtResource("2_vtrqu")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=763628669]
+position = Vector2(-160, 544)
+scale = Vector2(4, 4)
+color = Color(0.7529412, 0.7529412, 0.7529412, 1)
 
 [node name="WorldEffects" type="Node2D" parent="." unique_id=242796999]
 
@@ -111,5 +117,8 @@ texture_filter = 1
 position = Vector2(-960, 1168)
 scale = Vector2(-2.2, 2.2)
 texture = ExtResource("10_otrks")
+
+[node name="Torch" parent="Decor" unique_id=1674849074 instance=ExtResource("14_up7ug")]
+position = Vector2(-160, 544)
 
 [editable path="NPCs/HelalDuck"]
