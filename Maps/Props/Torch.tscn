@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://c2eguyckexun" path="res://Assets/ItchIO/2D Pixel Dungeon Asset Pack v2.0/2D Pixel Dungeon Asset Pack/items and trap_animation/torch/torch_2.png" id="2_fernf"]
 [ext_resource type="Texture2D" uid="uid://dbhklomkcubae" path="res://Assets/ItchIO/2D Pixel Dungeon Asset Pack v2.0/2D Pixel Dungeon Asset Pack/items and trap_animation/torch/torch_3.png" id="3_20o6b"]
 [ext_resource type="Texture2D" uid="uid://byc024wf65vrl" path="res://Assets/ItchIO/2D Pixel Dungeon Asset Pack v2.0/2D Pixel Dungeon Asset Pack/items and trap_animation/torch/torch_4.png" id="4_qsbmt"]
-[ext_resource type="Texture2D" uid="uid://nr2hbkqc2eiu" path="res://Assets/CircleGreyscale.jpg" id="5_fernf"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_acuxn"]
 animations = [{
@@ -26,12 +25,30 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_6pfqg"]
+offsets = PackedFloat32Array(0, 0.55050504, 1)
+colors = PackedColorArray(0.7529412, 0.2509804, 0, 1, 0.3779187, 0.3779189, 0.37791875, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fernf"]
+gradient = SubResource("Gradient_6pfqg")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
 [node name="Torch" type="AnimatedSprite2D" unique_id=1674849074]
 texture_filter = 1
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_acuxn")
 autoplay = "default"
+speed_scale = 2.0
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1608541750]
-texture = ExtResource("5_fernf")
-texture_scale = 0.25
+color = Color(1, 0.7529412, 0.627451, 1)
+energy = 0.25
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 16.0
+texture = SubResource("GradientTexture2D_fernf")

@@ -2,6 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://cvbrop21b5ui7" path="res://Assets/Sprites/Terrain/TerrainAtlas.png" id="1_j4whk"]
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_j4whk"]
+polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i415w"]
 resource_name = "DebugTextures"
 texture = ExtResource("1_j4whk")
@@ -12,6 +15,7 @@ texture_region_size = Vector2i(64, 64)
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 0:0/0/custom_data_0 = 1.0
 1:0/0 = 0
+1:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_j4whk")
 1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 1:0/0/custom_data_0 = 1.0
 2:0/0 = 0
@@ -221,6 +225,7 @@ texture_region_size = Vector2i(64, 64)
 
 [resource]
 tile_size = Vector2i(64, 64)
+occlusion_layer_0/light_mask = 1
 physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 0
 custom_data_layer_0/name = "Speed"
