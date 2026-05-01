@@ -19,5 +19,5 @@ enum Types {INV, HELM, CHEST, RING, MAINHAND, OFFHAND}
 @export var attack : AttackData
 
 func _ready(): 
-	scale = Vector2(0.5,0.5) # Items are small
+	scale *= 0.75 # Items are small
 	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST # fix blurry pixelart

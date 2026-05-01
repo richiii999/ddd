@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://qrielvvwsqli"]
 
-[ext_resource type="Texture2D" uid="uid://dnr70onggtm7f" path="res://Assets/Sprites/GD Icons/GD_Purple.tres" id="1_r1fxf"]
+[ext_resource type="Texture2D" uid="uid://cgo1v84ftwub7" path="res://Assets/ItchIO/Itch Item Icons/AtlasTextures/Throw4.tres" id="1_r1fxf"]
 [ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_0yrnx"]
 [ext_resource type="PackedScene" uid="uid://dko0els7hvmek" path="res://Entity/Projectile/ProjectileTest2.tscn" id="3_lvo6b"]
 [ext_resource type="Script" uid="uid://8aascd4pg6vc" path="res://Entity/Projectile/attack_projecticle.gd" id="4_is3uf"]
@@ -11,7 +11,10 @@ projectile = ExtResource("3_lvo6b")
 metadata/_custom_type_script = "uid://8aascd4pg6vc"
 
 [node name="FirstWeapon" type="Sprite2D" unique_id=398207244]
+texture_filter = 1
+scale = Vector2(2.5, 2.5)
 texture = ExtResource("1_r1fxf")
+region_rect = Rect2(16, 16, 16, 16)
 script = ExtResource("2_0yrnx")
 type = 4
 stats = Dictionary[int, int]({

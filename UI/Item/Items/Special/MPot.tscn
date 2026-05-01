@@ -5,7 +5,7 @@
 
 [node name="MPot" type="Sprite2D" unique_id=1667245125]
 texture_filter = 1
-scale = Vector2(4, 4)
+scale = Vector2(2.5, 2.5)
 texture = ExtResource("1_1u45d")
 script = ExtResource("2_17cuq")
 type = -2

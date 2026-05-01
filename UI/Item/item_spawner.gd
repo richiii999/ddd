@@ -75,7 +75,7 @@ func SpawnItem(item : Item, pos : Vector2): # Spawns given item at Pos(X,Y)
 	
 	# BUG: Have to manually scale pots (they dont autoscale Idk why), coins work tho
 	if item.ID in [specialID.HPot, specialID.MPot]: 
-		groundItem.find_child("ItemSlot").scale = Vector2(6,6) 
+		groundItem.find_child("ItemSlot").scale = Vector2(6,6)
 	
 	call_deferred("add_child", groundItem) # Place the GroundItem in the world
 	get_tree().process_frame.connect(groundItem.set_global_position.bind(pos), CONNECT_ONE_SHOT)

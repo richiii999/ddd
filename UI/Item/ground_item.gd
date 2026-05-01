@@ -15,7 +15,13 @@ func _ready():
 	$Fade.connect("timeout", fadeOut)
 	$Fade.start(TTL / 5)
 	
-	$ItemSlot.add_child(item)
+	setItem(item)
 
 func fadeOut(): # Fade 20% every 1/5 of TTL
 	set_modulate(Color(get_modulate(), $TTL.time_left / TTL))
+
+func setItem(newItem:Item):
+	$ItemSlot.add_child(newItem)
+	$ItemSlot.scale = newItem.scale
+	
+	
