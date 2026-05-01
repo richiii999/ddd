@@ -38,7 +38,7 @@ func AddEffect(E: EffectBASE, constant:bool = false, length:float = E.length) ->
 		var T = Timer.new() # NOTE: Cant use SceneTreeTimer since the effect may expire before timer
 		T.timeout.connect(RemoveEffect.bind(E))
 		E.add_child(T)
-		T.start(length)
+		T.call_deferred("start", length)
 
 ## Remove an effect
 func RemoveEffect(E : EffectBASE) -> void: 

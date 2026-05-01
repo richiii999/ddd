@@ -67,11 +67,12 @@ size = Vector2(120, 120)
 resource_local_to_scene = true
 radius = 272.118
 
-[node name="Enemy_Test" type="CharacterBody2D" unique_id=940119581 groups=["Enemy"]]
+[node name="ChaseZombie" type="CharacterBody2D" unique_id=940119581 groups=["Enemy"]]
 collision_layer = 256
 collision_mask = 267
 motion_mode = 1
 script = ExtResource("1_rj2pp")
+XP = 30
 projs = Array[PackedScene]([ExtResource("2_vvp5b"), null, null])
 HPmax = 100
 

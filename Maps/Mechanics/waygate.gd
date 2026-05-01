@@ -85,4 +85,4 @@ func setActive(state:bool):
 func EffectTrigger(state:bool=true): # Emits blue particles and changes sprite for a moment
 	#print("EffectTrigger called, state: " + str(state) + "WG= " + str(self))
 	emitting = state; 
-	if(state): $EffectTimer.start(1.5) # Ttops emitting (calls this with state = false)
+	if(state): $EffectTimer.call_deferred("start", 1.5) # Ttops emitting (calls this with state = false)

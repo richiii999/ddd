@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://tcx34hy287cs" path="res://Maps/Mechanics/Waygate.tscn" id="4_bvj08"]
 [ext_resource type="PackedScene" uid="uid://3srv66mglq52" path="res://UI/Item/Items/MCTest/T1_Chest.tscn" id="4_tklj8"]
 [ext_resource type="PackedScene" uid="uid://tq8hs5inekce" path="res://Entity/Enemy/Enemies/ChaseZombie.tscn" id="7_4aram"]
-[ext_resource type="PackedScene" uid="uid://dgtlakw8834qa" path="res://Entity/Enemy/Bosses/NecromancerBOSS.tscn" id="7_mehv6"]
+[ext_resource type="PackedScene" uid="uid://bca2k1o6q71dn" path="res://Entity/Enemy/Bosses/NecromancerBOSS.tscn" id="7_mehv6"]
 [ext_resource type="PackedScene" uid="uid://bx6nhpoc0gjgt" path="res://Entity/Enemy/Enemies/Necromancer.tscn" id="9_74rsv"]
 
 [node name="Test_World" type="TileMapLayer" unique_id=1473374642]

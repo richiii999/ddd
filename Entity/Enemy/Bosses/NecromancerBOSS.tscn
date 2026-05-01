@@ -159,9 +159,9 @@ wait_time = 0.5
 isFinal = true
 
 [node name="LootTable" parent="." unique_id=1315550005 instance=ExtResource("9_lanxk")]
+numRolls = 3
 lootTable = Dictionary[int, int]({
-0: 0,
-1: 1
+-2: 1
 })
 
 [node name="EffectsComponentSystem" parent="." unique_id=921567753 instance=ExtResource("10_7aklf")]
@@ -173,7 +173,7 @@ maxMobs = 2
 onlyWhenOffScreen = false
 
 [node name="RespawnTimer" parent="EnemySpawnNode" index="0" unique_id=1959530611]
-wait_time = 6.0
+wait_time = 10.0
 
 [node name="ProjectilePattern" type="Node2D" parent="." unique_id=998689461]
 script = ExtResource("13_1h0en")
