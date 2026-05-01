@@ -2,7 +2,13 @@
 
 [ext_resource type="Texture2D" uid="uid://cvbrop21b5ui7" path="res://Assets/Sprites/Terrain/TerrainAtlas.png" id="1_j4whk"]
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_djaga"]
+polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_j4whk"]
+polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_akh6x"]
 polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i415w"]
@@ -12,6 +18,7 @@ margins = Vector2i(1, 1)
 separation = Vector2i(1, 1)
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
+0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_djaga")
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 0:0/0/custom_data_0 = 1.0
 1:0/0 = 0
@@ -19,6 +26,7 @@ texture_region_size = Vector2i(64, 64)
 1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 1:0/0/custom_data_0 = 1.0
 2:0/0 = 0
+2:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_akh6x")
 2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 2:0/0/custom_data_0 = 1.0
 2:0/0/custom_data_1 = 1
