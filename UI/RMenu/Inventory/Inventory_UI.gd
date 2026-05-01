@@ -37,7 +37,7 @@ signal dropItem(item:Item, pos:Vector2)
 
 func _ready(): 
 	UpdateInvStats.connect(player.UpdateStats)
-	dropItem.connect(itemSpawner.SpawnItem)
+	dropItem.connect(itemSpawner.SpawnItemByID)
 	
 	for i in len(Slots):
 		Slots[i].slotNumber = i # Assign slotNumber
@@ -156,7 +156,7 @@ func DropItem():
 		if mouseItem.tier == 4: # Quest Item
 			player.StatusLabel.addStatusText("Cant drop Quest Item!")
 			return
-		dropItem.emit(mouseItem, player.global_position)
+		dropItem.emit(mouseItem.ID, player.global_position)
 	else: push_warning("Tried to drop null item") # Null case: shouldnt happen, see Loot()
 	
 	SlotClick(Slot.MOUSE, Slot.GROUND) # Delete item in MOUSE
