@@ -36,7 +36,13 @@ var items : Array[Resource] = [ # Index of this array == "itemID" used throughou
 	load("res://UI/Item/Items/MCTest/T4_Helm.tscn"),
 	load("res://UI/Item/Items/MCTest/T4_Offhand.tscn"),
 	load("res://UI/Item/Items/MCTest/T4_Sword.tscn"),
-	load("res://UI/Item/Items/MCTest/TX_Diamond.tscn") # 20
+	load("res://UI/Item/Items/MCTest/TX_Diamond.tscn"), # 20
+	
+	# Jackson's weapons
+	load("res://UI/Item/Weapon/WEAPON-ONE.tscn"),
+	load("res://UI/Item/Weapon/WEAPON-TWO.tscn"),
+	load("res://UI/Item/Weapon/WEAPON-THREE.tscn")
+	
 ]
 
 ## Creates a new item with an ID
@@ -48,10 +54,9 @@ func ItemByID(itemID:int) -> Item:
 	else: newItem = items[itemID].instantiate() # Positive ID
 	
 	newItem.ID = itemID
-	
 	return newItem
 
-## Wrapper for SpawnItem if you want a brand new item
+## Spawns an item via ID
 func SpawnItemByID(itemID : int, pos : Vector2): # Spawns items[itemID] at Pos(X,Y)
 	if itemID > len(items) - 1 or itemID < (len(specialItems) - 1) * -1:
 		push_error("IndexOOB ItemID")
@@ -59,7 +64,7 @@ func SpawnItemByID(itemID : int, pos : Vector2): # Spawns items[itemID] at Pos(X
 	
 	SpawnItem(ItemByID(itemID), pos)
 
-## ACTUALLY places the item into the world
+## Places an item into the world
 func SpawnItem(item : Item, pos : Vector2): # Spawns given item at Pos(X,Y)
 	if item.ID == 0: push_warning("Spawned item without ID")
 	
