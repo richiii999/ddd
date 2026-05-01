@@ -1,9 +1,10 @@
-[gd_scene format=3 uid="uid://bppeakuvj7xq3"]
+[gd_scene format=3 uid="uid://lxrkv7cintjn"]
 
 [ext_resource type="Texture2D" uid="uid://drfpfdw05ump0" path="res://Assets/Sprites/GD Icons/GD_Yellow.tres" id="1_biulr"]
 [ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_q1rlp"]
 
 [node name="Test_chestplate" type="Sprite2D" unique_id=1605123198]
+scale = Vector2(0.75, 0.75)
 texture = ExtResource("1_biulr")
 script = ExtResource("2_q1rlp")
 type = 2

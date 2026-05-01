@@ -5,6 +5,8 @@
 [ext_resource type="Resource" uid="uid://6uxfkrkyiuvg" path="res://Entity/Projectile/Attack/attack_test2.tres" id="3_11alj"]
 
 [node name="TestItem3" type="Sprite2D" unique_id=398207244]
+texture_filter = 1
+scale = Vector2(0.75, 0.75)
 texture = ExtResource("1_11alj")
 script = ExtResource("2_paedb")
 type = 5

@@ -2,12 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://drfpfdw05ump0" path="res://Assets/Sprites/GD Icons/GD_Yellow.tres" id="1_8bq7i"]
 [ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="1_8pf0b"]
-[ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_woukd"]
 
 [node name="TestItem" type="Sprite2D" unique_id=398207244]
+scale = Vector2(0.75, 0.75)
 texture = ExtResource("1_8bq7i")
 script = ExtResource("1_8pf0b")
-itemName = "TEST_ITEM"
 type = 1
-projectile = ExtResource("2_woukd")
 metadata/_custom_type_script = "uid://dpbuam0tpmaha"

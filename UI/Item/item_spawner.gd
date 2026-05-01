@@ -15,33 +15,28 @@ var specialItems : Array[Resource] = [ # Negative item IDs
 
 var items : Array[Resource] = [ # Index of this array == "itemID" used throughout the code
 	load("res://UI/Item/Items/Special/TEST_ITEM.tscn"), # NOTE: Present in both arrays at index 0
-	load("res://UI/Item/Items/test_chestplate.tscn"),
-	load("res://UI/Item/Items/TEST_ITEM2.tscn"),
-	load("res://UI/Item/Items/TEST_ITEM3.tscn"), # 3
-	
 	# MC Test items
 	load("res://UI/Item/Items/MCTest/T1_Chest.tscn"),
-	load("res://UI/Item/Items/MCTest/T1_Helm.tscn"), # 5
+	load("res://UI/Item/Items/MCTest/T1_Helm.tscn"), 
 	load("res://UI/Item/Items/MCTest/T1_Offhand.tscn"),
 	load("res://UI/Item/Items/MCTest/T1_Sword.tscn"),
-	load("res://UI/Item/Items/MCTest/T2_Chest.tscn"),
+	load("res://UI/Item/Items/MCTest/T2_Chest.tscn"), # 5
 	load("res://UI/Item/Items/MCTest/T2_Helm.tscn"),
-	load("res://UI/Item/Items/MCTest/T2_Offhand.tscn"), # 10
+	load("res://UI/Item/Items/MCTest/T2_Offhand.tscn"),
 	load("res://UI/Item/Items/MCTest/T2_Sword.tscn"),
 	load("res://UI/Item/Items/MCTest/T3_Chest.tscn"),
-	load("res://UI/Item/Items/MCTest/T3_Helm.tscn"),
+	load("res://UI/Item/Items/MCTest/T3_Helm.tscn"), # 10
 	load("res://UI/Item/Items/MCTest/T3_Offhand.tscn"),
-	load("res://UI/Item/Items/MCTest/T3_Sword.tscn"), # 15
+	load("res://UI/Item/Items/MCTest/T3_Sword.tscn"), 
 	load("res://UI/Item/Items/MCTest/T4_Chest.tscn"),
 	load("res://UI/Item/Items/MCTest/T4_Helm.tscn"),
-	load("res://UI/Item/Items/MCTest/T4_Offhand.tscn"),
+	load("res://UI/Item/Items/MCTest/T4_Offhand.tscn"), # 15
 	load("res://UI/Item/Items/MCTest/T4_Sword.tscn"),
-	load("res://UI/Item/Items/MCTest/TX_Diamond.tscn"), # 20
-	
+	load("res://UI/Item/Items/MCTest/TX_Diamond.tscn"), 
 	# Jackson's weapons
 	load("res://UI/Item/Weapon/WEAPON-ONE.tscn"),
 	load("res://UI/Item/Weapon/WEAPON-TWO.tscn"),
-	load("res://UI/Item/Weapon/WEAPON-THREE.tscn")
+	load("res://UI/Item/Weapon/WEAPON-THREE.tscn") # 20
 	
 ]
 
@@ -72,10 +67,6 @@ func SpawnItem(item : Item, pos : Vector2): # Spawns given item at Pos(X,Y)
 	
 	var groundItem = groundItemScene.instantiate()
 	groundItem.item = item
-	
-	# BUG: Have to manually scale pots (they dont autoscale Idk why), coins work tho
-	if item.ID in [specialID.HPot, specialID.MPot]: 
-		groundItem.find_child("ItemSlot").scale = Vector2(6,6)
 	
 	call_deferred("add_child", groundItem) # Place the GroundItem in the world
 	get_tree().process_frame.connect(groundItem.set_global_position.bind(pos), CONNECT_ONE_SHOT)
