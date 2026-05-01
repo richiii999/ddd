@@ -336,18 +336,18 @@ func GainXP(xp : int = 0):
 	while (XP >= XPmax): LevelUp() # "While" for rare cases where you level up more than once
 	
 ## Spawn the given Pet
-func SpawnPet(pet:PackedScene):
+func SpawnPet(newPet:PackedScene):
 	if pet_instance != null:
 		$Status.addStatusText("You have a Pet!", "BLUE")
 		$Status.addStatusText("'Z' to abandon Pet!", "BLUE")
 		return
 	
-	pet_instance = pet.instantiate()
+	pet_instance = newPet.instantiate()
 	get_parent().add_child(pet_instance)
 	
 	pet_instance.global_position = global_position + Vector2(50, 0)
-	pet_instance.player = self # Set the player variable for the instantiated pet
-	$Status.addStatusText("You gained a pet!", "BLUE")
+	pet_instance.player = self # Set the player variable for the instantiated newPet
+	$Status.addStatusText("You gained a Pet!", "BLUE")
 
 ## Deletes the player's Pet
 func DeletePet(): 
