@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bk717q8rtmc5l" path="res://Assets/UI/HPotFull.png" id="1_jod4c"]
 
 [node name="HPot" type="Sprite2D" unique_id=1667245125]
-scale = Vector2(2.5, 2.5)
+scale = Vector2(2, 2)
 texture = ExtResource("1_jod4c")
 script = ExtResource("1_8s573")
 type = -2

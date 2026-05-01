@@ -5,6 +5,8 @@
 [ext_resource type="Resource" uid="uid://6uxfkrkyiuvg" path="res://Entity/Projectile/Attack/attack_test2.tres" id="3_chqqt"]
 
 [node name="DiamondChest" type="Sprite2D" unique_id=398207244]
+texture_filter = 1
+scale = Vector2(2, 2)
 texture = ExtResource("1_l78up")
 script = ExtResource("2_j6cd3")
 tier = 3

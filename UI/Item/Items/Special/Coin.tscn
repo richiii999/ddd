@@ -27,6 +27,7 @@ animations = [{
 }]
 
 [node name="Coin" type="Sprite2D" unique_id=1667245125]
+scale = Vector2(0.75, 0.75)
 script = ExtResource("2_fcwoc")
 type = -2
 

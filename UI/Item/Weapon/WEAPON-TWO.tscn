@@ -12,7 +12,7 @@ metadata/_custom_type_script = "uid://8aascd4pg6vc"
 
 [node name="SecondWeapon" type="Sprite2D" unique_id=398207244]
 texture_filter = 1
-scale = Vector2(2.5, 2.5)
+scale = Vector2(2, 2)
 texture = ExtResource("1_3ttdj")
 script = ExtResource("2_w2qv2")
 type = 4
