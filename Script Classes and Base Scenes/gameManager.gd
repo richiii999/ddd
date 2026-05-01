@@ -60,12 +60,12 @@ func NexusSetup():
 	var nexOffset = nexus.global_position
 	
 	## Spawn 3 of every special item
-	for ID in range(len($ItemSpawner.specialItems)):
+	for ID in range(1, len($ItemSpawner.specialItems)):
 		$ItemSpawner.SpawnItemByID(-ID, nexOffset + Vector2(-850, -100 * ID - 100))
 		$ItemSpawner.SpawnItemByID(-ID, nexOffset + Vector2(-900, -100 * ID - 100))
 		$ItemSpawner.SpawnItemByID(-ID, nexOffset + Vector2(-950, -100 * ID - 100))
 	
-	for ID in range(len($ItemSpawner.items)):
+	for ID in range(1, len($ItemSpawner.items)):
 		$ItemSpawner.SpawnItemByID(ID, nexOffset + Vector2(-900 - ((ID * 100) % 300), 50 * ID))
 
 ## PlayerSetup: Places a new player into the game
