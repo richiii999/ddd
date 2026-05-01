@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://dldt74d5wk85d"]
 
-[ext_resource type="Texture2D" uid="uid://cktlhgltnn6h1" path="res://Assets/References/Minecraft/Invicon_Shield.png" id="1_ecyt6"]
+[ext_resource type="Texture2D" uid="uid://b8o3nut484xnc" path="res://Assets/ItchIO/shield.png" id="1_ecyt6"]
 [ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_gqu0t"]
 [ext_resource type="Resource" uid="uid://6uxfkrkyiuvg" path="res://Entity/Projectile/Attack/attack_test2.tres" id="3_xa2vf"]
 
 [node name="ShieldT2" type="Sprite2D" unique_id=398207244]
 texture_filter = 1
-scale = Vector2(0.75, 0.75)
+scale = Vector2(2, 2)
 texture = ExtResource("1_ecyt6")
 script = ExtResource("2_gqu0t")
 tier = 1

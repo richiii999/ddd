@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cktlhgltnn6h1"
-path="res://.godot/imported/Invicon_Shield.png-c5179b32964ba37b9335c1554c6a1fdd.ctex"
+uid="uid://b8o3nut484xnc"
+path="res://.godot/imported/shield.png-0c8d9553c66220ad0911a8096caacfd5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/References/Minecraft/Invicon_Shield.png"
-dest_files=["res://.godot/imported/Invicon_Shield.png-c5179b32964ba37b9335c1554c6a1fdd.ctex"]
+source_file="res://Assets/ItchIO/shield.png"
+dest_files=["res://.godot/imported/shield.png-0c8d9553c66220ad0911a8096caacfd5.ctex"]
 
 [params]
 
