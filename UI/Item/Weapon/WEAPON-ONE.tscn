@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://qrielvvwsqli"]
 
-[ext_resource type="Texture2D" uid="uid://drfpfdw05ump0" path="res://Assets/Sprites/GD Icons/GD_Yellow.tres" id="1_r1fxf"]
+[ext_resource type="Texture2D" uid="uid://dnr70onggtm7f" path="res://Assets/Sprites/GD Icons/GD_Purple.tres" id="1_r1fxf"]
 [ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_0yrnx"]
 [ext_resource type="PackedScene" uid="uid://dko0els7hvmek" path="res://Entity/Projectile/ProjectileTest2.tscn" id="3_lvo6b"]
 [ext_resource type="Script" uid="uid://8aascd4pg6vc" path="res://Entity/Projectile/attack_projecticle.gd" id="4_is3uf"]
@@ -10,15 +10,14 @@ script = ExtResource("4_is3uf")
 projectile = ExtResource("3_lvo6b")
 metadata/_custom_type_script = "uid://8aascd4pg6vc"
 
-[node name="TestItem" type="Sprite2D" unique_id=398207244]
+[node name="FirstWeapon" type="Sprite2D" unique_id=398207244]
 texture = ExtResource("1_r1fxf")
 script = ExtResource("2_0yrnx")
-itemName = "WEAPON_ONE"
 type = 4
 stats = Dictionary[int, int]({
-0: 10,
+0: -5,
 1: 0,
-2: 10,
+2: 20,
 3: 0,
 4: 0,
 5: 10,

@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://c8y460v3po8xh" path="res://Script Classes and Base Scenes/Interactable.tscn" id="2_5a6me"]
 [ext_resource type="PackedScene" uid="uid://bppeakuvj7xq3" path="res://UI/Item/Items/test_chestplate.tscn" id="3_ja3ak"]
 [ext_resource type="PackedScene" uid="uid://qrielvvwsqli" path="res://UI/Item/Weapon/WEAPON-ONE.tscn" id="4_ja3ak"]
+[ext_resource type="PackedScene" uid="uid://cn30bddmph3ff" path="res://UI/Item/Weapon/WEAPON-TWO.tscn" id="5_o5eft"]
+[ext_resource type="PackedScene" uid="uid://ckhc0im2v1uyb" path="res://UI/Item/Weapon/WEAPON-THREE.tscn" id="6_lsc47"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0su43"]
 radius = 148.12157
@@ -12,7 +14,7 @@ radius = 148.12157
 [node name="ShopTest" type="Sprite2D" unique_id=2144558353]
 texture = ExtResource("1_tmpwn")
 script = ExtResource("1_4ubr3")
-items = Array[PackedScene]([ExtResource("3_ja3ak"), ExtResource("4_ja3ak")])
+items = Array[PackedScene]([ExtResource("3_ja3ak"), ExtResource("4_ja3ak"), ExtResource("5_o5eft"), ExtResource("6_lsc47")])
 
 [node name="InteractComponent" parent="." unique_id=337905091 instance=ExtResource("2_5a6me")]
 
