@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bsq334knc34xj" path="res://Assets/Sprites/Terrain/spawnSquareON.png" id="3_b30aj"]
 [ext_resource type="Texture2D" uid="uid://w3wtcrfc68lr" path="res://Assets/Sprites/Terrain/spawnSquareOFF.png" id="4_b6lit"]
 [ext_resource type="PackedScene" uid="uid://c8y460v3po8xh" path="res://Script Classes and Base Scenes/Interactable.tscn" id="5_6772d"]
+[ext_resource type="AudioStream" uid="uid://d1nojx4sdbqk2" path="res://Assets/Audio/SFX/heal.wav" id="6_kl5nx"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ftblx"]
 particle_flag_disable_z = true
@@ -46,5 +47,10 @@ one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractComponent" unique_id=1864128415]
 shape = SubResource("RectangleShape2D_4r7gn")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1901576203]
+stream = ExtResource("6_kl5nx")
+volume_db = -6.933
+bus = &"SFX"
 
 [connection signal="Interact" from="InteractComponent" to="." method="WaygateInteract"]

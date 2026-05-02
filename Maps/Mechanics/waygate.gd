@@ -4,6 +4,7 @@ class_name Waygate extends GPUParticles2D ## Waygate: Node for teleporting playe
 @onready var currWorld : WorldBASE = Tools.FindParentByType(self, WorldBASE)
 @export var active : bool = false # Players can only spawn here if active
 @export var exit: bool = false # One-way teleport to Nexus, no GUI (ex. dungeon exit)
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 var currPlayer : Player = null # Set when player interacts with this
 
@@ -75,6 +76,7 @@ func UseWaygate(P:Player): # Teleports player to this waygate
 	get_tree().process_frame.connect(P.ECS.ClearEffects, CONNECT_ONE_SHOT)
 	
 	EffectTrigger()
+	audio_stream_player.play()
 
 func setActive(state:bool):
 	EffectTrigger(state)
