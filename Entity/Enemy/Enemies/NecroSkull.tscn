@@ -109,10 +109,6 @@ one_shot = true
 [node name="behavior_orbit" parent="BehaviorFSM" unique_id=394172828 instance=ExtResource("8_4hron")]
 
 [node name="LootTable" parent="." unique_id=1315550005 instance=ExtResource("9_3fl16")]
-lootTable = Dictionary[int, int]({
-0: 0,
-1: 1
-})
 
 [node name="EffectsComponentSystem" parent="." unique_id=921567753 instance=ExtResource("10_l5t8d")]
 

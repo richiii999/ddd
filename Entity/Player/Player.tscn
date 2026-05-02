@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://nquy6bnqhiwd"]
 
 [ext_resource type="Script" uid="uid://28yokghggm42" path="res://Entity/Player/player.gd" id="1_pnyfx"]
-[ext_resource type="PackedScene" uid="uid://cs61kw023xsp4" path="res://Entity/Player/Pet.tscn" id="2_3vnax"]
+[ext_resource type="PackedScene" uid="uid://cs61kw023xsp4" path="res://Entity/Player/Pet/PetDuck.tscn" id="2_3vnax"]
 [ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_7hmw6"]
 [ext_resource type="PackedScene" uid="uid://dko0els7hvmek" path="res://Entity/Projectile/ProjectileTest2.tscn" id="3_pnyfx"]
 [ext_resource type="PackedScene" uid="uid://bclrygg5d3dyn" path="res://Entity/Field.tscn" id="4_cretm"]
-[ext_resource type="PackedScene" uid="uid://b7cfsiy7p7ath" path="res://Entity/Components/Effects/Confused.tscn" id="5_pnyfx"]
+[ext_resource type="PackedScene" uid="uid://b7jer77opiti2" path="res://Entity/Components/Effects/Burn.tscn" id="6_7hmw6"]
 [ext_resource type="PackedScene" uid="uid://e5fewqnk5nty" path="res://UI/RMenu/r_menu.tscn" id="6_s48lg"]
 [ext_resource type="PackedScene" uid="uid://jkkh88r7c0fe" path="res://UI/LoadingScreen/loading_screen.tscn" id="7_2h57d"]
 [ext_resource type="PackedScene" uid="uid://ckppam3wv3dxn" path="res://UI/Death/death_screen.tscn" id="8_pt1bs"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://b286d5w4sx2m8" path="res://UI/WaygateGUI/waygate_gui.tscn" id="10_4q2yq"]
 [ext_resource type="PackedScene" uid="uid://blxsgjk3fmr0e" path="res://UI/Skills/skills.tscn" id="11_2efty"]
 [ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="12_be5jb"]
+[ext_resource type="PackedScene" uid="uid://ccj4e6ctlf042" path="res://UI/CharMenu/CharMenu.tscn" id="13_3vnax"]
 [ext_resource type="PackedScene" uid="uid://bo88q26eog6w" path="res://Entity/Player/Camera.tscn" id="13_23qwt"]
 [ext_resource type="PackedScene" uid="uid://dddy50t4saequ" path="res://Entity/Components/EffectComponentSystem.tscn" id="15_si366"]
 [ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/smartArea.gd" id="16_5ay3i"]
@@ -76,12 +77,11 @@ collision_layer = 16
 collision_mask = 385
 motion_mode = 1
 wall_min_slide_angle = 0.17453292
-safe_margin = 0.25
 script = ExtResource("1_pnyfx")
 pet = ExtResource("2_3vnax")
 projs = Array[PackedScene]([ExtResource("2_7hmw6"), ExtResource("3_pnyfx"), ExtResource("2_7hmw6")])
 fields = Array[PackedScene]([null, ExtResource("4_cretm"), null])
-fieldEffects = Array[PackedScene]([null, ExtResource("5_pnyfx"), null])
+fieldEffects = Array[PackedScene]([null, ExtResource("6_7hmw6"), null])
 aimSpread = 0.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1109501273]
@@ -120,15 +120,41 @@ Hide Rmenu: F12
 HP- : 0
 HP+: Shift+0
 XP+: 9
-Show Pet: X
-Hide Pet: Z"
+Pet Trick: X
+Abandon Pet: Z"
 
 [node name="RMenu" parent="CanvasLayer" unique_id=675567958 instance=ExtResource("6_s48lg")]
 unique_name_in_owner = true
 metadata/_edit_use_anchors_ = true
 
+[node name="HP_Text" parent="CanvasLayer/RMenu/HP_Bar" parent_id_path=PackedInt32Array(675567958, 436757496) index="0" unique_id=1865393913]
+offset_top = -7.9999237
+offset_bottom = 8.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 1
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/normal_font_size = 20
+
 [node name="MP_Bar" parent="CanvasLayer/RMenu" index="4" unique_id=1104932176]
 allow_greater = true
+
+[node name="MP_Text" parent="CanvasLayer/RMenu/MP_Bar" index="0" unique_id=1384016067]
+offset_top = -8.0
+offset_bottom = 7.999939
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 1
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/normal_font_size = 20
+
+[node name="XP_Text" parent="CanvasLayer/RMenu/XP_Bar" parent_id_path=PackedInt32Array(675567958, 218592652) index="0" unique_id=1117124343]
+offset_top = -8.000244
+offset_bottom = 7.9996796
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/normal_font_size = 20
 
 [node name="LoadingScreen" parent="CanvasLayer" unique_id=1453508200 instance=ExtResource("7_2h57d")]
 unique_name_in_owner = true
@@ -155,6 +181,10 @@ offset_left = 304.0
 offset_top = 160.0
 offset_right = 880.0
 offset_bottom = 576.0
+
+[node name="CharMenu" parent="CanvasLayer" unique_id=1899022427 instance=ExtResource("13_3vnax")]
+unique_name_in_owner = true
+visible = false
 
 [node name="Status" parent="." unique_id=651066457 instance=ExtResource("12_be5jb")]
 offset_left = -72.0
@@ -239,10 +269,6 @@ debug_color = Color(0.644771, 0.636917, 0.625141, 0.14902)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_t0707")
 animation = &"walk"
-
-[connection signal="pressed" from="CanvasLayer/RMenu/Utility/HPot_Button" to="." method="HPot"]
-[connection signal="pressed" from="CanvasLayer/RMenu/Utility/MPot_Button" to="." method="MPot"]
-[connection signal="pressed" from="CanvasLayer/RMenu/Utility/Nex_Button" to="." method="Nexus"]
 
 [editable path="CanvasLayer/RMenu"]
 [editable path="CanvasLayer/RMenu/Utility"]

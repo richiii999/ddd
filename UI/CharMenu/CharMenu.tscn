@@ -1,0 +1,261 @@
+[gd_scene format=3 uid="uid://ccj4e6ctlf042"]
+
+[ext_resource type="Script" uid="uid://cfl05a25qlg4k" path="res://UI/CharMenu/charMenu.gd" id="1_305y5"]
+[ext_resource type="Texture2D" uid="uid://mjmylc0o657g" path="res://Assets/Sprites/DDD_PlayerSprite_Attempt.png" id="2_pwacs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qy3kc"]
+atlas = ExtResource("2_pwacs")
+region = Rect2(0, 0, 70, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ortyr"]
+atlas = ExtResource("2_pwacs")
+region = Rect2(70, 0, 70, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_30gpd"]
+atlas = ExtResource("2_pwacs")
+region = Rect2(140, 0, 70, 67)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bq565"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qy3kc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ortyr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_30gpd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CharMenu" type="Control" unique_id=1899022427]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_305y5")
+
+[node name="BGPanel" type="ColorRect" parent="." unique_id=243092551]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.497474, 0.497474, 0.497474, 0.498039)
+
+[node name="CharacterRect" type="ColorRect" parent="." unique_id=1361627872]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -295.0
+offset_top = -216.0
+offset_right = 299.0
+offset_bottom = 233.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.34862554, 0.023335436, 0.045079388, 1)
+
+[node name="Label" type="RichTextLabel" parent="CharacterRect" unique_id=1223048474]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -82.5
+offset_top = 36.07
+offset_right = 82.5
+offset_bottom = 97.73001
+grow_horizontal = 2
+theme_override_colors/font_selected_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 26
+text = "Character"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CharSprite" type="AnimatedSprite2D" parent="CharacterRect" unique_id=754680249]
+position = Vector2(298, 194)
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_bq565")
+autoplay = "default"
+
+[node name="Stats" type="Control" parent="CharacterRect" unique_id=1082783267]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = 143.5
+offset_right = -2.0
+offset_bottom = 143.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="STR_Label" type="RichTextLabel" parent="CharacterRect/Stats" unique_id=507223762]
+self_modulate = Color(1, 0.2509804, 0.2509804, 1)
+layout_mode = 0
+offset_left = -280.0
+offset_top = -64.0
+offset_right = -240.0
+offset_bottom = -24.0
+text = "STR"
+horizontal_alignment = 1
+
+[node name="STR" type="RichTextLabel" parent="CharacterRect/Stats/STR_Label" unique_id=1328796775]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+text = "123"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="TOU_Label" type="RichTextLabel" parent="CharacterRect/Stats" unique_id=1048295852]
+self_modulate = Color(1, 0.2509804, 0.2509804, 1)
+layout_mode = 0
+offset_left = -208.0
+offset_right = -168.0
+offset_bottom = 40.0
+text = "TOU"
+horizontal_alignment = 1
+
+[node name="TOU" type="RichTextLabel" parent="CharacterRect/Stats/TOU_Label" unique_id=587930173]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+text = "123"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="BLK_Label" type="RichTextLabel" parent="CharacterRect/Stats" unique_id=1785278316]
+self_modulate = Color(1, 0.2509804, 0.2509804, 1)
+layout_mode = 0
+offset_left = -144.0
+offset_top = -64.0
+offset_right = -104.0
+offset_bottom = -24.0
+text = "BLK
+"
+horizontal_alignment = 1
+
+[node name="BLK" type="RichTextLabel" parent="CharacterRect/Stats/BLK_Label" unique_id=1992990135]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+text = "123"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="STR_Label5" type="RichTextLabel" parent="CharacterRect/Stats" unique_id=641021677]
+self_modulate = Color(0.2509804, 1, 0.2509804, 1)
+layout_mode = 0
+offset_left = -80.0
+offset_right = -40.0
+offset_bottom = 40.0
+text = "STR"
+horizontal_alignment = 1
+
+[node name="STR" type="RichTextLabel" parent="CharacterRect/Stats/STR_Label5" unique_id=348040268]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+text = "123"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="INT_Label" type="RichTextLabel" parent="CharacterRect/Stats" unique_id=60410980]
+self_modulate = Color(0.2509804, 1, 0.2509804, 1)
+layout_mode = 0
+offset_left = -16.0
+offset_top = -64.0
+offset_right = 24.0
+offset_bottom = -24.0
+text = "STR"
+horizontal_alignment = 1
+
+[node name="INT" type="RichTextLabel" parent="CharacterRect/Stats/INT_Label" unique_id=1299571817]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+text = "123"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="STR_Label6" type="RichTextLabel" parent="CharacterRect/Stats" unique_id=1973770229]
+self_modulate = Color(0.2509804, 1, 0.2509804, 1)
+layout_mode = 0
+offset_left = 48.0
+offset_right = 88.0
+offset_bottom = 40.0
+text = "STR"
+horizontal_alignment = 1
+
+[node name="STR" type="RichTextLabel" parent="CharacterRect/Stats/STR_Label6" unique_id=63474671]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+text = "123"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="STR_Label2" type="RichTextLabel" parent="CharacterRect/Stats" unique_id=690782330]
+self_modulate = Color(0.2509804, 0.2509804, 1, 1)
+layout_mode = 0
+offset_left = 104.0
+offset_top = -64.0
+offset_right = 144.0
+offset_bottom = -24.0
+text = "STR"
+horizontal_alignment = 1
+
+[node name="STR" type="RichTextLabel" parent="CharacterRect/Stats/STR_Label2" unique_id=760286115]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+text = "123"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="asdfasdf2" type="RichTextLabel" parent="CharacterRect/Stats" unique_id=1231763988]
+self_modulate = Color(0.2509804, 0.2509804, 1, 1)
+layout_mode = 0
+offset_left = 176.0
+offset_right = 216.0
+offset_bottom = 40.0
+text = "STR"
+horizontal_alignment = 1
+
+[node name="STR" type="RichTextLabel" parent="CharacterRect/Stats/asdfasdf2" unique_id=1036113810]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+text = "123"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="AGI_Label2" type="RichTextLabel" parent="CharacterRect/Stats" unique_id=1621420295]
+self_modulate = Color(0.2509804, 0.2509804, 1, 1)
+layout_mode = 0
+offset_left = 240.0
+offset_top = -64.0
+offset_right = 280.0
+offset_bottom = -24.0
+text = "STR"
+horizontal_alignment = 1
+
+[node name="AGI" type="RichTextLabel" parent="CharacterRect/Stats/AGI_Label2" unique_id=696248475]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+text = "123"
+horizontal_alignment = 1
+vertical_alignment = 2

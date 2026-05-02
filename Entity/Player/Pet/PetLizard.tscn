@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dbkto02kcwybg"]
+
+[ext_resource type="Script" uid="uid://dq33y75pnwsmq" path="res://Entity/Player/Pet/pet.gd" id="1_i64fu"]
+[ext_resource type="Texture2D" uid="uid://dsaqnss63f1sd" path="res://Assets/Sprites/Pets/Lizard.png" id="2_i64fu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_is5pi"]
+size = Vector2(51, 50)
+
+[node name="Pet" type="CharacterBody2D" unique_id=1563926412]
+motion_mode = 1
+script = ExtResource("1_i64fu")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1082199575]
+texture_filter = 1
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("2_i64fu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=926908102]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_is5pi")
+disabled = true

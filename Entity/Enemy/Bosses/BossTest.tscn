@@ -113,8 +113,7 @@ one_shot = true
 wait_time = 10.0
 autostart = true
 
-[node name="BehaviorFSM" parent="." unique_id=669444931 node_paths=PackedStringArray("initState") instance=ExtResource("5_j4rks")]
-initState = NodePath("behavior_boss1")
+[node name="BehaviorFSM" parent="." unique_id=669444931 instance=ExtResource("5_j4rks")]
 
 [node name="behavior_boss1" parent="BehaviorFSM" unique_id=109561774 instance=ExtResource("6_6sh2x")]
 

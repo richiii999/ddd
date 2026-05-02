@@ -1,9 +1,14 @@
 [gd_scene format=3 uid="uid://dtef1w3v7r3y1"]
 
-[ext_resource type="Texture2D" uid="uid://fb0magvji858" path="res://Assets/UI/HPot Button.png" id="1_gatec"]
-[ext_resource type="Texture2D" uid="uid://dg6bbuxx6p2sf" path="res://Assets/UI/MPot Button.png" id="2_w41be"]
+[ext_resource type="Texture2D" uid="uid://dgchm6xhsl36h" path="res://Assets/UI/HPotSlot.png" id="1_jkc2o"]
+[ext_resource type="Texture2D" uid="uid://bk717q8rtmc5l" path="res://Assets/UI/HPotFull.png" id="2_ajnqo"]
+[ext_resource type="Texture2D" uid="uid://disssetd8vxlj" path="res://Assets/UI/MPotSlot.png" id="2_jkc2o"]
+[ext_resource type="Texture2D" uid="uid://ciy5nuokhwstc" path="res://Assets/UI/HPotEmpty.png" id="3_2sk3e"]
+[ext_resource type="Texture2D" uid="uid://kiqf4mk7st5y" path="res://Assets/UI/MPotFull.png" id="5_bqpn1"]
+[ext_resource type="Texture2D" uid="uid://dubkle56g6o1c" path="res://Assets/UI/MPotEmpty.png" id="6_he72y"]
+[ext_resource type="Texture2D" uid="uid://cassmco45pf63" path="res://Assets/UI/NexusButton.png" id="7_bqpn1"]
 
-[node name="Utility" type="Panel"]
+[node name="Utility" type="Panel" unique_id=742165527]
 anchors_preset = -1
 anchor_right = 0.212
 anchor_bottom = 0.1
@@ -12,44 +17,101 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="HPot_Button" type="Button" parent="."]
+[node name="HPot_Button" type="Button" parent="." unique_id=1050025407]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.0289412
-anchor_top = 0.112
-anchor_right = 0.205882
-anchor_bottom = 0.889
+anchor_left = 0.028941195
+anchor_top = 0.028667025
+anchor_right = 0.20588198
+anchor_bottom = 0.8056671
 offset_left = 0.127996
 offset_top = -0.0640259
 offset_bottom = -0.00800323
 focus_mode = 0
 theme_override_colors/font_color = Color(1, 0, 0, 1)
-text = "X"
-icon = ExtResource("1_gatec")
+flat = true
 icon_alignment = 1
-expand_icon = true
 metadata/_edit_use_anchors_ = true
 
-[node name="MPot_Button" type="Button" parent="."]
+[node name="HPotSlot" type="Sprite2D" parent="HPot_Button" unique_id=1016655815]
+position = Vector2(23.999998, 28.000025)
+scale = Vector2(1.5, 1.5403227)
+texture = ExtResource("1_jkc2o")
+
+[node name="HPotIconFull" type="Sprite2D" parent="HPot_Button" unique_id=694095989]
+position = Vector2(23.8, 28.9)
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("2_ajnqo")
+
+[node name="HPotIconEmpty" type="Sprite2D" parent="HPot_Button" unique_id=1521987495]
+visible = false
+position = Vector2(23.8, 28.9)
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("3_2sk3e")
+
+[node name="HPotValue" type="Label" parent="HPot_Button" unique_id=1021174846]
+layout_mode = 0
+offset_left = 2.999999
+offset_top = 47.0
+offset_right = 43.0
+offset_bottom = 70.0
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 2
+text = "X/X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MPot_Button" type="Button" parent="." unique_id=279769501]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.234824
-anchor_top = 0.112
-anchor_right = 0.412
-anchor_bottom = 0.887903
-offset_left = 0.127998
+anchor_left = 0.23482357
+anchor_top = 0.028667025
+anchor_right = 0.41176435
+anchor_bottom = 0.8056671
+offset_left = 0.127996
 offset_top = -0.0640259
-offset_right = -0.0639496
-offset_bottom = 0.0709839
+offset_bottom = -0.00800323
 focus_mode = 0
-theme_override_colors/font_color = Color(0, 0, 1, 1)
-text = "X"
-icon = ExtResource("2_w41be")
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+flat = true
 icon_alignment = 1
-expand_icon = true
 metadata/_edit_use_anchors_ = true
 
-[node name="CamReset_Button" type="Button" parent="."]
+[node name="MPotSlot" type="Sprite2D" parent="MPot_Button" unique_id=1523392734]
+position = Vector2(23.999998, 28.000025)
+scale = Vector2(1.5, 1.5403227)
+texture = ExtResource("2_jkc2o")
+
+[node name="MPotIconFull" type="Sprite2D" parent="MPot_Button" unique_id=1860418379]
+position = Vector2(23.8, 28.9)
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("5_bqpn1")
+
+[node name="MPotIconEmpty" type="Sprite2D" parent="MPot_Button" unique_id=1174136227]
+visible = false
+position = Vector2(23.8, 28.9)
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("6_he72y")
+
+[node name="MPotValue" type="Label" parent="MPot_Button" unique_id=801709585]
+layout_mode = 0
+offset_left = 2.999999
+offset_top = 47.0
+offset_right = 43.0
+offset_bottom = 70.0
+theme_override_colors/font_shadow_color = Color(0, 0, 1, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 4
+text = "X/X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CamReset_Button" type="Button" parent="." unique_id=201944757]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.441177
@@ -67,7 +129,7 @@ icon_alignment = 1
 expand_icon = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Nex_Button" type="Button" parent="."]
+[node name="Nex_Button" type="Button" parent="." unique_id=1275553186]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.647059
@@ -78,8 +140,27 @@ offset_left = -3.05176e-05
 offset_top = 0.00799942
 offset_bottom = -0.00800323
 focus_mode = 0
-text = "Nexus
-"
+flat = true
 icon_alignment = 1
 expand_icon = true
 metadata/_edit_use_anchors_ = true
+
+[node name="NexusIcon" type="Sprite2D" parent="Nex_Button" unique_id=972271847]
+texture_filter = 1
+position = Vector2(45, 28)
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("7_bqpn1")
+
+[node name="NexusText" type="Label" parent="Nex_Button" unique_id=454415072]
+layout_mode = 0
+offset_left = 9.999999
+offset_top = 15.0
+offset_right = 81.0
+offset_bottom = 38.0
+theme_override_colors/font_shadow_color = Color(1, 1, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 1
+text = "RECALL"
+horizontal_alignment = 1
+vertical_alignment = 1

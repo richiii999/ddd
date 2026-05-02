@@ -133,8 +133,11 @@ func _ready():
 	%DeathScreen.find_child("Restart").pressed.connect(_OnDeathScreenButtonPushed)
 	%DeathScreen.find_child("DebugRestart").pressed.connect(_OnDebugRevive)
 	## Initialize the UI info
-	%RMenu/Utility/MPot_Button.text = "%s/%s" % [MPotC, MPotmax]
-	%RMenu/Utility/HPot_Button.text = "%s/%s" % [HPotC, HPotmax]
+	%RMenu/Utility/Nex_Button.pressed.connect(Nexus)
+	%RMenu/Utility/HPot_Button.pressed.connect(HPot)
+	%RMenu/Utility/MPot_Button.pressed.connect(MPot)
+	%RMenu/Utility/HPot_Button/HPotValue.text = "%s/%s" % [HPotC, HPotmax]
+	%RMenu/Utility/MPot_Button/MPotValue.text = "%s/%s" % [MPotC, MPotmax]
 	%RMenu/MP_Bar.max_value = MPmax
 	%RMenu/XP_Bar.max_value = XPmax
 	%RMenu/HP_Bar.visible = true
@@ -189,6 +192,8 @@ func get_input(): # TODO: replace this with _input() ?
 		
 		dashNum -= 1.00
 		velocity += InputV * dashSpd
+		
+		ResetTile() # No tile effects while dashing
 	
 	## Spacebar: Charged shots by holding then releasing space with mana
 	# charge linearly by holding space (up to 125%)
@@ -233,11 +238,9 @@ func get_input(): # TODO: replace this with _input() ?
 	## Utility button keys
 	if Input.is_action_just_pressed("HPot"): HPot() # HPot with 'H'
 	if Input.is_action_just_pressed("MPot"): MPot() # MPot with 'G'
-	if Input.is_action_just_pressed("Nexus"): # TP back to Nexus with 'N'
-		get_node("/root/GameManager/Maps/Nexus/Waygates/NexusWaygate").UseWaygate(self)
-		$Status.addStatusText("Nexus!", "BLUE")
+	if Input.is_action_just_pressed("Nexus"): Nexus() # TP back to Nexus with 'N'
 	if Input.is_action_just_pressed("Loot"): Inv.Loot() # Loot with 'Q'
-	if Input.is_action_just_pressed("spawn-pet"): SpawnPet() # Spawn pet with 'X'
+	if Input.is_action_just_pressed("PetTrick"): PetTrick() # Pet do trick with 'X'
 	if Input.is_action_just_pressed("delete-pet"): DeletePet() # Delete pet with 'Z'
 	
 	## UI Toggles 
@@ -251,10 +254,12 @@ func get_input(): # TODO: replace this with _input() ?
 		%RMenu.visible = !(%RMenu.visible) # RMenu toggle 'F12'
 		%PlayerCam.setOffset(%RMenu.visible)
 	if Input.is_action_just_pressed("SkillsUI"): %SkillsUI.visible = !(%SkillsUI.visible) # SkillsUI 'P'
+	if Input.is_action_just_pressed("CharMenu"): toggleCharMenu(!%CharMenu.visible) # CharMenu 'C'
 
 func _physics_process(_delta):
 	## Movement
-	ReadTerrain()
+	if not dashing: ReadTerrain()
+	#print(currTile)
 	get_input()
 	
 	if not dashing: EntityMovement()
@@ -299,10 +304,28 @@ func MPot(): # Mana Potion: Called when press 'G' to restore MP
 		$Status.addStatusText("Used mana potion", "BLUE") # Show status text
 func incHPot(i:int):
 	HPotC += i 
-	$CanvasLayer/RMenu/Utility/HPot_Button.text = str(HPotC) + "/" + str(HPotmax)
+	
+	%RMenu/Utility/HPot_Button/HPotValue.text = str(HPotC) + "/" + str(HPotmax)
+	if HPotC == 0: # Empty sprite
+		%RMenu/Utility/HPot_Button/HPotIconFull.visible = false
+		%RMenu/Utility/HPot_Button/HPotIconEmpty.visible = true
+	elif HPotC == i: # No longer empty
+		%RMenu/Utility/HPot_Button/HPotIconFull.visible = true
+		%RMenu/Utility/HPot_Button/HPotIconEmpty.visible = false
 func incMPot(i:int):
 	MPotC += i 
-	$CanvasLayer/RMenu/Utility/MPot_Button.text = str(MPotC) + "/" + str(MPotmax)
+	
+	%RMenu/Utility/MPot_Button/MPotValue.text = str(MPotC) + "/" + str(MPotmax)
+	if MPotC == 0: # Empty sprite
+		%RMenu/Utility/MPot_Button/MPotIconFull.visible = false
+		%RMenu/Utility/MPot_Button/MPotIconEmpty.visible = true
+	elif MPotC == i: # No longer empty
+		%RMenu/Utility/MPot_Button/MPotIconFull.visible = true
+		%RMenu/Utility/MPot_Button/MPotIconEmpty.visible = false
+
+func Nexus():
+	get_node("/root/GameManager/Maps/Nexus/Waygates/NexusWaygate").UseWaygate(self)
+	$Status.addStatusText("Nexus!", "BLUE")
 
 ## XP / Leveling: Called by signals from enemy deaths, quest rewards, and other things
 func GainXP(xp : int = 0):
@@ -312,21 +335,28 @@ func GainXP(xp : int = 0):
 	else: $CanvasLayer/RMenu/Fame_Bar.value = XP
 	while (XP >= XPmax): LevelUp() # "While" for rare cases where you level up more than once
 	
-## Spawn the pet (For now we are just going to spawn the pet)
-## TODO: Interact with pets and possibly add them to inventory
-func SpawnPet():
-	if pet_instance == null:
-		pet_instance = pet.instantiate()
-		get_parent().add_child(pet_instance)
-		
-		pet_instance.global_position = global_position + Vector2(50, 0)
-		pet_instance.player = self # Set the player variable for the instantiated pet
-		
-# Deletes the player's pet
-func DeletePet():
+## Spawn the given Pet
+func SpawnPet(newPet:PackedScene):
+	if pet_instance != null:
+		$Status.addStatusText("You have a Pet!", "BLUE")
+		$Status.addStatusText("'Z' to abandon Pet!", "BLUE")
+		return
+	
+	pet_instance = newPet.instantiate()
+	get_parent().add_child(pet_instance)
+	
+	pet_instance.global_position = global_position + Vector2(50, 0)
+	pet_instance.player = self # Set the player variable for the instantiated newPet
+	$Status.addStatusText("You gained a Pet!", "BLUE")
+
+## Deletes the player's Pet
+func DeletePet(): 
 	if is_instance_valid(pet_instance):
 		pet_instance.queue_free()
 		pet_instance = null
+
+## Makes Player's Pet do a trick
+func PetTrick(): if pet_instance != null: pet_instance.Trick()
 
 func LevelUp(): 
 	if (Level < 25): # If not maxed yet
@@ -435,6 +465,9 @@ func UpdateUIBars(): # All at once rather than spread out
 	%RMenu/XP_Bar/XP_Text.text = "%s / %s" % [XP, XPmax]
 	%RMenu/Fame_Bar/Fame_Text.text = "%s" % [Fame]
 
+func toggleCharMenu(state:bool):
+	%CharMenu.visible = state
+
 ## OVERRIDE FUNCS: Entity Overridden funcs by Player.gd
 func Death(): 
 	%DeathScreen.visible = true
@@ -460,3 +493,4 @@ func _OnDebugRevive() -> void:
 	get_tree().set_pause(false)
 	self.InputStatus = true
 	HP = HPmax
+	toggleBubble(false)

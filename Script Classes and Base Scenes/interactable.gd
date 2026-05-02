@@ -3,7 +3,7 @@ class_name Interactable extends Area2D ## Makes parent interactable, connect 'In
 
 @export var interactable : bool = true
 
-signal Interact # Emitted with Player (pressing 'E') or null (player leaves range
+signal Interact # Emitted with Player (player interacted) or null (player leaves range)
 func Interaction(P:Player = null): Interact.emit(P)
 
 func _ready():

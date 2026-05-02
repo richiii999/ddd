@@ -18,6 +18,5 @@ enum Types {INV, HELM, CHEST, RING, MAINHAND, OFFHAND}
 # NOTE: Only used on Main/Off-hand items
 @export var attack : AttackData
 
-func _ready(): 
-	scale = Vector2(0.5,0.5) # Items are small
+func _ready():
 	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST # fix blurry pixelart

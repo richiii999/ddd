@@ -5,6 +5,7 @@ class_name DungeonBASE extends WorldBASE ## Inspired by Gungeon, waves of enemie
 
 # TODO Displayed on entrance
 @export var DungeonTitle : String = "Dungeon"
+var currRoom = self # Set by each room's entrance door
 
 # TODO Dungeon music
 #@export var bkgMusic
@@ -24,7 +25,7 @@ func onDungeonClear(): # Called by signal from bossRoom's roomClear()
 	# Exit Waygate spawned on dungeon clear, takes player back to nexus and resets dungeon
 	# NOTE: Unbind(1) in the last line here means ignore the passed arg (free doesnt have params)
 	exitWaygate = load("res://Maps/Mechanics/Waygate.tscn").instantiate()
-	$Rooms.get_children().pop_back().add_child(exitWaygate)
+	$Rooms.get_children().pop_back().call_deferred("add_child", exitWaygate)
 	exitWaygate.exit = true
 	exitWaygate.setActive(true)
 	exitWaygate.find_child("InteractComponent").Interact.connect(exitWaygate.queue_free.unbind(1))

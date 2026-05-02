@@ -1,6 +1,6 @@
-class_name NPC extends Node
+class_name DialogueNPC extends Node
 ## NPC: Controls interactability of the NPC, stores state info if any
-# NOTE: Interaction signal comes with a ref to player, hence the _Player param (trashing since we dont use it)
+# NOTE: Should always set "Editable Children" on NPCs, to change the name and stuff
 
 @export var repeatable:bool = true # Can the dialogue be repeated?
 var currStep = -1 # Which dialogue string currently used?

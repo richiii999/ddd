@@ -1,13 +1,14 @@
-[gd_scene format=3 uid="uid://dgtlakw8834qa"]
+[gd_scene format=3 uid="uid://bx6nhpoc0gjgt"]
 
 [ext_resource type="Script" uid="uid://ncx0o5gc4pic" path="res://Entity/Enemy/Enemies/necromancer.gd" id="1_ydshy"]
 [ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_6ytyj"]
 [ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="3_1bi2m"]
-[ext_resource type="Texture2D" uid="uid://dq6232arfxx81" path="res://Assets/Sprites/GD Icons/GD_Red.tres" id="4_y8q84"]
+[ext_resource type="PackedScene" uid="uid://b7jer77opiti2" path="res://Entity/Components/Effects/Burn.tscn" id="3_liuer"]
+[ext_resource type="Texture2D" uid="uid://d2oum50pfm7sq" path="res://Assets/ItchIO/pixelGuyIdk/basic magical animations/adept necromancer/AdeptNecromancer.png" id="4_r81hf"]
 [ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/smartArea.gd" id="5_kak8k"]
 [ext_resource type="PackedScene" uid="uid://dfcui8l7w2j3m" path="res://Entity/Components/BehaviorFSM.tscn" id="6_k13pl"]
 [ext_resource type="PackedScene" uid="uid://dk58kntas8hfd" path="res://Entity/Components/Behaviors/Wander.tscn" id="7_i8w8w"]
-[ext_resource type="PackedScene" uid="uid://dx23kg5vk3spb" path="res://Entity/Components/Behaviors/Orbit.tscn" id="8_bpstu"]
+[ext_resource type="PackedScene" uid="uid://dvourlhp5t1tv" path="res://Entity/Components/Behaviors/ChaseFlee.tscn" id="8_r81hf"]
 [ext_resource type="PackedScene" uid="uid://bntfe5iinhuu5" path="res://UI/Item/loot_table.tscn" id="9_5p18q"]
 [ext_resource type="PackedScene" uid="uid://dddy50t4saequ" path="res://Entity/Components/EffectComponentSystem.tscn" id="10_na328"]
 [ext_resource type="PackedScene" uid="uid://blyjhm2j5onnb" path="res://Maps/Mechanics/EnemyPackSpawner.tscn" id="11_6ytyj"]
@@ -26,6 +27,42 @@ border_width_bottom = 2
 border_color = Color(0, 0.501961, 0, 1)
 corner_detail = 1
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_liuer"]
+atlas = ExtResource("4_r81hf")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l5bbo"]
+atlas = ExtResource("4_r81hf")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3y3r0"]
+atlas = ExtResource("4_r81hf")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_knmx6"]
+atlas = ExtResource("4_r81hf")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q7sfa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_liuer")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l5bbo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3y3r0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_knmx6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_2b4ng"]
 radius = 50.0
 
@@ -41,7 +78,9 @@ collision_layer = 256
 collision_mask = 267
 motion_mode = 1
 script = ExtResource("1_ydshy")
+XP = 50
 projs = Array[PackedScene]([ExtResource("2_6ytyj"), ExtResource("2_6ytyj"), ExtResource("2_6ytyj")])
+effects = Array[PackedScene]([ExtResource("3_liuer"), null, null])
 
 [node name="Status" parent="." unique_id=869158990 instance=ExtResource("3_1bi2m")]
 offset_left = -72.0
@@ -65,9 +104,11 @@ theme_override_styles/background = SubResource("StyleBoxFlat_pw8gt")
 theme_override_styles/fill = SubResource("StyleBoxFlat_wjxar")
 value = 50.0
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1213981542]
-self_modulate = Color(0, 1, 0, 1)
-texture = ExtResource("4_y8q84")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1922433555]
+texture_filter = 1
+scale = Vector2(7.5, 7.5)
+sprite_frames = SubResource("SpriteFrames_q7sfa")
+autoplay = "default"
 
 [node name="Physics_Hitbox" type="CollisionShape2D" parent="." unique_id=2055280999]
 shape = SubResource("CircleShape2D_2b4ng")
@@ -111,7 +152,9 @@ one_shot = true
 
 [node name="behavior_wander" parent="BehaviorFSM" unique_id=65294224 instance=ExtResource("7_i8w8w")]
 
-[node name="behavior_orbit" parent="BehaviorFSM" unique_id=394172828 instance=ExtResource("8_bpstu")]
+[node name="behavior_chaseFlee" parent="BehaviorFSM" unique_id=815050752 instance=ExtResource("8_r81hf")]
+TargetEntity = true
+speed = 0.7
 
 [node name="LootTable" parent="." unique_id=1315550005 instance=ExtResource("9_5p18q")]
 lootTable = Dictionary[int, int]({
@@ -122,9 +165,10 @@ lootTable = Dictionary[int, int]({
 [node name="EffectsComponentSystem" parent="." unique_id=921567753 instance=ExtResource("10_na328")]
 
 [node name="EnemySpawnNode" parent="." unique_id=1257634712 instance=ExtResource("11_6ytyj")]
+scale = Vector2(0.5, 0.5)
+show_rect = false
 Mob = ExtResource("12_r81hf")
 maxMobs = 3
-immediate = false
 onlyWhenOffScreen = false
 
 [node name="RespawnTimer" parent="EnemySpawnNode" index="0" unique_id=1959530611]

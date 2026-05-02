@@ -5,20 +5,22 @@
 [ext_resource type="Resource" uid="uid://6uxfkrkyiuvg" path="res://Entity/Projectile/Attack/attack_test2.tres" id="3_qck8u"]
 
 [node name="GoldSword" type="Sprite2D" unique_id=398207244]
+texture_filter = 1
+scale = Vector2(2, 2)
 texture = ExtResource("1_luhs5")
 script = ExtResource("2_dp0sp")
 tier = 2
-type = 1
+type = 4
 stats = Dictionary[int, int]({
 0: 5,
-1: 5,
-2: 5,
-3: 3,
-4: 3,
-5: 3,
-6: 1,
-7: 1,
-8: 99
+1: 0,
+2: 3,
+3: 0,
+4: 0,
+5: 4,
+6: 0,
+7: 0,
+8: 1
 })
 attack = ExtResource("3_qck8u")
 metadata/_custom_type_script = "uid://dpbuam0tpmaha"

@@ -8,7 +8,7 @@ static func NudgeVec2(V2 : Vector2, r : float) -> Vector2: return Vector2(randf_
 static func NudgeFloat(A : float, r : float) -> float: return randf_range(A - r, A + r)
 # Subracting one Vector2i from another: returns (A - B)
 static func VecSub(A : Vector2i, B : Vector2i) -> Vector2i: return Vector2i(A.x - B.x, A.y - B.y)
-
+static func AbsVecSub(A : Vector2i, B : Vector2i) -> Vector2i: return Vector2i(abs(A.x - B.x), abs(A.y - B.y))
 ## Common issue: Need to pass off a particle emitter to some parent node higher in tree due to it's direct parent being free'd
 # Simply freeing will result in particles disappearing all at once, so need to wait for particles to fade, then free (via a timer)
 # There is probably an intended way to do this but idk

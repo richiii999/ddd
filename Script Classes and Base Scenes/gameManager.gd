@@ -11,7 +11,11 @@ class_name GameManager extends Node ## Controls the game. The "Main" scene of th
 
 @export var dungeons: Array[PackedScene]
 var mapOffset : Vector2 = Vector2(99999,0) # Offset each added map by this much
-func AddMap(map): $Maps.add_child(map); map.global_position += mapOffset; mapOffset += mapOffset
+func AddMap(map): 
+	$Maps.add_child(map)
+	map.global_position += mapOffset
+	mapOffset += mapOffset
+	map.z_index = -10
 
 ## Player
 @export var player_tscn: PackedScene 
@@ -53,42 +57,16 @@ func ActivatingMainMenu():
 
 ## NexusSetup: Spawn items on the ground in the nexus
 func NexusSetup():
-	## Initial items
 	var nexOffset = nexus.global_position
-	# Some coins
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.Coin, nexOffset + Vector2(-300, 0))
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.Coin, nexOffset + Vector2(-400, -100))
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.Coin, nexOffset + Vector2(-400, 100))
-	# HPots
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.HPot, nexOffset + Vector2(-200, 0))
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.HPot, nexOffset + Vector2(-200, 50))
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.HPot, nexOffset + Vector2(-200, 75))
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.HPot, nexOffset + Vector2(-200, 100))
-	# MPots
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.MPot, nexOffset + Vector2(-175, 0))
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.MPot, nexOffset + Vector2(-175, 25))
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.MPot, nexOffset + Vector2(-175, 50))
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.MPot, nexOffset + Vector2(-175, 75))
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.MPot, nexOffset + Vector2(-175, 100))
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.MPot, nexOffset + Vector2(-175, 125))
-	# MC Items test
-	$ItemSpawner.SpawnItemByID(4, nexOffset + Vector2(-600, 0))
-	$ItemSpawner.SpawnItemByID(5, nexOffset + Vector2(-700, 0))
-	$ItemSpawner.SpawnItemByID(6, nexOffset + Vector2(-800, 0))
-	$ItemSpawner.SpawnItemByID(7, nexOffset + Vector2(-600, 100))
-	$ItemSpawner.SpawnItemByID(8, nexOffset + Vector2(-700, 100))
-	$ItemSpawner.SpawnItemByID(9, nexOffset + Vector2(-800, 100))
-	$ItemSpawner.SpawnItemByID(10, nexOffset + Vector2(-600, 200))
-	$ItemSpawner.SpawnItemByID(11, nexOffset + Vector2(-700, 200))
-	$ItemSpawner.SpawnItemByID(12, nexOffset + Vector2(-800, 200))
-	$ItemSpawner.SpawnItemByID(13, nexOffset + Vector2(-600, 300))
-	$ItemSpawner.SpawnItemByID(14, nexOffset + Vector2(-700, 300))
-	$ItemSpawner.SpawnItemByID(15, nexOffset + Vector2(-800, 300))
-	$ItemSpawner.SpawnItemByID(16, nexOffset + Vector2(-600, 400))
-	$ItemSpawner.SpawnItemByID(17, nexOffset + Vector2(-700, 400))
-	$ItemSpawner.SpawnItemByID(18, nexOffset + Vector2(-800, 400))
-	$ItemSpawner.SpawnItemByID(19, nexOffset + Vector2(-600, 500))
-	$ItemSpawner.SpawnItemByID(20, nexOffset + Vector2(-700, 500))
+	
+	## Spawn 3 of every special item
+	for ID in range(2, len($ItemSpawner.specialItems)):
+		$ItemSpawner.SpawnItemByID(-ID, nexOffset + Vector2(-850, -100 * ID - 100))
+		$ItemSpawner.SpawnItemByID(-ID, nexOffset + Vector2(-900, -100 * ID - 100))
+		$ItemSpawner.SpawnItemByID(-ID, nexOffset + Vector2(-950, -100 * ID - 100))
+	
+	for ID in range(1, len($ItemSpawner.items)):
+		$ItemSpawner.SpawnItemByID(ID, nexOffset + Vector2(-900 - ((ID * 100) % 300), 50 * ID))
 
 ## PlayerSetup: Places a new player into the game
 # NOTE: Any existing player should be freed before calling this func on the next frame.
