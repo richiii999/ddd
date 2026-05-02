@@ -15,6 +15,7 @@ signal damage # emitted to the thing it hits with (source, power) params
 var linear_velocity : Vector2 = Vector2(0,0) # Constant linear Velocity 
 # NOTE: this is an area2D, not a physics object like RigidBody2D
 
+
 ## Constructor, this replaces the projectile manager signal translator thingy
 func Spawn( Source : Node = null,
 			Rotation : float = 0.00, # The direction of travel (radians)

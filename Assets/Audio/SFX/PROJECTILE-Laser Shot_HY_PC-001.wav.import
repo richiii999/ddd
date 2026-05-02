@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://y7fw821oe70a"
+path="res://.godot/imported/PROJECTILE-Laser Shot_HY_PC-001.wav-14e93f2b94e583cb2c48738d0d8b3330.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/SFX/PROJECTILE-Laser Shot_HY_PC-001.wav"
+dest_files=["res://.godot/imported/PROJECTILE-Laser Shot_HY_PC-001.wav-14e93f2b94e583cb2c48738d0d8b3330.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
