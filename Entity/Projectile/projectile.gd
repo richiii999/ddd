@@ -47,7 +47,6 @@ func Spawn( Source : Node = null,
 	set_collision_layer_value(projLayer, true)
 	set_collision_mask_value(projMask, true)
 	set_collision_mask_value(wallMask, true)
-	
 	return self
 
 func _physics_process(_delta): global_position += linear_velocity # Simple physics, dont need full Rigidbody2D calculations
@@ -83,7 +82,10 @@ func AreaCollide(area : Area2D) -> void: ## Entity collide
 		damage.connect(entity.Knockback, 4)
 		damage.emit(global_position, knockback)
 		
-		if effect and entity.ECS: entity.ECS.AddEffect(effect)
+		if effect and entity.ECS:
+			print("AreaCollide effect id: ", effect.get_instance_id())
+			effect.sourcePower = source.getStats(Stats.INT)
+			entity.ECS.AddEffect(effect)
 		
 		piercing -= 1
 		if(piercing): return # break early to prevent destruct

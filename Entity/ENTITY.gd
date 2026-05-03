@@ -120,7 +120,6 @@ func ShootProj(input : int, Aim : Vector2) -> void:
 		FE = attack.fieldEffect.instantiate()
 	if attack.effect:
 		E = attack.effect.instantiate()
-
 	#proj_scene = getEquippedProj(index)
 	#if proj_scene == null:
 		#proj_scene = projs[index]

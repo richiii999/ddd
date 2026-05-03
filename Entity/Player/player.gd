@@ -204,10 +204,18 @@ func get_input(): # TODO: replace this with _input() ?
 		%DashBar.visible = true # Update the visibility for both bars since charging ended
 		if   charge < 10 : incMP(charge) # dont spend mana if it was just a tap
 		elif charge < 25 || charge > MP: $Status.addStatusText("Fizzle! (" + str(charge) + ")", "GRAY") # spend mana, but dont cast a spell if weak charge / OOM
-		elif charge < 100 : ShootProj(2, get_global_mouse_position()); $Status.addStatusText("Spellcast (" + str(charge) + ")", "BLUE")
-		elif charge < 125 :
+		elif charge < 100:
+			var old_main = mainStat
+			mainStat = mainStat + getStats(Stats.INT) * 2
 			ShootProj(2, get_global_mouse_position())
-			Damage((int)( (HPmax >> 3) * ((charge - 100) / 25.00) )) # cost up to 1/8 HP if over 100 charge
+			mainStat = old_main
+			$Status.addStatusText("Spellcast (" + str(charge) + ")", "BLUE")
+		elif charge < 125 :
+			var old_main = mainStat
+			mainStat = mainStat + getStats(Stats.INT) * 2
+			ShootProj(2, get_global_mouse_position())
+			mainStat = old_main
+			Damage((int)( (HPmax >> 3) * ((charge - 100) / 25.00) ))
 			$Status.addStatusText("Spellcast (" + str(charge) + ")", "BLUE")
 			$Status.addStatusText("Manaburn (" + str((int)((HPmax >> 3) * ((charge - 100) / 25.00))) + ")", "RED")
 		incMP(-charge)

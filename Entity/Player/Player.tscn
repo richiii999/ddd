@@ -87,6 +87,7 @@ wall_min_slide_angle = 0.17453292
 script = ExtResource("1_pnyfx")
 pet = ExtResource("2_3vnax")
 projs = Array[PackedScene]([ExtResource("2_7hmw6"), ExtResource("3_pnyfx"), ExtResource("2_7hmw6")])
+effects = Array[PackedScene]([null, ExtResource("6_7hmw6"), null])
 fields = Array[PackedScene]([null, ExtResource("4_cretm"), null])
 fieldEffects = Array[PackedScene]([null, ExtResource("6_7hmw6"), null])
 aimSpread = 0.0
