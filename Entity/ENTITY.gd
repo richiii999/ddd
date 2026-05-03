@@ -94,9 +94,7 @@ func ShootProj(input : int, Aim : Vector2) -> void:
 	#if no item attack exists, get the current projectile based off our index
 	if attack == null: 
 		var proj_fallback = getEquippedProj(index)
-		if proj_fallback == null:
-			push_error("Invalid projectile index at: " + str(index))
-			return
+		if proj_fallback == null: return # Enemy has no projectile set
 		
 		#create a new attack and assign that to the projectile, then assign everything else basef off the index
 		attack = AttackData.new()

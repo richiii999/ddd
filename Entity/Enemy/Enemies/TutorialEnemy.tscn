@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dk58kntas8hfd" path="res://Entity/Components/Behaviors/Wander.tscn" id="7_orw45"]
 [ext_resource type="PackedScene" uid="uid://dvourlhp5t1tv" path="res://Entity/Components/Behaviors/ChaseFlee.tscn" id="8_5cc53"]
 [ext_resource type="PackedScene" uid="uid://bntfe5iinhuu5" path="res://UI/Item/loot_table.tscn" id="9_74kdl"]
+[ext_resource type="PackedScene" uid="uid://dddy50t4saequ" path="res://Entity/Components/EffectComponentSystem.tscn" id="10_0wmpm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw8gt"]
 bg_color = Color(1, 0, 0, 1)
@@ -156,6 +157,8 @@ lootTable = Dictionary[int, int]({
 -3: 1,
 0: 3
 })
+
+[node name="EffectsComponentSystem" parent="." unique_id=921567753 instance=ExtResource("10_0wmpm")]
 
 [connection signal="onEmpty" from="Sight" to="." method="SightIncrease" binds= [false]]
 [connection signal="onEmpty" from="Sight" to="ShootTimer1" method="set_paused" binds= [true]]

@@ -16,7 +16,6 @@
 
 ## BUG list
 # save doesnt save skill tree information
-# enemies bugged when pressing space (effects are messing up on enemies again)
 # saving UI is bugged, "hp pots is full" when it shows 3/5 for examples
 
 ## Main Menu - Initial Version Done: Needs more
