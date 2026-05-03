@@ -32,6 +32,7 @@ func _ready():
 	# Load all maps into the game
 	AddMap(nexus)
 	NexusSetup() # Spawn items in the nexus
+	UpdateHOF()
 	AddMap(world)
 	for DG in dungeons: AddMap(DG.instantiate())
 	
@@ -100,6 +101,9 @@ func Quit():
 ## Permadeath: Reset the player
 func DeathHandling():
 	get_tree().set_pause(false) # Player.Death() paused the game, need to unpause
+	
+	Save.EnterHOF(player)
+	UpdateHOF()
 	player.queue_free()
 	
 	# NOTE: process_frame basically means do this on the next frame
@@ -161,6 +165,17 @@ func LoadPlayer(P:Player):
 	var skillData = Save.LoadSkills()
 	if not skillData.is_empty():
 		P.find_child("SkillsUI").apply_save(skillData)
+
+## Load HOF data from HallOfFame.ddd
+func UpdateHOF():
+	var HOF = Save.LoadHOF()
+	var vals = HOF.values()
+	vals.sort_custom(func(a, b): return a > b) # Desc order
+	
+	nexus.find_child("HallOfFame").get_child(1).text = ""
+	for v in vals:
+		nexus.find_child("HallOfFame").get_child(1).text += str(HOF.find_key(v))
+		nexus.find_child("HallOfFame").get_child(1).text += str(", ", v, "\n")
 
 ## Get all active waygates in all worlds
 func GetActiveWaygates() -> Array[Waygate]:

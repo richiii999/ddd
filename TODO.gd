@@ -1,9 +1,6 @@
 ## TODO.gd: Using to store my TODO's and ideas
 # NOTE: We are NOT doing classes, instead there's a large skill tree that offers specializations
 
-## BUG FIXES / FUNCTIONALITY LIST
-
-# TODO z idx list
 ## Z-Index list (all values should be absolute):
 # 10: PLAYER, player projectiles, groundItems
 # 2:  enemies
