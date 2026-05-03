@@ -4,6 +4,7 @@ class_name SaveMgr extends Node
 
 var playerFilePath : String = "user://PlayerData.ddd"
 var bankFilePath : String = "user://BankData.ddd"
+var skillFilePath: String = "user://SkillData.ddd"
 
 ## Returns data from the passed player for saving
 # TODO: For now, dont save their stats or skills, must re-pick skills when reloading a save
@@ -34,9 +35,13 @@ func PlayerData(P:Player) -> Dictionary:
 		"Inv6" : P.Inv.ItemIDInSlot(P.Inv.Slot.INV6),
 		"Inv7" : P.Inv.ItemIDInSlot(P.Inv.Slot.INV7),
 		"Inv8" : P.Inv.ItemIDInSlot(P.Inv.Slot.INV8),
+		"SkillPoints" : P.skillPoints
 	}
 	print("Saving PlayerData as: " + str(playerData))
 	return playerData
+
+func LoadSkills() -> Dictionary:
+	return ReadFile(skillFilePath)
 
 ## Returns itemIDs for each bankslot
 # Format: "Bank<slotN>": <itemID>
@@ -46,6 +51,27 @@ func BankData(B:Bank) -> Dictionary:
 	
 	print("Saving BankData as: " + str(bankData))
 	return bankData
+
+## Saves skill data
+func SkillData(P:Player) -> Dictionary:
+	#retrieve the skills unlocked already
+	var skillsUI = P.find_child("SkillsUI")
+	var data = { "chosen_class": skillsUI.chosen_class }
+	
+	for skill in skillsUI.get_skills():
+		data[skill.name] = skill.active
+	
+	#use persistent data
+	for skill_name in skillsUI.subtree_save:
+		data["subtree_" + skill_name] = skillsUI.subtree_save[skill_name]
+	
+	#if subtree IS currently open, also grab live state (overrides saved)
+	if skillsUI.has_node("ActiveSubtree"):
+		var subtree = skillsUI.get_node("ActiveSubtree")
+		for skill in subtree.get_children().filter(func(n): return n is skillButton):
+			data["subtree_" + skill.name] = skill.active
+	
+	return data
 
 ## Save data to filePath
 func SaveToFile(data:Dictionary, filePath:String) -> void:
@@ -58,6 +84,7 @@ func SaveGame(P:Player, B:Bank) -> void:
 	print("Saving game to " + str(OS.get_data_dir()))
 	SaveToFile(PlayerData(P), playerFilePath)
 	SaveToFile(BankData(B), bankFilePath)
+	SaveToFile(SkillData(P), skillFilePath)
 
 ## NOTE: Load functions split in two, to make it easier
 

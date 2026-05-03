@@ -126,6 +126,9 @@ func LoadPlayer(P:Player):
 	while playerData.Fame > 0: # Fame starts from 0
 		P.LevelUp()
 		playerData.Fame -= 1
+	
+	#need to overwrite the skill points that LevelUp() just handed out
+	P.skillPoints = playerData["SkillPoints"]
 	P.XP = playerData.XP
 	# Consumables
 	P.HPotC = playerData.HPotC
@@ -153,7 +156,11 @@ func LoadPlayer(P:Player):
 	# Prevent "Level X!" spam
 	player.StatusLabel.textQueue = []
 	player.StatusLabel.addStatusText("Spawned in!", "BLUE")
-
+	
+	#load skills last cuz we needs player stats and setup to be done first
+	var skillData = Save.LoadSkills()
+	if not skillData.is_empty():
+		P.find_child("SkillsUI").apply_save(skillData)
 
 ## Get all active waygates in all worlds
 func GetActiveWaygates() -> Array[Waygate]:
