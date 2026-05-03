@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://blyjhm2j5onnb" path="res://Maps/Mechanics/EnemyPackSpawner.tscn" id="4_5iikc"]
 [ext_resource type="PackedScene" uid="uid://tcx34hy287cs" path="res://Maps/Mechanics/Waygate.tscn" id="4_bvj08"]
 [ext_resource type="PackedScene" uid="uid://3srv66mglq52" path="res://UI/Item/Items/MCTest/T1_Chest.tscn" id="4_tklj8"]
+[ext_resource type="PackedScene" uid="uid://bbmy3615xp8ba" path="res://Maps/NPC/DialogueNPC.tscn" id="5_74rsv"]
+[ext_resource type="PackedScene" uid="uid://coo4jrce2m4tu" path="res://Entity/Enemy/Enemies/TreasureAnimal.tscn" id="6_d4r7k"]
 [ext_resource type="PackedScene" uid="uid://tq8hs5inekce" path="res://Entity/Enemy/Enemies/ChaseZombie.tscn" id="7_4aram"]
 [ext_resource type="PackedScene" uid="uid://bca2k1o6q71dn" path="res://Entity/Enemy/Bosses/NecromancerBOSS.tscn" id="7_mehv6"]
 [ext_resource type="PackedScene" uid="uid://bx6nhpoc0gjgt" path="res://Entity/Enemy/Enemies/Necromancer.tscn" id="9_74rsv"]
@@ -43,6 +45,92 @@ itemPrice = ExtResource("4_tklj8")
 position = Vector2(-5408, -13856)
 coinPrice = 10
 
+[node name="Ali" parent="Waygates/Secret" unique_id=1821983141 instance=ExtResource("5_74rsv")]
+position = Vector2(-400, -8)
+repeatable = true
+dialogue = Array[String](["*scrolls YT shorts*"])
+
+[node name="Nameplate" parent="Waygates/Secret/Ali" index="1" unique_id=253969490]
+text = "Ali"
+
+[node name="Name" parent="Waygates/Secret/Ali/DialoguePanel" parent_id_path=PackedInt32Array(1821983141, 991532548) index="1" unique_id=1911208660]
+text = "Ali"
+
+[node name="Nimbus" parent="Waygates/Secret" unique_id=1079090416 instance=ExtResource("5_74rsv")]
+position = Vector2(0, -400)
+repeatable = true
+dialogue = Array[String](["Have you seen my son, Jack?"])
+
+[node name="Nameplate" parent="Waygates/Secret/Nimbus" index="1" unique_id=253969490]
+offset_left = -56.0
+offset_top = 64.0
+offset_right = 63.0
+offset_bottom = 100.0
+text = "Nimbus"
+
+[node name="Name" parent="Waygates/Secret/Nimbus/DialoguePanel" parent_id_path=PackedInt32Array(1079090416, 991532548) index="1" unique_id=1911208660]
+text = "Nimbus"
+
+[node name="MugThugs" parent="Waygates/Secret" unique_id=444566367 instance=ExtResource("5_74rsv")]
+position = Vector2(400, 0)
+repeatable = true
+dialogue = Array[String](["I cant wait for Ghost Maximus 4D!"])
+
+[node name="Nameplate" parent="Waygates/Secret/MugThugs" index="1" unique_id=253969490]
+offset_left = -72.0
+offset_top = 56.0
+offset_right = 79.0
+offset_bottom = 92.0
+text = "MugThugs"
+
+[node name="Name" parent="Waygates/Secret/MugThugs/DialoguePanel" parent_id_path=PackedInt32Array(444566367, 991532548) index="1" unique_id=1911208660]
+text = "MugThugs"
+
+[node name="Richiii" parent="Waygates/Secret" unique_id=1492216309 instance=ExtResource("5_74rsv")]
+position = Vector2(224, -224)
+repeatable = true
+dialogue = Array[String](["I use arch btw"])
+
+[node name="Nameplate" parent="Waygates/Secret/Richiii" index="1" unique_id=253969490]
+offset_left = -40.0
+offset_top = 56.0
+offset_right = 35.0
+offset_bottom = 92.0
+text = "Richiii"
+
+[node name="Name" parent="Waygates/Secret/Richiii/DialoguePanel" parent_id_path=PackedInt32Array(1492216309, 991532548) index="1" unique_id=1911208660]
+text = "Richiii"
+
+[node name="Selym" parent="Waygates/Secret" unique_id=52336475 instance=ExtResource("5_74rsv")]
+position = Vector2(-224, -224)
+repeatable = true
+dialogue = Array[String](["I am supreme"])
+
+[node name="Nameplate" parent="Waygates/Secret/Selym" index="1" unique_id=253969490]
+offset_left = -40.0
+offset_top = 56.0
+offset_right = 35.0
+offset_bottom = 92.0
+text = "Selym"
+
+[node name="Name" parent="Waygates/Secret/Selym/DialoguePanel" parent_id_path=PackedInt32Array(52336475, 991532548) index="1" unique_id=1911208660]
+text = "Selym"
+
+[node name="FleeBunny" parent="Waygates/Secret" unique_id=357451089 instance=ExtResource("6_d4r7k")]
+position = Vector2(208, 704)
+
+[node name="FleeBunny2" parent="Waygates/Secret" unique_id=397955316 instance=ExtResource("6_d4r7k")]
+position = Vector2(-184, 1248)
+
+[node name="FleeBunny3" parent="Waygates/Secret" unique_id=174745962 instance=ExtResource("6_d4r7k")]
+position = Vector2(192, 1856)
+
+[node name="FleeBunny4" parent="Waygates/Secret" unique_id=612625042 instance=ExtResource("6_d4r7k")]
+position = Vector2(-184, 2712)
+
+[node name="FleeBunny5" parent="Waygates/Secret" unique_id=1583762461 instance=ExtResource("6_d4r7k")]
+position = Vector2(192, 3392)
+
 [node name="Spawners" type="Node2D" parent="." unique_id=653064510]
 z_index = 2
 position = Vector2(88, -240)
@@ -61,3 +149,9 @@ maxMobs = 1
 position = Vector2(-1385, 417)
 Mob = ExtResource("7_4aram")
 maxMobs = 5
+
+[editable path="Waygates/Secret/Ali"]
+[editable path="Waygates/Secret/Nimbus"]
+[editable path="Waygates/Secret/MugThugs"]
+[editable path="Waygates/Secret/Richiii"]
+[editable path="Waygates/Secret/Selym"]
