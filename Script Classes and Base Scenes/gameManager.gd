@@ -137,7 +137,7 @@ func LoadPlayer(P:Player):
 	# Consumables
 	P.incHPot(playerData.HPotC)
 	P.incMPot(playerData.MPotC)
-	P.coins = playerData.Coins
+	P.incCoins(playerData.Coins)
 	# Items: Store the ID only, when loading the ID can be used to spawn them in again
 	# Gear
 	if playerData.Helm  > 0: P.Inv.PutItemInSlot(P.Inv.Slot.HELM,     $ItemSpawner.ItemByID(playerData.Helm))
