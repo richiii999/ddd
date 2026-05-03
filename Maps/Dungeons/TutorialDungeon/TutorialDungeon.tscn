@@ -84,32 +84,34 @@ your stamina to dash)"
 
 [node name="Label3" type="Label" parent="Text" unique_id=827067955]
 layout_mode = 0
-offset_left = 1160.0
-offset_top = 2576.0
-offset_right = 1730.0
-offset_bottom = 2663.0
+offset_left = 264.0
+offset_top = 2544.0
+offset_right = 834.0
+offset_bottom = 2811.0
 theme_override_font_sizes/font_size = 30
 text = "Your first ever dungeon room...
 be sure to avoid the lava
+
 
 though be careful, 
 as holding it for too long will cause "
 
 [node name="Label3_blue" type="Label" parent="Text" unique_id=125344412]
 layout_mode = 0
-offset_left = 1160.0
-offset_top = 2664.0
-offset_right = 1851.0
-offset_bottom = 2751.0
+offset_left = 264.0
+offset_top = 2632.0
+offset_right = 955.0
+offset_bottom = 2719.0
 theme_override_colors/font_color = Color(0, 0.54509807, 1, 1)
 theme_override_font_sizes/font_size = 30
-text = "and hold space to launch a different projectile..."
+text = "and hold space to launch 
+a different projectile..."
 
 [node name="Label3_red" type="Label" parent="Text" unique_id=1614867464]
 layout_mode = 0
-offset_left = 1160.0
+offset_left = 264.0
 offset_top = 2800.0
-offset_right = 1851.0
+offset_right = 955.0
 offset_bottom = 2887.0
 theme_override_colors/font_color = Color(0.90588236, 0.07058824, 0.07058824, 1)
 theme_override_font_sizes/font_size = 30
@@ -126,52 +128,96 @@ text = "More lava..."
 
 [node name="Label5" type="Label" parent="Text" unique_id=597824620]
 layout_mode = 0
-offset_left = 2976.0
+offset_left = 2240.0
 offset_top = 4232.0
-offset_right = 3699.0
+offset_right = 2963.0
 offset_bottom = 4454.0
 theme_override_font_sizes/font_size = 30
-text = "Be wary of the tiles with 
+text = "Be wary of 
+the tiles with 
 they will move you in
 "
 
 [node name="Label5_red" type="Label" parent="Text" unique_id=706125317]
 layout_mode = 0
-offset_left = 3328.0
-offset_top = 4232.0
-offset_right = 4019.0
-offset_bottom = 4319.0
+offset_left = 2432.0
+offset_top = 4280.0
+offset_right = 3123.0
+offset_bottom = 4367.0
 theme_override_colors/font_color = Color(0.90588236, 0.07058824, 0.07058824, 1)
 theme_override_font_sizes/font_size = 30
 text = "arrows...."
 
 [node name="Label5_red2" type="Label" parent="Text" unique_id=665882861]
 layout_mode = 0
-offset_left = 2976.0
-offset_top = 4320.0
-offset_right = 3667.0
-offset_bottom = 4407.0
+offset_left = 2240.0
+offset_top = 4360.0
+offset_right = 2931.0
+offset_bottom = 4447.0
 theme_override_colors/font_color = Color(0.90588236, 0.07058824, 0.07058824, 1)
 theme_override_font_sizes/font_size = 30
-text = "the direction that they point"
+text = "the direction that 
+they point in"
 
 [node name="Label6" type="Label" parent="Text" unique_id=1278214700]
 layout_mode = 0
-offset_left = 3528.0
-offset_top = 2696.0
-offset_right = 4251.0
-offset_bottom = 2918.0
+offset_left = 3584.0
+offset_top = 2944.0
+offset_right = 4307.0
+offset_bottom = 3166.0
 theme_override_font_sizes/font_size = 30
 text = "The final room... 
 a dungeon would not be
-complete, "
+complete...
+"
 
 [node name="Label6_red" type="Label" parent="Text" unique_id=1596574808]
 layout_mode = 0
-offset_left = 3528.0
-offset_top = 2832.0
-offset_right = 4219.0
-offset_bottom = 2919.0
+offset_left = 5312.0
+offset_top = 3064.0
+offset_right = 5661.0
+offset_bottom = 3151.0
 theme_override_colors/font_color = Color(0.90588236, 0.07058824, 0.07058824, 1)
 theme_override_font_sizes/font_size = 30
 text = "without a boss to fight..."
+
+[node name="Label7" type="Label" parent="Text" unique_id=10319897]
+layout_mode = 0
+offset_left = 6088.0
+offset_top = 2792.0
+offset_right = 6811.0
+offset_bottom = 3014.0
+theme_override_font_sizes/font_size = 30
+text = "Congratulations! You have beaten the tutorial...
+Now interact with the waygate to get out of here"
+
+[node name="Label7_blue" type="Label" parent="Text" unique_id=710208048]
+layout_mode = 0
+offset_left = 6088.0
+offset_top = 2880.0
+offset_right = 6779.0
+offset_bottom = 2967.0
+theme_override_colors/font_color = Color(0, 0.54509807, 1, 1)
+theme_override_font_sizes/font_size = 30
+text = "(Press E)"
+
+[node name="Label8" type="Label" parent="Text" unique_id=690326960]
+layout_mode = 0
+offset_left = -48.0
+offset_top = 3488.0
+offset_right = 208.0
+offset_bottom = 3575.0
+theme_override_font_sizes/font_size = 30
+text = "Pick up items by
+"
+
+[node name="Label8_blue" type="Label" parent="Text" unique_id=628265794]
+layout_mode = 0
+offset_left = -48.0
+offset_top = 3512.0
+offset_right = 643.0
+offset_bottom = 3599.0
+theme_override_colors/font_color = Color(0, 0.54509807, 1, 1)
+theme_override_font_sizes/font_size = 30
+text = "pressing E
+"

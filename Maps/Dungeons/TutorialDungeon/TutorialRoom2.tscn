@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cnjedl2iok75y" path="res://Maps/Dungeons/dungeonRoom.gd" id="2_m0odu"]
 [ext_resource type="PackedScene" uid="uid://g7spcuqqx1mx" path="res://Maps/Dungeons/dungeonDoor.tscn" id="3_xlxhm"]
 [ext_resource type="PackedScene" uid="uid://t77auhbqet13" path="res://Maps/Dungeons/DungeonEnemySpawner.tscn" id="4_gyetv"]
+[ext_resource type="PackedScene" uid="uid://cqm6w61upfmi1" path="res://Entity/Enemy/Enemies/TutorialEnemy.tscn" id="5_m0odu"]
 
 [node name="Tutorial_Room" type="TileMapLayer" unique_id=1223308819]
 use_parent_material = true
@@ -31,29 +32,37 @@ position = Vector2(8, 0)
 
 [node name="EnemyDungeonSpawner" parent="Waves/Wave1" unique_id=546534452 instance=ExtResource("4_gyetv")]
 position = Vector2(-368, 744)
+enemyScene = ExtResource("5_m0odu")
 
 [node name="EnemyDungeonSpawner3" parent="Waves/Wave1" unique_id=1445437097 instance=ExtResource("4_gyetv")]
 position = Vector2(-368, -104)
+enemyScene = ExtResource("5_m0odu")
 
 [node name="EnemyDungeonSpawner4" parent="Waves/Wave1" unique_id=1788395925 instance=ExtResource("4_gyetv")]
 position = Vector2(480, 744)
+enemyScene = ExtResource("5_m0odu")
 
 [node name="EnemyDungeonSpawner5" parent="Waves/Wave1" unique_id=1946041755 instance=ExtResource("4_gyetv")]
 position = Vector2(480, -104)
+enemyScene = ExtResource("5_m0odu")
 
 [node name="Wave2" type="Node2D" parent="Waves" unique_id=627376379]
 
 [node name="EnemyDungeonSpawner" parent="Waves/Wave2" unique_id=453596684 instance=ExtResource("4_gyetv")]
 position = Vector2(-712, 328)
+enemyScene = ExtResource("5_m0odu")
 
 [node name="EnemyDungeonSpawner3" parent="Waves/Wave2" unique_id=728820020 instance=ExtResource("4_gyetv")]
 position = Vector2(824, 320)
+enemyScene = ExtResource("5_m0odu")
 
 [node name="EnemyDungeonSpawner4" parent="Waves/Wave2" unique_id=255646666 instance=ExtResource("4_gyetv")]
 position = Vector2(56, 1000)
+enemyScene = ExtResource("5_m0odu")
 
 [node name="EnemyDungeonSpawner5" parent="Waves/Wave2" unique_id=192360778 instance=ExtResource("4_gyetv")]
 position = Vector2(56, -448)
+enemyScene = ExtResource("5_m0odu")
 
 [node name="Props" type="Node2D" parent="." unique_id=2020528078]
 position = Vector2(8, 0)
