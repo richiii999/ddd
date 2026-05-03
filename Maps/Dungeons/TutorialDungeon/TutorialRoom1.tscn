@@ -33,14 +33,64 @@ position = Vector2(8, 0)
 [node name="EnemyDungeonSpawner" parent="Waves/Wave1" unique_id=546534452 instance=ExtResource("4_4ecu6")]
 position = Vector2(-360, 744)
 enemyScene = ExtResource("5_e18ua")
+statScale = Dictionary[String, float]({
+"DMG": 1.0,
+"HP": 0.5,
+"SIZE": 1.0,
+"SPD": 1.0
+})
 
 [node name="EnemyDungeonSpawner3" parent="Waves/Wave1" unique_id=1445437097 instance=ExtResource("4_4ecu6")]
 position = Vector2(-528, 160)
 enemyScene = ExtResource("5_e18ua")
+statScale = Dictionary[String, float]({
+"DMG": 1.0,
+"HP": 0.5,
+"SIZE": 1.0,
+"SPD": 1.0
+})
 
 [node name="EnemyDungeonSpawner4" parent="Waves/Wave1" unique_id=1788395925 instance=ExtResource("4_4ecu6")]
 position = Vector2(576, 928)
 enemyScene = ExtResource("5_e18ua")
+statScale = Dictionary[String, float]({
+"DMG": 1.0,
+"HP": 0.5,
+"SIZE": 1.0,
+"SPD": 1.0
+})
+
+[node name="Wave2" type="Node2D" parent="Waves" unique_id=450679786]
+
+[node name="EnemyDungeonSpawner" parent="Waves/Wave2" unique_id=380853881 instance=ExtResource("4_4ecu6")]
+position = Vector2(-64, -104)
+enemyScene = ExtResource("5_e18ua")
+statScale = Dictionary[String, float]({
+"DMG": 1.0,
+"HP": 0.5,
+"SIZE": 1.0,
+"SPD": 1.0
+})
+
+[node name="EnemyDungeonSpawner3" parent="Waves/Wave2" unique_id=1896533676 instance=ExtResource("4_4ecu6")]
+position = Vector2(424, 24)
+enemyScene = ExtResource("5_e18ua")
+statScale = Dictionary[String, float]({
+"DMG": 1.0,
+"HP": 0.5,
+"SIZE": 1.0,
+"SPD": 1.0
+})
+
+[node name="EnemyDungeonSpawner4" parent="Waves/Wave2" unique_id=335304384 instance=ExtResource("4_4ecu6")]
+position = Vector2(568, 528)
+enemyScene = ExtResource("5_e18ua")
+statScale = Dictionary[String, float]({
+"DMG": 1.0,
+"HP": 0.5,
+"SIZE": 1.0,
+"SPD": 1.0
+})
 
 [node name="Props" type="Node2D" parent="." unique_id=2020528078]
 position = Vector2(8, 0)
