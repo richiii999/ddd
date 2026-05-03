@@ -30,13 +30,13 @@ var SpawnNode : Node = null # Link to the entity's spawn node (if any), Set by t
 @export var kBstrength2  : float = 500.0
 
 ## Movement
-@export var maxVel : float = 800.0  # Hard cap
-@export var drag   : float = 0.94  # Soft cap
-@export var accel  : float = 30.00 # Multiplied by a bunch of modifiers
+var maxVel : float = 800.0  # Hard cap
+var drag   : float = 0.94  # Soft cap
+var accel  : float = 30.00 # Multiplied by a bunch of modifiers
 # Movement Modifiers
 @export var immovable : bool = false # If true, skips physics
-@export var behaviorMoveSpeed : float = 1.00 # Multiplier to accel
-@export var effectMoveSpeed   : float = 1.00 # Multiplier to accel
+var behaviorMoveSpeed : float = 1.00 # Multiplier to accel
+var effectMoveSpeed   : float = 1.00 # Multiplier to accel
 @export var wet : bool = false # if true, slippery movement (less drag)
 
 ## Terrain
@@ -58,12 +58,12 @@ func incHP(inc:int): HP += inc; if (HPBar): HPBar.value = HP
 func incMP(inc:int): MP += inc; if (MPBar): MPBar.value = MP
 
 ## Entity AI stuff
-@onready var targetEntity : ENTITY = self # What entity is this entity targeting? (ex. player targeted by enemy)
+var targetEntity : ENTITY = self # What entity is this entity targeting? (ex. player targeted by enemy)
 
 @onready var targetPos : Vector2 = global_position # movement target (global position) for pathfinding to (players dont use this)
 
-func setTargetEntity(T : ENTITY = self): targetEntity = T if T is ENTITY else self # Failsafe
-func setTargetPos(T : Vector2 = Vector2(0,0)): targetPos = T # TODO: Pathfinding
+func setTargetEntity(T : ENTITY): targetEntity = T
+func setTargetPos(T : Vector2): targetPos = T # TODO: Pathfinding
 
 # Workaround for double signal binding (enemy Sight.onFirst sets target entity to whatever was seen)
 func setTargetFirstSight(): setTargetEntity(Sight.smartArea.front())
@@ -94,9 +94,7 @@ func ShootProj(input : int, Aim : Vector2) -> void:
 	#if no item attack exists, get the current projectile based off our index
 	if attack == null: 
 		var proj_fallback = getEquippedProj(index)
-		if proj_fallback == null:
-			push_error("Invalid projectile index at: " + str(index))
-			return
+		if proj_fallback == null: return # Enemy has no projectile set
 		
 		#create a new attack and assign that to the projectile, then assign everything else basef off the index
 		attack = AttackData.new()
@@ -122,7 +120,6 @@ func ShootProj(input : int, Aim : Vector2) -> void:
 		FE = attack.fieldEffect.instantiate()
 	if attack.effect:
 		E = attack.effect.instantiate()
-
 	#proj_scene = getEquippedProj(index)
 	#if proj_scene == null:
 		#proj_scene = projs[index]
@@ -174,13 +171,25 @@ func Heal(power : int):
 	# Display heal number
 	Manager.get_child(2).add_child(dmgNumScn.instantiate().setup(global_position, power, false, true))
 
-func ReadTerrain(): ## Read tile under the entity, assign tile's data to variables
-	if currWorld:
+## Read tile under the entity, assign tile's data to variables
+func ReadTerrain(): 
+	if currWorld == null: ResetTile(); return
+	if currWorld is DungeonBASE: # Dungeons have multiple different TileMapLayers as rooms
+		currTile = currWorld.currRoom.get_cell_tile_data(currWorld.currRoom.local_to_map(currWorld.currRoom.to_local(global_position)))
+	else: 
 		currTile = currWorld.get_cell_tile_data(currWorld.local_to_map(currWorld.to_local(global_position)))
-		if currTile != null:
-			tileSpeed = currTile.get_custom_data("Speed")
-			tilePain  = currTile.get_custom_data("Pain")
-			tilePush  = Vector2(float(currTile.get_custom_data("PushH")), float(currTile.get_custom_data("PushV")))
+	
+	if currTile == null: ResetTile()
+	else: 
+		tileSpeed = currTile.get_custom_data("Speed")
+		tilePain  = currTile.get_custom_data("Pain")
+		tilePush  = Vector2(float(currTile.get_custom_data("PushH")), float(currTile.get_custom_data("PushV")))
+
+## Resets tile data
+func ResetTile():
+	tileSpeed = 1.0
+	tilePain = 0
+	tilePush = Vector2.ZERO
 
 ## Knockback (signaled from the colliding projectile): Applies an impluse to velocity in px/s (modified by KBresistance)
 func Knockback(from : Vector2, strength : float): if !invulnerable: velocity += Vector2.from_angle(from.angle_to_point(global_position)) * (1.00 - kBResistance) * strength
@@ -195,5 +204,6 @@ func EntityMovement():
 func _ready(): 
 	incHP(HPmax)
 	incMP(MPmax)
+	safe_margin = 0.5 # Prevent getting stuck on corners / walls
 
 func Death(): death.emit(self) ## Death: Default func for entities just emits the signal

@@ -1,5 +1,4 @@
-extends Control ## Inventory: Stores the slots for gear, items, and the mouse
-# Interfaces with root/ItemSpawner to drop items on ground
+extends Control ## Inventory: Stores the slots for gear, items, and the mouse. Handles pick/drop 'Q'
 
 # Refs to parts of the Player
 @onready var player : Player = Tools.FindParentByType(self, Player)
@@ -17,9 +16,9 @@ enum Slot {
 MOUSE, GROUND, 
 HELM, CHEST, RING1, 
 MAINHAND, OFFHAND, RING2, 
-INV1, INV2, INV3, 
-INV4, INV5, INV6, 
-INV7, INV8, INV9
+INV0, INV1, INV2, 
+INV3, INV4, INV5, 
+INV6, INV7, INV8
 }
 
 @onready var Slots : Array = [
@@ -31,48 +30,36 @@ INV7, INV8, INV9
 %Inv_Slot6, %Inv_Slot7, %Inv_Slot8
 ]
 
-@export var Inv : Array[Item] = [
-null, null, 
-null, null, null, 
-null, null, null, 
-null, null, null, 
-null, null, null, 
-null, null, null
-]
-
-# Emitted to player when changing items
+# Emitted to Player when equipping gear
 signal UpdateInvStats(increase:bool, stats : Dictionary) 
-
-# Emitted when dropping an item, with the dropped item and position
-signal dropItem
+# Emitted to itemSpawner when dropping an item
+signal dropItem(item:Item, pos:Vector2)
 
 func _ready(): 
 	UpdateInvStats.connect(player.UpdateStats)
-	dropItem.connect(itemSpawner.SpawnItem)
-	
+	dropItem.connect(itemSpawner.SpawnItemByID)
 	
 	for i in len(Slots):
 		Slots[i].slotNumber = i # Assign slotNumber
 		Slots[i].slotClicked.connect(SlotClick) # Connect the slot's signal
-	
-	# Default inventory, debug items
-	var testItem = load("res://UI/Item/Items/Special/TEST_ITEM.tscn").instantiate()
-	# Deferred since player isnt ready() yet
-	call_deferred("PutItemInSlot", 8, testItem)
-	call_deferred("PutItemInSlot", 12, testItem)
-	call_deferred("PutItemInSlot", 16, testItem)
-
 
 func _process(_delta): 
-	if Inv[Slot.MOUSE]: # Move the mouse slot to the mouse
+	if ItemInSlot(Slot.MOUSE): # Move the mouse slot to the mouse
 		$MouseSlot.position = Tools.VecSub(get_global_mouse_position(), MouseOffset)
+
+## Initialize stats from a fresh inventory
+# NOTE: This should only be called after loading inventory from a save, otherwise it may dupe stats
+func InitStats() -> void:
+	for slotN in range(Slot.HELM, Slot.INV0): # Gear slots
+		if ItemInSlot(slotN) != null:
+			UpdateInvStats.emit(true, ItemInSlot(slotN).stats)
 
 func ValidateSlot(SlotN : int, item : Item) -> bool:
 	return ( 
 	item == null || # Empty mouse
 	item.type == -1 || # Unset type, any slot allowed
 	SlotN == 0 || # Mouse slot always allowed
-	SlotN in range(Slot.INV1,Slot.INV9 + 1) || # Inventory slots always allowed
+	SlotN in range(Slot.INV0,Slot.INV8 + 1) || # Inventory slots always allowed
 	item.type == item.Types.HELM && SlotN == Slot.HELM || # Helmet
 	item.type == item.Types.CHEST && SlotN == Slot.CHEST || # Chest
 	item.type == item.Types.RING && (SlotN == Slot.RING1 || SlotN == Slot.RING2) || # Ring (either)
@@ -80,54 +67,40 @@ func ValidateSlot(SlotN : int, item : Item) -> bool:
 	item.type == item.Types.OFFHAND && SlotN == Slot.OFFHAND # Offhand
 	)
 
-func SlotClick(SlotA:int, SlotB:int = Slot.MOUSE) -> void:
-	print("Inv: " + str(SlotA) + "<->" + str(SlotB) + "  " + str(Inv[SlotA]) + "<->" + str(Inv[SlotB]))
+## Swap the items in SlotA <-> SlotB, usually B = mouse and A = inventory
+func SlotClick(SlotA:Slot, SlotB:Slot = Slot.MOUSE) -> void:
+	print("Inv: " + str(SlotA) + "<->" + str(SlotB) + "  " + str(ItemInSlot(SlotA)) + "<->" + str(ItemInSlot(SlotB)))
 	
-	if !ValidateSlot(SlotA, Inv[SlotB]): # Wrong slot, do not swap
+	if !ValidateSlot(SlotA, ItemInSlot(SlotB)): # Wrong slot, do not swap
 		player.StatusLabel.addStatusText("Wrong Slot!", "GREY")
 		return
 	
-	# Swap the SlotA <-> B
-	var tmp:Item = Inv[SlotA]
-	Inv[SlotA] = Inv[SlotB]
-	Inv[SlotB] = tmp
+	# Swap the items A <-> B
+	var tmp:Item = ItemInSlot(SlotA)
+	PutItemInSlot(SlotA, ItemInSlot(SlotB))
+	PutItemInSlot(SlotB, tmp)
 	
-	# Update them with the swapped values
-	Slots[SlotA].UpdateSlot(Inv[SlotA])
-	Slots[SlotB].UpdateSlot(Inv[SlotB])
+	# Remove ground items (e.g. after dropping an item), prevent duplication
+	PutItemInSlot(Slot.GROUND, null) 
 	
-	# Adjust UI if needed
-	%MouseSlot.visible = MouseHasItem()
-	Inv[Slot.GROUND] = null # Remove ground items (e.g. after dropping an item), prevent duplication
-	
-	# Update player stats if changing a gear slot (0's if no item)
-	if SlotA in range(Slot.HELM, Slot.INV1):
+	# Update player stats if changing a gear slot
+	if SlotA in range(Slot.HELM, Slot.INV0):
 	# REMOVE old item
-		if Inv[SlotB]:
-			UpdateInvStats.emit(false, Inv[SlotB].stats)
+		if ItemInSlot(SlotB) != null:
+			UpdateInvStats.emit(false, ItemInSlot(SlotB).stats)
 	# ADD new item
-		if Inv[SlotA]:
-			UpdateInvStats.emit(true, Inv[SlotA].stats)
+		if ItemInSlot(SlotA) != null:
+			UpdateInvStats.emit(true, ItemInSlot(SlotA).stats)
 
-## Returns first empty slot [8-16] or -1 if full
+## Returns first empty inventory slot [8-16] or -1 if full
 func FirstEmptyInvSlot() -> int: 
-	var first : int = Inv.slice(Slot.INV1).find(null) 
-	# + because the slice's index 0 maps to original index 7
-	return ( -1 if (first == -1) else first + Slot.INV1 ) 
-
-## Does the mouse have an item in it?
-func MouseHasItem() -> bool: return true if Inv[Slot.MOUSE] else false 
-
-## Put an item in inv slot
-# NOTE: Item must be a valid type for the slot
-# NOTE: This will overwrite any existing item in the slot
-func PutItemInSlot(slotN:int, item:Item): 
-	Inv[Slot.GROUND] = item.duplicate() if item else null # Put item in 'Ground' slot
-	SlotClick(slotN, Slot.GROUND) # Then perform update on inv (moves into inv, deleted ground item)
+	for slotN in range(Slot.INV0, Slot.INV8 + 1):
+		if ItemInSlot(slotN) == null: return slotN
+	return -1
 
 ## 'Q' to pickup / drop items on ground
 func Loot() -> void: 
-	if MouseHasItem(): DropItem()
+	if ItemInSlot(Slot.MOUSE): DropItem()
 	else: PickItem()
 
 ## Pickup a nearby item from the ground
@@ -178,7 +151,12 @@ func PickItem() -> void:
 
 ## Drop the item in mouse on the ground
 func DropItem():
-	if MouseHasItem(): dropItem.emit(Inv[Slot.MOUSE], player.global_position)
+	var mouseItem = ItemInSlot(Slot.MOUSE)
+	if mouseItem: 
+		if mouseItem.tier == 4: # Quest Item
+			player.StatusLabel.addStatusText("Cant drop Quest Item!")
+			return
+		dropItem.emit(mouseItem.ID, player.global_position)
 	else: push_warning("Tried to drop null item") # Null case: shouldnt happen, see Loot()
 	
 	SlotClick(Slot.MOUSE, Slot.GROUND) # Delete item in MOUSE
@@ -186,12 +164,27 @@ func DropItem():
 ## Check for a specific item in inv, returning the slotN it's in (-1 if not found)
 func HasItem(item:Item) -> int: return HasItemID(item.ID)
 func HasItemName(itemName:String) -> int:
-	for i in range(len(Inv)):
-		if Inv[i] and Inv[i].itemName == itemName: return i
+	for i in range(len(Slots)):
+		if ItemInSlot(i) != null and ItemInSlot(i).name == itemName: return i
 	return -1
 func HasItemID(id:int) -> int:
 	if id == 0: push_warning("Searching for ItemID:0")
 	
-	for i in range(len(Inv)):
-		if Inv[i] and Inv[i].ID == id: return i
+	for i in range(len(Slots)):
+		if ItemInSlot(i) != null and ItemInSlot(i).ID == id: return i
 	return -1
+
+## Return the item (or ID) in slotN (null or 0 if none)
+func ItemInSlot(slotN:Slot) -> Item: 
+	return Slots[slotN].item
+func ItemIDInSlot(slotN:Slot) -> int: 
+	var item = ItemInSlot(slotN)
+	if item != null: return Slots[slotN].item.ID 
+	else: return 0
+
+## Put an item in inv slot
+# NOTE: Item may not be a valid type for the slot
+# NOTE: This will overwrite any existing item in the slot
+func PutItemInSlot(slotN:int, item:Item): 
+	Slots[slotN].UpdateSlot(item)
+	%MouseSlot.visible = (ItemInSlot(Slot.MOUSE) != null) # Adjust Mouse UI visibility

@@ -15,7 +15,7 @@ var lookMin : Vector2 = Vector2.ZERO - lookMax
 
 var zoomRate: Vector2 = Vector2(0.01, 0.01) # How fast the cam zooms in/out
 var zoomMax : Vector2 = Vector2(1.25, 1.25) # Max / Min zoom amount
-var zoomMin : Vector2 = Vector2(0.40, 0.40)
+var zoomMin : Vector2 = Vector2(0.60, 0.60)
 
 var rMenuOffset : bool = true # Applies an offset to account for the game's UI
 func setOffset(state:bool):
@@ -25,6 +25,7 @@ func setOffset(state:bool):
 func _ready(): 
 	Follow.find_child("CamReset_Button").pressed.connect(camReset)
 	Follow.find_child("RMenu").visibility_changed.connect(RMenuOffset)
+	camReset()
 
 func _process(_delta): 
 	if Input.is_action_pressed("camReset"): camReset()
@@ -33,7 +34,7 @@ func _process(_delta):
 	if lookAtCursor: offset = (get_viewport().get_mouse_position() / lookRate).clamp(lookMin, lookMax)
 	if confused: Zoom(0.1 * sin(Time.get_ticks_msec() / 1000.0))
 
-func camReset() -> void : zoom = Vector2(1.00,1.00)
+func camReset() -> void : zoom = Vector2(0.8, 0.8) # 0.8 is the new default
 
 func Zoom(input : float = 0.00) -> void : zoom = (zoom + (zoomRate * input) ).clamp(zoomMin, zoomMax)
 

@@ -15,6 +15,7 @@ signal damage # emitted to the thing it hits with (source, power) params
 var linear_velocity : Vector2 = Vector2(0,0) # Constant linear Velocity 
 # NOTE: this is an area2D, not a physics object like RigidBody2D
 
+
 ## Constructor, this replaces the projectile manager signal translator thingy
 func Spawn( Source : Node = null,
 			Rotation : float = 0.00, # The direction of travel (radians)
@@ -46,7 +47,6 @@ func Spawn( Source : Node = null,
 	set_collision_layer_value(projLayer, true)
 	set_collision_mask_value(projMask, true)
 	set_collision_mask_value(wallMask, true)
-	
 	return self
 
 func _physics_process(_delta): global_position += linear_velocity # Simple physics, dont need full Rigidbody2D calculations
@@ -63,8 +63,11 @@ func BodyCollideRID(rid: RID, body: Node2D, _body_shape_idx: int, _local_shape_i
 		#print(tileCoords)
 		var tile = body.get_cell_tile_data(tileCoords)
 		if tile.get_custom_data("Destructible"):
-			if true: body.set_cell(tileCoords, 0, Vector2i(2,1)) # Tile switches to destroyed version which has no collision and a different texture
-			else: body.erase_cell(tileCoords) # Failsafe: If the tilemap atlas is messed up, just erase the tile
+			# TODO: change this to work for multiple different wall tiles
+			# Tile switches to destroyed version which has no collision and a different texture
+			if true: body.set_cell(tileCoords, 0, Vector2i(2,1)) 
+			# Failsafe: If the tilemap atlas is messed up, just erase the tile
+			else: body.erase_cell(tileCoords) 
 		Destruct()
 	#else: pass
 
@@ -79,7 +82,10 @@ func AreaCollide(area : Area2D) -> void: ## Entity collide
 		damage.connect(entity.Knockback, 4)
 		damage.emit(global_position, knockback)
 		
-		if effect and entity.ECS: entity.AddEffect(effect)
+		if effect and entity.ECS:
+			print("AreaCollide effect id: ", effect.get_instance_id())
+			effect.sourcePower = source.getStats(Stats.INT)
+			entity.ECS.AddEffect(effect)
 		
 		piercing -= 1
 		if(piercing): return # break early to prevent destruct

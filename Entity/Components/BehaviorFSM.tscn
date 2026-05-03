@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://drgv5k0gsyg22" path="res://Entity/Components/behaviorFSM.gd" id="1_8gpa2"]
 
 [node name="BehaviorFSM" type="Timer" unique_id=1770316537]
+wait_time = 0.3
 autostart = true
 script = ExtResource("1_8gpa2")
-
-[connection signal="timeout" from="." to="." method="CheckConditions"]

@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cct3vu23ii7dh"]
+
+[ext_resource type="Texture2D" uid="uid://dhj037xlvtk48" path="res://Assets/References/Minecraft/Invicon_Diamond_Helmet.png" id="1_kfefe"]
+[ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_qxcdv"]
+[ext_resource type="Resource" uid="uid://6uxfkrkyiuvg" path="res://Entity/Projectile/Attack/attack_test2.tres" id="3_qvuuv"]
+
+[node name="DiamondHelm" type="Sprite2D" unique_id=398207244]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("1_kfefe")
+script = ExtResource("2_qxcdv")
+tier = 3
+type = 1
+stats = Dictionary[int, int]({
+0: 5,
+1: 5,
+2: 5,
+3: 6,
+4: 0,
+5: 0,
+6: 5,
+7: 0,
+8: 3
+})
+attack = ExtResource("3_qvuuv")
+metadata/_custom_type_script = "uid://dpbuam0tpmaha"

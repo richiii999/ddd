@@ -1,47 +1,24 @@
 ## TODO.gd: Using to store my TODO's and ideas
 # NOTE: We are NOT doing classes, instead there's a large skill tree that offers specializations
 
-# TODO z idx list
-## Z-Index list (all values absolute):
+## Z-Index list (all values should be absolute):
+# 10: PLAYER, player projectiles, groundItems
 # 2:  enemies
-# 1:  asdf
-# 0:  asdf
-# -1: asdf
-# -2: asdf
+# 1:  -
+# 0:  -
+# -1: -
+# -2: -
+# -10: WorldBase
+# -99: WorldEffects, should never be seen (hidden behind world)
 
 ## BUG list
-# death screen sometimes fuck up
-# whenever you hit the necromancer, its summons take damage (that's fine for now, but we could change this in the future)
-# Level bar doesn't change at the fame threshold, so it's only the level bar (only when loading a saved player)
-# Need to save the bank and skill tree information
-
+# save doesnt save skill tree information
+# Projectile destructibles broke a while ago
 
 ## Main Menu - Initial Version Done: Needs more
 # Splash screen / intro on game launch, specifically a custom Godot Editor splash (cool version)
-# credits with dev nicknames and roles
 # Loading screen (game launch): press space to skip all intros and just load to main asap.
 # main menu music and animation
-# BASIC options menu, may or may not rebind keys
-# quit game button (ofc)
-
-
-## Save feature for player
-# Saves only player info like stats, inventory, etc.
-# Also saves bank, not lost on death
-# read on game launch, if present, uses the save file
-# if not present, just makes a new player
-
-
-## Pets
-# pet follows player: 
-	# Player.pos - pet.pos (+- offset based on direction or whatever), 
-	# if nonzero, divide by some small number and subtract by a constant 
-# Cosmetic first, then functional like stat boost or something
-
-
-## Hall of Fame
-# When you die, add entry to this list, viewable in town
-# Lists the date, and amount of xp/fame u had when died
 
 
 ## Minimap
@@ -62,6 +39,7 @@
 # Enemy that acts like the car from L4D2. Anytime a player is in its radius or doesn't kill it in time, it triggers a horde of enemies (done, we added the necromancer)
 # Add a necromancer boss that is fast, but has low HP BUT summons 3 giant enemies and you can't kill the necromancer until those enemies die
 
+
 ## Audio
 # Sounds, music, sound effects, UI noises on focus and click, items have special pickup/drop sounds etc. etc.
 	# Other music, open source (kevin macleod)
@@ -75,17 +53,6 @@
 # Fancy particle effects, still pixelated but cool lighting and stuff
 # Get a pixel art text font
 # Glowing lighting and shining stuff, daytime / nighttime effect perhaps? Or oryx can cause an eclipse which darkens the world for 10 mins then final boss
-
-
-## Projectile Patterns: can spawn projectile's in special patterns
-# Possibly can group pattern projectiles via one parent node that has only ONE timer
-# interface can be like pattern(type, num, [color optional]) where type is like, circle, 2pair 3p,4p,np, 
-# chain (which is a repetition of some other pattern multiple times)
-# ex: (circle, 3) makes a triangle, and (circle,40) is a bullet hell
-# (bowtie, 20, 50degrees, 45egrees) is a bowtie shape with a safezone of 50deg and a 45deg offset from the rotation of the boss
-# Proj pattern example, for loop spaws a grid of projectiles tat moves across the screen on a line or a curved path
-# adv patter, block: spawns a 3x3 grid or whatever predefined shape that moves along a path
-# adv proj patter, wing rings:  spawns concentric rings that emit from the center and rotate on offset sinewaves via bowtie
 
 
 ## Knockback content:
@@ -107,18 +74,6 @@
 	# Little tornado enemies, wind gust effect fields applied randomly around the place, sky-related bosses (e.g. stormcloud shoots lightning)
 
 
-## World map ideas
-# island has 1 waygate per biome
-# Island is BIG, way bigger than mythfall's tiny ass island and bigger even than realm. I have big plans
-	# One biome in my island is probably like the whole map in mythfall, maybe a bit less than that idk, depends on the biome ofc.
-
-
-## Crystals / Essence
-# Dungeons and open world minibosses from an area drop shards / essence
-# One of which is required to unlock the shrine (teleporter) for a biome. 
-# As a way to ensure the player has actually been in that area for a little bit.
-
-
 ## Effect content ideas:
 # Effect that gets spammed alot, whole mechanic is about not reaching too high of a timer
 	# Effect is reapplied often in dungeon, and unavoidably, so the timer never goes down, if you get too high, hurt or soemthing
@@ -131,3 +86,11 @@
 # Damage NOTE: done
 # Speed up / slow down
 # Can also have tiles that have effects beyond just hurting you or whatever, conveyor belts, slippery ice, status effect goo
+
+
+## Boss Rush
+# Boss Rush will be a dungeon that's high risk high reward, containing what's in the name... bosses
+	# Each room will have a boss (or maybe more? not sure), which is buffed up higher than their normal version
+	# They may have reworked boss mechanics or something (probably just the same boss but one thing that's different about them)
+	# Each boss will drop high tier loot, which incentivizes the player to try and fight them
+# Probably will be locked to a specific level (maybe like 10 or above)

@@ -26,13 +26,13 @@ func DropItem(pos:Vector2 = Vector2.ZERO, itemID:int = -1): # Attempts to signal
 
 func RollForItem() -> int: # Uses weighted RNG to pick an ID from the lootTable
 	# Dumb way of doing it, there has to be a better way for sure.
-	var RNG = randi() % sumWeights + 1 # Roll RNG out of the total weight
-	print("LootTable rolled " + str(RNG) + " out of " + str(sumWeights))
+	var RNG = randi() % sumWeights # Roll RNG out of the total weight
+	#print("LootTable rolled " + str(RNG) + " out of " + str(sumWeights))
 	
 	for ID in lootTable: 
 		RNG -= lootTable[ID] # Decrement weight
 		if RNG <= 0: # Once <= 0, stop and use the current ID
-			print("LootTable chose itemID: " + str(ID))
+			#print("LootTable chose itemID: " + str(ID))
 			return ID
 	
 	push_error("LootTable roll failed! final RNG=" + str(RNG))

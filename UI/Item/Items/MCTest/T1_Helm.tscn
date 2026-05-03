@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://xjgo8bavrj53"]
+
+[ext_resource type="Texture2D" uid="uid://dcf70udexp2f8" path="res://Assets/References/Minecraft/Invicon_Leather_Cap.png" id="1_62l27"]
+[ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_wt6nl"]
+[ext_resource type="Resource" uid="uid://6uxfkrkyiuvg" path="res://Entity/Projectile/Attack/attack_test2.tres" id="3_tklwp"]
+
+[node name="LeatherHelm" type="Sprite2D" unique_id=398207244]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("1_62l27")
+script = ExtResource("2_wt6nl")
+type = 1
+stats = Dictionary[int, int]({
+0: 1,
+1: 1,
+2: 1,
+3: 2,
+4: 0,
+5: 0,
+6: 1,
+7: 0,
+8: 0
+})
+attack = ExtResource("3_tklwp")
+metadata/_custom_type_script = "uid://dpbuam0tpmaha"

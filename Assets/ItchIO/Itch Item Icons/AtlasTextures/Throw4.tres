@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" format=3 uid="uid://cgo1v84ftwub7"]
+
+[ext_resource type="Texture2D" uid="uid://r5is1bj4dqmp" path="res://Assets/ItchIO/Itch Item Icons/AllWeps.png" id="1_0wr1d"]
+
+[resource]
+atlas = ExtResource("1_0wr1d")
+region = Rect2(112, 192, 16, 16)

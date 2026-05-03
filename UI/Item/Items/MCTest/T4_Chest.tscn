@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://balg0o141phhg"]
+
+[ext_resource type="Texture2D" uid="uid://b2hff8e537gkr" path="res://Assets/References/Minecraft/Invicon_Diamond_Chestplate.png" id="1_l78up"]
+[ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_j6cd3"]
+[ext_resource type="Resource" uid="uid://6uxfkrkyiuvg" path="res://Entity/Projectile/Attack/attack_test2.tres" id="3_chqqt"]
+
+[node name="DiamondChest" type="Sprite2D" unique_id=398207244]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("1_l78up")
+script = ExtResource("2_j6cd3")
+tier = 3
+type = 2
+stats = Dictionary[int, int]({
+0: 5,
+1: 5,
+2: 5,
+3: 7,
+4: 0,
+5: 0,
+6: 6,
+7: 0,
+8: 3
+})
+attack = ExtResource("3_chqqt")
+metadata/_custom_type_script = "uid://dpbuam0tpmaha"

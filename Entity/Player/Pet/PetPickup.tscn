@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dq3y8uc1n57l4"]
+
+[ext_resource type="Script" uid="uid://c7wctnq2tvedw" path="res://Entity/Player/Pet/petPickup.gd" id="2_6sake"]
+[ext_resource type="PackedScene" uid="uid://c8y460v3po8xh" path="res://Script Classes and Base Scenes/Interactable.tscn" id="2_nae7t"]
+[ext_resource type="Texture2D" uid="uid://kvedle5n3nvh" path="res://Assets/Sprites/Pets/Duck.png" id="2_xulvg"]
+[ext_resource type="PackedScene" uid="uid://cs61kw023xsp4" path="res://Entity/Player/Pet/PetDuck.tscn" id="3_42om1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_is5pi"]
+size = Vector2(51, 50)
+
+[node name="PetPickup" type="Sprite2D" unique_id=1082199575]
+texture_filter = 1
+scale = Vector2(2.1, 2.1)
+texture = ExtResource("2_xulvg")
+script = ExtResource("2_6sake")
+Pet = ExtResource("3_42om1")
+
+[node name="InteractComponent" parent="." unique_id=248235521 instance=ExtResource("2_nae7t")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractComponent" unique_id=926908102]
+position = Vector2(0.5000001, 1.0000002)
+scale = Vector2(1.0000002, 1.0000002)
+shape = SubResource("RectangleShape2D_is5pi")
+disabled = true

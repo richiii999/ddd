@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://dk75vwl8p2eck" path="res://Entity/Enemy/enemy.gd" id="1_k51ts"]
 [ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="2_4h0c1"]
+[ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_e2618"]
 [ext_resource type="Texture2D" uid="uid://di6ytqcvdio6g" path="res://Assets/Sprites/GD Icons/GodotIconAtlas.png" id="3_e2618"]
+[ext_resource type="PackedScene" uid="uid://b7jer77opiti2" path="res://Entity/Components/Effects/Burn.tscn" id="3_eqluo"]
 [ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/smartArea.gd" id="4_eqluo"]
 [ext_resource type="PackedScene" uid="uid://dfcui8l7w2j3m" path="res://Entity/Components/BehaviorFSM.tscn" id="5_j4rks"]
 [ext_resource type="PackedScene" uid="uid://byp1r1vlopabi" path="res://Entity/Components/Behaviors/Boss/Boss1.tscn" id="6_6sh2x"]
@@ -10,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://vosbka7lsvf0" path="res://Entity/Components/Behaviors/Boss/Boss2.tscn" id="8_h2xyi"]
 [ext_resource type="PackedScene" uid="uid://bexluv4wwnwxr" path="res://Entity/Components/BossBar.tscn" id="9_aplmu"]
 [ext_resource type="PackedScene" uid="uid://bntfe5iinhuu5" path="res://UI/Item/loot_table.tscn" id="10_hy2l8"]
+[ext_resource type="PackedScene" uid="uid://dddy50t4saequ" path="res://Entity/Components/EffectComponentSystem.tscn" id="13_eqluo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw8gt"]
 bg_color = Color(1, 0, 0, 1)
@@ -42,6 +45,8 @@ collision_layer = 256
 collision_mask = 267
 motion_mode = 1
 script = ExtResource("1_k51ts")
+projs = Array[PackedScene]([ExtResource("2_e2618"), null, null])
+effects = Array[PackedScene]([ExtResource("3_eqluo"), null, null])
 kBResistance = 1.0
 HPmax = 500
 
@@ -108,8 +113,7 @@ one_shot = true
 wait_time = 10.0
 autostart = true
 
-[node name="BehaviorFSM" parent="." unique_id=669444931 node_paths=PackedStringArray("initState") instance=ExtResource("5_j4rks")]
-initState = NodePath("behavior_boss1")
+[node name="BehaviorFSM" parent="." unique_id=669444931 instance=ExtResource("5_j4rks")]
 
 [node name="behavior_boss1" parent="BehaviorFSM" unique_id=109561774 instance=ExtResource("6_6sh2x")]
 
@@ -128,6 +132,8 @@ lootTable = Dictionary[int, int]({
 0: 1,
 1: 3
 })
+
+[node name="EffectsComponentSystem" parent="." unique_id=921567753 instance=ExtResource("13_eqluo")]
 
 [connection signal="onEmpty" from="Sight" to="." method="SightIncrease" binds= [false]]
 [connection signal="onEmpty" from="Sight" to="ShootTimer1" method="set_paused" binds= [true]]

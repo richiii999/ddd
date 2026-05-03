@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://byvqbs1h1bre4"]
+
+[ext_resource type="Texture2D" uid="uid://cl0mlama7t27o" path="res://Assets/References/Minecraft/Invicon_Golden_Chestplate.png" id="1_y1qj8"]
+[ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_xqctt"]
+[ext_resource type="Resource" uid="uid://6uxfkrkyiuvg" path="res://Entity/Projectile/Attack/attack_test2.tres" id="3_vwhbo"]
+
+[node name="GoldChest" type="Sprite2D" unique_id=398207244]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("1_y1qj8")
+script = ExtResource("2_xqctt")
+tier = 2
+type = 2
+stats = Dictionary[int, int]({
+0: 3,
+1: 3,
+2: 3,
+3: 5,
+4: 0,
+5: 0,
+6: 4,
+7: 0,
+8: 1
+})
+attack = ExtResource("3_vwhbo")
+metadata/_custom_type_script = "uid://dpbuam0tpmaha"

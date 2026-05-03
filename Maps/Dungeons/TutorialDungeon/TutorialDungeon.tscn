@@ -1,0 +1,239 @@
+[gd_scene format=4 uid="uid://ch6p8upawjudp"]
+
+[ext_resource type="TileSet" uid="uid://cnvmagl4xkjae" path="res://Maps/TileSet.tres" id="1_lmddn"]
+[ext_resource type="Script" uid="uid://bhqsdd2qy8h5w" path="res://Maps/Dungeons/dungeon.gd" id="2_ffpe7"]
+[ext_resource type="PackedScene" uid="uid://tcx34hy287cs" path="res://Maps/Mechanics/Waygate.tscn" id="3_t8yh5"]
+[ext_resource type="PackedScene" uid="uid://b26urdve2jdba" path="res://Maps/Dungeons/TutorialDungeon/TutorialRoom1.tscn" id="4_xqppy"]
+[ext_resource type="PackedScene" uid="uid://cfrr8g6iuqus8" path="res://Maps/Dungeons/TutorialDungeon/TutorialCorridor1.tscn" id="5_30drn"]
+[ext_resource type="PackedScene" uid="uid://boe7k1rv8wsjt" path="res://Maps/Dungeons/TutorialDungeon/TutorialCorridor2.tscn" id="6_30drn"]
+[ext_resource type="PackedScene" uid="uid://ddq1rnckg480" path="res://Maps/Dungeons/TutorialDungeon/TutorialRoom2.tscn" id="7_lo2xd"]
+[ext_resource type="PackedScene" uid="uid://kabsvvps3yrx" path="res://Maps/Dungeons/TutorialDungeon/TutorialBossRoom.tscn" id="8_2xxxx"]
+[ext_resource type="PackedScene" uid="uid://ct83qub122r52" path="res://Maps/Dungeons/TutorialDungeon/TutorialExit.tscn" id="9_nckbr"]
+
+[node name="TutorialDungeon" type="TileMapLayer" unique_id=563884137]
+use_parent_material = true
+tile_map_data = PackedByteArray("AAD/////AAACAAEAAAD//wAAAAACAAEAAAAAAAAAAAACAAEAAAABAAAAAAACAAEAAAABAP//AAACAAEAAAAAAP//AAACAAEAAAD+////AAACAAEAAAD8//3/AAACAAEAAAD8//7/AAACAAEAAAD8////AAACAAEAAAD8/wAAAAACAAEAAAD8/wEAAAACAAEAAAD8/wIAAAACAAEAAAD9/wIAAAACAAEAAAD+/wIAAAACAAEAAAD//wIAAAACAAEAAAAAAAIAAAACAAEAAAABAAIAAAACAAEAAAACAAIAAAACAAEAAAADAAIAAAACAAEAAAADAAEAAAACAAEAAAAEAAEAAAABAAAAAAADAP//AAACAAEAAAADAP7/AAACAAEAAAADAP3/AAACAAEAAAACAP3/AAACAAEAAAABAP3/AAACAAEAAAAAAP3/AAACAAEAAAD///3/AAACAAEAAAD+//3/AAACAAEAAAD9//3/AAACAAEAAAD9//7/AAACAAEAAAD9////AAACAAEAAAD+//7/AAACAAEAAAD9/wEAAAACAAEAAAD+/wEAAAACAAEAAAD//wEAAAACAAEAAAAAAAEAAAACAAEAAAABAAEAAAACAAEAAAACAAEAAAACAAEAAAACAAAAAAACAAEAAAABAP7/AAACAAEAAAAAAP7/AAACAAEAAAD///7/AAACAAEAAAACAP//AAACAAEAAAACAP7/AAACAAEAAAADAAAAAAACAAEAAAADAAMAAAACAAEAAAACAAMAAAACAAEAAAABAAMAAAACAAEAAAAAAAMAAAACAAEAAAD//wMAAAACAAEAAAD+/wMAAAACAAEAAAD9/wMAAAACAAEAAAD8/wMAAAACAAEAAAD8//z/AAACAAEAAAD9//z/AAACAAEAAAD+//z/AAACAAEAAAD///z/AAACAAEAAAAAAPz/AAACAAEAAAABAPz/AAACAAEAAAACAPz/AAACAAEAAAADAPz/AAACAAEAAAD7/wQAAAABAAAAAAD8/wQAAAABAAAAAAD9/wQAAAABAAAAAAD+/wQAAAABAAAAAAD//wQAAAABAAAAAAAAAAQAAAABAAAAAAABAAQAAAABAAAAAAACAAQAAAABAAAAAAADAAQAAAABAAAAAAAEAAQAAAABAAAAAAAEAAMAAAABAAAAAAAEAAIAAAABAAAAAAAEAP7/AAABAAAAAAAEAP3/AAABAAAAAAAEAPz/AAABAAAAAAAEAPv/AAABAAAAAAADAPv/AAABAAAAAAACAPv/AAABAAAAAAABAPv/AAABAAAAAAAAAPv/AAABAAAAAAD///v/AAABAAAAAAD+//v/AAABAAAAAAD9//v/AAABAAAAAAD8//v/AAABAAAAAAD7//v/AAABAAAAAAD7//z/AAABAAAAAAD7//3/AAABAAAAAAD7//7/AAABAAAAAAD7////AAABAAAAAAD7/wEAAAABAAAAAAD7/wIAAAABAAAAAAD7/wMAAAABAAAAAAD7/wAAAAABAAAAAAAEAP//AAACAAEAAAAEAAAAAAACAAEAAAD+/wAAAAACAAEAAAD9/wAAAAACAAEAAAA=")
+tile_set = ExtResource("1_lmddn")
+script = ExtResource("2_ffpe7")
+
+[node name="WorldEffects" type="Node2D" parent="." unique_id=732786577]
+
+[node name="Waygates" type="Node2D" parent="." unique_id=902142817]
+
+[node name="TutorialDungeon" parent="Waygates" unique_id=991796255 instance=ExtResource("3_t8yh5")]
+active = true
+
+[node name="Rooms" type="Node2D" parent="." unique_id=1892436274]
+
+[node name="Tutorial_Corridor1" parent="Rooms" unique_id=1735399232 instance=ExtResource("5_30drn")]
+position = Vector2(766, 0)
+
+[node name="Tutorial_Room1" parent="Rooms" unique_id=1223308819 instance=ExtResource("4_xqppy")]
+position = Vector2(893, 3263)
+
+[node name="Tutorial_Corridor2" parent="Rooms" unique_id=272676484 instance=ExtResource("6_30drn")]
+position = Vector2(893, 4864)
+
+[node name="Tutorial_Room2" parent="Rooms" unique_id=1282399432 instance=ExtResource("7_lo2xd")]
+position = Vector2(2685, 2944)
+
+[node name="Tutorial_BossRoom" parent="Rooms" unique_id=613707467 instance=ExtResource("8_2xxxx")]
+position = Vector2(4864, 3264)
+rotation = 1.7484555e-07
+
+[node name="Tutorial_Exit" parent="Rooms" unique_id=394915165 instance=ExtResource("9_nckbr")]
+position = Vector2(6400, 3264)
+
+[node name="Spawners" type="Node2D" parent="." unique_id=555905646]
+
+[node name="Text" type="Control" parent="." unique_id=452839583]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label1" type="Label" parent="Text" unique_id=480432675]
+layout_mode = 0
+offset_left = 373.0
+offset_top = -290.0
+offset_right = 828.0
+offset_bottom = -248.0
+theme_override_font_sizes/font_size = 30
+text = "Welcome to the Tutorial! :)
+Use WASD to move and
+LMB to shoot"
+
+[node name="Label2" type="Label" parent="Text" unique_id=711546626]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 344.0
+offset_right = 1018.0
+offset_bottom = 431.0
+theme_override_font_sizes/font_size = 30
+text = "Get ready to
+dodge some bullets"
+
+[node name="Label2_blue" type="Label" parent="Text" unique_id=572640704]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 424.0
+offset_right = 1018.0
+offset_bottom = 511.0
+theme_override_colors/font_color = Color(0, 0.54509807, 1, 1)
+theme_override_font_sizes/font_size = 30
+text = "(right click to dash)"
+
+[node name="Label3" type="Label" parent="Text" unique_id=827067955]
+layout_mode = 0
+offset_left = 264.0
+offset_top = 2544.0
+offset_right = 834.0
+offset_bottom = 2811.0
+theme_override_font_sizes/font_size = 30
+text = "Your first ever dungeon room...
+be sure to avoid the lava
+
+
+though be careful, 
+as holding it for too long will cause "
+
+[node name="Label3_blue" type="Label" parent="Text" unique_id=125344412]
+layout_mode = 0
+offset_left = 264.0
+offset_top = 2632.0
+offset_right = 955.0
+offset_bottom = 2719.0
+theme_override_colors/font_color = Color(0, 0.54509807, 1, 1)
+theme_override_font_sizes/font_size = 30
+text = "and hold space to launch 
+a different projectile..."
+
+[node name="Label3_red" type="Label" parent="Text" unique_id=1614867464]
+layout_mode = 0
+offset_left = 264.0
+offset_top = 2800.0
+offset_right = 955.0
+offset_bottom = 2887.0
+theme_override_colors/font_color = Color(0.90588236, 0.07058824, 0.07058824, 1)
+theme_override_font_sizes/font_size = 30
+text = "consequences..."
+
+[node name="Label4" type="Label" parent="Text" unique_id=1200240389]
+layout_mode = 0
+offset_left = 1043.0
+offset_top = 4756.0
+offset_right = 1734.0
+offset_bottom = 4978.0
+theme_override_font_sizes/font_size = 30
+text = "More lava...
+Try dashing over it"
+
+[node name="Label5" type="Label" parent="Text" unique_id=597824620]
+layout_mode = 0
+offset_left = 2240.0
+offset_top = 4232.0
+offset_right = 2963.0
+offset_bottom = 4454.0
+theme_override_font_sizes/font_size = 30
+text = "Be wary of 
+the tiles with 
+they will move you in
+"
+
+[node name="Label5_red" type="Label" parent="Text" unique_id=706125317]
+layout_mode = 0
+offset_left = 2432.0
+offset_top = 4280.0
+offset_right = 3123.0
+offset_bottom = 4367.0
+theme_override_colors/font_color = Color(0.90588236, 0.07058824, 0.07058824, 1)
+theme_override_font_sizes/font_size = 30
+text = "arrows...."
+
+[node name="Label5_red2" type="Label" parent="Text" unique_id=665882861]
+layout_mode = 0
+offset_left = 2240.0
+offset_top = 4360.0
+offset_right = 2931.0
+offset_bottom = 4447.0
+theme_override_colors/font_color = Color(0.90588236, 0.07058824, 0.07058824, 1)
+theme_override_font_sizes/font_size = 30
+text = "the direction that 
+they point in"
+
+[node name="Label6" type="Label" parent="Text" unique_id=1278214700]
+layout_mode = 0
+offset_left = 3584.0
+offset_top = 2944.0
+offset_right = 4307.0
+offset_bottom = 3166.0
+theme_override_font_sizes/font_size = 30
+text = "A Dungeon would not be
+complete...
+"
+
+[node name="Label6_red" type="Label" parent="Text" unique_id=1596574808]
+layout_mode = 0
+offset_left = 3584.0
+offset_top = 3030.0
+offset_right = 3933.0
+offset_bottom = 3117.0
+scale = Vector2(0.91698253, 0.95969987)
+theme_override_colors/font_color = Color(0.90588236, 0.07058824, 0.07058824, 1)
+theme_override_font_sizes/font_size = 30
+text = "without a boss to fight..."
+
+[node name="Label7" type="Label" parent="Text" unique_id=10319897]
+layout_mode = 0
+offset_left = 6088.0
+offset_top = 2792.0
+offset_right = 6811.0
+offset_bottom = 3014.0
+theme_override_font_sizes/font_size = 30
+text = "Congratulations! You have beaten the tutorial...
+Now interact with the waygate to get out of here"
+
+[node name="Label7_blue" type="Label" parent="Text" unique_id=710208048]
+layout_mode = 0
+offset_left = 6088.0
+offset_top = 2880.0
+offset_right = 6779.0
+offset_bottom = 2967.0
+theme_override_colors/font_color = Color(0, 0.54509807, 1, 1)
+theme_override_font_sizes/font_size = 30
+text = "(Press E)"
+
+[node name="Label8" type="Label" parent="Text" unique_id=690326960]
+layout_mode = 0
+offset_left = 863.0
+offset_top = 3373.0
+offset_right = 1119.0
+offset_bottom = 3460.0
+theme_override_font_sizes/font_size = 30
+text = "Pick up items by
+
+Use Health Potion
+"
+
+[node name="Label9" type="Label" parent="Text" unique_id=2138282940]
+layout_mode = 0
+offset_left = 1043.0
+offset_top = 4447.0
+offset_right = 1303.0
+offset_bottom = 4624.0
+theme_override_font_sizes/font_size = 30
+text = "You regenerate health
+to 50% after 5 sec without
+taking damage."
+
+[node name="Label8_blue" type="Label" parent="Text" unique_id=628265794]
+layout_mode = 0
+offset_left = 863.0
+offset_top = 3397.0
+offset_right = 1554.0
+offset_bottom = 3484.0
+theme_override_colors/font_color = Color(0, 0.54509807, 1, 1)
+theme_override_font_sizes/font_size = 30
+text = "pressing Q
+
+with H"

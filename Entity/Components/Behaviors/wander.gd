@@ -19,7 +19,8 @@ func onEnter(): # Begin wandering about spawnpoint (if any) or current position,
 	Entity.set_collision_mask_value(9, false)
 	Entity.StatusLabel.addStatusText("Wander", "WHITE")
 	Wander()
-	start()
+	if is_inside_tree(): # Prevents error on enemy death going back to wander for 1 frame
+		start()
 
 func onLeave(): # Reset movespeed and collision
 	Entity.behaviorMoveSpeed = 1.00 

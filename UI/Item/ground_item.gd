@@ -1,14 +1,9 @@
 class_name GroundItem extends Node2D
 
-@export var TTL : float = 15.00 # Time for an item to despawn (sec)
+@export var TTL : float = 20.00 # Time for an item to despawn (sec)
 @export var item : Item = null
 
-# If the groundItem is manually placed (ex. for debugging), need to use a scene
-@export var itemScene : PackedScene = null 
-
 func _ready():
-	if itemScene: item = itemScene.instantiate()
-	
 	z_index = 10 # Render above floor
 	
 	# Despawn Timer
@@ -18,13 +13,15 @@ func _ready():
 	
 	# Fade Timer (always relative to TTL value)
 	$Fade.connect("timeout", fadeOut)
-	$Fade.start(TTL / 3)
+	$Fade.start(TTL / 5)
 	
-	if (item == null): # Item not set
-		print_debug("Item not set for GroundItem, using TestItem")
-		item = load("res://UI/Item/Items/TEST_ITEM.tscn").instantiate()
-	
-	$ItemSlot.add_child(item)
+	setItem(item)
 
 func fadeOut(): # Fade 20% every 1/5 of TTL
 	set_modulate(Color(get_modulate(), $TTL.time_left / TTL))
+
+func setItem(newItem:Item):
+	$ItemSlot.add_child(newItem)
+	$ItemSlot.scale = newItem.scale
+	
+	

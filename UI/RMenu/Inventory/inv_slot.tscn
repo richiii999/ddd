@@ -12,9 +12,27 @@ icon_alignment = 1
 script = ExtResource("1_1o36c")
 
 [node name="Display_Sprite" type="Sprite2D" parent="." unique_id=263854480]
+texture_filter = 1
 position = Vector2(36, 36)
 scale = Vector2(0.5, 0.5)
 
 [node name="BorderSprite" type="Sprite2D" parent="." unique_id=1127903311]
+texture_filter = 1
 position = Vector2(36, 36)
 texture = ExtResource("3_6m3m7")
+
+[node name="ItemName" type="Label" parent="." unique_id=1466056063]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -33.0
+offset_top = -7.0
+offset_right = 35.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "ItemName"
+horizontal_alignment = 1

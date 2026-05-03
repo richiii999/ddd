@@ -24,6 +24,4 @@ func BehaviorTick(): # Copied from Orbit
 	var newTarget = orbitTarget + (Vector2.RIGHT.rotated(orbitAngle) * orbitRadius)
 	Entity.setTargetPos(newTarget) # set Entity.targetPos to a position along a circle of radius orbitRadius
 
-func checkConditions(): 
-	if ( Entity.HPBar.ratio <= healthThreshold): 
-		changeStateByIdx.emit(self.get_index() + 1 ) # Go to next phase
+func checkConditions(): return (Entity.HPBar.ratio <= healthThreshold)

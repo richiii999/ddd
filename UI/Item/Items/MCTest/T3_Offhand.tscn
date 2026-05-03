@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bit2jsxu3tyoy"]
+
+[ext_resource type="Texture2D" uid="uid://b8o3nut484xnc" path="res://Assets/ItchIO/shield.png" id="1_6k5py"]
+[ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_vlhx3"]
+[ext_resource type="Resource" uid="uid://6uxfkrkyiuvg" path="res://Entity/Projectile/Attack/attack_test2.tres" id="3_eb613"]
+
+[node name="ShieldT3" type="Sprite2D" unique_id=398207244]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("1_6k5py")
+script = ExtResource("2_vlhx3")
+tier = 2
+type = 5
+stats = Dictionary[int, int]({
+0: 4,
+1: 0,
+2: 0,
+3: 5,
+4: 0,
+5: 0,
+6: 6,
+7: 0,
+8: 0
+})
+attack = ExtResource("3_eb613")
+metadata/_custom_type_script = "uid://dpbuam0tpmaha"

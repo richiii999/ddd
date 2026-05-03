@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://dt1wntgri7o62"]
 
-[ext_resource type="Texture2D" uid="uid://gl7l68p10c2b" path="res://Assets/Sprites/GD Icons/GD_Default.tres" id="1_1u45d"]
+[ext_resource type="Texture2D" uid="uid://kiqf4mk7st5y" path="res://Assets/UI/MPotFull.png" id="1_1u45d"]
 [ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_17cuq"]
 
 [node name="MPot" type="Sprite2D" unique_id=1667245125]
+texture_filter = 1
+scale = Vector2(2, 2)
 texture = ExtResource("1_1u45d")
 script = ExtResource("2_17cuq")
-itemName = "HPot"
 type = -2

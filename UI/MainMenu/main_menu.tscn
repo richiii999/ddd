@@ -27,7 +27,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.2890427, 0.7106343, 0.8717462, 1)
 
-[node name="Label" type="RichTextLabel" parent="BG color" unique_id=2400649]
+[node name="Title" type="RichTextLabel" parent="BG color" unique_id=2400649]
 modulate = Color(0.057722077, 0.019735226, 0.015061044, 1)
 layout_mode = 1
 anchors_preset = 5
@@ -40,6 +40,26 @@ offset_bottom = 382.16998
 grow_horizontal = 2
 theme_override_font_sizes/normal_font_size = 52
 text = "Domain of the Deranged Deity"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Credits" type="RichTextLabel" parent="BG color" unique_id=722280687]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -304.0
+offset_top = 554.0
+offset_right = 334.0
+offset_bottom = 706.0
+grow_horizontal = 2
+text = "Richiii - Game Design
+Ali - Coding
+Nimbus - Art
+Selym - Audio
+Jack's son - Coding
+Helal - Biz
+"
 horizontal_alignment = 1
 vertical_alignment = 1
 

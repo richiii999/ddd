@@ -4,6 +4,7 @@ class_name Waygate extends GPUParticles2D ## Waygate: Node for teleporting playe
 @onready var currWorld : WorldBASE = Tools.FindParentByType(self, WorldBASE)
 @export var active : bool = false # Players can only spawn here if active
 @export var exit: bool = false # One-way teleport to Nexus, no GUI (ex. dungeon exit)
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 var currPlayer : Player = null # Set when player interacts with this
 
@@ -32,7 +33,7 @@ func WaygateInteract(P:Player):
 	currPlayer = P # Player interacted with waygate
 	
 	if !active: # Inactive, try to purchase
-		if itemPrice and P.Inv.HasItemName(itemPriceItem.itemName) == -1: # itemName since ID is 0
+		if itemPrice and P.Inv.HasItemName(itemPriceItem.name) == -1: # itemName since ID is 0
 			P.StatusLabel.addStatusText("Missing Item: " + str(itemPriceItem.name), "RED")
 		elif P.coins < coinPrice:
 			P.StatusLabel.addStatusText("Need " + str(coinPrice) + " Coins", "RED")
@@ -40,7 +41,7 @@ func WaygateInteract(P:Player):
 			P.incCoins(coinPrice * -1)
 			#print(P.Inv.HasItemName(itemPriceItem.itemName))
 			if itemPrice:
-				var slotN = P.Inv.HasItemName(itemPriceItem.itemName) # Find the item slot
+				var slotN = P.Inv.HasItemName(itemPriceItem.name) # Find the item slot
 				P.Inv.PutItemInSlot(slotN, null) # Delete the item from Player Inv
 			setActive(true)
 	
@@ -49,7 +50,13 @@ func WaygateInteract(P:Player):
 		else: P.toggleWaygateGUI(true) # Regular waygates open the GUI to select a destination
 
 func UseWaygate(P:Player): # Teleports player to this waygate
+	if P == null:
+		push_error("P is null")
+		return
+	
 	# Heal and dispell player
+	if P == null: 
+		push_error("player is null")
 	P.Heal(P.HPmax - P.HP)
 	P.ECS.immuneToEffects = true
 	P.ECS.ClearEffects()
@@ -69,6 +76,7 @@ func UseWaygate(P:Player): # Teleports player to this waygate
 	get_tree().process_frame.connect(P.ECS.ClearEffects, CONNECT_ONE_SHOT)
 	
 	EffectTrigger()
+	audio_stream_player.play()
 
 func setActive(state:bool):
 	EffectTrigger(state)
@@ -79,4 +87,4 @@ func setActive(state:bool):
 func EffectTrigger(state:bool=true): # Emits blue particles and changes sprite for a moment
 	#print("EffectTrigger called, state: " + str(state) + "WG= " + str(self))
 	emitting = state; 
-	if(state): $EffectTimer.start(1.5) # Ttops emitting (calls this with state = false)
+	if(state): $EffectTimer.call_deferred("start", 1.5) # Ttops emitting (calls this with state = false)

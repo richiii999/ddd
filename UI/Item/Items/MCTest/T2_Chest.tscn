@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://ckncbdnn8b41u"]
+
+[ext_resource type="Texture2D" uid="uid://lvq7kpkgrjlg" path="res://Assets/References/Minecraft/Invicon_Chainmail_Chestplate.png" id="1_0sl0m"]
+[ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_uplar"]
+[ext_resource type="Resource" uid="uid://6uxfkrkyiuvg" path="res://Entity/Projectile/Attack/attack_test2.tres" id="3_1jmhg"]
+
+[node name="IronChest" type="Sprite2D" unique_id=398207244]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("1_0sl0m")
+script = ExtResource("2_uplar")
+tier = 1
+type = 2
+stats = Dictionary[int, int]({
+0: 2,
+1: 2,
+2: 2,
+3: 4,
+4: 0,
+5: 0,
+6: 3,
+7: 0,
+8: 0
+})
+attack = ExtResource("3_1jmhg")
+metadata/_custom_type_script = "uid://dpbuam0tpmaha"

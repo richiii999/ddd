@@ -47,6 +47,7 @@ func onEnemyDeath():
 func onPlayerEnter(_P):
 	if !roomActive: # Activate on first player entered
 		roomActive = true
+		get_parent().get_parent().currRoom = self # Set Dungeon currRoom
 		NextWave()
 	else: # Scale enemies for each extra player
 		for child in currWave.get_children():

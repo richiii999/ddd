@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://btes4v11s186a"]
+
+[ext_resource type="Texture2D" uid="uid://dnmtqetuegceb" path="res://Assets/References/Minecraft/Invicon_Chainmail_Helmet.png" id="1_sjywo"]
+[ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_xh4qf"]
+[ext_resource type="Resource" uid="uid://6uxfkrkyiuvg" path="res://Entity/Projectile/Attack/attack_test2.tres" id="3_vj5au"]
+
+[node name="IronHelm" type="Sprite2D" unique_id=398207244]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("1_sjywo")
+script = ExtResource("2_xh4qf")
+tier = 1
+type = 1
+stats = Dictionary[int, int]({
+0: 2,
+1: 2,
+2: 2,
+3: 3,
+4: 0,
+5: 0,
+6: 2,
+7: 0,
+8: 0
+})
+attack = ExtResource("3_vj5au")
+metadata/_custom_type_script = "uid://dpbuam0tpmaha"

@@ -5,19 +5,18 @@ class_name ProjectilePattern extends Node2D #all this file is gonna do is spawn 
 enum PatternType {
 	CIRCLE,
 	ARC, 
-	#BOWTIE, 
-	#GRID, 
+	BOWTIE, 
+	GRID, 
 	CHAIN,
-	#WING_RINGS
+	WING_RINGS
 }
 
-#TODO: this is our projectile scene to instantiate, we have to set this on the node in the editor or before calling Emit()
 @export var projectile_scene : PackedScene
 
 #chain settings - don't know if this is correct so will change this later
-#var _chain_timer : Timer = null
-#var _chain_config : Dictionary = {}
-#var _chain_rep_left : int = 0
+var chain_timer : Timer = null
+var chain_config : Dictionary = {}
+var chain_rep_left : int = 0
 
 #main emit function that needs to be called
 
@@ -25,6 +24,10 @@ func Emit(type: PatternType, count: int, opts: Dictionary = {}) -> void:
 	match type:
 		PatternType.CIRCLE: emit_circle(count, opts)
 		PatternType.ARC: emit_arc(count, opts)
+		PatternType.BOWTIE: emit_bowtie(count, opts)
+		PatternType.GRID: emit_grid(opts)
+		PatternType.CHAIN: start_chain(count, opts)
+		PatternType.WING_RINGS: emit_wing_rings(count, opts)
 
 #this will basically do a circle that does N projectles in a 360 (aka a circle)
 #so if you pass in say (circle, 3), then you get a triangle
@@ -51,6 +54,119 @@ func emit_arc(count: int, opts: Dictionary) -> void:
 	for i in count: #same thing as circle, generates the arc
 		spawn_proj(start + step * i, opts)
 
+#bowtie is like two opposing arcs which make a bow like shape (based off what google said)
+func emit_bowtie(count: int, opts: Dictionary) -> void:
+	@warning_ignore("integer_division")
+	var half: int = count / 2 #one half of the arc
+	var safe: float =  opts.get("safe_angle", PI / 4.0) #the total gap in the bowtie
+	var lobe_spread: float = opts.get("spread", PI - safe) #how much each lobe is filled
+	var offset: float = opts.get("offset_angle", 0.0) #basically rotates our entire pattern
+	
+	#create the forward lobe by defining the spread and offset angle, then passing it into our arc function
+	var opts_fwd:= opts.duplicate()
+	opts_fwd["spread"] = lobe_spread
+	opts_fwd["offset_angle"] = opts.get("offset_angle", 0.0) 
+	emit_arc(half, opts_fwd)
+	
+	#create the rear lobe, which is just 180 degrees in the opposite direction
+	var opts_back:= opts.duplicate()
+	opts_back["spread"] = lobe_spread
+	opts_back["offset_angle"] = opts.get("offset_angle", 0.0) + PI #the opposite direction
+	emit_arc(count - half, opts_back) #need to do count - half to deal with the odd counts
+
+#grid is just bullet hell... gonna have so many projectiles on the screen 
+func emit_grid(opts: Dictionary) -> void:
+	var cols: int = opts.get("cols", 3) #3 columns
+	var rows: int = opts.get("rows", 3) #3 rows
+	var cell_size: float = opts.get("cell_size", 40.0) #how big our cells are going to be 
+	var offset: float = opts.get("offset_angle", 0.0) #same thing as the other ones
+	var dir = rotation + offset
+	
+	#need to center the grid on the emitter
+	var grid_w : float = (cols - 1) * cell_size
+	var grid_h : float = (rows - 1) * cell_size
+	
+	#loop through our rows and columns
+	for r in rows:
+		for c in cols:
+			#need to get the local offset
+			var local_x: float = c * cell_size - grid_w / 2.0
+			var local_y: float = r * cell_size - grid_h / 2.0
+			
+			#now we need to rotate the local offset by the emitters direction
+			var rotated: Vector2 = Vector2(local_x, local_y).rotated(dir)
+			
+			#now make the projectile 
+			var proj := make_proj(dir, opts)
+			if proj == null: continue
+			get_parent().add_child(proj)
+			proj.global_position = global_position + rotated
+
+#chain just allows them to do chain attacks of patterns 
+func start_chain(count: int, opts: Dictionary) -> void:
+	#since we're starting a chain, we want to stop any existing chain 
+	if chain_timer and chain_timer.is_inside_tree():
+		chain_timer.stop()
+		chain_timer.queue_free()
+	
+	#get the configuration for the chain
+	chain_config = {
+		"sub_type": opts.get("sub_type", PatternType.CIRCLE),
+		"sub_count": opts.get("sub_count", count),
+		"sub_opts": opts.get("sub_opts", {})
+	}
+	chain_rep_left = opts.get("reps", 3)
+	
+	#fire the chain once, then use a start timer for the rest of them
+	fire_chain_rep()
+	
+	#if there's 0 chains left, return
+	if chain_rep_left <= 0: return
+	
+	#initialize our timer
+	chain_timer = Timer.new()
+	chain_timer.wait_time = opts.get("interval", 0.5)
+	chain_timer.one_shot = false
+	chain_timer.timeout.connect(on_chain_tick)
+	add_child(chain_timer)
+	chain_timer.start()
+
+#have it keep chaining until reaching 0, then clear out our timer
+func on_chain_tick() -> void:
+	fire_chain_rep()
+	if chain_rep_left <= 0:
+		chain_timer.stop()
+		chain_timer.queue_free()
+		chain_timer = null
+
+#fires our chain out
+func fire_chain_rep() -> void:
+	if chain_rep_left <= 0: return
+	Emit(chain_config["sub_type"], chain_config["sub_count"], chain_config["sub_opts"])
+	chain_rep_left -= 1
+
+#wing rings are rings of projectiles that shoot out 
+func emit_wing_rings(count: int, opts: Dictionary) -> void:
+	var ring_count: int = opts.get("ring_count", 3) #how many rings
+	var sine_amp: float = opts.get("sine_amp", 0.4) #math shit i found online
+	var sine_freq: float = opts.get("sine_freq", 2.0)
+	var time_offset: float = opts.get("time_offset", 0.0)
+
+	for ring_idx in ring_count:
+		#each ring gets a phase-shifted sinusoidal rotation offset
+		var phase   : float = float(ring_idx) / ring_count * TAU
+		var ang_off : float = sin(time_offset * sine_freq + phase) * sine_amp
+
+		var ring_opts := opts.duplicate()
+		ring_opts["offset_angle"] = opts.get("offset_angle", 0.0) + ang_off
+
+		#alternate CW / CCW spin direction per ring for the wing effect
+		if ring_idx % 2 == 1:
+			ring_opts["offset_angle"] += PI / count  #half-step offset between rings
+
+		emit_circle(count, ring_opts)
+
+
 func make_proj(dir: float, opts: Dictionary) -> Projectile:
 	#check to see if the projectile scene even exists 
 	if projectile_scene == null: return null
@@ -75,13 +191,3 @@ func spawn_proj(dir: float, opts: Dictionary) -> void:
 	if proj == null: return
 	get_node("/root/GameManager/Projectiles").add_child(proj)
 	proj.global_position = global_position
-	
-	
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

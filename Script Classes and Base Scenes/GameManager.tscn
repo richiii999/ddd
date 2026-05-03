@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://jvh7seemiuj4"]
 
 [ext_resource type="Script" uid="uid://bu7bcptiyn0ns" path="res://Script Classes and Base Scenes/gameManager.gd" id="1_5l5e5"]
-[ext_resource type="PackedScene" uid="uid://yam0tl01v76q" path="res://Maps/Nexus.tscn" id="2_xgfaf"]
-[ext_resource type="PackedScene" uid="uid://brdsmfkvsa5ou" path="res://Maps/TestWorld.tscn" id="3_d5dbk"]
+[ext_resource type="PackedScene" uid="uid://ch6p8upawjudp" path="res://Maps/Dungeons/TutorialDungeon/TutorialDungeon.tscn" id="4_he4om"]
 [ext_resource type="PackedScene" uid="uid://nquy6bnqhiwd" path="res://Entity/Player/Player.tscn" id="4_nj8wv"]
 [ext_resource type="PackedScene" uid="uid://57ucfjynaww3" path="res://Maps/Dungeons/TestDungeon/Dungeon.tscn" id="4_x4dmn"]
 [ext_resource type="PackedScene" uid="uid://cmgpcvcen5bty" path="res://UI/Item/item_spawner.tscn" id="5_8vor3"]
@@ -12,11 +11,8 @@
 [node name="GameManager" type="Node" unique_id=1545096795]
 process_mode = 3
 script = ExtResource("1_5l5e5")
-nexus_tscn = ExtResource("2_xgfaf")
-world_tscn = ExtResource("3_d5dbk")
-dungeons = Array[PackedScene]([ExtResource("4_x4dmn"), ExtResource("5_lmy2i")])
+dungeons = Array[PackedScene]([ExtResource("4_x4dmn"), ExtResource("5_lmy2i"), ExtResource("4_he4om")])
 player_tscn = ExtResource("4_nj8wv")
-mainmenu_tscn = ExtResource("5_xwctg")
 
 [node name="Maps" type="Node2D" parent="." unique_id=178269315]
 process_mode = 1
@@ -29,3 +25,8 @@ position = Vector2(30000, 0)
 [node name="ItemSpawner" parent="." unique_id=1318176200 instance=ExtResource("5_8vor3")]
 
 [node name="Projectiles" type="Node2D" parent="." unique_id=2123273897]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=779040823]
+
+[node name="MainMenu" parent="CanvasLayer" unique_id=1191625732 instance=ExtResource("5_xwctg")]
+unique_name_in_owner = true

@@ -9,7 +9,8 @@ class_name EffectBASE extends GPUParticles2D ## BASE class for effects, effects 
 
 @export var tier     : int = 1          # Tier affects how strong the effect is
 @export var length   : float = 4.00     # How long does the effect last?
-
+@export var source : Node = null # Source
+var sourcePower : int = 0
 ## Setup the timer, send a status text, particles (if any), and apply initial effect
 func _ready():
 	if not entity: return

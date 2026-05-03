@@ -22,5 +22,6 @@ func updateWorldWaygateList(): ActiveWaygates = $Waygates.get_children().filter(
 @export var currBoss : int = 0 # Which is the current boss to spawn (Based on cumulative kills and other factors)
 
 func _ready():
+	z_index = -10
 	# Hide effect particles behind world
 	$WorldEffects.z_index -= 99
