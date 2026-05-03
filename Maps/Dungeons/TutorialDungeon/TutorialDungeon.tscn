@@ -25,11 +25,11 @@ active = true
 
 [node name="Rooms" type="Node2D" parent="." unique_id=1892436274]
 
-[node name="Tutorial_Room1" parent="Rooms" unique_id=1223308819 instance=ExtResource("4_xqppy")]
-position = Vector2(893, 3263)
-
 [node name="Tutorial_Corridor1" parent="Rooms" unique_id=1735399232 instance=ExtResource("5_30drn")]
 position = Vector2(766, 0)
+
+[node name="Tutorial_Room1" parent="Rooms" unique_id=1223308819 instance=ExtResource("4_xqppy")]
+position = Vector2(893, 3263)
 
 [node name="Tutorial_Corridor2" parent="Rooms" unique_id=272676484 instance=ExtResource("6_30drn")]
 position = Vector2(893, 4864)
@@ -37,7 +37,7 @@ position = Vector2(893, 4864)
 [node name="Tutorial_Room2" parent="Rooms" unique_id=1282399432 instance=ExtResource("7_lo2xd")]
 position = Vector2(2685, 2944)
 
-[node name="Tutorial_Room" parent="Rooms" unique_id=613707467 instance=ExtResource("8_2xxxx")]
+[node name="Tutorial_BossRoom" parent="Rooms" unique_id=613707467 instance=ExtResource("8_2xxxx")]
 position = Vector2(4864, 3264)
 rotation = 1.7484555e-07
 
@@ -54,12 +54,14 @@ offset_bottom = 40.0
 
 [node name="Label1" type="Label" parent="Text" unique_id=480432675]
 layout_mode = 0
-offset_left = 408.0
-offset_top = -232.0
-offset_right = 863.0
-offset_bottom = -190.0
+offset_left = 373.0
+offset_top = -290.0
+offset_right = 828.0
+offset_bottom = -248.0
 theme_override_font_sizes/font_size = 30
-text = "Welcome to the first dungeon :)"
+text = "Welcome to the Tutorial! :)
+Use WASD to move and
+LMB to shoot"
 
 [node name="Label2" type="Label" parent="Text" unique_id=711546626]
 layout_mode = 0
@@ -79,8 +81,7 @@ offset_right = 1018.0
 offset_bottom = 511.0
 theme_override_colors/font_color = Color(0, 0.54509807, 1, 1)
 theme_override_font_sizes/font_size = 30
-text = "(right click to use 
-your stamina to dash)"
+text = "(right click to dash)"
 
 [node name="Label3" type="Label" parent="Text" unique_id=827067955]
 layout_mode = 0
@@ -119,12 +120,13 @@ text = "consequences..."
 
 [node name="Label4" type="Label" parent="Text" unique_id=1200240389]
 layout_mode = 0
-offset_left = 1048.0
-offset_top = 4496.0
-offset_right = 1739.0
-offset_bottom = 4718.0
+offset_left = 1043.0
+offset_top = 4756.0
+offset_right = 1734.0
+offset_bottom = 4978.0
 theme_override_font_sizes/font_size = 30
-text = "More lava..."
+text = "More lava...
+Try dashing over it"
 
 [node name="Label5" type="Label" parent="Text" unique_id=597824620]
 layout_mode = 0
@@ -166,17 +168,17 @@ offset_top = 2944.0
 offset_right = 4307.0
 offset_bottom = 3166.0
 theme_override_font_sizes/font_size = 30
-text = "The final room... 
-a dungeon would not be
+text = "A Dungeon would not be
 complete...
 "
 
 [node name="Label6_red" type="Label" parent="Text" unique_id=1596574808]
 layout_mode = 0
-offset_left = 5312.0
-offset_top = 3064.0
-offset_right = 5661.0
-offset_bottom = 3151.0
+offset_left = 3584.0
+offset_top = 3030.0
+offset_right = 3933.0
+offset_bottom = 3117.0
+scale = Vector2(0.91698253, 0.95969987)
 theme_override_colors/font_color = Color(0.90588236, 0.07058824, 0.07058824, 1)
 theme_override_font_sizes/font_size = 30
 text = "without a boss to fight..."
@@ -203,21 +205,35 @@ text = "(Press E)"
 
 [node name="Label8" type="Label" parent="Text" unique_id=690326960]
 layout_mode = 0
-offset_left = -48.0
-offset_top = 3488.0
-offset_right = 208.0
-offset_bottom = 3575.0
+offset_left = 863.0
+offset_top = 3373.0
+offset_right = 1119.0
+offset_bottom = 3460.0
 theme_override_font_sizes/font_size = 30
 text = "Pick up items by
+
+Use Health Potion
 "
+
+[node name="Label9" type="Label" parent="Text" unique_id=2138282940]
+layout_mode = 0
+offset_left = 1043.0
+offset_top = 4447.0
+offset_right = 1303.0
+offset_bottom = 4624.0
+theme_override_font_sizes/font_size = 30
+text = "You regenerate health
+to 50% after 5 sec without
+taking damage."
 
 [node name="Label8_blue" type="Label" parent="Text" unique_id=628265794]
 layout_mode = 0
-offset_left = -48.0
-offset_top = 3512.0
-offset_right = 643.0
-offset_bottom = 3599.0
+offset_left = 863.0
+offset_top = 3397.0
+offset_right = 1554.0
+offset_bottom = 3484.0
 theme_override_colors/font_color = Color(0, 0.54509807, 1, 1)
 theme_override_font_sizes/font_size = 30
-text = "pressing E
-"
+text = "pressing Q
+
+with H"

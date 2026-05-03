@@ -91,11 +91,11 @@ shape = SubResource("CircleShape2D_w6h3m")
 debug_color = Color(0.501961, 0.501961, 0.501961, 0.25098)
 
 [node name="ShootTimer1" type="Timer" parent="." unique_id=142791748]
-wait_time = 4.0
+wait_time = 2.0
 autostart = true
 
 [node name="ShootTimer2" type="Timer" parent="." unique_id=1367343406]
-wait_time = 5.0
+wait_time = 99.0
 autostart = true
 
 [node name="DamageFlashTimer" type="Timer" parent="." unique_id=116557462]

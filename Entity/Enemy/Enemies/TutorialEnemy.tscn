@@ -67,14 +67,13 @@ size = Vector2(120, 120)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w6h3m"]
 resource_local_to_scene = true
-radius = 272.118
+radius = 640.0
 
 [node name="TutorialZombie" type="CharacterBody2D" unique_id=940119581 groups=["Enemy"]]
 collision_layer = 256
 collision_mask = 267
 motion_mode = 1
 script = ExtResource("1_h33l2")
-XP = 30
 projs = Array[PackedScene]([ExtResource("2_74kdl"), null, null])
 HPmax = 100
 
@@ -126,6 +125,7 @@ script = ExtResource("5_i0cef")
 metadata/_custom_type_script = "uid://hi4e34yydb2t"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=1478919866]
+rotation = -0.0016192237
 shape = SubResource("CircleShape2D_w6h3m")
 debug_color = Color(0.501961, 0.501961, 0.501961, 0.25098)
 
