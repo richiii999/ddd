@@ -135,8 +135,8 @@ func LoadPlayer(P:Player):
 	P.skillPoints = playerData["SkillPoints"]
 	P.XP = playerData.XP
 	# Consumables
-	P.HPotC = playerData.HPotC
-	P.MPotC = playerData.MPotC
+	P.incHPot(playerData.HPotC)
+	P.incMPot(playerData.MPotC)
 	P.coins = playerData.Coins
 	# Items: Store the ID only, when loading the ID can be used to spawn them in again
 	# Gear
@@ -165,6 +165,8 @@ func LoadPlayer(P:Player):
 	var skillData = Save.LoadSkills()
 	if not skillData.is_empty():
 		P.find_child("SkillsUI").apply_save(skillData)
+	
+	player.UpdateUIBars()
 
 ## Load HOF data from HallOfFame.ddd
 func UpdateHOF():

@@ -13,7 +13,7 @@
 
 ## BUG list
 # save doesnt save skill tree information
-# saving UI is bugged, "hp pots is full" when it shows 3/5 for examples
+# Projectile destructibles broke a while ago
 
 ## Main Menu - Initial Version Done: Needs more
 # Splash screen / intro on game launch, specifically a custom Godot Editor splash (cool version)

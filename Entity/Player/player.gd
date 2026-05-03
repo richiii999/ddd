@@ -28,8 +28,8 @@ var effectStats := {}
 ## Pots
 var HPotmax : int = 5 # Max Potions you can carry
 var MPotmax : int = 10
-var HPotC   : int = 3 # Current Potion count
-var MPotC   : int = 5
+var HPotC   : int = 0 # Current Potion count
+var MPotC   : int = 0
 
 ## Pet
 @export var pet: PackedScene
@@ -139,8 +139,7 @@ func _ready():
 	%RMenu/Utility/Nex_Button.pressed.connect(Nexus)
 	%RMenu/Utility/HPot_Button.pressed.connect(HPot)
 	%RMenu/Utility/MPot_Button.pressed.connect(MPot)
-	%RMenu/Utility/HPot_Button/HPotValue.text = "%s/%s" % [HPotC, HPotmax]
-	%RMenu/Utility/MPot_Button/MPotValue.text = "%s/%s" % [MPotC, MPotmax]
+	
 	%RMenu/MP_Bar.max_value = MPmax
 	%RMenu/XP_Bar.max_value = XPmax
 	%RMenu/HP_Bar.visible = true
