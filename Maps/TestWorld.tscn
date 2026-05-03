@@ -116,19 +116,19 @@ text = "Selym"
 [node name="Name" parent="Waygates/Secret/Selym/DialoguePanel" parent_id_path=PackedInt32Array(52336475, 991532548) index="1" unique_id=1911208660]
 text = "Selym"
 
-[node name="FleeBunny" parent="Waygates/Secret" unique_id=357451089 instance=ExtResource("6_d4r7k")]
+[node name="TreasureAnimal" parent="Waygates/Secret" unique_id=357451089 instance=ExtResource("6_d4r7k")]
 position = Vector2(208, 704)
 
-[node name="FleeBunny2" parent="Waygates/Secret" unique_id=397955316 instance=ExtResource("6_d4r7k")]
+[node name="TreasureAnimal2" parent="Waygates/Secret" unique_id=397955316 instance=ExtResource("6_d4r7k")]
 position = Vector2(-184, 1248)
 
-[node name="FleeBunny3" parent="Waygates/Secret" unique_id=174745962 instance=ExtResource("6_d4r7k")]
+[node name="TreasureAnimal3" parent="Waygates/Secret" unique_id=174745962 instance=ExtResource("6_d4r7k")]
 position = Vector2(192, 1856)
 
-[node name="FleeBunny4" parent="Waygates/Secret" unique_id=612625042 instance=ExtResource("6_d4r7k")]
+[node name="TreasureAnimal4" parent="Waygates/Secret" unique_id=612625042 instance=ExtResource("6_d4r7k")]
 position = Vector2(-184, 2712)
 
-[node name="FleeBunny5" parent="Waygates/Secret" unique_id=1583762461 instance=ExtResource("6_d4r7k")]
+[node name="TreasureAnimal5" parent="Waygates/Secret" unique_id=1583762461 instance=ExtResource("6_d4r7k")]
 position = Vector2(192, 3392)
 
 [node name="Spawners" type="Node2D" parent="." unique_id=653064510]
