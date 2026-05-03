@@ -4,6 +4,9 @@ class_name Player extends ENTITY ## PLAYER: Gamedevs be like: Player.script = 10
 ## Refs to child nodes
 @onready var Inv = $CanvasLayer/RMenu/Inventory # Other stuff needs to access player inv (ex. shops)
 # NOTE: Inv requires there to be a ItemPickupRange (type SmartArea)
+@onready var death_sound: AudioStreamPlayer = $"Death Sound"
+@onready var hurt_sound: AudioStreamPlayer = $Hurt
+@onready var shoot: AudioStreamPlayer = $shoot
 
 ## Stats
 @warning_ignore("int_as_enum_without_cast")
@@ -179,6 +182,7 @@ func get_input(): # TODO: replace this with _input() ?
 	## Mouse inputs: "pressed" NOT "just_pressed" so player can hold shoot / dash
 	# Left Click: Shoot1
 	if (Input.is_action_pressed("LMB") && $ShotTimer.is_stopped()):
+		shoot.play()
 		$ShotTimer.start(max((0.30 / atkSpeed), 0.05)) # Max AtkSpeed is 0.05s per shot (AtkSpeed == 6.00), any higher does nothing
 		ShootProj(1, get_global_mouse_position())
 	
@@ -471,13 +475,14 @@ func toggleCharMenu(state:bool):
 ## OVERRIDE FUNCS: Entity Overridden funcs by Player.gd
 func Death(): 
 	%DeathScreen.visible = true
-	
+	death_sound.play()
 	toggleBubble(true)
 	self.velocity = Vector2.ZERO
 	
 	get_tree().set_pause( true )
 
 func Damage(power : int, crit:bool=false):
+	hurt_sound.play()
 	super.Damage(power, crit)
 	$HurtTimer.start(5.00)
 
