@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dfqvndegjlea"]
+[gd_scene format=3 uid="uid://d30sgdk8c7rvs"]
 
 [ext_resource type="Texture2D" uid="uid://bt0k5w8xqyhj5" path="res://Assets/Sprites/GD Icons/GD_Grey.tres" id="1_7uxoj"]
 [ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_3t0sl"]
@@ -7,7 +7,6 @@
 [node name="TestItem2" type="Sprite2D" unique_id=398207244]
 texture = ExtResource("1_7uxoj")
 script = ExtResource("2_3t0sl")
-itemName = "TEST_ITEM2"
 type = 4
 stats = Dictionary[int, int]({
 0: 5,

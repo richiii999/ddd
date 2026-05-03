@@ -5,6 +5,8 @@
 [ext_resource type="Resource" uid="uid://6uxfkrkyiuvg" path="res://Entity/Projectile/Attack/attack_test2.tres" id="3_dm68h"]
 
 [node name="WoodSword" type="Sprite2D" unique_id=398207244]
+texture_filter = 1
+scale = Vector2(2, 2)
 texture = ExtResource("1_3ia6a")
 script = ExtResource("2_jx5q8")
 type = 4

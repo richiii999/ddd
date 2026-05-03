@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="3_ethji"]
 [ext_resource type="Texture2D" uid="uid://b6lvk4ovtd460" path="res://Assets/UI/Death UI/pixel-art-halloween-skull-head-elemenet-3-png.webp" id="4_jk0i1"]
 [ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/smartArea.gd" id="5_dsyiw"]
+[ext_resource type="Texture2D" uid="uid://bd53ctwn8xw6k" path="res://Assets/UI/Death UI/SkullOpen.webp" id="5_jk0i1"]
 [ext_resource type="PackedScene" uid="uid://dfcui8l7w2j3m" path="res://Entity/Components/BehaviorFSM.tscn" id="6_tsfot"]
 [ext_resource type="PackedScene" uid="uid://dx23kg5vk3spb" path="res://Entity/Components/Behaviors/Orbit.tscn" id="8_4hron"]
 [ext_resource type="PackedScene" uid="uid://bntfe5iinhuu5" path="res://UI/Item/loot_table.tscn" id="9_3fl16"]
@@ -22,6 +23,20 @@ border_width_bottom = 2
 border_color = Color(0, 0.501961, 0, 1)
 corner_detail = 1
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_3tbe6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_jk0i1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jk0i1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_2b4ng"]
 radius = 50.0
 
@@ -37,7 +52,6 @@ collision_layer = 256
 collision_mask = 267
 motion_mode = 1
 script = ExtResource("1_icryi")
-XP = 5
 projs = Array[PackedScene]([ExtResource("2_11o8n"), ExtResource("2_11o8n"), ExtResource("2_11o8n")])
 
 [node name="Status" parent="." unique_id=869158990 instance=ExtResource("3_ethji")]
@@ -62,10 +76,11 @@ theme_override_styles/background = SubResource("StyleBoxFlat_pw8gt")
 theme_override_styles/fill = SubResource("StyleBoxFlat_wjxar")
 value = 50.0
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1213981542]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1480586063]
 position = Vector2(0.9999995, 1)
 scale = Vector2(0.22857144, 0.24857144)
-texture = ExtResource("4_jk0i1")
+sprite_frames = SubResource("SpriteFrames_3tbe6")
+autoplay = "default"
 
 [node name="Physics_Hitbox" type="CollisionShape2D" parent="." unique_id=2055280999]
 shape = SubResource("CircleShape2D_2b4ng")

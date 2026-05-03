@@ -13,11 +13,13 @@ func UpdateSlot(newItem:Item = null, setName:bool=false) -> void:
 	if newItem != null:
 		item = newItem.duplicate() # Internal state = item properties
 		$Display_Sprite.texture = newItem.texture
+		$Display_Sprite.scale = newItem.scale * 2.0
 		$BorderSprite.self_modulate = rarityColors[newItem.tier]
 		$ItemName.text = String(item.name) if setName else ""
 	else:
 		item = null
 		$Display_Sprite.texture = null
+		$Display_Sprite.scale = Vector2.ONE
 		$BorderSprite.self_modulate = Color.TRANSPARENT
 		$ItemName.text = ""
 

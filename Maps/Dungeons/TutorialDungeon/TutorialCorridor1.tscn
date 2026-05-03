@@ -19,6 +19,12 @@ position = Vector2(8, 0)
 position = Vector2(-392, -2.3271694e-10)
 rotation = -1.57079
 
+[node name="DungeonRoomDoor2" parent="Doors" unique_id=1479086620 instance=ExtResource("3_32y4q")]
+position = Vector2(184.00002, 2560)
+rotation = -3.1415927
+scale = Vector2(0.512, 0.64)
+frame_progress = 0.9607749
+
 [node name="Props" type="Node2D" parent="." unique_id=2020528078]
 position = Vector2(8, 0)
 
@@ -27,5 +33,5 @@ position = Vector2(8, 0)
 [node name="Wave 1" type="Node2D" parent="Waves" unique_id=2030772466]
 
 [node name="EnemyDungeonSpawner" parent="Waves/Wave 1" unique_id=1445437097 instance=ExtResource("4_32y4q")]
-position = Vector2(184, 2512)
+position = Vector2(192, 2304)
 enemyScene = ExtResource("5_ppwev")

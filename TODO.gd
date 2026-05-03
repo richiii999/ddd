@@ -1,9 +1,6 @@
 ## TODO.gd: Using to store my TODO's and ideas
 # NOTE: We are NOT doing classes, instead there's a large skill tree that offers specializations
 
-## BUG FIXES / FUNCTIONALITY LIST
-
-# TODO z idx list
 ## Z-Index list (all values should be absolute):
 # 10: PLAYER, player projectiles, groundItems
 # 2:  enemies
@@ -16,16 +13,12 @@
 
 ## BUG list
 # save doesnt save skill tree information
+# Projectile destructibles broke a while ago
 
 ## Main Menu - Initial Version Done: Needs more
 # Splash screen / intro on game launch, specifically a custom Godot Editor splash (cool version)
 # Loading screen (game launch): press space to skip all intros and just load to main asap.
 # main menu music and animation
-
-
-## Hall of Fame
-# When you die, add entry to this list, viewable in town
-# Lists the date, and amount of xp/fame u had when died
 
 
 ## Minimap
@@ -81,18 +74,6 @@
 	# Little tornado enemies, wind gust effect fields applied randomly around the place, sky-related bosses (e.g. stormcloud shoots lightning)
 
 
-## World map ideas
-# island has 1 waygate per biome
-# Island is BIG, way bigger than mythfall's tiny ass island and bigger even than realm. I have big plans
-	# One biome in my island is probably like the whole map in mythfall, maybe a bit less than that idk, depends on the biome ofc.
-
-
-## Crystals / Essence
-# Dungeons and open world minibosses from an area drop shards / essence
-# One of which is required to unlock the shrine (teleporter) for a biome. 
-# As a way to ensure the player has actually been in that area for a little bit.
-
-
 ## Effect content ideas:
 # Effect that gets spammed alot, whole mechanic is about not reaching too high of a timer
 	# Effect is reapplied often in dungeon, and unavoidably, so the timer never goes down, if you get too high, hurt or soemthing
@@ -106,14 +87,6 @@
 # Speed up / slow down
 # Can also have tiles that have effects beyond just hurting you or whatever, conveyor belts, slippery ice, status effect goo
 
-#### CONTENT
-## Tutorial 
-# Tutorial will be a dungeon with several rooms (i was thinking maybe 6-7?), each showcasing different abilities of the player and possibly the enemy/dungeon itself
-	# Dungeon will include: traps, base enemies, doorways, nexus gateway, item usage, very basic boss (and probably more things)
-	# Loot in this dungeon should probably be fixed, just to showcase the loot and what it does
-	# In order to access the other parts of the game, they have to do the tutorial dungeon
-# There will be a tutorial NPC that talks the player into doing the dungeon (with maybe some basic controls involved as well)
-# Problems with this idea: when a player dies, their player node gets deleted entirely, meaning they would have to do the tutorial all over again... how can we bypass that? 
 
 ## Boss Rush
 # Boss Rush will be a dungeon that's high risk high reward, containing what's in the name... bosses
@@ -121,8 +94,3 @@
 	# They may have reworked boss mechanics or something (probably just the same boss but one thing that's different about them)
 	# Each boss will drop high tier loot, which incentivizes the player to try and fight them
 # Probably will be locked to a specific level (maybe like 10 or above)
-
-## NPCs of Developers
-# Literally easter egg that has us, the devs, in the game
-
-##  

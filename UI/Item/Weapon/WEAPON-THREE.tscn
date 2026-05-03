@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ckhc0im2v1uyb"]
 
-[ext_resource type="Texture2D" uid="uid://3baec8vvuxpd" path="res://Assets/Sprites/GD Icons/GD_Orange.tres" id="1_tlqbk"]
+[ext_resource type="Texture2D" uid="uid://dcu25flylirxd" path="res://Assets/ItchIO/Itch Item Icons/AtlasTextures/Sword3.tres" id="1_tlqbk"]
 [ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_yact6"]
 [ext_resource type="PackedScene" uid="uid://bkxsyqwvb8dgm" path="res://Entity/Projectile/ProjectileTest4.tscn" id="3_tlqbk"]
 [ext_resource type="Script" uid="uid://8aascd4pg6vc" path="res://Entity/Projectile/attack_projecticle.gd" id="4_cs8jc"]
@@ -11,6 +11,8 @@ projectile = ExtResource("3_tlqbk")
 metadata/_custom_type_script = "uid://8aascd4pg6vc"
 
 [node name="ThirdWeapon" type="Sprite2D" unique_id=398207244]
+texture_filter = 1
+scale = Vector2(2, 2)
 texture = ExtResource("1_tlqbk")
 script = ExtResource("2_yact6")
 type = 4

@@ -2,6 +2,8 @@ extends Panel ## SkillsUI: Controls skills states (closed / availible / active)
 
 var player : Node = null # player init
 var chosen_class : String = "" #since its empty, they haven't chosen a class yet
+var subtree_save: Dictionary = {}  #persists subtree state even when closed
+
 
 func _ready(): 
 	#connect_skill_signals()
@@ -74,10 +76,29 @@ func open_subtree(scene: PackedScene) -> void:
 	
 	#pass references down to the subtree
 	subtree.setup(player, chosen_class, self)
+	
+	#restore bought subtree skills with multiple passes for parent dependencies
+	var sub_skills = subtree.get_children().filter(func(n): return n is skillButton)
+	for pas in range(sub_skills.size()):
+		for skill in sub_skills:
+			if subtree_save.get(skill.name, false) and not skill.active:
+				skill.checkAvailible()
+				if skill.availible:
+					skill.availible = false
+					skill.active = true
+					skill.setSkillIcon()
+	
+	#sfter restoring actives, update availability for unspent skills
+	for skill in sub_skills:
+		if not skill.active:
+			skill.checkAvailible()
 
 func close_subtree() -> void:
-	#remove the subtree
+	#remove the subtree but save it before doing so
 	if has_node("ActiveSubtree"):
+		var subtree = $ActiveSubtree
+		for skill in subtree.get_children().filter(func(n): return n is skillButton):
+			subtree_save[skill.name] = skill.active
 		$ActiveSubtree.queue_free()
 	
 	#restore main panel
@@ -100,3 +121,36 @@ func reopen_subtree() -> void:
 			open_subtree(skill.subtree_scene)
 			$OpenClass.visible = false
 			return
+
+#apply our save data here
+func apply_save(data: Dictionary) -> void:
+	chosen_class = data.get("chosen_class", "")
+	if chosen_class != "":
+		lock_other_classes()
+		$OpenClass.visible = true
+	
+	#populate subtree_save first so open_subtree() can use it
+	for key in data:
+		if key.begins_with("subtree_"):
+			subtree_save[key.trim_prefix("subtree_")] = data[key]
+	
+	#restore main skills (multiple passes for parent dependencies)
+	var skills = get_skills()
+	for pas in range(skills.size()):
+		for skill in skills:
+			if data.get(skill.name, false) and not skill.active:
+				skill.checkAvailible()
+				if skill.availible:
+					skill.availible = false
+					skill.active = true
+					skill.setSkillIcon()
+	
+	#ppen the subtree last as it will read from subtree_save automatically
+	for skill in skills:
+		if skill.is_class_choice and skill.active and skill.subtree_scene:
+			open_subtree(skill.subtree_scene)
+	
+	#update the availability
+	for skill in get_skills():
+		if not skill.active:
+			skill.checkAvailible()

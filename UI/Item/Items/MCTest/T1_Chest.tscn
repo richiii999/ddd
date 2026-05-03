@@ -5,6 +5,8 @@
 [ext_resource type="Resource" uid="uid://6uxfkrkyiuvg" path="res://Entity/Projectile/Attack/attack_test2.tres" id="3_ikkhw"]
 
 [node name="LeatherChest" type="Sprite2D" unique_id=398207244]
+texture_filter = 1
+scale = Vector2(2, 2)
 texture = ExtResource("1_f6lx1")
 script = ExtResource("2_2pp7w")
 type = 2

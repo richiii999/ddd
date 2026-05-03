@@ -32,6 +32,7 @@ func _ready():
 	# Load all maps into the game
 	AddMap(nexus)
 	NexusSetup() # Spawn items in the nexus
+	UpdateHOF()
 	AddMap(world)
 	for DG in dungeons: AddMap(DG.instantiate())
 	
@@ -57,42 +58,16 @@ func ActivatingMainMenu():
 
 ## NexusSetup: Spawn items on the ground in the nexus
 func NexusSetup():
-	## Initial items
 	var nexOffset = nexus.global_position
-	# Some coins
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.Coin, nexOffset + Vector2(-300, 0))
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.Coin, nexOffset + Vector2(-400, -100))
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.Coin, nexOffset + Vector2(-400, 100))
-	# HPots
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.HPot, nexOffset + Vector2(-200, 0))
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.HPot, nexOffset + Vector2(-200, 50))
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.HPot, nexOffset + Vector2(-200, 75))
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.HPot, nexOffset + Vector2(-200, 100))
-	# MPots
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.MPot, nexOffset + Vector2(-175, 0))
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.MPot, nexOffset + Vector2(-175, 25))
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.MPot, nexOffset + Vector2(-175, 50))
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.MPot, nexOffset + Vector2(-175, 75))
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.MPot, nexOffset + Vector2(-175, 100))
-	$ItemSpawner.SpawnItemByID($ItemSpawner.specialID.MPot, nexOffset + Vector2(-175, 125))
-	# MC Items test
-	$ItemSpawner.SpawnItemByID(4, nexOffset + Vector2(-600, 0))
-	$ItemSpawner.SpawnItemByID(5, nexOffset + Vector2(-700, 0))
-	$ItemSpawner.SpawnItemByID(6, nexOffset + Vector2(-800, 0))
-	$ItemSpawner.SpawnItemByID(7, nexOffset + Vector2(-600, 100))
-	$ItemSpawner.SpawnItemByID(8, nexOffset + Vector2(-700, 100))
-	$ItemSpawner.SpawnItemByID(9, nexOffset + Vector2(-800, 100))
-	$ItemSpawner.SpawnItemByID(10, nexOffset + Vector2(-600, 200))
-	$ItemSpawner.SpawnItemByID(11, nexOffset + Vector2(-700, 200))
-	$ItemSpawner.SpawnItemByID(12, nexOffset + Vector2(-800, 200))
-	$ItemSpawner.SpawnItemByID(13, nexOffset + Vector2(-600, 300))
-	$ItemSpawner.SpawnItemByID(14, nexOffset + Vector2(-700, 300))
-	$ItemSpawner.SpawnItemByID(15, nexOffset + Vector2(-800, 300))
-	$ItemSpawner.SpawnItemByID(16, nexOffset + Vector2(-600, 400))
-	$ItemSpawner.SpawnItemByID(17, nexOffset + Vector2(-700, 400))
-	$ItemSpawner.SpawnItemByID(18, nexOffset + Vector2(-800, 400))
-	$ItemSpawner.SpawnItemByID(19, nexOffset + Vector2(-600, 500))
-	$ItemSpawner.SpawnItemByID(20, nexOffset + Vector2(-700, 500))
+	
+	## Spawn 3 of every special item
+	for ID in range(2, len($ItemSpawner.specialItems)):
+		$ItemSpawner.SpawnItemByID(-ID, nexOffset + Vector2(-850, -100 * ID - 100))
+		$ItemSpawner.SpawnItemByID(-ID, nexOffset + Vector2(-900, -100 * ID - 100))
+		$ItemSpawner.SpawnItemByID(-ID, nexOffset + Vector2(-950, -100 * ID - 100))
+	
+	for ID in range(1, len($ItemSpawner.items)):
+		$ItemSpawner.SpawnItemByID(ID, nexOffset + Vector2(-900 - ((ID * 100) % 300), 50 * ID))
 
 ## PlayerSetup: Places a new player into the game
 # NOTE: Any existing player should be freed before calling this func on the next frame.
@@ -126,6 +101,9 @@ func Quit():
 ## Permadeath: Reset the player
 func DeathHandling():
 	get_tree().set_pause(false) # Player.Death() paused the game, need to unpause
+	
+	Save.EnterHOF(player)
+	UpdateHOF()
 	player.queue_free()
 	
 	# NOTE: process_frame basically means do this on the next frame
@@ -152,11 +130,14 @@ func LoadPlayer(P:Player):
 	while playerData.Fame > 0: # Fame starts from 0
 		P.LevelUp()
 		playerData.Fame -= 1
+	
+	#need to overwrite the skill points that LevelUp() just handed out
+	P.skillPoints = playerData["SkillPoints"]
 	P.XP = playerData.XP
 	# Consumables
-	P.HPotC = playerData.HPotC
-	P.MPotC = playerData.MPotC
-	P.coins = playerData.Coins
+	P.incHPot(playerData.HPotC)
+	P.incMPot(playerData.MPotC)
+	P.incCoins(playerData.Coins)
 	# Items: Store the ID only, when loading the ID can be used to spawn them in again
 	# Gear
 	if playerData.Helm  > 0: P.Inv.PutItemInSlot(P.Inv.Slot.HELM,     $ItemSpawner.ItemByID(playerData.Helm))
@@ -179,7 +160,24 @@ func LoadPlayer(P:Player):
 	# Prevent "Level X!" spam
 	player.StatusLabel.textQueue = []
 	player.StatusLabel.addStatusText("Spawned in!", "BLUE")
+	
+	#load skills last cuz we needs player stats and setup to be done first
+	var skillData = Save.LoadSkills()
+	if not skillData.is_empty():
+		P.find_child("SkillsUI").apply_save(skillData)
+	
+	player.UpdateUIBars()
 
+## Load HOF data from HallOfFame.ddd
+func UpdateHOF():
+	var HOF = Save.LoadHOF()
+	var vals = HOF.values()
+	vals.sort_custom(func(a, b): return a > b) # Desc order
+	
+	nexus.find_child("HallOfFame").get_child(1).text = ""
+	for v in vals:
+		nexus.find_child("HallOfFame").get_child(1).text += str(HOF.find_key(v))
+		nexus.find_child("HallOfFame").get_child(1).text += str(", ", v, "\n")
 
 ## Get all active waygates in all worlds
 func GetActiveWaygates() -> Array[Waygate]:

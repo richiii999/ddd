@@ -9,8 +9,7 @@ var invSlot = preload("res://UI/RMenu/Inventory/inv_slot.tscn")
 func _ready():
 	$InteractComponent.Interact.connect(ToggleShopGUI)
 	
-	var i : int = 0
-	for item in items:
+	for i in range(len(items)):
 		var slot = invSlot.instantiate()
 		$ShopGUI/GridContainer.add_child(slot)
 		
@@ -20,7 +19,6 @@ func _ready():
 		slot.slotNumber = i
 		slot.slotClicked.connect(BuyItem) # SlotN is emitted with this signal
 		slot.UpdateSlot(items[i].instantiate(), true) # Add item to slot
-		i += 1
 
 # Dialogue text is visible for a few seconds then goes away automatically
 func ToggleShopGUI(player):
