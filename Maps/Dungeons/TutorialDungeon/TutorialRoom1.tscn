@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cnjedl2iok75y" path="res://Maps/Dungeons/dungeonRoom.gd" id="2_cxgta"]
 [ext_resource type="PackedScene" uid="uid://g7spcuqqx1mx" path="res://Maps/Dungeons/dungeonDoor.tscn" id="3_uy3et"]
 [ext_resource type="PackedScene" uid="uid://t77auhbqet13" path="res://Maps/Dungeons/DungeonEnemySpawner.tscn" id="4_4ecu6"]
+[ext_resource type="PackedScene" uid="uid://cqm6w61upfmi1" path="res://Entity/Enemy/Enemies/TutorialEnemy.tscn" id="5_e18ua"]
 
 [node name="Tutorial_Room" type="TileMapLayer" unique_id=1223308819]
 use_parent_material = true
@@ -31,12 +32,15 @@ position = Vector2(8, 0)
 
 [node name="EnemyDungeonSpawner" parent="Waves/Wave1" unique_id=546534452 instance=ExtResource("4_4ecu6")]
 position = Vector2(-360, 744)
+enemyScene = ExtResource("5_e18ua")
 
 [node name="EnemyDungeonSpawner3" parent="Waves/Wave1" unique_id=1445437097 instance=ExtResource("4_4ecu6")]
 position = Vector2(-528, 160)
+enemyScene = ExtResource("5_e18ua")
 
 [node name="EnemyDungeonSpawner4" parent="Waves/Wave1" unique_id=1788395925 instance=ExtResource("4_4ecu6")]
 position = Vector2(576, 928)
+enemyScene = ExtResource("5_e18ua")
 
 [node name="Props" type="Node2D" parent="." unique_id=2020528078]
 position = Vector2(8, 0)
