@@ -40,7 +40,6 @@ func Spawn( Source : Node = null,
 	field = endField
 	#$Sprite2D.apply_scale(Vector2(ScaleFactor, ScaleFactor)) # Scales the proj
 	# TODO: WTF! can't just scale the root node? "Overriden by physics engine"
-	
 	var projLayer = 6 if (player) else 10
 	var projMask = 7 if (!player) else 11
 	var wallMask  = 8 if (player) else 12
@@ -83,8 +82,7 @@ func AreaCollide(area : Area2D) -> void: ## Entity collide
 		damage.emit(global_position, knockback)
 		
 		if effect and entity.ECS:
-			print("AreaCollide effect id: ", effect.get_instance_id())
-			effect.sourcePower = source.getStats(Stats.INT)
+			effect.sourcePower = source.getStats(Stats.INT) if source else 0
 			entity.ECS.AddEffect(effect)
 		
 		piercing -= 1
