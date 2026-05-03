@@ -21,11 +21,6 @@
 # main menu music and animation
 
 
-## Hall of Fame
-# When you die, add entry to this list, viewable in town
-# Lists the date, and amount of xp/fame u had when died
-
-
 ## Minimap
 # your dot and enemy dots, player dots, treasure dots, dungeon dots
 # Simplified terrain view
