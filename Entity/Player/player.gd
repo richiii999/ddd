@@ -468,7 +468,7 @@ func Death():
 	get_tree().set_pause( true )
 
 func Damage(power : int, crit:bool=false):
-	var reduction = getStats(Stats.BLK) * 0.02  # 2% per point
+	var reduction = getStats(Stats.BLK) * 0.02  # 2% eper point
 	power = int(power * (1.0 - reduction))
 	hurt_sound.play()
 	super.Damage(power, crit)

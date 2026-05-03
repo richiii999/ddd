@@ -8,7 +8,6 @@ class_name Enemy extends ENTITY ## ENEMY: Base class for enemies, who are instan
 @export var targetOnSight:bool = true # Target player when spotted?
 
 var following:Enemy = null # Set by parent enemy's spawner (ex. NecroSkull Orbiters)
-var targetPosStopRadius : float = 50 # How close to targetPos will this enemy stop (values closer to 0 make movement rubberband when reach targetPos)
 
 func _ready():
 	super._ready() # call ENTITY._ready() (sets HP and MP)
@@ -28,9 +27,8 @@ func _ready():
 
 func _physics_process(_delta):
 	ReadTerrain()
-	if(abs(global_position.x - targetPos.x) + abs(global_position.y - targetPos.y) > targetPosStopRadius ): 
-		velocity += (Vector2.from_angle(get_angle_to(targetPos))) * (accel * behaviorMoveSpeed * effectMoveSpeed * tileSpeed)
-	
+	if Behavior: Behavior.BehaviorTick()
+	MoveTowardTarget()
 	EntityMovement()
 
 func EnemyShoot(P : int, pos : Vector2 = targetEntity.global_position): ShootProj(P, pos) # Workaround for signal binds keeping one value and not updating each call

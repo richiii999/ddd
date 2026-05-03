@@ -82,7 +82,9 @@ func AreaCollide(area : Area2D) -> void: ## Entity collide
 		damage.emit(global_position, knockback)
 		
 		if effect and entity.ECS:
-			effect.sourcePower = source.getStats(Stats.INT) if source else 0
+			if source is Player:
+				effect.sourcePower = source.getStats(Stats.INT) if source else 0
+			else: effect.sourcePower = 5
 			entity.ECS.AddEffect(effect)
 		
 		piercing -= 1
