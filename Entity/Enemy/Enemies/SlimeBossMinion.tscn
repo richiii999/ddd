@@ -1,15 +1,15 @@
 [gd_scene format=3 uid="uid://doy712uadjpb"]
 
-[ext_resource type="Script" uid="uid://dk75vwl8p2eck" path="res://Entity/Enemy/enemy.gd" id="1_jyn8u"]
+[ext_resource type="Script" uid="uid://ba85tusi3tpmu" path="res://Entity/Enemy/Enemies/SlimeMinion.gd" id="1_ptwue"]
 [ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_3n4he"]
 [ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="3_luuok"]
-[ext_resource type="Texture2D" uid="uid://b6lvk4ovtd460" path="res://Assets/UI/Death UI/pixel-art-halloween-skull-head-elemenet-3-png.webp" id="4_apw2t"]
-[ext_resource type="Texture2D" uid="uid://bd53ctwn8xw6k" path="res://Assets/UI/Death UI/SkullOpen.webp" id="5_hufjk"]
+[ext_resource type="Texture2D" uid="uid://br0ccpvjbcww8" path="res://Assets/ItchIO/pixelGuyIdk/Basic Monster Animations/Death Slime/DeathSlime.png" id="4_ptwue"]
 [ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/smartArea.gd" id="6_vwcep"]
 [ext_resource type="PackedScene" uid="uid://dfcui8l7w2j3m" path="res://Entity/Components/BehaviorFSM.tscn" id="7_yu43d"]
 [ext_resource type="PackedScene" uid="uid://dx23kg5vk3spb" path="res://Entity/Components/Behaviors/Orbit.tscn" id="8_31sib"]
 [ext_resource type="PackedScene" uid="uid://bntfe5iinhuu5" path="res://UI/Item/loot_table.tscn" id="9_h5x1f"]
 [ext_resource type="PackedScene" uid="uid://dddy50t4saequ" path="res://Entity/Components/EffectComponentSystem.tscn" id="10_0tm20"]
+[ext_resource type="Script" uid="uid://cxshegflcbfxh" path="res://Entity/Projectile/projectile_pattern.gd" id="10_jyn8u"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw8gt"]
 bg_color = Color(1, 0, 0, 1)
@@ -23,14 +23,36 @@ border_width_bottom = 2
 border_color = Color(0, 0.501961, 0, 1)
 corner_detail = 1
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_jyn8u"]
+atlas = ExtResource("4_ptwue")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3n4he"]
+atlas = ExtResource("4_ptwue")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_luuok"]
+atlas = ExtResource("4_ptwue")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apw2t"]
+atlas = ExtResource("4_ptwue")
+region = Rect2(48, 0, 16, 16)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_3tbe6"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_apw2t")
+"texture": SubResource("AtlasTexture_jyn8u")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_hufjk")
+"texture": SubResource("AtlasTexture_3n4he")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_luuok")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_apw2t")
 }],
 "loop": true,
 "name": &"default",
@@ -38,10 +60,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2b4ng"]
-radius = 50.0
+radius = 58.00862
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o61b1"]
-size = Vector2(120, 120)
+size = Vector2(119, 88)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w6h3m"]
 resource_local_to_scene = true
@@ -51,7 +73,7 @@ radius = 272.118
 collision_layer = 256
 collision_mask = 267
 motion_mode = 1
-script = ExtResource("1_jyn8u")
+script = ExtResource("1_ptwue")
 projs = Array[PackedScene]([ExtResource("2_3n4he"), ExtResource("2_3n4he"), ExtResource("2_3n4he")])
 HPmax = 200
 
@@ -77,11 +99,12 @@ theme_override_styles/background = SubResource("StyleBoxFlat_pw8gt")
 theme_override_styles/fill = SubResource("StyleBoxFlat_wjxar")
 value = 50.0
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1480586063]
-position = Vector2(0.9999995, 1)
-scale = Vector2(0.22857144, 0.24857144)
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=362277606]
+position = Vector2(0, -27.999998)
+scale = Vector2(7.499999, 7.5625)
 sprite_frames = SubResource("SpriteFrames_3tbe6")
 autoplay = "default"
+frame_progress = 0.94264334
 
 [node name="Physics_Hitbox" type="CollisionShape2D" parent="." unique_id=2055280999]
 shape = SubResource("CircleShape2D_2b4ng")
@@ -92,6 +115,7 @@ collision_mask = 0
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Projectile_Hitbox" unique_id=401901389]
+position = Vector2(-0.5, -8)
 shape = SubResource("RectangleShape2D_o61b1")
 
 [node name="Sight" type="Area2D" parent="." unique_id=1797314496]
@@ -128,6 +152,11 @@ one_shot = true
 [node name="LootTable" parent="." unique_id=1315550005 instance=ExtResource("9_h5x1f")]
 
 [node name="EffectsComponentSystem" parent="." unique_id=921567753 instance=ExtResource("10_0tm20")]
+
+[node name="ProjectilePattern" type="Node2D" parent="." unique_id=1645309370]
+script = ExtResource("10_jyn8u")
+projectile_scene = ExtResource("2_3n4he")
+metadata/_custom_type_script = "uid://cxshegflcbfxh"
 
 [connection signal="onEmpty" from="Sight" to="." method="SightIncrease" binds= [false]]
 [connection signal="onEmpty" from="Sight" to="ShootTimer1" method="set_paused" binds= [true]]

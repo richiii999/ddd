@@ -3,9 +3,8 @@
 [ext_resource type="Script" uid="uid://bfbdmbtgp7hpy" path="res://Entity/Enemy/Bosses/slime_boss.gd" id="1_xmg1d"]
 [ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_iu3y1"]
 [ext_resource type="PackedScene" uid="uid://doy712uadjpb" path="res://Entity/Enemy/Enemies/SlimeBossMinion.tscn" id="2_oqpxn"]
-[ext_resource type="PackedScene" uid="uid://b7jer77opiti2" path="res://Entity/Components/Effects/Burn.tscn" id="3_oqpxn"]
 [ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="4_0yr5n"]
-[ext_resource type="Texture2D" uid="uid://qslb0hv6f6st" path="res://Assets/Sprites/GD Icons/GD_Green.tres" id="5_g6i3y"]
+[ext_resource type="Texture2D" uid="uid://br0ccpvjbcww8" path="res://Assets/ItchIO/pixelGuyIdk/Basic Monster Animations/Death Slime/DeathSlime.png" id="5_xmg1d"]
 [ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/smartArea.gd" id="6_qiocp"]
 [ext_resource type="PackedScene" uid="uid://dfcui8l7w2j3m" path="res://Entity/Components/BehaviorFSM.tscn" id="7_mfen5"]
 [ext_resource type="Script" uid="uid://b1iivep8skg1h" path="res://Entity/Components/Behaviors/Boss/behavior_charge.gd" id="8_vy3on"]
@@ -27,11 +26,47 @@ border_width_bottom = 2
 border_color = Color(0, 0.501961, 0, 1)
 corner_detail = 1
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_iu3y1"]
+atlas = ExtResource("5_xmg1d")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqpxn"]
+atlas = ExtResource("5_xmg1d")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0yr5n"]
+atlas = ExtResource("5_xmg1d")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbfuo"]
+atlas = ExtResource("5_xmg1d")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qiocp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iu3y1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oqpxn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0yr5n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rbfuo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_2b4ng"]
-radius = 50.0
+radius = 38.503246
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o61b1"]
-size = Vector2(120, 120)
+size = Vector2(105, 89.5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jxsfg"]
 radius = 488.803
@@ -45,7 +80,6 @@ script = ExtResource("1_xmg1d")
 Mob = ExtResource("2_oqpxn")
 XP = 200
 projs = Array[PackedScene]([ExtResource("2_iu3y1"), null, null])
-effects = Array[PackedScene]([ExtResource("3_oqpxn"), null, null])
 kBResistance = 1.0
 HPmax = 500
 
@@ -70,10 +104,15 @@ theme_override_styles/background = SubResource("StyleBoxFlat_pw8gt")
 theme_override_styles/fill = SubResource("StyleBoxFlat_wjxar")
 value = 50.0
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1336434541]
-texture = ExtResource("5_g6i3y")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1544515888]
+position = Vector2(1.5000031, -25.500002)
+scale = Vector2(6.125, 7.0000005)
+sprite_frames = SubResource("SpriteFrames_qiocp")
+autoplay = "default"
+frame_progress = 0.07392209
 
 [node name="Physics_Hitbox" type="CollisionShape2D" parent="." unique_id=464345492]
+position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_2b4ng")
 
 [node name="Projectile_Hitbox" type="Area2D" parent="." unique_id=1770188805]
@@ -82,6 +121,7 @@ collision_mask = 0
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Projectile_Hitbox" unique_id=1686771942]
+position = Vector2(1, -1.75)
 shape = SubResource("RectangleShape2D_o61b1")
 
 [node name="Sight" type="Area2D" parent="." unique_id=845665305]
@@ -132,5 +172,3 @@ metadata/_custom_type_script = "uid://cxshegflcbfxh"
 [connection signal="onEmpty" from="Sight" to="." method="SightIncrease" binds= [false]]
 [connection signal="onFirst" from="Sight" to="." method="SightIncrease" binds= [true]]
 [connection signal="timeout" from="BehaviorFSM/Behavior_Crash" to="BehaviorFSM/Behavior_Crash" method="_on_timeout"]
-[connection signal="timeout" from="ShootTimer1" to="." method="EnemyShoot" binds= [1]]
-[connection signal="timeout" from="ShootTimer2" to="." method="EnemyShoot" binds= [2]]
