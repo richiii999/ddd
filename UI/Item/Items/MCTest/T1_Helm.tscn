@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://xjgo8bavrj53"]
 
-[ext_resource type="Texture2D" uid="uid://ccmhoa4eim58x" path="res://Assets/ItchIO/Itch Item Icons/Helmets.png" id="1_62l27"]
+[ext_resource type="Texture2D" uid="uid://d25o5ju1thdu4" path="res://Assets/ItchIO/moreIconsBruh/16x16.png" id="1_62l27"]
 [ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_wt6nl"]
 [ext_resource type="Resource" uid="uid://6uxfkrkyiuvg" path="res://Entity/Projectile/Attack/attack_test2.tres" id="3_tklwp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wt6nl"]
 atlas = ExtResource("1_62l27")
-region = Rect2(1.9549751, 2.0194554, 27.778362, 29.11451)
+region = Rect2(112, 1824, 16, 16)
 
 [node name="LeatherHelm" type="Sprite2D" unique_id=398207244]
 texture_filter = 1

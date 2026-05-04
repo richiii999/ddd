@@ -1,13 +1,17 @@
 [gd_scene format=3 uid="uid://bit2jsxu3tyoy"]
 
-[ext_resource type="Texture2D" uid="uid://b8o3nut484xnc" path="res://Assets/ItchIO/shield.png" id="1_6k5py"]
+[ext_resource type="Texture2D" uid="uid://uvenrlql2joj" path="res://Assets/ItchIO/Itch Item Icons/Assorted.png" id="1_6k5py"]
 [ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_vlhx3"]
 [ext_resource type="Resource" uid="uid://6uxfkrkyiuvg" path="res://Entity/Projectile/Attack/attack_test2.tres" id="3_eb613"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xl4x"]
+atlas = ExtResource("1_6k5py")
+region = Rect2(577, 465, 14, 14)
+
 [node name="ShieldT3" type="Sprite2D" unique_id=398207244]
 texture_filter = 1
-scale = Vector2(2, 2)
-texture = ExtResource("1_6k5py")
+scale = Vector2(2.1, 2.1)
+texture = SubResource("AtlasTexture_0xl4x")
 script = ExtResource("2_vlhx3")
 tier = 2
 type = 5

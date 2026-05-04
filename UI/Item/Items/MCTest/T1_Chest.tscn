@@ -1,13 +1,17 @@
 [gd_scene format=3 uid="uid://3srv66mglq52"]
 
-[ext_resource type="Texture2D" uid="uid://cwvlv8ag5teew" path="res://Assets/References/Minecraft/Invicon_Leather_Tunic.png" id="1_f6lx1"]
+[ext_resource type="Texture2D" uid="uid://caadlyohnpt4y" path="res://Assets/ItchIO/Itch Item Icons/armours.png" id="1_f6lx1"]
 [ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_2pp7w"]
 [ext_resource type="Resource" uid="uid://6uxfkrkyiuvg" path="res://Entity/Projectile/Attack/attack_test2.tres" id="3_ikkhw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8a43f"]
+atlas = ExtResource("1_f6lx1")
+region = Rect2(112, 1, 16, 16)
 
 [node name="LeatherChest" type="Sprite2D" unique_id=398207244]
 texture_filter = 1
 scale = Vector2(2, 2)
-texture = ExtResource("1_f6lx1")
+texture = SubResource("AtlasTexture_8a43f")
 script = ExtResource("2_2pp7w")
 type = 2
 stats = Dictionary[int, int]({

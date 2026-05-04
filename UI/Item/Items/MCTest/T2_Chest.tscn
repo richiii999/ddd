@@ -1,13 +1,17 @@
 [gd_scene format=3 uid="uid://ckncbdnn8b41u"]
 
-[ext_resource type="Texture2D" uid="uid://lvq7kpkgrjlg" path="res://Assets/References/Minecraft/Invicon_Chainmail_Chestplate.png" id="1_0sl0m"]
+[ext_resource type="Texture2D" uid="uid://caadlyohnpt4y" path="res://Assets/ItchIO/Itch Item Icons/armours.png" id="1_0sl0m"]
 [ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_uplar"]
 [ext_resource type="Resource" uid="uid://6uxfkrkyiuvg" path="res://Entity/Projectile/Attack/attack_test2.tres" id="3_1jmhg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nrotp"]
+atlas = ExtResource("1_0sl0m")
+region = Rect2(16, 128, 16, 16)
 
 [node name="IronChest" type="Sprite2D" unique_id=398207244]
 texture_filter = 1
 scale = Vector2(2, 2)
-texture = ExtResource("1_0sl0m")
+texture = SubResource("AtlasTexture_nrotp")
 script = ExtResource("2_uplar")
 tier = 1
 type = 2
