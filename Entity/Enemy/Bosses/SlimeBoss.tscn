@@ -1,0 +1,174 @@
+[gd_scene format=3 uid="uid://bjna025e6acb3"]
+
+[ext_resource type="Script" uid="uid://bfbdmbtgp7hpy" path="res://Entity/Enemy/Bosses/slime_boss.gd" id="1_xmg1d"]
+[ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_iu3y1"]
+[ext_resource type="PackedScene" uid="uid://doy712uadjpb" path="res://Entity/Enemy/Enemies/SlimeBossMinion.tscn" id="2_oqpxn"]
+[ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="4_0yr5n"]
+[ext_resource type="Texture2D" uid="uid://br0ccpvjbcww8" path="res://Assets/ItchIO/pixelGuyIdk/Basic Monster Animations/Death Slime/DeathSlime.png" id="5_xmg1d"]
+[ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/smartArea.gd" id="6_qiocp"]
+[ext_resource type="PackedScene" uid="uid://dfcui8l7w2j3m" path="res://Entity/Components/BehaviorFSM.tscn" id="7_mfen5"]
+[ext_resource type="Script" uid="uid://b1iivep8skg1h" path="res://Entity/Components/Behaviors/Boss/behavior_charge.gd" id="8_vy3on"]
+[ext_resource type="Script" uid="uid://dceikghrd8w4c" path="res://Entity/Components/Behaviors/Boss/behavior_crash.gd" id="9_dow8g"]
+[ext_resource type="PackedScene" uid="uid://bexluv4wwnwxr" path="res://Entity/Components/BossBar.tscn" id="11_1jl7k"]
+[ext_resource type="PackedScene" uid="uid://bntfe5iinhuu5" path="res://UI/Item/loot_table.tscn" id="12_ddl7u"]
+[ext_resource type="PackedScene" uid="uid://dddy50t4saequ" path="res://Entity/Components/EffectComponentSystem.tscn" id="13_ene1r"]
+[ext_resource type="Script" uid="uid://cxshegflcbfxh" path="res://Entity/Projectile/projectile_pattern.gd" id="13_xmg1d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw8gt"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wjxar"]
+bg_color = Color(0, 1, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.501961, 0, 1)
+corner_detail = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iu3y1"]
+atlas = ExtResource("5_xmg1d")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqpxn"]
+atlas = ExtResource("5_xmg1d")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0yr5n"]
+atlas = ExtResource("5_xmg1d")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbfuo"]
+atlas = ExtResource("5_xmg1d")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qiocp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iu3y1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oqpxn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0yr5n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rbfuo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2b4ng"]
+radius = 38.503246
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o61b1"]
+size = Vector2(105, 89.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jxsfg"]
+radius = 488.803
+
+[node name="SlimeBoss" type="CharacterBody2D" unique_id=1156960978 groups=["Enemy"]]
+scale = Vector2(2, 2)
+collision_layer = 256
+collision_mask = 267
+motion_mode = 1
+script = ExtResource("1_xmg1d")
+Mob = ExtResource("2_oqpxn")
+XP = 200
+projs = Array[PackedScene]([ExtResource("2_iu3y1"), null, null])
+kBResistance = 1.0
+HPmax = 500
+
+[node name="Status" parent="." unique_id=1170503114 instance=ExtResource("4_0yr5n")]
+offset_left = -72.0
+offset_top = -120.0
+offset_right = 80.0
+offset_bottom = -72.0
+metadata/_edit_use_anchors_ = true
+
+[node name="HP_Bar" type="ProgressBar" parent="." unique_id=1971627743]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_top = 64.0
+offset_right = 64.0
+offset_bottom = 87.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 16
+theme_override_styles/background = SubResource("StyleBoxFlat_pw8gt")
+theme_override_styles/fill = SubResource("StyleBoxFlat_wjxar")
+value = 50.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1544515888]
+position = Vector2(1.5000031, -25.500002)
+scale = Vector2(6.125, 7.0000005)
+sprite_frames = SubResource("SpriteFrames_qiocp")
+autoplay = "default"
+frame_progress = 0.07392209
+
+[node name="Physics_Hitbox" type="CollisionShape2D" parent="." unique_id=464345492]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_2b4ng")
+
+[node name="Projectile_Hitbox" type="Area2D" parent="." unique_id=1770188805]
+collision_layer = 1024
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Projectile_Hitbox" unique_id=1686771942]
+position = Vector2(1, -1.75)
+shape = SubResource("RectangleShape2D_o61b1")
+
+[node name="Sight" type="Area2D" parent="." unique_id=845665305]
+collision_layer = 0
+collision_mask = 16
+input_pickable = false
+monitorable = false
+script = ExtResource("6_qiocp")
+metadata/_custom_type_script = "uid://hi4e34yydb2t"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=1965683690]
+shape = SubResource("CircleShape2D_jxsfg")
+debug_color = Color(0.501961, 0.501961, 0.501961, 0.25098)
+
+[node name="BehaviorFSM" parent="." unique_id=669444931 instance=ExtResource("7_mfen5")]
+
+[node name="Behavior_Charge" type="Timer" parent="BehaviorFSM" unique_id=587464750]
+script = ExtResource("8_vy3on")
+
+[node name="Behavior_Crash" type="Timer" parent="BehaviorFSM" unique_id=909734288]
+script = ExtResource("9_dow8g")
+
+[node name="BossBar" parent="." unique_id=1422355881 instance=ExtResource("11_1jl7k")]
+
+[node name="LootTable" parent="." unique_id=727939910 instance=ExtResource("12_ddl7u")]
+numRolls = 3
+lootTable = Dictionary[int, int]({
+-2: 5,
+0: 1,
+1: 3
+})
+
+[node name="EffectsComponentSystem" parent="." unique_id=921567753 instance=ExtResource("13_ene1r")]
+
+[node name="ShootTimer1" type="Timer" parent="." unique_id=424953401]
+wait_time = 0.75
+autostart = true
+
+[node name="ShootTimer2" type="Timer" parent="." unique_id=1173131482]
+wait_time = 5.0
+autostart = true
+
+[node name="ProjectilePattern" type="Node2D" parent="." unique_id=1601197524]
+script = ExtResource("13_xmg1d")
+projectile_scene = ExtResource("2_iu3y1")
+metadata/_custom_type_script = "uid://cxshegflcbfxh"
+
+[connection signal="onEmpty" from="Sight" to="." method="SightIncrease" binds= [false]]
+[connection signal="onFirst" from="Sight" to="." method="SightIncrease" binds= [true]]
+[connection signal="timeout" from="BehaviorFSM/Behavior_Crash" to="BehaviorFSM/Behavior_Crash" method="_on_timeout"]

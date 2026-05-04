@@ -28,7 +28,8 @@ func _ready():
 func _physics_process(_delta):
 	ReadTerrain()
 	if Behavior: Behavior.BehaviorTick()
-	MoveTowardTarget()
+	if not override_movement: 
+		MoveTowardTarget() 
 	EntityMovement()
 	var facingDir : Vector2 = velocity if velocity.length() > 10.0 else (get_global_mouse_position() - global_position)
 	# Flip the sprite horizontally when facing the left 
