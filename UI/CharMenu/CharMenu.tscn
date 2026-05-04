@@ -105,13 +105,28 @@ grow_vertical = 2
 self_modulate = Color(1, 0.2509804, 0.2509804, 1)
 layout_mode = 0
 offset_left = -280.0
-offset_top = -64.0
 offset_right = -240.0
-offset_bottom = -24.0
+offset_bottom = 40.0
 text = "STR"
 horizontal_alignment = 1
 
 [node name="STR" type="RichTextLabel" parent="CharacterRect/Stats/STR_Label" unique_id=1328796775]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="SPD_Label" type="RichTextLabel" parent="CharacterRect/Stats" unique_id=1893518339]
+self_modulate = Color(0.2509804, 1, 0.2509804, 1)
+layout_mode = 0
+offset_left = 112.0
+offset_right = 152.0
+offset_bottom = 40.0
+text = "SPD"
+horizontal_alignment = 1
+
+[node name="SPD" type="RichTextLabel" parent="CharacterRect/Stats/SPD_Label" unique_id=77341209]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -122,9 +137,9 @@ vertical_alignment = 2
 [node name="TOU_Label" type="RichTextLabel" parent="CharacterRect/Stats" unique_id=1048295852]
 self_modulate = Color(1, 0.2509804, 0.2509804, 1)
 layout_mode = 0
-offset_left = -208.0
-offset_right = -168.0
-offset_bottom = 40.0
+offset_left = -225.0
+offset_top = -40.0
+offset_right = -185.0
 text = "TOU"
 horizontal_alignment = 1
 
@@ -139,10 +154,9 @@ vertical_alignment = 2
 [node name="BLK_Label" type="RichTextLabel" parent="CharacterRect/Stats" unique_id=1785278316]
 self_modulate = Color(1, 0.2509804, 0.2509804, 1)
 layout_mode = 0
-offset_left = -144.0
-offset_top = -64.0
-offset_right = -104.0
-offset_bottom = -24.0
+offset_left = -161.0
+offset_right = -121.0
+offset_bottom = 40.0
 text = "BLK
 "
 horizontal_alignment = 1
@@ -155,16 +169,16 @@ text = "123"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="STR_Label5" type="RichTextLabel" parent="CharacterRect/Stats" unique_id=641021677]
-self_modulate = Color(0.2509804, 1, 0.2509804, 1)
+[node name="WIS_Label" type="RichTextLabel" parent="CharacterRect/Stats" unique_id=641021677]
+self_modulate = Color(0.2509804, 0.2509804, 1, 1)
 layout_mode = 0
-offset_left = -80.0
-offset_right = -40.0
-offset_bottom = 40.0
-text = "STR"
+offset_left = -88.0
+offset_top = -40.0
+offset_right = -48.0
+text = "WIS"
 horizontal_alignment = 1
 
-[node name="STR" type="RichTextLabel" parent="CharacterRect/Stats/STR_Label5" unique_id=348040268]
+[node name="WIS" type="RichTextLabel" parent="CharacterRect/Stats/WIS_Label" unique_id=348040268]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -173,13 +187,12 @@ horizontal_alignment = 1
 vertical_alignment = 2
 
 [node name="INT_Label" type="RichTextLabel" parent="CharacterRect/Stats" unique_id=60410980]
-self_modulate = Color(0.2509804, 1, 0.2509804, 1)
+self_modulate = Color(0.2509804, 0.2509804, 1, 1)
 layout_mode = 0
-offset_left = -16.0
-offset_top = -64.0
-offset_right = 24.0
-offset_bottom = -24.0
-text = "STR"
+offset_left = -24.0
+offset_right = 16.0
+offset_bottom = 40.0
+text = "INT"
 horizontal_alignment = 1
 
 [node name="INT" type="RichTextLabel" parent="CharacterRect/Stats/INT_Label" unique_id=1299571817]
@@ -190,51 +203,16 @@ text = "123"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="STR_Label6" type="RichTextLabel" parent="CharacterRect/Stats" unique_id=1973770229]
+[node name="DEX_Label" type="RichTextLabel" parent="CharacterRect/Stats" unique_id=1973770229]
 self_modulate = Color(0.2509804, 1, 0.2509804, 1)
 layout_mode = 0
-offset_left = 48.0
-offset_right = 88.0
-offset_bottom = 40.0
-text = "STR"
-horizontal_alignment = 1
-
-[node name="STR" type="RichTextLabel" parent="CharacterRect/Stats/STR_Label6" unique_id=63474671]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-text = "123"
-horizontal_alignment = 1
-vertical_alignment = 2
-
-[node name="STR_Label2" type="RichTextLabel" parent="CharacterRect/Stats" unique_id=690782330]
-self_modulate = Color(0.2509804, 0.2509804, 1, 1)
-layout_mode = 0
-offset_left = 104.0
-offset_top = -64.0
-offset_right = 144.0
-offset_bottom = -24.0
-text = "STR"
-horizontal_alignment = 1
-
-[node name="STR" type="RichTextLabel" parent="CharacterRect/Stats/STR_Label2" unique_id=760286115]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-text = "123"
-horizontal_alignment = 1
-vertical_alignment = 2
-
-[node name="asdfasdf2" type="RichTextLabel" parent="CharacterRect/Stats" unique_id=1231763988]
-self_modulate = Color(0.2509804, 0.2509804, 1, 1)
-layout_mode = 0
 offset_left = 176.0
+offset_top = -40.0
 offset_right = 216.0
-offset_bottom = 40.0
-text = "STR"
+text = "DEX"
 horizontal_alignment = 1
 
-[node name="STR" type="RichTextLabel" parent="CharacterRect/Stats/asdfasdf2" unique_id=1036113810]
+[node name="DEX" type="RichTextLabel" parent="CharacterRect/Stats/DEX_Label" unique_id=63474671]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -242,17 +220,33 @@ text = "123"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="AGI_Label2" type="RichTextLabel" parent="CharacterRect/Stats" unique_id=1621420295]
+[node name="WIL_Label" type="RichTextLabel" parent="CharacterRect/Stats" unique_id=690782330]
 self_modulate = Color(0.2509804, 0.2509804, 1, 1)
 layout_mode = 0
-offset_left = 240.0
-offset_top = -64.0
-offset_right = 280.0
-offset_bottom = -24.0
-text = "STR"
+offset_left = 40.0
+offset_top = -40.0
+offset_right = 80.0
+text = "WIL"
 horizontal_alignment = 1
 
-[node name="AGI" type="RichTextLabel" parent="CharacterRect/Stats/AGI_Label2" unique_id=696248475]
+[node name="WIL" type="RichTextLabel" parent="CharacterRect/Stats/WIL_Label" unique_id=760286115]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+text = "123"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="AGI_Label" type="RichTextLabel" parent="CharacterRect/Stats" unique_id=1621420295]
+self_modulate = Color(0.2509804, 1, 0.2509804, 1)
+layout_mode = 0
+offset_left = 248.0
+offset_right = 288.0
+offset_bottom = 40.0
+text = "AGI"
+horizontal_alignment = 1
+
+[node name="AGI" type="RichTextLabel" parent="CharacterRect/Stats/AGI_Label" unique_id=696248475]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
