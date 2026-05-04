@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dnk3j4akwai16"]
+
+[node name="HallOfFame" type="ColorRect" unique_id=874475336]
+offset_right = 192.0
+offset_bottom = 160.0
+color = Color(0.3337548, 0.20038465, 0, 1)
+
+[node name="Title" type="Label" parent="." unique_id=1547404443]
+layout_mode = 0
+offset_left = 40.0
+offset_right = 150.0
+offset_bottom = 23.0
+text = "HALL OF FAME"
+horizontal_alignment = 1
+
+[node name="Leaderboard" type="Label" parent="." unique_id=692083823]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 24.0
+offset_right = 180.0
+offset_bottom = 151.0
+text = "DD-MM-YY : XXX Fame
+DD-MM-YY : XXX Fame
+DD-MM-YY : XXX Fame
+DD-MM-YY : XXX Fame
+DD-MM-YY : XXX Fame"

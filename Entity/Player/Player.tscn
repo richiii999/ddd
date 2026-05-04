@@ -18,6 +18,8 @@
 [ext_resource type="PackedScene" uid="uid://dddy50t4saequ" path="res://Entity/Components/EffectComponentSystem.tscn" id="15_si366"]
 [ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/smartArea.gd" id="16_5ay3i"]
 [ext_resource type="Texture2D" uid="uid://mjmylc0o657g" path="res://Assets/Sprites/DDD_PlayerSprite_Attempt.png" id="16_pnyfx"]
+[ext_resource type="AudioStream" uid="uid://cym66d05c5h80" path="res://Assets/Audio/SFX/dead.wav" id="19_cretm"]
+[ext_resource type="AudioStream" uid="uid://0wym60docfn6" path="res://Assets/Audio/SFX/hit.wav" id="20_t0707"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sqvdy"]
 radius = 60.0
@@ -69,6 +71,11 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_s48lg"]
+playback_mode = 1
+random_pitch = 1.0806005
+random_volume_offset_db = 1.71
+
 [node name="Player" type="CharacterBody2D" unique_id=1134707457 groups=["Player"]]
 z_index = 10
 z_as_relative = false
@@ -80,6 +87,7 @@ wall_min_slide_angle = 0.17453292
 script = ExtResource("1_pnyfx")
 pet = ExtResource("2_3vnax")
 projs = Array[PackedScene]([ExtResource("2_7hmw6"), ExtResource("3_pnyfx"), ExtResource("2_7hmw6")])
+effects = Array[PackedScene]([null, ExtResource("6_7hmw6"), null])
 fields = Array[PackedScene]([null, ExtResource("4_cretm"), null])
 fieldEffects = Array[PackedScene]([null, ExtResource("6_7hmw6"), null])
 aimSpread = 0.0
@@ -269,6 +277,19 @@ debug_color = Color(0.644771, 0.636917, 0.625141, 0.14902)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_t0707")
 animation = &"walk"
+
+[node name="Death Sound" type="AudioStreamPlayer" parent="." unique_id=1607358507]
+stream = ExtResource("19_cretm")
+bus = &"SFX"
+
+[node name="Hurt" type="AudioStreamPlayer" parent="." unique_id=960410828]
+stream = ExtResource("20_t0707")
+bus = &"SFX"
+
+[node name="shoot" type="AudioStreamPlayer" parent="." unique_id=334622276]
+stream = SubResource("AudioStreamRandomizer_s48lg")
+volume_db = -10.0
+bus = &"SFX"
 
 [editable path="CanvasLayer/RMenu"]
 [editable path="CanvasLayer/RMenu/Utility"]

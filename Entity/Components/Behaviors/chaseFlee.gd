@@ -20,11 +20,10 @@ func onLeave(): # Stop timer, reset movement stuff
 func BehaviorTick(): # every frame, set target pos farther along a circle with radius orbitRadius via timer
 	# Chase target
 	if chaseOrFlee && Entity.targetEntity != Entity: 
-		targetPos = Entity.targetEntity.global_position
-		Entity.targetPos = targetPos
-	
+		Entity.targetPos = Entity.targetEntity.global_position
+
 	# Flee from target
 	elif !chaseOrFlee && Entity.targetEntity != Entity: 
-		targetPos = Entity.targetEntity.global_position + Vector2(1000,0) 
-	
+		var away = (Entity.global_position - Entity.targetEntity.global_position).normalized()
+		Entity.targetPos = Entity.global_position + away * 1000
 	# TODO Change flee to git the difference between this pos and target pos (= directional vector) then mult by alot to make it go far away

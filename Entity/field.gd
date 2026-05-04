@@ -46,6 +46,7 @@ func onLeave(entity : Node2D):
 	if entity is not ENTITY: # Try to find parent Entity
 		entity = Tools.FindParentByType(entity, ENTITY)
 	if entity is ENTITY:
-		entity.ECS.RemoveEffectByName(effect.efname)
-		if lingering > 0.0: entity.ECS.AddEffect(effect.duplicate(), false, lingering)
+		if entity.ECS != null:
+			entity.ECS.RemoveEffectByName(effect.efname)
+			if lingering > 0.0: entity.ECS.AddEffect(effect.duplicate(), false, lingering)
 	else: push_error("Non entity exited field, wtf")

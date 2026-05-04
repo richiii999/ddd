@@ -2,13 +2,16 @@ class_name SaveMgr extends Node
 ## SaveMgr: Contains functions for saving and loading player & bank data from files
 # [https://docs.godotengine.org/en/stable/tutorials/io/saving_games.html]
 
-var playerFilePath : String = "user://PlayerData.ddd"
-var bankFilePath : String = "user://BankData.ddd"
+# Linux: ~/.local/share/godot/app_userdata/DotDD/
+# Winbloat: C:/Users/{User}/AppData/Roaming
+
+var playerFilePath: String = "user://PlayerData.ddd"
+var bankFilePath  : String = "user://BankData.ddd"
+var skillFilePath : String = "user://SkillData.ddd"
+var HOFFilePath  : String = "user://HallOfFame.ddd"
 
 ## Returns data from the passed player for saving
-# TODO: For now, dont save their stats or skills, must re-pick skills when reloading a save
 func PlayerData(P:Player) -> Dictionary:
-	print(OS.get_data_dir())
 	var playerData = {
 		# Progress
 		"Fame" : P.Fame,
@@ -34,9 +37,13 @@ func PlayerData(P:Player) -> Dictionary:
 		"Inv6" : P.Inv.ItemIDInSlot(P.Inv.Slot.INV6),
 		"Inv7" : P.Inv.ItemIDInSlot(P.Inv.Slot.INV7),
 		"Inv8" : P.Inv.ItemIDInSlot(P.Inv.Slot.INV8),
+		"SkillPoints" : P.skillPoints
 	}
 	print("Saving PlayerData as: " + str(playerData))
 	return playerData
+
+func LoadSkills() -> Dictionary:
+	return ReadFile(skillFilePath)
 
 ## Returns itemIDs for each bankslot
 # Format: "Bank<slotN>": <itemID>
@@ -47,19 +54,53 @@ func BankData(B:Bank) -> Dictionary:
 	print("Saving BankData as: " + str(bankData))
 	return bankData
 
+## Saves skill data
+func SkillData(P:Player) -> Dictionary:
+	#retrieve the skills unlocked already
+	var skillsUI = P.find_child("SkillsUI")
+	var data = { "chosen_class": skillsUI.chosen_class }
+	
+	for skill in skillsUI.get_skills():
+		data[skill.name] = skill.active
+	
+	#use persistent data
+	for skill_name in skillsUI.subtree_save:
+		data["subtree_" + skill_name] = skillsUI.subtree_save[skill_name]
+	
+	#if subtree IS currently open, also grab live state (overrides saved)
+	if skillsUI.has_node("ActiveSubtree"):
+		var subtree = skillsUI.get_node("ActiveSubtree")
+		for skill in subtree.get_children().filter(func(n): return n is skillButton):
+			data["subtree_" + skill.name] = skill.active
+	
+	return data
+
+## Enters the player into HOF
+# Called on death, not exit game
+func EnterHOF(P:Player) -> void:
+	var date = Time.get_datetime_string_from_datetime_dict(Time.get_datetime_dict_from_system(), true)
+	var fame = P.Fame
+	print("Potential HOF Entry: ", date, " ", fame)
+	
+	var HOF = LoadHOF()
+	HOF[date] = fame # Add new entry
+	
+	if len(HOF.keys()) > 5:
+		HOF.erase(HOF.find_key(HOF.values().min())) # Remove lowest
+	
+	SaveToFile(HOF, HOFFilePath)
+	print("Saved HOF: ", HOF)
+
 ## Save data to filePath
 func SaveToFile(data:Dictionary, filePath:String) -> void:
 	FileAccess.open(filePath, FileAccess.WRITE).store_line(JSON.stringify(data))
 
 ## Saves the given player & bank information to separate files
-# Linux: ~/.local/share/godot/app_userdata/DotDD/
-# Winbloat: C:/Users/{User}/AppData/Roaming
 func SaveGame(P:Player, B:Bank) -> void:
 	print("Saving game to " + str(OS.get_data_dir()))
 	SaveToFile(PlayerData(P), playerFilePath)
 	SaveToFile(BankData(B), bankFilePath)
-
-## NOTE: Load functions split in two, to make it easier
+	SaveToFile(SkillData(P), skillFilePath)
 
 ## Read bankData from a file, returns array of itemIDs
 # Returns [] if nothing found
@@ -80,6 +121,10 @@ func LoadBank() -> Array[int]:
 func LoadPlayer() -> Dictionary:
 	print("Loading player data from " + str(playerFilePath))
 	return ReadFile(playerFilePath)
+
+## Read HallOfFame from a file
+func LoadHOF() -> Dictionary:
+	return ReadFile(HOFFilePath)
 
 ## Read a json file into a Dict
 # 90% copy-pasted from the godot docs

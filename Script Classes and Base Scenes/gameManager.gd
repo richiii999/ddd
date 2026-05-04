@@ -32,6 +32,7 @@ func _ready():
 	# Load all maps into the game
 	AddMap(nexus)
 	NexusSetup() # Spawn items in the nexus
+	UpdateHOF()
 	AddMap(world)
 	for DG in dungeons: AddMap(DG.instantiate())
 	
@@ -100,6 +101,9 @@ func Quit():
 ## Permadeath: Reset the player
 func DeathHandling():
 	get_tree().set_pause(false) # Player.Death() paused the game, need to unpause
+	
+	Save.EnterHOF(player)
+	UpdateHOF()
 	player.queue_free()
 	
 	# NOTE: process_frame basically means do this on the next frame
@@ -126,11 +130,14 @@ func LoadPlayer(P:Player):
 	while playerData.Fame > 0: # Fame starts from 0
 		P.LevelUp()
 		playerData.Fame -= 1
+	
+	#need to overwrite the skill points that LevelUp() just handed out
+	P.skillPoints = playerData["SkillPoints"]
 	P.XP = playerData.XP
 	# Consumables
-	P.HPotC = playerData.HPotC
-	P.MPotC = playerData.MPotC
-	P.coins = playerData.Coins
+	P.incHPot(playerData.HPotC)
+	P.incMPot(playerData.MPotC)
+	P.incCoins(playerData.Coins)
 	# Items: Store the ID only, when loading the ID can be used to spawn them in again
 	# Gear
 	if playerData.Helm  > 0: P.Inv.PutItemInSlot(P.Inv.Slot.HELM,     $ItemSpawner.ItemByID(playerData.Helm))
@@ -153,7 +160,24 @@ func LoadPlayer(P:Player):
 	# Prevent "Level X!" spam
 	player.StatusLabel.textQueue = []
 	player.StatusLabel.addStatusText("Spawned in!", "BLUE")
+	
+	#load skills last cuz we needs player stats and setup to be done first
+	var skillData = Save.LoadSkills()
+	if not skillData.is_empty():
+		P.find_child("SkillsUI").apply_save(skillData)
+	
+	player.UpdateUIBars()
 
+## Load HOF data from HallOfFame.ddd
+func UpdateHOF():
+	var HOF = Save.LoadHOF()
+	var vals = HOF.values()
+	vals.sort_custom(func(a, b): return a > b) # Desc order
+	
+	nexus.find_child("HallOfFame").get_child(1).text = ""
+	for v in vals:
+		nexus.find_child("HallOfFame").get_child(1).text += str(HOF.find_key(v))
+		nexus.find_child("HallOfFame").get_child(1).text += str(", ", v, "\n")
 
 ## Get all active waygates in all worlds
 func GetActiveWaygates() -> Array[Waygate]:

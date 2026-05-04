@@ -12,6 +12,7 @@ const dmgNumScn : PackedScene = preload("res://Entity/Components/DamageNumber.ts
 @onready var HPBar : Node = find_child("HP_Bar") # This entity's HP and MP bars
 @onready var MPBar : Node = find_child("MP_Bar")
 var SpawnNode : Node = null # Link to the entity's spawn node (if any), Set by the spawnnode
+var targetPosStopRadius : float = 50 # How close to targetPos will this enemy stop (values closer to 0 make movement rubberband when reach targetPos)
 
 ## Scenes to spawn
 @export var projs : Array[PackedScene] = [null, null, null]
@@ -94,9 +95,7 @@ func ShootProj(input : int, Aim : Vector2) -> void:
 	#if no item attack exists, get the current projectile based off our index
 	if attack == null: 
 		var proj_fallback = getEquippedProj(index)
-		if proj_fallback == null:
-			push_error("Invalid projectile index at: " + str(index))
-			return
+		if proj_fallback == null: return # Enemy has no projectile set
 		
 		#create a new attack and assign that to the projectile, then assign everything else basef off the index
 		attack = AttackData.new()
@@ -122,7 +121,6 @@ func ShootProj(input : int, Aim : Vector2) -> void:
 		FE = attack.fieldEffect.instantiate()
 	if attack.effect:
 		E = attack.effect.instantiate()
-
 	#proj_scene = getEquippedProj(index)
 	#if proj_scene == null:
 		#proj_scene = projs[index]
@@ -202,6 +200,12 @@ func EntityMovement():
 	velocity *= drag if not wet else 0.99 # Softcap, no drag if wet
 	velocity = velocity.clampf(-maxVel, maxVel) # Hard clamp
 	if not immovable: move_and_slide()
+
+#move enemy toward the target 
+func MoveTowardTarget():
+	var dir = (targetPos - global_position)
+	if dir.length() > targetPosStopRadius:
+		velocity += dir.normalized() * (accel * behaviorMoveSpeed * tileSpeed)
 
 ## OVERRIDE funcs: Player and Enemy scripts override these and provide additional functionality
 func _ready(): 
