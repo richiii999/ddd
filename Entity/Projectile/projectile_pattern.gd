@@ -10,7 +10,7 @@ enum PatternType {
 	CHAIN,
 	WING_RINGS
 }
-
+@onready var enemy : Enemy = get_parent()
 @export var projectile_scene : PackedScene
 
 #chain settings - don't know if this is correct so will change this later
@@ -176,8 +176,8 @@ func make_proj(dir: float, opts: Dictionary) -> Projectile:
 	proj.Spawn(
 		get_parent(),# source
 		dir,# rotation / direction
-		opts.get("speed", 10), #modifiers (can comment this out for now)
-		opts.get("power", 1),
+		enemy.projSpeed, #modifiers (can comment this out for now)
+		enemy.mainStat,
 		opts.get("piercing", 1),
 		opts.get("knockback", 150.0),
 		opts.get("effect", null),
