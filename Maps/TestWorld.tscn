@@ -31,13 +31,11 @@ active = true
 
 [node name="Grass" parent="Waygates" unique_id=1832319352 instance=ExtResource("4_bvj08")]
 position = Vector2(-2944, -1280)
-active = true
 coinPrice = 2
 itemPrice = ExtResource("4_tklj8")
 
 [node name="Volcano" parent="Waygates" unique_id=1585017992 instance=ExtResource("4_bvj08")]
 position = Vector2(-3136, -8384)
-active = true
 coinPrice = 2
 itemPrice = ExtResource("4_tklj8")
 
