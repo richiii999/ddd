@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://nw5hft7r0p5k"]
 
-[ext_resource type="Script" uid="uid://bimy80gj5j22k" path="res://Entity/Enemy/Enemies/water_slime.gd" id="1_pvr2j"]
+[ext_resource type="Script" path="res://Entity/Enemy/Enemies/water_slime.gd" id="1_pvr2j"]
 [ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="2_qpm0f"]
 [ext_resource type="Texture2D" uid="uid://b12ykdv76qrtj" path="res://Assets/SlimeStuff/PNG/Slime1/Parts/Slime1_Attack_body.png" id="3_hsafb"]
 [ext_resource type="Texture2D" uid="uid://ihotjedvnkpq" path="res://Assets/SlimeStuff/PNG/Slime1/Parts/Slime1_Walk_body.png" id="4_pvr2j"]

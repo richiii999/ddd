@@ -39,6 +39,7 @@ var accel  : float = 30.00 # Multiplied by a bunch of modifiers
 var behaviorMoveSpeed : float = 1.00 # Multiplier to accel
 var effectMoveSpeed   : float = 1.00 # Multiplier to accel
 @export var wet : bool = false # if true, slippery movement (less drag)
+@export var override_movement : bool = false # If true use child's movement logic
 
 ## Terrain
 var currTile  : TileData = null # Current tile under player (can be null, ex. leave edge of map)
@@ -197,6 +198,7 @@ func Knockback(from : Vector2, strength : float): if !invulnerable: velocity += 
 
 ## Apply movement, with some limits and modifiers
 func EntityMovement():
+	if override_movement: pass
 	velocity *= drag if not wet else 0.99 # Softcap, no drag if wet
 	velocity = velocity.clampf(-maxVel, maxVel) # Hard clamp
 	if not immovable: move_and_slide()
