@@ -244,6 +244,7 @@ func get_input(): # TODO: replace this with _input() ?
 		%PlayerCam.setOffset(%RMenu.visible)
 	if Input.is_action_just_pressed("SkillsUI"): %SkillsUI.visible = !(%SkillsUI.visible) # SkillsUI 'P'
 	if Input.is_action_just_pressed("CharMenu"): toggleCharMenu(!%CharMenu.visible) # CharMenu 'C'
+		
 
 func _physics_process(_delta):
 	## Movement
@@ -457,6 +458,7 @@ func UpdateUIBars(): # All at once rather than spread out
 
 func toggleCharMenu(state:bool):
 	%CharMenu.visible = state
+	%CharMenu.refresh_stats()
 
 ## OVERRIDE FUNCS: Entity Overridden funcs by Player.gd
 func Death(): 

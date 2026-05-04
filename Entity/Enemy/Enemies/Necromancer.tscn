@@ -81,6 +81,7 @@ script = ExtResource("1_ydshy")
 XP = 50
 projs = Array[PackedScene]([ExtResource("2_6ytyj"), ExtResource("2_6ytyj"), ExtResource("2_6ytyj")])
 effects = Array[PackedScene]([ExtResource("3_liuer"), null, null])
+mainStat = 5
 
 [node name="Status" parent="." unique_id=869158990 instance=ExtResource("3_1bi2m")]
 offset_left = -72.0

@@ -161,9 +161,8 @@ wait_time = 0.5
 isFinal = true
 
 [node name="LootTable" parent="." unique_id=1315550005 instance=ExtResource("9_lanxk")]
-numRolls = 3
 lootTable = Dictionary[int, int]({
--2: 1
+18: 1
 })
 
 [node name="EffectsComponentSystem" parent="." unique_id=921567753 instance=ExtResource("10_7aklf")]
