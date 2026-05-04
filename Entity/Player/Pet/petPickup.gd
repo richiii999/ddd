@@ -1,4 +1,4 @@
-class_name PetPickup extends Sprite2D ## PetPickup: Interactable that spawns Pet
+class_name PetPickup extends AnimatedSprite2D ## PetPickup: Interactable that spawns Pet
 
 @export var pet : PackedScene # Pet to spawn
 

@@ -12,10 +12,32 @@
 [ext_resource type="PackedScene" uid="uid://d1qn6ah5n7134" path="res://Maps/NPC/Shop/ShopTest.tscn" id="9_22jxy"]
 [ext_resource type="PackedScene" uid="uid://dq3y8uc1n57l4" path="res://Entity/Player/Pet/PetPickup.tscn" id="9_otrks"]
 [ext_resource type="PackedScene" uid="uid://cs61kw023xsp4" path="res://Entity/Player/Pet/PetDuck.tscn" id="10_hvcss"]
-[ext_resource type="Texture2D" uid="uid://kvedle5n3nvh" path="res://Assets/Sprites/Pets/Duck.png" id="10_otrks"]
-[ext_resource type="Texture2D" uid="uid://dsaqnss63f1sd" path="res://Assets/Sprites/Pets/Lizard.png" id="10_qugiy"]
 [ext_resource type="PackedScene" uid="uid://dbkto02kcwybg" path="res://Entity/Player/Pet/PetLizard.tscn" id="11_nqe2l"]
+[ext_resource type="Texture2D" uid="uid://ciyu5qtwcy3uj" path="res://Assets/Sprites/Pets/LizardAnim.png" id="13_e66yt"]
 [ext_resource type="PackedScene" uid="uid://dkky8m348k6w7" path="res://Maps/Props/Torch.tscn" id="14_up7ug"]
+[ext_resource type="Texture2D" uid="uid://w641khecpbxk" path="res://Assets/Sprites/Pets/DuckSolo.png" id="15_oi5ai"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7ruc"]
+atlas = ExtResource("13_e66yt")
+region = Rect2(0, 0, 29, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmjhk"]
+atlas = ExtResource("13_e66yt")
+region = Rect2(29, 0, 29, 17)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3ho1w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7ruc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cmjhk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
 
 [node name="Nexus" type="TileMapLayer" unique_id=961261896 groups=["World"]]
 z_index = -10
@@ -91,7 +113,8 @@ pet = ExtResource("10_hvcss")
 
 [node name="PetPickupLizard" parent="NPCs" unique_id=154059293 instance=ExtResource("9_otrks")]
 position = Vector2(775.99994, 1143.9999)
-texture = ExtResource("10_qugiy")
+sprite_frames = SubResource("SpriteFrames_3ho1w")
+frame_progress = 0.0
 flip_h = true
 pet = ExtResource("11_nqe2l")
 
@@ -127,36 +150,36 @@ position = Vector2(248, -888)
 texture_filter = 1
 position = Vector2(-736, 1344)
 scale = Vector2(2.2, 2.2)
-texture = ExtResource("10_otrks")
+texture = ExtResource("15_oi5ai")
 
 [node name="Duck2" type="Sprite2D" parent="Decor" unique_id=1903479554]
 texture_filter = 1
 position = Vector2(-800, 888)
 scale = Vector2(2.2, 2.2)
-texture = ExtResource("10_otrks")
+texture = ExtResource("15_oi5ai")
 
 [node name="Duck3" type="Sprite2D" parent="Decor" unique_id=1906067141]
 texture_filter = 1
 position = Vector2(-663.99994, 1208)
 scale = Vector2(2.2, 2.2)
-texture = ExtResource("10_otrks")
+texture = ExtResource("15_oi5ai")
 
 [node name="Duck4_Reversed" type="Sprite2D" parent="Decor" unique_id=1232542628]
 texture_filter = 1
 position = Vector2(-1056, 864)
 scale = Vector2(-2.2, 2.2)
-texture = ExtResource("10_otrks")
+texture = ExtResource("15_oi5ai")
 
 [node name="Duck4_Reversed2" type="Sprite2D" parent="Decor" unique_id=20706547]
 texture_filter = 1
 position = Vector2(-1136, 1000)
 scale = Vector2(-2.2, 2.2)
-texture = ExtResource("10_otrks")
+texture = ExtResource("15_oi5ai")
 
 [node name="Duck4_Reversed3" type="Sprite2D" parent="Decor" unique_id=1174755742]
 texture_filter = 1
 position = Vector2(-960, 1168)
 scale = Vector2(-2.2, 2.2)
-texture = ExtResource("10_otrks")
+texture = ExtResource("15_oi5ai")
 
 [editable path="NPCs/HelalDuck"]

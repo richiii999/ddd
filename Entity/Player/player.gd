@@ -354,7 +354,7 @@ func SpawnPet(newPet:PackedScene):
 	pet_instance.global_position = global_position + Vector2(50, 0)
 	pet_instance.player = self # Set the player variable for the instantiated newPet
 	$Status.addStatusText("You gained a Pet!", "BLUE")
-	$Status.addStatusText("'X' to make it do a trick!", "BLUE")
+	$Status.addStatusText("'X' to do a trick!", "BLUE")
 
 ## Deletes the player's Pet
 func DeletePet(): 
