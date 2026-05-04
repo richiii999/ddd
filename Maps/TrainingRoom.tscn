@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bxf720rh8hgob" path="res://Maps/WorldBASE.gd" id="2_t6a6c"]
 [ext_resource type="PackedScene" uid="uid://tcx34hy287cs" path="res://Maps/Mechanics/Waygate.tscn" id="3_2uhxa"]
 [ext_resource type="PackedScene" uid="uid://blyjhm2j5onnb" path="res://Maps/Mechanics/EnemyPackSpawner.tscn" id="4_baa2i"]
-[ext_resource type="PackedScene" uid="uid://tq8hs5inekce" path="res://Entity/Enemy/Enemies/ChaseZombie.tscn" id="5_h3oso"]
+[ext_resource type="PackedScene" uid="uid://ywv2gl3qdld0" path="res://Entity/Enemy/Enemies/FireSlime.tscn" id="5_h3oso"]
 
 [node name="Training_Room" type="TileMapLayer" unique_id=1081225581]
 use_parent_material = true

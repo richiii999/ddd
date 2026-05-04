@@ -30,6 +30,12 @@ func _physics_process(_delta):
 	if Behavior: Behavior.BehaviorTick()
 	MoveTowardTarget()
 	EntityMovement()
+	var facingDir : Vector2 = velocity if velocity.length() > 10.0 else (get_global_mouse_position() - global_position)
+	# Flip the sprite horizontally when facing the left 
+	if find_child("AnimatedSprite2D"):
+		if facingDir.x != 0: $AnimatedSprite2D.flip_h = facingDir.x < 0
+	else: 
+		if facingDir.x != 0: $Sprite2D.flip_h = facingDir.x < 0
 
 func EnemyShoot(P : int, pos : Vector2 = targetEntity.global_position): ShootProj(P, pos) # Workaround for signal binds keeping one value and not updating each call
 

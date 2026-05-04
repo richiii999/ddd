@@ -80,6 +80,7 @@ text = "Helal"
 
 [node name="ShopTest" parent="NPCs" unique_id=2144558353 instance=ExtResource("9_22jxy")]
 position = Vector2(512, -644)
+items = Array[int]([18, 19, 20])
 
 [node name="Bank" parent="NPCs" unique_id=18598485 instance=ExtResource("8_22jxy")]
 position = Vector2(1, 831)

@@ -2,13 +2,14 @@ class_name Shop extends Node
 ## Shop: Opens a shop GUI that u can spend coins at for items / pots
 
 var currPlayer = null # Ref to player (set when u open the shop)
-@export var items : Array[PackedScene] # Put item scenes in editor
+@export var items : Array[int] = [] # Put itemIDs in the editor
 
 var invSlot = preload("res://UI/RMenu/Inventory/inv_slot.tscn")
 
 func _ready():
 	$InteractComponent.Interact.connect(ToggleShopGUI)
 	
+	var itemSpawner = get_node("/root/GameManager/ItemSpawner")
 	for i in range(len(items)):
 		var slot = invSlot.instantiate()
 		$ShopGUI/GridContainer.add_child(slot)
@@ -18,7 +19,7 @@ func _ready():
 		
 		slot.slotNumber = i
 		slot.slotClicked.connect(BuyItem) # SlotN is emitted with this signal
-		slot.UpdateSlot(items[i].instantiate(), true) # Add item to slot
+		slot.UpdateSlot(itemSpawner.ItemByID(items[i]), true) # Add item to slot
 
 # Dialogue text is visible for a few seconds then goes away automatically
 func ToggleShopGUI(player):
