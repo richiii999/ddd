@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dcrycxdplesgy"
+path="res://.godot/imported/DSGNSynth_BUFF-Water Buff_HY_PC-006.wav-736079c148547a17df62c11acae68a3e.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/SFX/DSGNSynth_BUFF-Water Buff_HY_PC-006.wav"
+dest_files=["res://.godot/imported/DSGNSynth_BUFF-Water Buff_HY_PC-006.wav-736079c148547a17df62c11acae68a3e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
