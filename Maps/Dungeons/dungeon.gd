@@ -7,9 +7,6 @@ class_name DungeonBASE extends WorldBASE ## Inspired by Gungeon, waves of enemie
 @export var DungeonTitle : String = "Dungeon"
 var currRoom = self # Set by each room's entrance door
 
-# TODO Dungeon music
-#@export var bkgMusic
-
 var exitWaygate : Waygate = null # ref to exitWaygate (if any)
 
 func _ready():
