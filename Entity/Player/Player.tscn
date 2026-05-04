@@ -291,5 +291,8 @@ stream = SubResource("AudioStreamRandomizer_s48lg")
 volume_db = -10.0
 bus = &"SFX"
 
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1510153806]
+volume_db = -25.0
+
 [editable path="CanvasLayer/RMenu"]
 [editable path="CanvasLayer/RMenu/Utility"]

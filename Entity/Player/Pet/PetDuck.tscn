@@ -3,6 +3,28 @@
 [ext_resource type="Script" uid="uid://dq33y75pnwsmq" path="res://Entity/Player/Pet/pet.gd" id="1_lvc2c"]
 [ext_resource type="Texture2D" uid="uid://kvedle5n3nvh" path="res://Assets/Sprites/Pets/Duck.png" id="2_wxrug"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_lvc2c"]
+atlas = ExtResource("2_wxrug")
+region = Rect2(0, 0, 13, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wxrug"]
+atlas = ExtResource("2_wxrug")
+region = Rect2(13, 0, 13, 19)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m38f0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lvc2c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wxrug")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_is5pi"]
 size = Vector2(51, 50)
 
@@ -10,10 +32,12 @@ size = Vector2(51, 50)
 motion_mode = 1
 script = ExtResource("1_lvc2c")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1082199575]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1672439099]
 texture_filter = 1
 scale = Vector2(2.1, 2.1)
-texture = ExtResource("2_wxrug")
+sprite_frames = SubResource("SpriteFrames_m38f0")
+autoplay = "default"
+frame_progress = 0.2738263
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=926908102]
 position = Vector2(0.5, 1)

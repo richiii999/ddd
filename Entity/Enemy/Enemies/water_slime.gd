@@ -23,6 +23,8 @@ func Waterexplode():
 	await $AnimatedSprite2D.animation_finished
 	
 	pattern.Emit(ProjectilePattern.PatternType.CIRCLE, 8, {"power": 10})	
+	
+	super.Death()
 	queue_free()
 
 func Death():

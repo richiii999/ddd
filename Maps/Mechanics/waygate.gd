@@ -65,7 +65,8 @@ func UseWaygate(P:Player): # Teleports player to this waygate
 	
 	P.global_position = global_position # Move player 
 	P.find_child("PlayerCam").InstantMove(global_position) # Force move camera without smoothing
-	P.currWorld = currWorld # Set the player's currWorld to this one (otherwise reading tilemap breaks)
+	P.setCurrWorld(currWorld) # Set the player's currWorld to this one (otherwise reading tilemap breaks)
+	
 	
 	arrived.emit(P)
 	P.LoadingScreenEnd()

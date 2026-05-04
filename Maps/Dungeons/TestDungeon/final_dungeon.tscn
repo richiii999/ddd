@@ -1,0 +1,46 @@
+[gd_scene format=4 uid="uid://dpxvsi3ynvsag"]
+
+[ext_resource type="TileSet" uid="uid://cnvmagl4xkjae" path="res://Maps/TileSet.tres" id="1_2si8f"]
+[ext_resource type="Script" uid="uid://bhqsdd2qy8h5w" path="res://Maps/Dungeons/dungeon.gd" id="2_5fku8"]
+[ext_resource type="PackedScene" uid="uid://tcx34hy287cs" path="res://Maps/Mechanics/Waygate.tscn" id="3_8bv8l"]
+[ext_resource type="PackedScene" uid="uid://cv4mfe1l32jgk" path="res://Maps/Dungeons/TestDungeon/first_room_final.tscn" id="4_5fku8"]
+[ext_resource type="PackedScene" uid="uid://dcs5coak1x7i0" path="res://Maps/Dungeons/TestDungeon/first_to_second_room_hallway.tscn" id="5_8bv8l"]
+[ext_resource type="PackedScene" uid="uid://b676nlbggecrc" path="res://Maps/Dungeons/TestDungeon/second_room_final.tscn" id="5_dilrq"]
+[ext_resource type="PackedScene" uid="uid://jng1vdxwsdmh" path="res://Maps/Dungeons/TestDungeon/final_boss_room.tscn" id="6_psp2c"]
+[ext_resource type="PackedScene" uid="uid://vhj0ucgt4j1m" path="res://Maps/Dungeons/TestDungeon/secondroomtoThirdRoom.tscn" id="8_nbcbp"]
+
+[node name="FinalDungeon" type="TileMapLayer" unique_id=563884137]
+use_parent_material = true
+tile_map_data = PackedByteArray("AAD7//z/AAADAAUAAAD8//v/AAADAAUAAAD6//3/AAADAAUAAAD9//r/AAADAAUAAAD+//r/AAADAAUAAAD///r/AAADAAUAAAAAAPr/AAADAAUAAAABAPr/AAADAAUAAAACAPr/AAADAAUAAAADAPv/AAADAAUAAAAEAPz/AAADAAUAAAAFAP3/AAADAAUAAAAFAP7/AAADAAUAAAAFAAEAAAADAAUAAAD6//7/AAADAAUAAAD6////AAADAAUAAAD6/wAAAAADAAUAAAD6/wEAAAADAAUAAAD6/wIAAAADAAUAAAD7/wMAAAADAAUAAAD+/wUAAAADAAUAAAD8/wQAAAADAAUAAAD9/wUAAAADAAUAAAD//wUAAAADAAUAAAAAAAUAAAADAAUAAAABAAUAAAADAAUAAAACAAUAAAADAAUAAAAEAAMAAAADAAUAAAAFAAIAAAADAAUAAAADAAQAAAADAAUAAAD6//z/AAADAAUAAAD7//v/AAADAAUAAAD8//r/AAADAAUAAAADAPr/AAADAAUAAAAEAPv/AAADAAUAAAAFAPz/AAADAAUAAAD6/wMAAAADAAUAAAD7/wQAAAADAAUAAAD8/wUAAAADAAUAAAADAAUAAAADAAUAAAAEAAQAAAADAAUAAAAFAAMAAAADAAUAAAD+/wQAAAAHAAUAAAD9/wQAAAAHAAUAAAD9/wMAAAAHAAUAAAD8/wMAAAAHAAUAAAD8/wIAAAAHAAUAAAD7/wIAAAAHAAUAAAD7/wEAAAAHAAUAAAD7/wAAAAAHAAUAAAD7////AAAHAAUAAAD7//7/AAAHAAUAAAD7//3/AAAHAAUAAAD8//3/AAAHAAUAAAD8//z/AAAHAAUAAAD8//7/AAAHAAUAAAD8////AAAHAAUAAAD8/wAAAAAHAAUAAAD8/wEAAAAHAAUAAAD9/wIAAAAHAAUAAAD+/wMAAAAHAAUAAAD//wMAAAAHAAUAAAAAAAQAAAAHAAUAAAD//wQAAAAHAAUAAAABAAQAAAAHAAUAAAACAAQAAAAHAAUAAAACAAMAAAAHAAUAAAABAAMAAAAHAAUAAAAAAAMAAAAHAAUAAAAAAAIAAAAHAAUAAAD//wEAAAAHAAUAAAD//wAAAAAHAAUAAAD/////AAAHAAUAAAD///7/AAAHAAUAAAD+/wEAAAAHAAUAAAD+/wIAAAAHAAUAAAD+/wAAAAAHAAUAAAD+////AAAHAAUAAAD//wIAAAAHAAUAAAABAAIAAAAHAAUAAAACAAIAAAAHAAUAAAACAAEAAAAHAAUAAAACAAAAAAAHAAUAAAACAP//AAAHAAUAAAACAP7/AAAHAAUAAAABAP7/AAAHAAUAAAAAAP7/AAAHAAUAAAD///3/AAAHAAUAAAAAAP3/AAAHAAUAAAABAP3/AAAHAAUAAAACAP3/AAAHAAUAAAD+//3/AAAHAAUAAAD9//3/AAAHAAUAAAD9//7/AAAHAAUAAAD9////AAAHAAUAAAD9/wAAAAAHAAUAAAD9/wEAAAAHAAUAAAAAAAEAAAAHAAUAAAAAAAAAAAAHAAUAAAD///z/AAAHAAUAAAD+//z/AAAHAAUAAAD9//z/AAAHAAUAAAD9//v/AAAHAAUAAAD+//v/AAAHAAUAAAD///v/AAAHAAUAAAAAAPv/AAAHAAUAAAABAPv/AAAHAAUAAAABAPz/AAAHAAUAAAAAAPz/AAAHAAUAAAACAPv/AAAHAAUAAAACAPz/AAAHAAUAAAADAPz/AAAHAAUAAAADAP3/AAAHAAUAAAADAP7/AAAHAAUAAAADAP//AAAHAAUAAAADAAAAAAAHAAUAAAADAAEAAAAHAAUAAAADAAIAAAAHAAUAAAADAAMAAAAHAAUAAAAEAAIAAAAHAAUAAAAEAAEAAAAHAAUAAAAEAAAAAAAHAAUAAAAEAP//AAAHAAUAAAAEAP7/AAAHAAUAAAAEAP3/AAAHAAUAAAABAP//AAAHAAUAAAABAAAAAAAHAAUAAAAFAP//AAAHAAUAAAAFAAAAAAAHAAUAAAAGAP//AAAHAAUAAAAGAAAAAAAHAAUAAAAGAAEAAAADAAUAAAAGAP7/AAADAAUAAAA=")
+tile_set = ExtResource("1_2si8f")
+script = ExtResource("2_5fku8")
+
+[node name="WorldEffects" type="Node2D" parent="." unique_id=732786577]
+
+[node name="Waygates" type="Node2D" parent="." unique_id=902142817]
+
+[node name="Final Dungeon" parent="Waygates" unique_id=991796255 instance=ExtResource("3_8bv8l")]
+active = true
+
+[node name="Rooms" type="Node2D" parent="." unique_id=1892436274]
+
+[node name="FirstRoomFinal" parent="Rooms" unique_id=1223308819 instance=ExtResource("4_5fku8")]
+position = Vector2(1024, 128)
+
+[node name="SecondRoomFinal" parent="Rooms" unique_id=1299358157 instance=ExtResource("5_dilrq")]
+position = Vector2(2560, 1344)
+
+[node name="DungeonBossRoom" parent="Rooms" unique_id=1438972844 instance=ExtResource("6_psp2c")]
+position = Vector2(2304, 3840)
+
+[node name="Spawners" type="Node2D" parent="." unique_id=555905646]
+
+[node name="Hallways" type="Node2D" parent="." unique_id=1399954390]
+
+[node name="HallwayFinal1" parent="Hallways" unique_id=2101802365 instance=ExtResource("5_8bv8l")]
+position = Vector2(2176, 128)
+script = null
+
+[node name="HallwayFinal2" parent="Hallways" unique_id=1997804302 instance=ExtResource("8_nbcbp")]
+position = Vector2(2560, 2368)
+script = null
