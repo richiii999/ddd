@@ -68,7 +68,7 @@ size = Vector2(120, 120)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w6h3m"]
 resource_local_to_scene = true
-radius = 2716.6626
+radius = 2056.0156
 
 [node name="Immobile_Turret" type="CharacterBody2D" unique_id=654557338 groups=["Enemy"]]
 collision_layer = 256
