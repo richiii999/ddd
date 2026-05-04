@@ -70,7 +70,7 @@ func Death():
 	for E in $Sight.smartArea: # For each Player in Sight
 		if E is Player: death.connect(E.GainXP.bind(XP))
 	
-	var LT = find_child("LootTable") # Setup LootTable signal connections
+	var LT = Tools.FindChildByType(self, LootTable) # Setup LootTable signal connections
 	if LT: # Roll off loot (harder enemies may have more than 1 loot drop)
 		for i in range(LT.numRolls): LT.DropItem(global_position)
 	

@@ -35,3 +35,9 @@ static func FindParentByType(target_node:Node, type:Variant) -> Node:
 		curr = curr.get_parent()
 		if is_instance_of(curr, type): return curr
 	return null
+
+# Search for a child node of type returning first instance, returns NULL if cannot find
+static func FindChildByType(target_node:Node, type:Variant) -> Node:
+	for child in target_node.get_children():
+		if is_instance_of(child, type): return child
+	return null
