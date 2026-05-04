@@ -10,6 +10,10 @@ class_name EnemyPackSpawner extends Node2D ## EnemySpawnNode: Spawns mobs in pac
 @export var spawnRadius: int = 150   # Within what radius to spawn mobs?
 @export var onlyWhenOffScreen : bool = true # Only spawn when player can't see?
 
+# Overrides spawned enemy's LootTable
+# NOTE: You should instantiate LootTable somewhere in the scene then drag it to the spawner
+@export var lootTable : LootTable = null 
+
 var mobList : Array[Node] = []  # Links to the pack's mobs
 var packBoss: Node = null       # Link to the pack's boss (if any)
 var visibility: int = 0 # Is the node visible to any player (via count)? If so, pause timer (to prevent spawning immediately after you leave and come back)
@@ -39,6 +43,13 @@ func SpawnMobs( n : int = (maxMobs >> 2) + 1 ):
 				# Some mobs spawn other mobs, the new mob should follow parent
 				# Ex. NecroSkull orbiters
 				if get_parent() is Enemy: newMob.following = get_parent()
+				
+				# Override LootTable
+				if lootTable != null:
+					if Tools.FindChildByType(newMob, LootTable): 
+						newMob.find_child("LootTable").queue_free()
+					
+					newMob.add_child(lootTable.duplicate())
 				
 				add_child(newMob)
 	elif(PackBoss && !packBoss): # If already full of mobs (or max = 0), spawn the pack boss

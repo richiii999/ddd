@@ -28,7 +28,7 @@ offset_bottom = 40.0
 text = "0"
 horizontal_alignment = 1
 
-[node name="Skill_0" parent="." unique_id=963993930 instance=ExtResource("1_oyd6t")]
+[node name="ALL" parent="." unique_id=963993930 instance=ExtResource("1_oyd6t")]
 layout_mode = 0
 offset_left = 248.0
 offset_top = 176.0
@@ -36,78 +36,126 @@ offset_right = 320.0
 offset_bottom = 248.0
 skillText = "+1 ALL"
 availible = true
+stats = Dictionary[int, int]({
+0: 1,
+1: 1,
+2: 1,
+3: 1,
+4: 1,
+5: 1,
+6: 1,
+7: 1,
+8: 1
+})
 
-[node name="Skill_1" parent="." unique_id=1563444799 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
+[node name="STR" parent="." unique_id=1563444799 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
 layout_mode = 0
 offset_left = 248.0
 offset_top = 80.0
 offset_right = 320.0
 offset_bottom = 152.0
-skillText = "+1 STR"
-parentSkills = [NodePath("../Skill_0")]
+skillText = "+2 STR"
+parentSkills = [NodePath("../ALL")]
+stats = Dictionary[int, int]({
+0: 2,
+1: 0,
+2: 0,
+3: 0,
+4: 0,
+5: 0,
+6: 0,
+7: 0,
+8: 0
+})
 
-[node name="Skill_2" parent="." unique_id=560904053 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
+[node name="AGI" parent="." unique_id=560904053 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
 layout_mode = 0
 offset_left = 152.0
 offset_top = 176.0
 offset_right = 224.0
 offset_bottom = 248.0
-skillText = "+1 AGI"
-parentSkills = [NodePath("../Skill_0")]
+skillText = "+2 AGI"
+parentSkills = [NodePath("../ALL")]
+stats = Dictionary[int, int]({
+0: 0,
+1: 0,
+2: 2,
+3: 0,
+4: 0,
+5: 0,
+6: 0,
+7: 0,
+8: 0
+})
 
-[node name="Skill_3" parent="." unique_id=747967176 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
+[node name="INT" parent="." unique_id=747967176 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
 layout_mode = 0
 offset_left = 248.0
 offset_top = 272.0
 offset_right = 320.0
 offset_bottom = 344.0
-skillText = "+1 INT"
-parentSkills = [NodePath("../Skill_0")]
+skillText = "+2 INT"
+parentSkills = [NodePath("../ALL")]
+stats = Dictionary[int, int]({
+0: 0,
+1: 2,
+2: 0,
+3: 0,
+4: 0,
+5: 0,
+6: 0,
+7: 0,
+8: 0
+})
 
-[node name="Skill_4" parent="." unique_id=229106207 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
+[node name="WIS" parent="." unique_id=229106207 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
 layout_mode = 0
 offset_left = 344.0
 offset_top = 176.0
 offset_right = 416.0
 offset_bottom = 248.0
-skillText = "+2 STR"
-parentSkills = [NodePath("../Skill_0")]
+skillText = "+2 WIS"
+parentSkills = [NodePath("../ALL")]
+stats = Dictionary[int, int]({
+0: 0,
+1: 0,
+2: 0,
+3: 0,
+4: 2,
+5: 0,
+6: 0,
+7: 0,
+8: 0
+})
 
-[node name="Skill_5" parent="." unique_id=1945750708 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
+[node name="DEX" parent="." unique_id=1945750708 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
 layout_mode = 0
 offset_left = 48.0
 offset_top = 112.0
 offset_right = 120.0
 offset_bottom = 184.0
 skillText = "+2 DEX"
-parentSkills = [NodePath("../Skill_2")]
+parentSkills = [NodePath("../AGI")]
+stats = Dictionary[int, int]({
+0: 0,
+1: 0,
+2: 0,
+3: 0,
+4: 0,
+5: 2,
+6: 0,
+7: 0,
+8: 0
+})
 
-[node name="Skill_6" parent="." unique_id=148652741 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
+[node name="SPD" parent="." unique_id=148652741 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
 layout_mode = 0
 offset_left = 48.0
 offset_top = 240.0
 offset_right = 120.0
 offset_bottom = 312.0
 skillText = "+2 SPD"
-parentSkills = [NodePath("../Skill_2")]
-
-[node name="Skill_7" parent="." unique_id=1383487241 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
-layout_mode = 0
-offset_left = 456.0
-offset_top = 104.0
-offset_right = 528.0
-offset_bottom = 176.0
-skillText = "+2 TOU"
-parentSkills = [NodePath("../Skill_4")]
-
-[node name="Skill_8" parent="." unique_id=1677158838 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
-layout_mode = 0
-offset_left = 456.0
-offset_top = 232.0
-offset_right = 528.0
-offset_bottom = 304.0
-skillText = "+99 SPD"
-parentSkills = [NodePath("../Skill_4")]
+parentSkills = [NodePath("../AGI")]
 stats = Dictionary[int, int]({
 0: 0,
 1: 0,
@@ -117,7 +165,47 @@ stats = Dictionary[int, int]({
 5: 0,
 6: 0,
 7: 0,
-8: 99
+8: 2
+})
+
+[node name="TOU" parent="." unique_id=1383487241 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
+layout_mode = 0
+offset_left = 456.0
+offset_top = 104.0
+offset_right = 528.0
+offset_bottom = 176.0
+skillText = "+2 TOU"
+parentSkills = [NodePath("../WIS")]
+stats = Dictionary[int, int]({
+0: 0,
+1: 0,
+2: 0,
+3: 2,
+4: 0,
+5: 0,
+6: 0,
+7: 0,
+8: 0
+})
+
+[node name="BLK" parent="." unique_id=1677158838 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
+layout_mode = 0
+offset_left = 456.0
+offset_top = 232.0
+offset_right = 528.0
+offset_bottom = 304.0
+skillText = "+2 BLK"
+parentSkills = [NodePath("../WIS")]
+stats = Dictionary[int, int]({
+0: 0,
+1: 0,
+2: 0,
+3: 0,
+4: 0,
+5: 0,
+6: 2,
+7: 0,
+8: 0
 })
 
 [node name="berseker" parent="." unique_id=331613725 instance=ExtResource("1_oyd6t")]
@@ -126,6 +214,17 @@ skillText = "Berseker"
 is_class_choice = true
 class_id = "berserker"
 subtree_scene = ExtResource("3_1uy7s")
+stats = Dictionary[int, int]({
+0: 5,
+1: 0,
+2: 0,
+3: 3,
+4: 0,
+5: 0,
+6: 3,
+7: 0,
+8: 1
+})
 
 [node name="mage" parent="." unique_id=2031093468 instance=ExtResource("1_oyd6t")]
 layout_mode = 0
@@ -137,6 +236,17 @@ skillText = "Mage"
 is_class_choice = true
 class_id = "mage"
 subtree_scene = ExtResource("4_g2e51")
+stats = Dictionary[int, int]({
+0: 0,
+1: 5,
+2: 0,
+3: 0,
+4: 3,
+5: 0,
+6: 0,
+7: 1,
+8: 0
+})
 
 [node name="OpenClass" type="Button" parent="." unique_id=1395218759]
 layout_mode = 0

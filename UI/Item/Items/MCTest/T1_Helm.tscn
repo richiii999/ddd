@@ -6,7 +6,7 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wt6nl"]
 atlas = ExtResource("1_62l27")
-region = Rect2(0, -2.8290787, 29.733337, 35.920544)
+region = Rect2(1.9549751, 2.0194554, 27.778362, 29.11451)
 
 [node name="LeatherHelm" type="Sprite2D" unique_id=398207244]
 texture_filter = 1

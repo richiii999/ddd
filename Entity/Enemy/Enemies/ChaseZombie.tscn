@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dk58kntas8hfd" path="res://Entity/Components/Behaviors/Wander.tscn" id="7_4vlkc"]
 [ext_resource type="PackedScene" uid="uid://dvourlhp5t1tv" path="res://Entity/Components/Behaviors/ChaseFlee.tscn" id="8_10a87"]
 [ext_resource type="PackedScene" uid="uid://dddy50t4saequ" path="res://Entity/Components/EffectComponentSystem.tscn" id="9_vvp5b"]
+[ext_resource type="PackedScene" uid="uid://bntfe5iinhuu5" path="res://UI/Item/loot_table.tscn" id="10_84nuw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw8gt"]
 bg_color = Color(1, 0, 0, 1)
@@ -152,6 +153,8 @@ autostart = true
 TargetEntity = true
 
 [node name="EffectsComponentSystem" parent="." unique_id=921567753 instance=ExtResource("9_vvp5b")]
+
+[node name="LootTable" parent="." unique_id=530515387 instance=ExtResource("10_84nuw")]
 
 [connection signal="onEmpty" from="Sight" to="." method="SightIncrease" binds= [false]]
 [connection signal="onEmpty" from="Sight" to="ShootTimer1" method="set_paused" binds= [true]]
