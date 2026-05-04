@@ -365,6 +365,14 @@ func DeletePet():
 ## Makes Player's Pet do a trick
 func PetTrick(): if pet_instance != null: pet_instance.Trick()
 
+## Changes currWorld and plays BGM
+func setCurrWorld(newWorld:WorldBASE):
+	if newWorld == null: push_error("Tried to set null world!"); return
+	currWorld = newWorld
+	
+	$BGM.set_stream(newWorld.BGM if newWorld.BGM else null)
+	if $BGM.stream: $BGM.play()
+
 func LevelUp(): 
 	if (Level < 25): # If not maxed yet
 		Level += 1; $Status.addStatusText( ("Level " + str(Level) + "!"), "ORANGE")
