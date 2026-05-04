@@ -22,5 +22,5 @@ func explode(play):
 
 	$AnimatedSprite2D.play("Explode")
 	await $AnimatedSprite2D.animation_finished
-
+	super.Death()
 	queue_free()
