@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://bd7ibtcm0ok6n"]
 
 [ext_resource type="Script" uid="uid://dk75vwl8p2eck" path="res://Entity/Enemy/enemy.gd" id="1_vs62h"]
-[ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_2bhtu"]
+[ext_resource type="PackedScene" uid="uid://bkxsyqwvb8dgm" path="res://Entity/Projectile/ProjectileTest4.tscn" id="2_vs62h"]
+[ext_resource type="PackedScene" uid="uid://b7jer77opiti2" path="res://Entity/Components/Effects/Burn.tscn" id="3_2bhtu"]
 [ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="3_qs858"]
 [ext_resource type="Texture2D" uid="uid://0k1rjusceoto" path="res://Assets/ItchIO/pixelGuyIdk/basic magical animations/corrupted treant/CorruptedTreant.png" id="4_vs62h"]
 [ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/smartArea.gd" id="5_ymv3s"]
@@ -66,7 +67,7 @@ size = Vector2(120, 120)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w6h3m"]
 resource_local_to_scene = true
-radius = 272.118
+radius = 704.0
 
 [node name="TreantAsh" type="CharacterBody2D" unique_id=940119581 groups=["Enemy"]]
 collision_layer = 256
@@ -74,7 +75,8 @@ collision_mask = 267
 motion_mode = 1
 script = ExtResource("1_vs62h")
 XP = 50
-projs = Array[PackedScene]([ExtResource("2_2bhtu"), null, null])
+projs = Array[PackedScene]([ExtResource("2_vs62h"), null, null])
+effects = Array[PackedScene]([ExtResource("3_2bhtu"), null, null])
 mainStat = 20
 HPmax = 200
 
