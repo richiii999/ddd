@@ -1,15 +1,19 @@
 [gd_scene format=3 uid="uid://bjna025e6acb3"]
 
-[ext_resource type="Script" uid="uid://dk75vwl8p2eck" path="res://Entity/Enemy/enemy.gd" id="1_xmg1d"]
+[ext_resource type="Script" uid="uid://bfbdmbtgp7hpy" path="res://Entity/Enemy/Bosses/slime_boss.gd" id="1_xmg1d"]
 [ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_iu3y1"]
+[ext_resource type="PackedScene" uid="uid://doy712uadjpb" path="res://Entity/Enemy/Enemies/SlimeBossMinion.tscn" id="2_oqpxn"]
 [ext_resource type="PackedScene" uid="uid://b7jer77opiti2" path="res://Entity/Components/Effects/Burn.tscn" id="3_oqpxn"]
 [ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="4_0yr5n"]
 [ext_resource type="Texture2D" uid="uid://qslb0hv6f6st" path="res://Assets/Sprites/GD Icons/GD_Green.tres" id="5_g6i3y"]
 [ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/smartArea.gd" id="6_qiocp"]
 [ext_resource type="PackedScene" uid="uid://dfcui8l7w2j3m" path="res://Entity/Components/BehaviorFSM.tscn" id="7_mfen5"]
+[ext_resource type="Script" uid="uid://b1iivep8skg1h" path="res://Entity/Components/Behaviors/Boss/behavior_charge.gd" id="8_vy3on"]
+[ext_resource type="Script" uid="uid://dceikghrd8w4c" path="res://Entity/Components/Behaviors/Boss/behavior_crash.gd" id="9_dow8g"]
 [ext_resource type="PackedScene" uid="uid://bexluv4wwnwxr" path="res://Entity/Components/BossBar.tscn" id="11_1jl7k"]
 [ext_resource type="PackedScene" uid="uid://bntfe5iinhuu5" path="res://UI/Item/loot_table.tscn" id="12_ddl7u"]
 [ext_resource type="PackedScene" uid="uid://dddy50t4saequ" path="res://Entity/Components/EffectComponentSystem.tscn" id="13_ene1r"]
+[ext_resource type="Script" uid="uid://cxshegflcbfxh" path="res://Entity/Projectile/projectile_pattern.gd" id="13_xmg1d"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw8gt"]
 bg_color = Color(1, 0, 0, 1)
@@ -38,6 +42,8 @@ collision_layer = 256
 collision_mask = 267
 motion_mode = 1
 script = ExtResource("1_xmg1d")
+Mob = ExtResource("2_oqpxn")
+XP = 200
 projs = Array[PackedScene]([ExtResource("2_iu3y1"), null, null])
 effects = Array[PackedScene]([ExtResource("3_oqpxn"), null, null])
 kBResistance = 1.0
@@ -92,6 +98,12 @@ debug_color = Color(0.501961, 0.501961, 0.501961, 0.25098)
 
 [node name="BehaviorFSM" parent="." unique_id=669444931 instance=ExtResource("7_mfen5")]
 
+[node name="Behavior_Charge" type="Timer" parent="BehaviorFSM" unique_id=587464750]
+script = ExtResource("8_vy3on")
+
+[node name="Behavior_Crash" type="Timer" parent="BehaviorFSM" unique_id=909734288]
+script = ExtResource("9_dow8g")
+
 [node name="BossBar" parent="." unique_id=1422355881 instance=ExtResource("11_1jl7k")]
 
 [node name="LootTable" parent="." unique_id=727939910 instance=ExtResource("12_ddl7u")]
@@ -104,5 +116,21 @@ lootTable = Dictionary[int, int]({
 
 [node name="EffectsComponentSystem" parent="." unique_id=921567753 instance=ExtResource("13_ene1r")]
 
+[node name="ShootTimer1" type="Timer" parent="." unique_id=424953401]
+wait_time = 0.75
+autostart = true
+
+[node name="ShootTimer2" type="Timer" parent="." unique_id=1173131482]
+wait_time = 5.0
+autostart = true
+
+[node name="ProjectilePattern" type="Node2D" parent="." unique_id=1601197524]
+script = ExtResource("13_xmg1d")
+projectile_scene = ExtResource("2_iu3y1")
+metadata/_custom_type_script = "uid://cxshegflcbfxh"
+
 [connection signal="onEmpty" from="Sight" to="." method="SightIncrease" binds= [false]]
 [connection signal="onFirst" from="Sight" to="." method="SightIncrease" binds= [true]]
+[connection signal="timeout" from="BehaviorFSM/Behavior_Crash" to="BehaviorFSM/Behavior_Crash" method="_on_timeout"]
+[connection signal="timeout" from="ShootTimer1" to="." method="EnemyShoot" binds= [1]]
+[connection signal="timeout" from="ShootTimer2" to="." method="EnemyShoot" binds= [2]]

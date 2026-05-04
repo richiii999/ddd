@@ -16,6 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://dsaqnss63f1sd" path="res://Assets/Sprites/Pets/Lizard.png" id="10_qugiy"]
 [ext_resource type="PackedScene" uid="uid://dbkto02kcwybg" path="res://Entity/Player/Pet/PetLizard.tscn" id="11_nqe2l"]
 [ext_resource type="PackedScene" uid="uid://dkky8m348k6w7" path="res://Maps/Props/Torch.tscn" id="14_up7ug"]
+[ext_resource type="PackedScene" uid="uid://bjna025e6acb3" path="res://Entity/Enemy/Bosses/SlimeBoss.tscn" id="17_n7ruc"]
+[ext_resource type="PackedScene" uid="uid://c873av6ry7k4j" path="res://Entity/Enemy/Enemies/FleeBunny.tscn" id="18_cmjhk"]
 
 [node name="Nexus" type="TileMapLayer" unique_id=961261896 groups=["World"]]
 z_index = -10
@@ -158,5 +160,11 @@ texture_filter = 1
 position = Vector2(-960, 1168)
 scale = Vector2(-2.2, 2.2)
 texture = ExtResource("10_otrks")
+
+[node name="SlimeBoss" parent="." unique_id=1156960978 instance=ExtResource("17_n7ruc")]
+position = Vector2(-536, -329)
+
+[node name="Enemy_Test2" parent="." unique_id=357451089 instance=ExtResource("18_cmjhk")]
+position = Vector2(-290, 46)
 
 [editable path="NPCs/HelalDuck"]

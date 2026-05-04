@@ -132,7 +132,10 @@ func LoadPlayer(P:Player):
 		playerData.Fame -= 1
 	
 	#need to overwrite the skill points that LevelUp() just handed out
-	P.skillPoints = playerData["SkillPoints"]
+	if playerData.has("SkillPoints"):
+		P.skillPoints = playerData["SkillPoints"]
+	else:
+		print("SkillPoints missing from save data")
 	P.XP = playerData.XP
 	# Consumables
 	P.incHPot(playerData.HPotC)

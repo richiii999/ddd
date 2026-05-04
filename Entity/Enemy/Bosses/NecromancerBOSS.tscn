@@ -109,6 +109,8 @@ texture_filter = 1
 scale = Vector2(7.5, 7.5)
 sprite_frames = SubResource("SpriteFrames_q7sfa")
 autoplay = "default"
+frame = 1
+frame_progress = 0.182994
 
 [node name="Physics_Hitbox" type="CollisionShape2D" parent="." unique_id=2055280999]
 shape = SubResource("CircleShape2D_2b4ng")
