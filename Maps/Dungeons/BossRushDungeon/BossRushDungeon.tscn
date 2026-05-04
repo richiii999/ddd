@@ -48,8 +48,8 @@ rotation = 7.853982
 position = Vector2(176, -32)
 enemyScene = ExtResource("7_usm7d")
 statScale = Dictionary[String, float]({
-"DMG": 2.0,
-"HP": 2.0,
+"DMG": 5.0,
+"HP": 10.0,
 "SIZE": 1.0,
 "SPD": 1.0
 })
