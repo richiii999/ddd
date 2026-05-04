@@ -4,6 +4,7 @@ class_name Waygate extends GPUParticles2D ## Waygate: Node for teleporting playe
 @onready var currWorld : WorldBASE = Tools.FindParentByType(self, WorldBASE)
 @export var active : bool = false # Players can only spawn here if active
 @export var exit: bool = false # One-way teleport to Nexus, no GUI (ex. dungeon exit)
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 var currPlayer : Player = null # Set when player interacts with this
 
@@ -64,7 +65,8 @@ func UseWaygate(P:Player): # Teleports player to this waygate
 	
 	P.global_position = global_position # Move player 
 	P.find_child("PlayerCam").InstantMove(global_position) # Force move camera without smoothing
-	P.currWorld = currWorld # Set the player's currWorld to this one (otherwise reading tilemap breaks)
+	P.setCurrWorld(currWorld) # Set the player's currWorld to this one (otherwise reading tilemap breaks)
+	
 	
 	arrived.emit(P)
 	P.LoadingScreenEnd()
@@ -75,6 +77,7 @@ func UseWaygate(P:Player): # Teleports player to this waygate
 	get_tree().process_frame.connect(P.ECS.ClearEffects, CONNECT_ONE_SHOT)
 	
 	EffectTrigger()
+	audio_stream_player.play()
 
 func setActive(state:bool):
 	EffectTrigger(state)
@@ -85,4 +88,4 @@ func setActive(state:bool):
 func EffectTrigger(state:bool=true): # Emits blue particles and changes sprite for a moment
 	#print("EffectTrigger called, state: " + str(state) + "WG= " + str(self))
 	emitting = state; 
-	if(state): $EffectTimer.start(1.5) # Ttops emitting (calls this with state = false)
+	if(state): $EffectTimer.call_deferred("start", 1.5) # Ttops emitting (calls this with state = false)

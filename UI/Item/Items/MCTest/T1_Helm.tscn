@@ -1,12 +1,17 @@
 [gd_scene format=3 uid="uid://xjgo8bavrj53"]
 
-[ext_resource type="Texture2D" uid="uid://dcf70udexp2f8" path="res://Assets/References/Minecraft/Invicon_Leather_Cap.png" id="1_62l27"]
+[ext_resource type="Texture2D" uid="uid://ccmhoa4eim58x" path="res://Assets/ItchIO/Itch Item Icons/Helmets.png" id="1_62l27"]
 [ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_wt6nl"]
 [ext_resource type="Resource" uid="uid://6uxfkrkyiuvg" path="res://Entity/Projectile/Attack/attack_test2.tres" id="3_tklwp"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_wt6nl"]
+atlas = ExtResource("1_62l27")
+region = Rect2(0, -2.8290787, 29.733337, 35.920544)
+
 [node name="LeatherHelm" type="Sprite2D" unique_id=398207244]
-scale = Vector2(8, 8)
-texture = ExtResource("1_62l27")
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_wt6nl")
 script = ExtResource("2_wt6nl")
 type = 1
 stats = Dictionary[int, int]({

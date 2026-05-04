@@ -4,6 +4,9 @@ class_name Player extends ENTITY ## PLAYER: Gamedevs be like: Player.script = 10
 ## Refs to child nodes
 @onready var Inv = $CanvasLayer/RMenu/Inventory # Other stuff needs to access player inv (ex. shops)
 # NOTE: Inv requires there to be a ItemPickupRange (type SmartArea)
+@onready var death_sound: AudioStreamPlayer = $"Death Sound"
+@onready var hurt_sound: AudioStreamPlayer = $Hurt
+@onready var shoot: AudioStreamPlayer = $shoot
 
 ## Stats
 @warning_ignore("int_as_enum_without_cast")
@@ -25,8 +28,8 @@ var effectStats := {}
 ## Pots
 var HPotmax : int = 5 # Max Potions you can carry
 var MPotmax : int = 10
-var HPotC   : int = 3 # Current Potion count
-var MPotC   : int = 5
+var HPotC   : int = 0 # Current Potion count
+var MPotC   : int = 0
 
 ## Pet
 @export var pet: PackedScene
@@ -67,13 +70,6 @@ signal Interact # Emitted with self to any connected interact component
 func getStats(stat:int) -> int: 
 	return coreStats.get(stat, 0) + gearStats.get(stat, 0) + effectStats.get(stat, 0)
 
-#get the item in your main and offhand
-#func getMainHand():
-#	return %Inventory.Inv[%Inventory.Slot.MAINHAND]
-
-#func getOffHand():
-#	return %Inventory.Inv[%Inventory.Slot.OFFHAND]
-
 func getEquippedAttack(index : int) -> AttackData:
 	#check to make sure the inventory node is not null
 	if Inv == null:
@@ -106,27 +102,12 @@ func get_move_spd() -> float:
 	var spd = getStats(Stats.SPD)
 	return 1.0 + (spd / (spd + 20.0))
 
-#debug testing
-#func test_apply_stats():
-	#var test_stats = {Stats.STR: 10, Stats.SPD: 5}
-	
-	#print("Before:", gearStats)
-
-	#applyStats(gearStats, test_stats)
-
-	#print("After add:", gearStats)
-	#print("Total STR:", getStats(Stats.STR)) # should be 5 (core) + 10 = 15
-	#print("Total SPD:", getStats(Stats.SPD)) # should be 1 (core) + 5 = 6
-
-	#applyStats(gearStats, test_stats, -1)
-
-	#print("After remove:", gearStats)
-	#print("Total STR:", getStats(Stats.STR)) # back to 5
-	#print("Total SPD:", getStats(Stats.SPD)) # back to 1
-
 func _ready():
 	super._ready() # call ENTITY._ready() (sets HP and MP)
 	super.EntityUI()
+	UpdateProjStats()
+	maxManaCalc()
+	maxHealthCalc()
 	StatusLabel.addStatusText("Spawned in!", "BLUE")
 	#print(get_tree_string_pretty()) #Debug print the nodetree
 	#test_apply_stats()
@@ -136,8 +117,7 @@ func _ready():
 	%RMenu/Utility/Nex_Button.pressed.connect(Nexus)
 	%RMenu/Utility/HPot_Button.pressed.connect(HPot)
 	%RMenu/Utility/MPot_Button.pressed.connect(MPot)
-	%RMenu/Utility/HPot_Button/HPotValue.text = "%s/%s" % [HPotC, HPotmax]
-	%RMenu/Utility/MPot_Button/MPotValue.text = "%s/%s" % [MPotC, MPotmax]
+	
 	%RMenu/MP_Bar.max_value = MPmax
 	%RMenu/XP_Bar.max_value = XPmax
 	%RMenu/HP_Bar.visible = true
@@ -179,6 +159,7 @@ func get_input(): # TODO: replace this with _input() ?
 	## Mouse inputs: "pressed" NOT "just_pressed" so player can hold shoot / dash
 	# Left Click: Shoot1
 	if (Input.is_action_pressed("LMB") && $ShotTimer.is_stopped()):
+		shoot.play()
 		$ShotTimer.start(max((0.30 / atkSpeed), 0.05)) # Max AtkSpeed is 0.05s per shot (AtkSpeed == 6.00), any higher does nothing
 		ShootProj(1, get_global_mouse_position())
 	
@@ -223,10 +204,18 @@ func get_input(): # TODO: replace this with _input() ?
 		%DashBar.visible = true # Update the visibility for both bars since charging ended
 		if   charge < 10 : incMP(charge) # dont spend mana if it was just a tap
 		elif charge < 25 || charge > MP: $Status.addStatusText("Fizzle! (" + str(charge) + ")", "GRAY") # spend mana, but dont cast a spell if weak charge / OOM
-		elif charge < 100 : ShootProj(2, get_global_mouse_position()); $Status.addStatusText("Spellcast (" + str(charge) + ")", "BLUE")
-		elif charge < 125 :
+		elif charge < 100:
+			var old_main = mainStat
+			mainStat = mainStat + getStats(Stats.INT) * 2
 			ShootProj(2, get_global_mouse_position())
-			Damage((int)( (HPmax >> 3) * ((charge - 100) / 25.00) )) # cost up to 1/8 HP if over 100 charge
+			mainStat = old_main
+			$Status.addStatusText("Spellcast (" + str(charge) + ")", "BLUE")
+		elif charge < 125 :
+			var old_main = mainStat
+			mainStat = mainStat + getStats(Stats.INT) * 2
+			ShootProj(2, get_global_mouse_position())
+			mainStat = old_main
+			Damage((int)( (HPmax >> 3) * ((charge - 100) / 25.00) ))
 			$Status.addStatusText("Spellcast (" + str(charge) + ")", "BLUE")
 			$Status.addStatusText("Manaburn (" + str((int)((HPmax >> 3) * ((charge - 100) / 25.00))) + ")", "RED")
 		incMP(-charge)
@@ -240,7 +229,7 @@ func get_input(): # TODO: replace this with _input() ?
 	if Input.is_action_just_pressed("MPot"): MPot() # MPot with 'G'
 	if Input.is_action_just_pressed("Nexus"): Nexus() # TP back to Nexus with 'N'
 	if Input.is_action_just_pressed("Loot"): Inv.Loot() # Loot with 'Q'
-	if Input.is_action_just_pressed("spawn-pet"): SpawnPet() # Spawn pet with 'X'
+	if Input.is_action_just_pressed("PetTrick"): PetTrick() # Pet do trick with 'X'
 	if Input.is_action_just_pressed("delete-pet"): DeletePet() # Delete pet with 'Z'
 	
 	## UI Toggles 
@@ -255,6 +244,7 @@ func get_input(): # TODO: replace this with _input() ?
 		%PlayerCam.setOffset(%RMenu.visible)
 	if Input.is_action_just_pressed("SkillsUI"): %SkillsUI.visible = !(%SkillsUI.visible) # SkillsUI 'P'
 	if Input.is_action_just_pressed("CharMenu"): toggleCharMenu(!%CharMenu.visible) # CharMenu 'C'
+		
 
 func _physics_process(_delta):
 	## Movement
@@ -267,40 +257,56 @@ func _physics_process(_delta):
 	
 	## MP
 	if(tilePain): Damage(tilePain)
-	
-	if MP < MPmax: incMP(2 if $HurtTimer.is_stopped() else 1) # recharge mana up to 100% (faster if passive)
-	if MP > MPmax  : MP -= (int)( ((MP - MPmax) >> 6) + 1 ) # remove 1/64 proportion + 1 constantly from overflowed MP
-	if MP < 0 - 2 * MPmax: MP = 0 - 2 * MPmax # Clamp minimum MP to -2*max (yes negative is allowed)
-	
+
+	var mp_regen = 1 + getStats(Stats.WIS) / 5
+	if MP < MPmax: incMP(mp_regen * (2 if $HurtTimer.is_stopped() else 1))
+	if MP > MPmax  : MP -= (int)( ((MP - MPmax) >> 6) + 1 )
+	if MP < 0 - 2 * MPmax: MP = 0 - 2 * MPmax
+
 	## HP
-	if $HurtTimer.is_stopped() && HP < (HPmax >> 1) : incHP(1) # recharge health up to 50%
-	if HP > HPmax : HP -= (int)( ((HP - HPmax) >> 7) + 1 ) # remove 1/128 proportion + 1 constantly from overflowed HP
+	var hp_regen = 1 + getStats(Stats.TOU) / 5
+	if $HurtTimer.is_stopped() && HP < (HPmax >> 1): incHP(hp_regen)
+	if HP > HPmax : HP -= (int)( ((HP - HPmax) >> 7) + 1 )
 	
 	## Misc
 	if dashNum < dashMax: dashNum += dashRec # Recover dash
 	
 	UpdateUIBars()
+	
+	#using this to debug shit
+	if Input.is_action_just_pressed("Debug_Print"):
+		print("tilePain: ", tilePain)
+		print("HurtTimer stopped: ", $HurtTimer.is_stopped())
+		print("HurtTimer time left: ", $HurtTimer.time_left)
+		print("HP: ", HP, " / ", HPmax)
+		print("HPmax >> 1: ", HPmax >> 1)
+		
+func maxManaCalc():
+	MPmax = 100 + (Level * 10) + (getStats(Stats.WIL) * 15)
+	%RMenu/MP_Bar.max_value = MPmax
+
+func maxHealthCalc():
+	HPmax = 100 + (Level * 20) + (getStats(Stats.TOU) * 15)
+	%RMenu/HP_Bar.max_value = HPmax
 
 ## Stats calculations
 func WepPower() -> int:
-	var wep = %Inventory.Inv[%Inventory.Slot.MAINHAND]
-	# Null case: use STR / 2
-	if wep == null: return int((coreStats[Stats.STR] + effectStats[Stats.STR] + gearStats[Stats.STR]) * 0.5)
-	
-	return 0
+	var wep = Inv.ItemInSlot(Inv.Slot.MAINHAND)
+	if wep == null: return int(getStats(Stats.STR) * 0.5)
+	return wep.attack.power + getStats(Stats.STR)
 
 ## Consumables
 func HPot(): # Health Potion: Called when press 'H' to restore HP
 	if !HPotC: $Status.addStatusText("Out of Health pots!", "GOLD") # First, if you are out of pots, fail and show UI
 	else: # Use a HPot
 		incHPot(-1)
-		incHP((int)(HPmax * 0.3))
+		incHP(int(HPmax * (0.3 + getStats(Stats.WIS) * 0.01)))
 		$Status.addStatusText("Used health potion", "RED") # Show status text
 func MPot(): # Mana Potion: Called when press 'G' to restore MP
 	if !MPotC: $Status.addStatusText("Out of Mana pots!", "GOLD") # First, if you are out of pots, fail and show UI
 	else: # Use a MPot
 		incMPot(-1)
-		incMP((int)(MPmax * 0.6))
+		incMP(int(MPmax * (0.6 + getStats(Stats.WIS) * 0.01)))
 		$Status.addStatusText("Used mana potion", "BLUE") # Show status text
 func incHPot(i:int):
 	HPotC += i 
@@ -335,21 +341,37 @@ func GainXP(xp : int = 0):
 	else: $CanvasLayer/RMenu/Fame_Bar.value = XP
 	while (XP >= XPmax): LevelUp() # "While" for rare cases where you level up more than once
 	
-## Spawn the pet (For now we are just going to spawn the pet)
-## TODO: Interact with pets and possibly add them to inventory
-func SpawnPet():
-	if pet_instance == null:
-		pet_instance = pet.instantiate()
-		get_parent().add_child(pet_instance)
-		
-		pet_instance.global_position = global_position + Vector2(50, 0)
-		pet_instance.player = self # Set the player variable for the instantiated pet
-		
-# Deletes the player's pet
-func DeletePet():
+## Spawn the given Pet
+func SpawnPet(newPet:PackedScene):
+	if pet_instance != null:
+		$Status.addStatusText("You have a Pet!", "BLUE")
+		$Status.addStatusText("'Z' to abandon Pet!", "BLUE")
+		return
+	
+	pet_instance = newPet.instantiate()
+	get_parent().add_child(pet_instance)
+	
+	pet_instance.global_position = global_position + Vector2(50, 0)
+	pet_instance.player = self # Set the player variable for the instantiated newPet
+	$Status.addStatusText("You gained a Pet!", "BLUE")
+	$Status.addStatusText("'X' to do a trick!", "BLUE")
+
+## Deletes the player's Pet
+func DeletePet(): 
 	if is_instance_valid(pet_instance):
 		pet_instance.queue_free()
 		pet_instance = null
+
+## Makes Player's Pet do a trick
+func PetTrick(): if pet_instance != null: pet_instance.Trick()
+
+## Changes currWorld and plays BGM
+func setCurrWorld(newWorld:WorldBASE):
+	if newWorld == null: push_error("Tried to set null world!"); return
+	currWorld = newWorld
+	
+	$BGM.set_stream(newWorld.BGM if newWorld.BGM else null)
+	if $BGM.stream: $BGM.play()
 
 func LevelUp(): 
 	if (Level < 25): # If not maxed yet
@@ -358,7 +380,8 @@ func LevelUp():
 		$CanvasLayer/RMenu/XP_Bar.max_value = XPmax
 		$CanvasLayer/RMenu/XP_Bar.value = XP
 		
-		MPmax += 10
+		maxManaCalc()
+		maxHealthCalc()
 		$CanvasLayer/RMenu/MP_Bar.max_value = MPmax
 		$CanvasLayer/RMenu/HP_Bar.max_value = HPmax
 		skillPoints += 1
@@ -376,35 +399,18 @@ func LevelUp():
 		XP -= XPmax; XPmax = (int)(XPmax * XPScaleFactor)
 		$CanvasLayer/RMenu/Fame_Bar.value = XP
 		$CanvasLayer/RMenu/Fame_Bar.max_value = XPmax
-		
-	HPmax += 20
-	MPmax += 10
+		maxManaCalc()
+		maxHealthCalc()
 	incHP(HPmax)
 	incMP(MPmax)
 
 #updates the projectile stats
 # TODO: Possibly add modifiers?
 func UpdateProjStats(): 
-	# Base values
-	var base_speed = 10
-	var base_power = 10
-	var base_pierce = 2
-	var base_kB = 250.0
-	
-	# Gear stat values
-	var gear_agi = gearStats.get(Stats.AGI, 0)
-	var gear_str = gearStats.get(Stats.STR, 0)
-	var gear_dex = gearStats.get(Stats.DEX, 0)
-	
-	projSpeed  = base_speed + gear_agi
-	mainStat   = base_power + gear_str
-	piercing   = base_pierce + gear_dex
-	kBstrength1 = base_kB + gear_str
-	
-	#projSpeed  = 10 + getStats(Stats.AGI)
-	#mainStat   = 10 + getStats(Stats.STR)
-	#piercing   = 2 + getStats(Stats.DEX)
-	#kBstrength1 = 250.0 + getStats(Stats.STR)
+	projSpeed  = 10 + (getStats(Stats.AGI) / 2)
+	mainStat   = 10 + (getStats(Stats.STR) / 2) 
+	piercing   = 2 + (getStats(Stats.DEX) / 2)
+	kBstrength1 = 250.0 + (getStats(Stats.STR) / 2)
 
 #TODO: update this function to take in an item rather than bool, type, sourcestats since item has all of that garbagio
 func UpdateStats(increase: bool, stats: Dictionary) -> void:
@@ -414,8 +420,8 @@ func UpdateStats(increase: bool, stats: Dictionary) -> void:
 		applyStats(gearStats, stats, -1)
 	
 	UpdateProjStats() #recalculate proj stats after any gear change
-	#print("GEAR STATS:", gearStats)
-	#print("FINAL SPD:", getStats(Stats.SPD))
+	maxManaCalc()
+	maxHealthCalc()
 	
 ## Transitional stuff: Player is teleporting, loading into the world, or otherwise waiting
 func toggleBubble(state:bool) -> void: # Makes player invulnerable, disables input, bubble around player
@@ -460,17 +466,21 @@ func UpdateUIBars(): # All at once rather than spread out
 
 func toggleCharMenu(state:bool):
 	%CharMenu.visible = state
+	%CharMenu.refresh_stats()
 
 ## OVERRIDE FUNCS: Entity Overridden funcs by Player.gd
 func Death(): 
 	%DeathScreen.visible = true
-	
+	death_sound.play()
 	toggleBubble(true)
 	self.velocity = Vector2.ZERO
 	
 	get_tree().set_pause( true )
 
 func Damage(power : int, crit:bool=false):
+	var reduction = getStats(Stats.BLK) * 0.02  # 2% eper point
+	power = int(power * (1.0 - reduction))
+	hurt_sound.play()
 	super.Damage(power, crit)
 	$HurtTimer.start(5.00)
 

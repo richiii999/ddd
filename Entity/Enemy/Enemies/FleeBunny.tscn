@@ -1,7 +1,6 @@
-[gd_scene format=3 uid="uid://coo4jrce2m4tu"]
+[gd_scene format=3 uid="uid://c873av6ry7k4j"]
 
 [ext_resource type="Script" uid="uid://dk75vwl8p2eck" path="res://Entity/Enemy/enemy.gd" id="1_xoamq"]
-[ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_ihjrd"]
 [ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="3_qhfj0"]
 [ext_resource type="Texture2D" uid="uid://dq6232arfxx81" path="res://Assets/Sprites/GD Icons/GD_Red.tres" id="4_v54h3"]
 [ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/smartArea.gd" id="5_1bj6m"]
@@ -36,8 +35,6 @@ collision_layer = 256
 collision_mask = 267
 motion_mode = 1
 script = ExtResource("1_xoamq")
-proj1 = ExtResource("2_ihjrd")
-proj2 = ExtResource("2_ihjrd")
 HPmax = 100
 
 [node name="Status" parent="." unique_id=1017605701 instance=ExtResource("3_qhfj0")]
@@ -104,8 +101,7 @@ one_shot = true
 wait_time = 10.0
 autostart = true
 
-[node name="BehaviorFSM" parent="." unique_id=377854388 node_paths=PackedStringArray("initState") instance=ExtResource("6_vwlhs")]
-initState = NodePath("behavior_orbit")
+[node name="BehaviorFSM" parent="." unique_id=377854388 instance=ExtResource("6_vwlhs")]
 
 [node name="behavior_orbit" parent="BehaviorFSM" unique_id=1988772191 instance=ExtResource("7_6srq1")]
 

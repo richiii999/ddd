@@ -15,6 +15,7 @@ signal damage # emitted to the thing it hits with (source, power) params
 var linear_velocity : Vector2 = Vector2(0,0) # Constant linear Velocity 
 # NOTE: this is an area2D, not a physics object like RigidBody2D
 
+
 ## Constructor, this replaces the projectile manager signal translator thingy
 func Spawn( Source : Node = null,
 			Rotation : float = 0.00, # The direction of travel (radians)
@@ -39,14 +40,12 @@ func Spawn( Source : Node = null,
 	field = endField
 	#$Sprite2D.apply_scale(Vector2(ScaleFactor, ScaleFactor)) # Scales the proj
 	# TODO: WTF! can't just scale the root node? "Overriden by physics engine"
-	
 	var projLayer = 6 if (player) else 10
 	var projMask = 7 if (!player) else 11
 	var wallMask  = 8 if (player) else 12
 	set_collision_layer_value(projLayer, true)
 	set_collision_mask_value(projMask, true)
 	set_collision_mask_value(wallMask, true)
-	
 	return self
 
 func _physics_process(_delta): global_position += linear_velocity # Simple physics, dont need full Rigidbody2D calculations
@@ -82,7 +81,11 @@ func AreaCollide(area : Area2D) -> void: ## Entity collide
 		damage.connect(entity.Knockback, 4)
 		damage.emit(global_position, knockback)
 		
-		if effect and entity.ECS: entity.ECS.AddEffect(effect)
+		if effect and entity.ECS:
+			if source and source is Player:
+				effect.sourcePower = source.getStats(Stats.INT) if source else 0
+			else: effect.sourcePower = 5
+			entity.ECS.AddEffect(effect)
 		
 		piercing -= 1
 		if(piercing): return # break early to prevent destruct

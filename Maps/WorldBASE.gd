@@ -3,6 +3,8 @@ class_name WorldBASE extends TileMapLayer ## Base class for worlds, stores stats
 # NOTE: Worlds must have the following child nodes (all Node2D):
 	# WorldEffects, Waygates, Spawners
 
+@export var BGM : AudioStream = null # BGM to play when entering world
+
 # Permanent effects given to players upon entering the world
 @onready var WorldEffects : Array[Node] = $WorldEffects.get_children()
 

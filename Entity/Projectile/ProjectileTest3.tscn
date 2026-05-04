@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://cmbxx4yme512w"]
+
+[ext_resource type="Script" uid="uid://crrvk6x6885m" path="res://Entity/Projectile/projectile.gd" id="1_v2q56"]
+[ext_resource type="Texture2D" uid="uid://b476ut0ua7xdv" path="res://Assets/Sprites/Particles/Energy_ball.png" id="2_v2q56"]
+[ext_resource type="Texture2D" uid="uid://dy12ff7b16url" path="res://Assets/Sprites/Particles/star particle white.png" id="3_v2q56"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gyw6f"]
+size = Vector2(28, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_opdfb"]
+atlas = ExtResource("2_v2q56")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbey6"]
+atlas = ExtResource("2_v2q56")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ob3y6"]
+atlas = ExtResource("2_v2q56")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0m3hy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_opdfb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbey6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ob3y6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l7fne"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+inherit_velocity_ratio = 0.5
+direction = Vector3(-1, 0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 0, 0)
+
+[node name="Projectile" type="Area2D" unique_id=2065421689 groups=["Projectile"]]
+collision_layer = 0
+collision_mask = 9
+script = ExtResource("1_v2q56")
+
+[node name="CollisionBox2D" type="CollisionShape2D" parent="." unique_id=170694314]
+shape = SubResource("RectangleShape2D_gyw6f")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1628282053]
+z_index = 3
+position = Vector2(4.7683716e-07, 4.7683716e-07)
+scale = Vector2(1.9999999, 1.9999999)
+sprite_frames = SubResource("SpriteFrames_0m3hy")
+autoplay = "default"
+frame_progress = 0.06951823
+
+[node name="ProjTime" type="Timer" parent="." unique_id=1506985516]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[node name="ProjParticles" type="GPUParticles2D" parent="." unique_id=136577469]
+texture = ExtResource("3_v2q56")
+process_material = SubResource("ParticleProcessMaterial_l7fne")
+
+[connection signal="area_entered" from="." to="." method="AreaCollide"]
+[connection signal="body_shape_entered" from="." to="." method="BodyCollideRID"]
+[connection signal="timeout" from="ProjTime" to="." method="Destruct"]

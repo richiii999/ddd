@@ -1,7 +1,8 @@
-[gd_scene format=3 uid="uid://dgtlakw8834qa"]
+[gd_scene format=3 uid="uid://bca2k1o6q71dn"]
 
 [ext_resource type="Script" uid="uid://ncx0o5gc4pic" path="res://Entity/Enemy/Enemies/necromancer.gd" id="1_6tkx8"]
 [ext_resource type="PackedScene" uid="uid://wdbtjasqamu2" path="res://Entity/Projectile/ProjectileTest.tscn" id="2_7i3r3"]
+[ext_resource type="PackedScene" uid="uid://b7jer77opiti2" path="res://Entity/Components/Effects/Burn.tscn" id="3_7i3r3"]
 [ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="3_b0mi6"]
 [ext_resource type="Texture2D" uid="uid://d2oum50pfm7sq" path="res://Assets/ItchIO/pixelGuyIdk/basic magical animations/adept necromancer/AdeptNecromancer.png" id="4_owr1e"]
 [ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/smartArea.gd" id="5_5rpb5"]
@@ -80,6 +81,7 @@ motion_mode = 1
 script = ExtResource("1_6tkx8")
 XP = 200
 projs = Array[PackedScene]([ExtResource("2_7i3r3"), ExtResource("2_7i3r3"), ExtResource("2_7i3r3")])
+effects = Array[PackedScene]([ExtResource("3_7i3r3"), null, null])
 immovable = true
 
 [node name="Status" parent="." unique_id=869158990 instance=ExtResource("3_b0mi6")]
@@ -109,6 +111,8 @@ texture_filter = 1
 scale = Vector2(7.5, 7.5)
 sprite_frames = SubResource("SpriteFrames_q7sfa")
 autoplay = "default"
+frame = 1
+frame_progress = 0.182994
 
 [node name="Physics_Hitbox" type="CollisionShape2D" parent="." unique_id=2055280999]
 shape = SubResource("CircleShape2D_2b4ng")
@@ -160,8 +164,7 @@ isFinal = true
 
 [node name="LootTable" parent="." unique_id=1315550005 instance=ExtResource("9_lanxk")]
 lootTable = Dictionary[int, int]({
-0: 0,
-1: 1
+18: 1
 })
 
 [node name="EffectsComponentSystem" parent="." unique_id=921567753 instance=ExtResource("10_7aklf")]
@@ -173,7 +176,7 @@ maxMobs = 2
 onlyWhenOffScreen = false
 
 [node name="RespawnTimer" parent="EnemySpawnNode" index="0" unique_id=1959530611]
-wait_time = 6.0
+wait_time = 10.0
 
 [node name="ProjectilePattern" type="Node2D" parent="." unique_id=998689461]
 script = ExtResource("13_1h0en")

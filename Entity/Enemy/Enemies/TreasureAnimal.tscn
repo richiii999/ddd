@@ -1,0 +1,162 @@
+[gd_scene format=3 uid="uid://coo4jrce2m4tu"]
+
+[ext_resource type="Script" uid="uid://dk75vwl8p2eck" path="res://Entity/Enemy/enemy.gd" id="1_xoamq"]
+[ext_resource type="PackedScene" uid="uid://dkf8po3prat36" path="res://Entity/Components/Effects/Slow.tscn" id="2_qmxhd"]
+[ext_resource type="PackedScene" uid="uid://dko0els7hvmek" path="res://Entity/Projectile/ProjectileTest2.tscn" id="2_xcxum"]
+[ext_resource type="Texture2D" uid="uid://cxgixsin3bfsp" path="res://Assets/Sprites/TreasureAnimalFrames.png" id="3_7pye5"]
+[ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="3_qhfj0"]
+[ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/smartArea.gd" id="5_1bj6m"]
+[ext_resource type="PackedScene" uid="uid://dfcui8l7w2j3m" path="res://Entity/Components/BehaviorFSM.tscn" id="6_vwlhs"]
+[ext_resource type="PackedScene" uid="uid://dvourlhp5t1tv" path="res://Entity/Components/Behaviors/ChaseFlee.tscn" id="7_kputd"]
+[ext_resource type="PackedScene" uid="uid://dk58kntas8hfd" path="res://Entity/Components/Behaviors/Wander.tscn" id="8_71ktc"]
+[ext_resource type="PackedScene" uid="uid://bntfe5iinhuu5" path="res://UI/Item/loot_table.tscn" id="10_n3xvv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw8gt"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wjxar"]
+bg_color = Color(0, 1, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.501961, 0, 1)
+corner_detail = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1bj6m"]
+atlas = ExtResource("3_7pye5")
+region = Rect2(0, 0, 15, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qvh4c"]
+atlas = ExtResource("3_7pye5")
+region = Rect2(15, 0, 15, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_41so0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1bj6m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qvh4c")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2b4ng"]
+radius = 50.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o61b1"]
+size = Vector2(120, 120)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w6h3m"]
+resource_local_to_scene = true
+radius = 544.0
+
+[node name="TreasureAnimal" type="CharacterBody2D" unique_id=357451089 groups=["Enemy"]]
+collision_layer = 256
+collision_mask = 267
+motion_mode = 1
+wall_min_slide_angle = 0.0
+safe_margin = 0.245
+script = ExtResource("1_xoamq")
+XP = 100
+projs = Array[PackedScene]([ExtResource("2_xcxum"), null, null])
+effects = Array[PackedScene]([ExtResource("2_qmxhd"), null, null])
+HPmax = 100
+
+[node name="Status" parent="." unique_id=1017605701 instance=ExtResource("3_qhfj0")]
+offset_left = -72.0
+offset_top = -120.0
+offset_right = 80.0
+offset_bottom = -72.0
+metadata/_edit_use_anchors_ = true
+
+[node name="HP_Bar" type="ProgressBar" parent="." unique_id=2117892988]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_top = 64.0
+offset_right = 64.0
+offset_bottom = 87.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 16
+theme_override_styles/background = SubResource("StyleBoxFlat_pw8gt")
+theme_override_styles/fill = SubResource("StyleBoxFlat_wjxar")
+value = 50.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=25977098]
+texture_filter = 1
+position = Vector2(3.8146973e-06, 0)
+scale = Vector2(7.466667, 8)
+sprite_frames = SubResource("SpriteFrames_41so0")
+autoplay = "default"
+
+[node name="Physics_Hitbox" type="CollisionShape2D" parent="." unique_id=307715714]
+shape = SubResource("CircleShape2D_2b4ng")
+
+[node name="Projectile_Hitbox" type="Area2D" parent="." unique_id=335481935]
+collision_layer = 1024
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Projectile_Hitbox" unique_id=1103908379]
+shape = SubResource("RectangleShape2D_o61b1")
+
+[node name="Sight" type="Area2D" parent="." unique_id=1253123646]
+collision_layer = 0
+collision_mask = 16
+input_pickable = false
+monitorable = false
+script = ExtResource("5_1bj6m")
+metadata/_custom_type_script = "uid://hi4e34yydb2t"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=1257401987]
+shape = SubResource("CircleShape2D_w6h3m")
+debug_color = Color(0.501961, 0.501961, 0.501961, 0.25098)
+
+[node name="ShootTimer1" type="Timer" parent="." unique_id=124978852]
+wait_time = 2.0
+autostart = true
+
+[node name="ShootTimer2" type="Timer" parent="." unique_id=551036897]
+wait_time = 2.0
+autostart = true
+
+[node name="DamageFlashTimer" type="Timer" parent="." unique_id=1481142803]
+wait_time = 0.25
+one_shot = true
+
+[node name="FocusTimer" type="Timer" parent="." unique_id=1204449370]
+wait_time = 10.0
+autostart = true
+
+[node name="BehaviorFSM" parent="." unique_id=377854388 instance=ExtResource("6_vwlhs")]
+
+[node name="behavior_wander" parent="BehaviorFSM" unique_id=1079043789 instance=ExtResource("8_71ktc")]
+
+[node name="behavior_chaseFlee" parent="BehaviorFSM" unique_id=1227871601 instance=ExtResource("7_kputd")]
+chaseOrFlee = false
+TargetEntity = true
+speed = 2.0
+
+[node name="LootTable" parent="." unique_id=530515387 instance=ExtResource("10_n3xvv")]
+numRolls = 5
+lootTable = Dictionary[int, int]({
+-2: 2,
+0: 2
+})
+
+[connection signal="onEmpty" from="Sight" to="." method="SightIncrease" binds= [false]]
+[connection signal="onEmpty" from="Sight" to="ShootTimer1" method="set_paused" binds= [true]]
+[connection signal="onEmpty" from="Sight" to="BehaviorFSM" method="ChangeStateByIdx" binds= [0]]
+[connection signal="onFirst" from="Sight" to="." method="SightIncrease" binds= [true]]
+[connection signal="onFirst" from="Sight" to="ShootTimer1" method="set_paused" binds= [false]]
+[connection signal="onFirst" from="Sight" to="BehaviorFSM" method="ChangeStateByIdx" binds= [1]]
+[connection signal="timeout" from="ShootTimer1" to="." method="EnemyShoot" binds= [1]]
+[connection signal="timeout" from="DamageFlashTimer" to="." method="setStatusFlash"]
+[connection signal="timeout" from="FocusTimer" to="." method="FocusTick"]

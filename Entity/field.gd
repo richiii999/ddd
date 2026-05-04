@@ -34,8 +34,9 @@ func onEnter(entity : Node2D):
 	if entity is not ENTITY: # Try to find parent Entity
 		entity = Tools.FindParentByType(entity, ENTITY)
 	if entity is ENTITY:
-		entity.ECS.RemoveEffectByName(effect.efname)
-		entity.ECS.AddEffect(effect.duplicate(), true)
+		if entity.ECS != null: # Some enemies dont have ECS, they are immune
+			entity.ECS.RemoveEffectByName(effect.efname)
+			entity.ECS.AddEffect(effect.duplicate(), true)
 	else: push_error("Non entity entered field, wtf")
 
 ## Replace the constant field effect with a lingering effect
@@ -45,6 +46,7 @@ func onLeave(entity : Node2D):
 	if entity is not ENTITY: # Try to find parent Entity
 		entity = Tools.FindParentByType(entity, ENTITY)
 	if entity is ENTITY:
-		entity.ECS.RemoveEffectByName(effect.efname)
-		if lingering > 0.0: entity.ECS.AddEffect(effect.duplicate(), false, lingering)
+		if entity.ECS != null:
+			entity.ECS.RemoveEffectByName(effect.efname)
+			if lingering > 0.0: entity.ECS.AddEffect(effect.duplicate(), false, lingering)
 	else: push_error("Non entity exited field, wtf")
