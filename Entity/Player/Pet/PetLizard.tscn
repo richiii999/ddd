@@ -1,7 +1,29 @@
 [gd_scene format=3 uid="uid://dbkto02kcwybg"]
 
 [ext_resource type="Script" uid="uid://dq33y75pnwsmq" path="res://Entity/Player/Pet/pet.gd" id="1_i64fu"]
-[ext_resource type="Texture2D" uid="uid://dsaqnss63f1sd" path="res://Assets/Sprites/Pets/Lizard.png" id="2_i64fu"]
+[ext_resource type="Texture2D" uid="uid://ciyu5qtwcy3uj" path="res://Assets/Sprites/Pets/LizardAnim.png" id="2_i64fu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ybd5r"]
+atlas = ExtResource("2_i64fu")
+region = Rect2(0, 0, 29, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8fo6k"]
+atlas = ExtResource("2_i64fu")
+region = Rect2(29, 0, 29, 17)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rtxik"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ybd5r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8fo6k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_is5pi"]
 size = Vector2(51, 50)
@@ -10,10 +32,12 @@ size = Vector2(51, 50)
 motion_mode = 1
 script = ExtResource("1_i64fu")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1082199575]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=807343550]
 texture_filter = 1
 scale = Vector2(1.6, 1.6)
-texture = ExtResource("2_i64fu")
+sprite_frames = SubResource("SpriteFrames_rtxik")
+autoplay = "default"
+frame_progress = 0.005830043
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=926908102]
 position = Vector2(0.5, 1)

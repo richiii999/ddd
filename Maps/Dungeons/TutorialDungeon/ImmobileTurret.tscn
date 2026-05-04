@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dppmxe0j0n61c" path="res://Maps/Dungeons/TutorialDungeon/immobile_turret.gd" id="1_tu645"]
 [ext_resource type="PackedScene" uid="uid://dh5gc4sj4sodd" path="res://Entity/Components/Status.tscn" id="3_anggt"]
-[ext_resource type="Texture2D" uid="uid://dq6232arfxx81" path="res://Assets/Sprites/GD Icons/GD_Red.tres" id="4_pxxqj"]
+[ext_resource type="Texture2D" uid="uid://hxr5pc0qonf" path="res://Assets/ItchIO/pixelGuyIdk/basic magical animations/water elemental/WaterElemental.png" id="3_wf2ui"]
 [ext_resource type="Script" uid="uid://hi4e34yydb2t" path="res://Script Classes and Base Scenes/smartArea.gd" id="5_hubi5"]
 [ext_resource type="PackedScene" uid="uid://dfcui8l7w2j3m" path="res://Entity/Components/BehaviorFSM.tscn" id="6_o3cnu"]
 [ext_resource type="PackedScene" uid="uid://dk58kntas8hfd" path="res://Entity/Components/Behaviors/Wander.tscn" id="7_c2yg2"]
@@ -24,6 +24,42 @@ border_width_bottom = 2
 border_color = Color(0, 0.501961, 0, 1)
 corner_detail = 1
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_627m2"]
+atlas = ExtResource("3_wf2ui")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpke2"]
+atlas = ExtResource("3_wf2ui")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7v2kv"]
+atlas = ExtResource("3_wf2ui")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axanq"]
+atlas = ExtResource("3_wf2ui")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hb3hc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_627m2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wpke2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7v2kv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axanq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_2b4ng"]
 radius = 50.0
 
@@ -32,14 +68,16 @@ size = Vector2(120, 120)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w6h3m"]
 resource_local_to_scene = true
-radius = 2716.6626
+radius = 2056.0156
 
 [node name="Immobile_Turret" type="CharacterBody2D" unique_id=654557338 groups=["Enemy"]]
 collision_layer = 256
 collision_mask = 267
 motion_mode = 1
 script = ExtResource("1_tu645")
+mainStat = 2
 atkSpeed = 0.5
+kBstrength1 = 1000.0
 immovable = true
 
 [node name="Status" parent="." unique_id=869158990 instance=ExtResource("3_anggt")]
@@ -64,8 +102,12 @@ theme_override_styles/background = SubResource("StyleBoxFlat_pw8gt")
 theme_override_styles/fill = SubResource("StyleBoxFlat_wjxar")
 value = 50.0
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1213981542]
-texture = ExtResource("4_pxxqj")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=90381493]
+position = Vector2(0, 3.8146973e-06)
+scale = Vector2(7, 7.0000005)
+sprite_frames = SubResource("SpriteFrames_hb3hc")
+autoplay = "default"
+frame_progress = 0.6148345
 
 [node name="Physics_Hitbox" type="CollisionShape2D" parent="." unique_id=2055280999]
 shape = SubResource("CircleShape2D_2b4ng")

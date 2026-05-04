@@ -1,11 +1,40 @@
 [gd_scene format=3 uid="uid://bkxsyqwvb8dgm"]
 
 [ext_resource type="Script" uid="uid://crrvk6x6885m" path="res://Entity/Projectile/projectile.gd" id="1_nhb2y"]
-[ext_resource type="Texture2D" uid="uid://3baec8vvuxpd" path="res://Assets/Sprites/GD Icons/GD_Orange.tres" id="2_nhb2y"]
+[ext_resource type="Texture2D" uid="uid://cd8o052ivlgs4" path="res://Assets/Sprites/Particles/fire_ball.png" id="2_nhb2y"]
 [ext_resource type="Texture2D" uid="uid://dy12ff7b16url" path="res://Assets/Sprites/Particles/star particle white.png" id="3_jgc6j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gyw6f"]
 size = Vector2(28, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gk5ba"]
+atlas = ExtResource("2_nhb2y")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jgc6j"]
+atlas = ExtResource("2_nhb2y")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f6qq5"]
+atlas = ExtResource("2_nhb2y")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vft5v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gk5ba")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jgc6j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f6qq5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l7fne"]
 lifetime_randomness = 0.5
@@ -24,10 +53,13 @@ script = ExtResource("1_nhb2y")
 [node name="CollisionBox2D" type="CollisionShape2D" parent="." unique_id=170694314]
 shape = SubResource("RectangleShape2D_gyw6f")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=367044911]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1783120728]
 z_index = 3
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_nhb2y")
+position = Vector2(4.7683716e-07, 4.7683716e-07)
+scale = Vector2(1.9999999, 1.9999999)
+sprite_frames = SubResource("SpriteFrames_vft5v")
+autoplay = "default"
+frame_progress = 0.84337115
 
 [node name="ProjTime" type="Timer" parent="." unique_id=1506985516]
 wait_time = 4.0

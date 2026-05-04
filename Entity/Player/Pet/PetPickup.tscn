@@ -3,17 +3,39 @@
 [ext_resource type="Script" uid="uid://c7wctnq2tvedw" path="res://Entity/Player/Pet/petPickup.gd" id="2_6sake"]
 [ext_resource type="PackedScene" uid="uid://c8y460v3po8xh" path="res://Script Classes and Base Scenes/Interactable.tscn" id="2_nae7t"]
 [ext_resource type="Texture2D" uid="uid://kvedle5n3nvh" path="res://Assets/Sprites/Pets/Duck.png" id="2_xulvg"]
-[ext_resource type="PackedScene" uid="uid://cs61kw023xsp4" path="res://Entity/Player/Pet/PetDuck.tscn" id="3_42om1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apcp3"]
+atlas = ExtResource("2_xulvg")
+region = Rect2(0, 0, 13, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42om1"]
+atlas = ExtResource("2_xulvg")
+region = Rect2(13, 0, 13, 19)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_48lip"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_apcp3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_42om1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_is5pi"]
 size = Vector2(51, 50)
 
-[node name="PetPickup" type="Sprite2D" unique_id=1082199575]
+[node name="AnimatedPetPickup" type="AnimatedSprite2D" unique_id=186255342]
 texture_filter = 1
 scale = Vector2(2.1, 2.1)
-texture = ExtResource("2_xulvg")
+sprite_frames = SubResource("SpriteFrames_48lip")
+autoplay = "default"
+frame_progress = 0.87137884
 script = ExtResource("2_6sake")
-Pet = ExtResource("3_42om1")
 
 [node name="InteractComponent" parent="." unique_id=248235521 instance=ExtResource("2_nae7t")]
 

@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://b5vd2rrbcty04" path="res://UI/RMenu/Minimap/minimap.tscn" id="1_jjgq5"]
 [ext_resource type="PackedScene" uid="uid://dtef1w3v7r3y1" path="res://UI/RMenu/Utility_Buttons.tscn" id="2_e8gpg"]
 [ext_resource type="PackedScene" uid="uid://dmuxbr5wnadof" path="res://UI/RMenu/Inventory/inventory.tscn" id="3_pcc4m"]
+[ext_resource type="Texture2D" uid="uid://bnwql7xu6fqns" path="res://Assets/ItchIO/2D Pixel Dungeon Asset Pack v2.0/2D Pixel Dungeon Asset Pack/items and trap_animation/coin/coin_1.png" id="4_d3buq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aog62"]
 bg_color = Color(1, 0, 0, 1)
@@ -220,11 +221,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Coins" type="RichTextLabel" parent="." unique_id=1055815199]
+clip_contents = false
 layout_mode = 0
-offset_left = -60.99994
-offset_top = 29.0
-offset_right = -5.999939
-offset_bottom = 69.0
+offset_left = 208.00006
+offset_top = 64.0
+offset_right = 263.00006
+offset_bottom = 104.0
 text = "0"
 horizontal_alignment = 1
 
@@ -235,3 +237,20 @@ offset_bottom = 40.0
 text = "Coins"
 horizontal_alignment = 1
 vertical_alignment = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Coins" unique_id=39195949]
+position = Vector2(27, -10)
+scale = Vector2(2.3063877, 2.270786)
+texture = ExtResource("4_d3buq")
+
+[node name="DDD" type="RichTextLabel" parent="." unique_id=384790903]
+layout_mode = 0
+offset_left = 16.000061
+offset_top = 9.0
+offset_right = 208.00006
+offset_bottom = 105.0
+text = "Domain of the Deranged Deity
+
+GameJam Build"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -166,7 +166,6 @@ texture_filter = 1
 scale = Vector2(5.165, 5.165)
 sprite_frames = SubResource("SpriteFrames_2wcg3")
 animation = &"Explode"
-autoplay = "Walk"
 frame = 3
 frame_progress = 1.0
 

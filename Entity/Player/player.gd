@@ -360,7 +360,7 @@ func SpawnPet(newPet:PackedScene):
 	pet_instance.global_position = global_position + Vector2(50, 0)
 	pet_instance.player = self # Set the player variable for the instantiated newPet
 	$Status.addStatusText("You gained a Pet!", "BLUE")
-	$Status.addStatusText("'X' to make it do a trick!", "BLUE")
+	$Status.addStatusText("'X' to do a trick!", "BLUE")
 
 ## Deletes the player's Pet
 func DeletePet(): 
@@ -370,6 +370,14 @@ func DeletePet():
 
 ## Makes Player's Pet do a trick
 func PetTrick(): if pet_instance != null: pet_instance.Trick()
+
+## Changes currWorld and plays BGM
+func setCurrWorld(newWorld:WorldBASE):
+	if newWorld == null: push_error("Tried to set null world!"); return
+	currWorld = newWorld
+	
+	$BGM.set_stream(newWorld.BGM if newWorld.BGM else null)
+	if $BGM.stream: $BGM.play()
 
 func LevelUp(): 
 	if (Level < 25): # If not maxed yet
