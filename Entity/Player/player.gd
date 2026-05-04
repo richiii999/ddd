@@ -260,7 +260,8 @@ func _physics_process(_delta):
 	## MP
 	if(tilePain): 
 		Damage(tilePain)
-		sizz.play()
+		if not sizz.playing:
+			sizz.play()
 
 	var mp_regen = 1 + getStats(Stats.WIS) / 5
 	if MP < MPmax: incMP(mp_regen * (2 if $HurtTimer.is_stopped() else 1))
