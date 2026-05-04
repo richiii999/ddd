@@ -30,6 +30,7 @@ window/size/viewport_height=720
 window/size/resizable=false
 window/size/borderless=true
 window/stretch/mode="canvas_items"
+mouse_cursor/custom_image="uid://d370gpd7ufbu2"
 
 [dotnet]
 
