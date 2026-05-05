@@ -8,22 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://b2qm4p2gtiog0" path="res://Assets/UI/Inventory/wep_slot.png" id="7_bryy3"]
 [ext_resource type="Texture2D" uid="uid://i1k3ja2x7sws" path="res://Assets/UI/Inventory/off_slot.png" id="8_v0o5t"]
 [ext_resource type="Texture2D" uid="uid://cafh7gmk78b2p" path="res://Assets/UI/Inventory/r2_slot.png" id="9_1g0hy"]
-[ext_resource type="AudioStream" uid="uid://cij2d7uul03au" path="res://Assets/Audio/SFX/DSGNTonl_USABLE-Coin Zap_HY_PC-001.wav" id="9_1ouby"]
-[ext_resource type="AudioStream" uid="uid://dldr4tsel63xl" path="res://Assets/Audio/SFX/DSGNTonl_USABLE-Coin Zap_HY_PC-002.wav" id="10_aliqq"]
-[ext_resource type="AudioStream" uid="uid://b5b7ndh8i35lo" path="res://Assets/Audio/SFX/DSGNTonl_USABLE-Coin Zap_HY_PC-003.wav" id="11_is466"]
-[ext_resource type="AudioStream" uid="uid://y1ntqj2xlm60" path="res://Assets/Audio/SFX/DSGNTonl_USABLE-Coin Zap_HY_PC-004.wav" id="12_24n4j"]
-[ext_resource type="AudioStream" uid="uid://dbu1kte4kgnxe" path="res://Assets/Audio/SFX/DSGNTonl_USABLE-Coin Zap_HY_PC-005.wav" id="13_aqs8b"]
-[ext_resource type="AudioStream" uid="uid://c0usvaib4a57p" path="res://Assets/Audio/SFX/DSGNTonl_USABLE-Coin Zap_HY_PC-006.wav" id="14_c3bss"]
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fo31b"]
-random_pitch = 1.0421647
-streams_count = 6
-stream_0/stream = ExtResource("9_1ouby")
-stream_1/stream = ExtResource("10_aliqq")
-stream_2/stream = ExtResource("11_is466")
-stream_3/stream = ExtResource("12_24n4j")
-stream_4/stream = ExtResource("13_aqs8b")
-stream_5/stream = ExtResource("14_c3bss")
 
 [node name="Inventory" type="Panel" unique_id=1164556197]
 custom_minimum_size = Vector2(256, 416)
@@ -152,8 +136,3 @@ visible = false
 layout_mode = 0
 scale = Vector2(0.5, 0.5)
 focus_mode = 0
-
-[node name="pickup" type="AudioStreamPlayer" parent="." unique_id=851722811]
-stream = SubResource("AudioStreamRandomizer_fo31b")
-volume_db = -10.0
-bus = &"SFX"

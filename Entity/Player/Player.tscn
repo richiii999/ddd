@@ -327,7 +327,6 @@ bus = &"Music"
 
 [node name="pot" type="AudioStreamPlayer" parent="." unique_id=595626491]
 stream = SubResource("AudioStreamRandomizer_nb1na")
-volume_db = -2.666
 bus = &"SFX"
 
 [node name="sizz" type="AudioStreamPlayer" parent="." unique_id=1815421767]
