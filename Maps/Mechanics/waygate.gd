@@ -85,6 +85,11 @@ func setActive(state:bool):
 	$Sprite2D_ON.visible = state;
 	$Sprite2D_OFF.visible = !state;
 	active = state
+	if currWorld:
+		if state:
+			currWorld.ActiveWaygates.append(self)
+		else:
+			currWorld.ActiveWaygates.erase(self)
 
 func EffectTrigger(state:bool=true): # Emits blue particles and changes sprite for a moment
 	#print("EffectTrigger called, state: " + str(state) + "WG= " + str(self))

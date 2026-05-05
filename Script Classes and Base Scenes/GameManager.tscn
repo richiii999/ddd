@@ -13,6 +13,7 @@
 [node name="GameManager" type="Node" unique_id=1545096795]
 process_mode = 3
 script = ExtResource("1_5l5e5")
+DebugMode = true
 dungeons = Array[PackedScene]([ExtResource("4_x4dmn"), ExtResource("5_lmy2i"), ExtResource("4_he4om"), ExtResource("5_x4dmn"), ExtResource("6_lmy2i")])
 player_tscn = ExtResource("4_nj8wv")
 
