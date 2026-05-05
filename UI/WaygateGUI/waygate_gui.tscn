@@ -1,7 +1,12 @@
 [gd_scene format=3 uid="uid://b286d5w4sx2m8"]
 
 [ext_resource type="Script" uid="uid://da2w6tiraf3ks" path="res://UI/WaygateGUI/waygate_gui.gd" id="1_580yd"]
+[ext_resource type="Texture2D" uid="uid://d25o5ju1thdu4" path="res://Assets/ItchIO/moreIconsBruh/16x16.png" id="2_7gq1g"]
 [ext_resource type="Texture2D" uid="uid://b2i8lrdls6dbr" path="res://Assets/UI/Inventory/inv_slot.png" id="3_xbl6y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ck0s2"]
+atlas = ExtResource("2_7gq1g")
+region = Rect2(32, 32, 16, 16)
 
 [node name="WaygateGUI" type="Panel" unique_id=1028285345]
 anchors_preset = -1
@@ -41,7 +46,7 @@ offset_left = 168.0
 offset_top = 192.0
 offset_right = -168.0
 offset_bottom = -14.976
-icon = ExtResource("3_xbl6y")
+icon = SubResource("AtlasTexture_ck0s2")
 icon_alignment = 1
 expand_icon = true
 
