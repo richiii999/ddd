@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://cnjedl2iok75y" path="res://Maps/Dungeons/dungeonRoom.gd" id="2_337q0"]
 [ext_resource type="PackedScene" uid="uid://g7spcuqqx1mx" path="res://Maps/Dungeons/dungeonDoor.tscn" id="3_3sq0f"]
 [ext_resource type="PackedScene" uid="uid://t77auhbqet13" path="res://Maps/Dungeons/DungeonEnemySpawner.tscn" id="4_cpwck"]
+[ext_resource type="PackedScene" uid="uid://ywv2gl3qdld0" path="res://Entity/Enemy/Enemies/FireSlime.tscn" id="5_6x6f0"]
+[ext_resource type="PackedScene" uid="uid://wyat1a2uj1oc" path="res://Maps/Dungeons/FinalDungeon/NecroSkullFinalDungeon.tscn" id="6_2na8o"]
 
 [node name="FirstRoomFinal" type="TileMapLayer" unique_id=1223308819]
 use_parent_material = true
@@ -30,25 +32,32 @@ position = Vector2(8, -128)
 
 [node name="EnemyDungeonSpawner" parent="Waves/Wave1" unique_id=546534452 instance=ExtResource("4_cpwck")]
 position = Vector2(-160, -160)
+enemyScene = ExtResource("5_6x6f0")
 
 [node name="EnemyDungeonSpawner2" parent="Waves/Wave1" unique_id=105423285 instance=ExtResource("4_cpwck")]
 position = Vector2(160, -160)
+enemyScene = ExtResource("5_6x6f0")
 
 [node name="EnemyDungeonSpawner3" parent="Waves/Wave1" unique_id=806918037 instance=ExtResource("4_cpwck")]
 position = Vector2(-160, 160)
+enemyScene = ExtResource("5_6x6f0")
 
 [node name="EnemyDungeonSpawner4" parent="Waves/Wave1" unique_id=475055390 instance=ExtResource("4_cpwck")]
 position = Vector2(160, 160)
+enemyScene = ExtResource("5_6x6f0")
 
 [node name="Wave2" type="Node2D" parent="Waves" unique_id=1002951048]
 
 [node name="EnemyDungeonSpawner4" parent="Waves/Wave2" unique_id=1855774156 instance=ExtResource("4_cpwck")]
 position = Vector2(-160, -160)
+enemyScene = ExtResource("6_2na8o")
 
 [node name="EnemyDungeonSpawner5" parent="Waves/Wave2" unique_id=1867343630 instance=ExtResource("4_cpwck")]
+enemyScene = ExtResource("6_2na8o")
 
 [node name="EnemyDungeonSpawner6" parent="Waves/Wave2" unique_id=343311221 instance=ExtResource("4_cpwck")]
 position = Vector2(160, 160)
+enemyScene = ExtResource("6_2na8o")
 
 [node name="Props" type="Node2D" parent="." unique_id=2020528078]
 position = Vector2(8, 0)

@@ -4,7 +4,11 @@
 [ext_resource type="Script" uid="uid://cnjedl2iok75y" path="res://Maps/Dungeons/dungeonRoom.gd" id="2_6adf4"]
 [ext_resource type="PackedScene" uid="uid://g7spcuqqx1mx" path="res://Maps/Dungeons/dungeonDoor.tscn" id="3_5rgtc"]
 [ext_resource type="PackedScene" uid="uid://t77auhbqet13" path="res://Maps/Dungeons/DungeonEnemySpawner.tscn" id="4_gmkxs"]
-[ext_resource type="PackedScene" uid="uid://cah1krc5w5maw" path="res://Entity/Enemy/Bosses/BossTest.tscn" id="5_6fxao"]
+[ext_resource type="PackedScene" uid="uid://deb21nr1x88vm" path="res://Maps/Dungeons/FinalDungeon/FireSlimeFinalDungeon.tscn" id="5_10emd"]
+[ext_resource type="PackedScene" uid="uid://cqrc6plr3pax4" path="res://Maps/Dungeons/FinalDungeon/WaterSlimeFinalDungeon.tscn" id="6_3xvjs"]
+[ext_resource type="PackedScene" uid="uid://tdj8hmlq7qp8" path="res://Maps/Dungeons/FinalDungeon/NecromancerFinalDungeon.tscn" id="7_22fx6"]
+[ext_resource type="PackedScene" uid="uid://klwrnrygvxa0" path="res://Maps/Dungeons/FinalDungeon/SlimeBossMinionFinalDungeon.tscn" id="8_6gob4"]
+[ext_resource type="PackedScene" uid="uid://c1nnbv0exbms3" path="res://Maps/Dungeons/FinalDungeon/SlimeBossFinalDungeon.tscn" id="9_0g0k6"]
 
 [node name="DungeonBossRoom" type="TileMapLayer" unique_id=1438972844]
 use_parent_material = true
@@ -24,43 +28,54 @@ position = Vector2(256, -896.00006)
 
 [node name="EnemyDungeonSpawner" parent="Waves/Wave1" unique_id=1995170827 instance=ExtResource("4_gmkxs")]
 position = Vector2(256, 0)
+enemyScene = ExtResource("5_10emd")
 
 [node name="EnemyDungeonSpawner2" parent="Waves/Wave1" unique_id=1242750036 instance=ExtResource("4_gmkxs")]
 position = Vector2(512, 336)
+enemyScene = ExtResource("5_10emd")
 
 [node name="EnemyDungeonSpawner3" parent="Waves/Wave1" unique_id=1804030702 instance=ExtResource("4_gmkxs")]
 position = Vector2(504, -328)
+enemyScene = ExtResource("5_10emd")
 
 [node name="Wave2" type="Node2D" parent="Waves" unique_id=1902843240]
 
 [node name="EnemyDungeonSpawner" parent="Waves/Wave2" unique_id=737618051 instance=ExtResource("4_gmkxs")]
 position = Vector2(256, 0)
+enemyScene = ExtResource("6_3xvjs")
 
 [node name="EnemyDungeonSpawner2" parent="Waves/Wave2" unique_id=1460056365 instance=ExtResource("4_gmkxs")]
 position = Vector2(-80, -328)
+enemyScene = ExtResource("6_3xvjs")
 
 [node name="EnemyDungeonSpawner3" parent="Waves/Wave2" unique_id=148755109 instance=ExtResource("4_gmkxs")]
 position = Vector2(-112, 32)
+enemyScene = ExtResource("7_22fx6")
 
 [node name="EnemyDungeonSpawner4" parent="Waves/Wave2" unique_id=43638361 instance=ExtResource("4_gmkxs")]
 position = Vector2(-48, 368)
+enemyScene = ExtResource("7_22fx6")
 
 [node name="Wave3" type="Node2D" parent="Waves" unique_id=1645892372]
 
 [node name="EnemyDungeonSpawner" parent="Waves/Wave3" unique_id=837944674 instance=ExtResource("4_gmkxs")]
 position = Vector2(536, -200)
+enemyScene = ExtResource("8_6gob4")
 
 [node name="EnemyDungeonSpawner2" parent="Waves/Wave3" unique_id=368584802 instance=ExtResource("4_gmkxs")]
 position = Vector2(536, 216)
+enemyScene = ExtResource("8_6gob4")
 
 [node name="EnemyDungeonSpawner3" parent="Waves/Wave3" unique_id=542745275 instance=ExtResource("4_gmkxs")]
 position = Vector2(-72, 248)
+enemyScene = ExtResource("8_6gob4")
 
 [node name="EnemyDungeonSpawner4" parent="Waves/Wave3" unique_id=1572453279 instance=ExtResource("4_gmkxs")]
 position = Vector2(-72, -168)
+enemyScene = ExtResource("8_6gob4")
 
 [node name="EnemyDungeonSpawner5" parent="Waves/Wave3" unique_id=1381339689 instance=ExtResource("4_gmkxs")]
 position = Vector2(192, -178)
-enemyScene = ExtResource("5_6fxao")
+enemyScene = ExtResource("9_0g0k6")
 
 [node name="Props" type="Node2D" parent="." unique_id=1530507175]

@@ -3,12 +3,12 @@
 [ext_resource type="Script" uid="uid://bu7bcptiyn0ns" path="res://Script Classes and Base Scenes/gameManager.gd" id="1_5l5e5"]
 [ext_resource type="PackedScene" uid="uid://ch6p8upawjudp" path="res://Maps/Dungeons/TutorialDungeon/TutorialDungeon.tscn" id="4_he4om"]
 [ext_resource type="PackedScene" uid="uid://nquy6bnqhiwd" path="res://Entity/Player/Player.tscn" id="4_nj8wv"]
-[ext_resource type="PackedScene" uid="uid://57ucfjynaww3" path="res://Maps/Dungeons/TestDungeon/Dungeon.tscn" id="4_x4dmn"]
+[ext_resource type="PackedScene" uid="uid://57ucfjynaww3" path="res://Maps/Dungeons/FinalDungeon/Dungeon.tscn" id="4_x4dmn"]
 [ext_resource type="PackedScene" uid="uid://cmgpcvcen5bty" path="res://UI/Item/item_spawner.tscn" id="5_8vor3"]
 [ext_resource type="PackedScene" uid="uid://dm6wv0ic4m2so" path="res://Maps/TrainingRoom.tscn" id="5_lmy2i"]
 [ext_resource type="PackedScene" uid="uid://decu04i2e416o" path="res://Maps/Dungeons/BossRushDungeon/BossRushDungeon.tscn" id="5_x4dmn"]
 [ext_resource type="PackedScene" uid="uid://cyesuh0mf14kt" path="res://UI/MainMenu/main_menu.tscn" id="5_xwctg"]
-[ext_resource type="PackedScene" uid="uid://dpxvsi3ynvsag" path="res://Maps/Dungeons/TestDungeon/final_dungeon.tscn" id="6_lmy2i"]
+[ext_resource type="PackedScene" uid="uid://dpxvsi3ynvsag" path="res://Maps/Dungeons/FinalDungeon/final_dungeon.tscn" id="6_lmy2i"]
 
 [node name="GameManager" type="Node" unique_id=1545096795]
 process_mode = 3
