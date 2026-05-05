@@ -9,6 +9,11 @@ func _ready():
 
 ## TP to a waygate when player clicks one of the Waygate buttons
 func useWaygateGUI(waygate : Waygate):
+	if player == null:
+		player = find_parent("Player")
+		if player == null: 
+			push_error("BRUH waygateGUI cant find player")
+			return
 	waygate.UseWaygate(player)
 	player.toggleWaygateGUI(false) # Close GUI after teleporting
 
@@ -23,7 +28,6 @@ func UpdateWaygateList():
 	## Add all active waygates in the world to the GUI
 	var numNewButtons : int = 0
 	for WG in get_node("/root/GameManager").GetActiveWaygates():
-		print(WG)
 		numNewButtons += 1
 		var button = $WGButton.duplicate() # Instantiate and setup a button scene
 		button.name = ("WaygateButton_" + str(WG)) 
