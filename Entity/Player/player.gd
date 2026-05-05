@@ -7,8 +7,10 @@ class_name Player extends ENTITY ## PLAYER: Gamedevs be like: Player.script = 10
 @onready var death_sound: AudioStreamPlayer = $"Death Sound"
 @onready var hurt_sound: AudioStreamPlayer = $Hurt
 @onready var shoot: AudioStreamPlayer = $shoot
+@onready var sizz: AudioStreamPlayer = $sizz
+@onready var pot: AudioStreamPlayer = $pot
 
-## Stats
+## Statss
 @warning_ignore("int_as_enum_without_cast")
 @export var coreStats: Dictionary[Stats.STAT, int] = {
 Stats.STR: 5, 
@@ -256,7 +258,10 @@ func _physics_process(_delta):
 	else: move_and_slide()
 	
 	## MP
-	if(tilePain): Damage(tilePain)
+	if(tilePain): 
+		Damage(tilePain)
+		if not sizz.playing:
+			sizz.play()
 
 	var mp_regen = 1 + getStats(Stats.WIS) / 5
 	if MP < MPmax: incMP(mp_regen * (2 if $HurtTimer.is_stopped() else 1))
@@ -302,12 +307,14 @@ func HPot(): # Health Potion: Called when press 'H' to restore HP
 		incHPot(-1)
 		incHP(int(HPmax * (0.3 + getStats(Stats.WIS) * 0.01)))
 		$Status.addStatusText("Used health potion", "RED") # Show status text
+		pot.play()
 func MPot(): # Mana Potion: Called when press 'G' to restore MP
 	if !MPotC: $Status.addStatusText("Out of Mana pots!", "GOLD") # First, if you are out of pots, fail and show UI
 	else: # Use a MPot
 		incMPot(-1)
 		incMP(int(MPmax * (0.6 + getStats(Stats.WIS) * 0.01)))
 		$Status.addStatusText("Used mana potion", "BLUE") # Show status text
+		pot.play()
 func incHPot(i:int):
 	HPotC += i 
 	
@@ -481,6 +488,10 @@ func Damage(power : int, crit:bool=false):
 	var reduction = getStats(Stats.BLK) * 0.02  # 2% eper point
 	power = int(power * (1.0 - reduction))
 	hurt_sound.play()
+	if tilePain > 0:
+		hurt_sound.stop();
+	else:
+		hurt_sound.play();
 	super.Damage(power, crit)
 	$HurtTimer.start(5.00)
 

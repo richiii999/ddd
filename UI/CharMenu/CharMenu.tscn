@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cfl05a25qlg4k" path="res://UI/CharMenu/charMenu.gd" id="1_305y5"]
 [ext_resource type="Texture2D" uid="uid://mjmylc0o657g" path="res://Assets/Sprites/DDD_PlayerSprite_Attempt.png" id="2_pwacs"]
+[ext_resource type="Texture2D" uid="uid://d25o5ju1thdu4" path="res://Assets/ItchIO/moreIconsBruh/16x16.png" id="3_qy3kc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qy3kc"]
 atlas = ExtResource("2_pwacs")
@@ -31,6 +32,18 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bq565"]
+atlas = ExtResource("3_qy3kc")
+region = Rect2(80, 1184, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f3lgh"]
+atlas = ExtResource("3_qy3kc")
+region = Rect2(0, 1088, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mp8r2"]
+atlas = ExtResource("3_qy3kc")
+region = Rect2(0, 1312, 16, 16)
 
 [node name="CharMenu" type="Control" unique_id=1899022427]
 layout_mode = 3
@@ -100,6 +113,21 @@ offset_right = -2.0
 offset_bottom = 143.5
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="STR_Icon" type="Sprite2D" parent="CharacterRect/Stats" unique_id=1600124398]
+position = Vector2(-200, 39.999992)
+scale = Vector2(3.999999, 3.999999)
+texture = SubResource("AtlasTexture_bq565")
+
+[node name="INT_Icon" type="Sprite2D" parent="CharacterRect/Stats" unique_id=1431393020]
+position = Vector2(-3, -40.000008)
+scale = Vector2(3.999999, 3.999999)
+texture = SubResource("AtlasTexture_f3lgh")
+
+[node name="AGI_Icon" type="Sprite2D" parent="CharacterRect/Stats" unique_id=1525137661]
+position = Vector2(196, 35.999992)
+scale = Vector2(3.999999, 3.999999)
+texture = SubResource("AtlasTexture_mp8r2")
 
 [node name="STR_Label" type="RichTextLabel" parent="CharacterRect/Stats" unique_id=507223762]
 self_modulate = Color(1, 0.2509804, 0.2509804, 1)

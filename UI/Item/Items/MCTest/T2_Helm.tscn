@@ -1,13 +1,17 @@
 [gd_scene format=3 uid="uid://btes4v11s186a"]
 
-[ext_resource type="Texture2D" uid="uid://dnmtqetuegceb" path="res://Assets/References/Minecraft/Invicon_Chainmail_Helmet.png" id="1_sjywo"]
+[ext_resource type="Texture2D" uid="uid://d25o5ju1thdu4" path="res://Assets/ItchIO/moreIconsBruh/16x16.png" id="1_sjywo"]
 [ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_xh4qf"]
 [ext_resource type="Resource" uid="uid://6uxfkrkyiuvg" path="res://Entity/Projectile/Attack/attack_test2.tres" id="3_vj5au"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjywo"]
+atlas = ExtResource("1_sjywo")
+region = Rect2(82, 1906, 12, 12)
+
 [node name="IronHelm" type="Sprite2D" unique_id=398207244]
 texture_filter = 1
-scale = Vector2(2, 2)
-texture = ExtResource("1_sjywo")
+scale = Vector2(2.2, 2.2)
+texture = SubResource("AtlasTexture_sjywo")
 script = ExtResource("2_xh4qf")
 tier = 1
 type = 1

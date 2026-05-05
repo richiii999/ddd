@@ -3,7 +3,52 @@
 [ext_resource type="Script" uid="uid://cokxulwlr7sv6" path="res://UI/Skills/skillsUI.gd" id="1_ne31x"]
 [ext_resource type="PackedScene" uid="uid://bnwioo2u0cgq2" path="res://UI/Skills/skill_button.tscn" id="1_oyd6t"]
 [ext_resource type="PackedScene" uid="uid://11o1ypwtrjtu" path="res://UI/Skills/Classes/berserker.tscn" id="3_1uy7s"]
+[ext_resource type="Texture2D" uid="uid://d25o5ju1thdu4" path="res://Assets/ItchIO/moreIconsBruh/16x16.png" id="3_odb2l"]
 [ext_resource type="PackedScene" uid="uid://b8bg130wcy65a" path="res://UI/Skills/Classes/mage.tscn" id="4_g2e51"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ci6h5"]
+atlas = ExtResource("3_odb2l")
+region = Rect2(176, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_duovj"]
+atlas = ExtResource("3_odb2l")
+region = Rect2(0, 656, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5hui"]
+atlas = ExtResource("3_odb2l")
+region = Rect2(16, 656, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_odb2l"]
+atlas = ExtResource("3_odb2l")
+region = Rect2(48, 657, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gi222"]
+atlas = ExtResource("3_odb2l")
+region = Rect2(160, 864, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kqr5c"]
+atlas = ExtResource("3_odb2l")
+region = Rect2(16, 880, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2c2l6"]
+atlas = ExtResource("3_odb2l")
+region = Rect2(65, 706, 13, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yyja8"]
+atlas = ExtResource("3_odb2l")
+region = Rect2(160, 1088, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v84us"]
+atlas = ExtResource("3_odb2l")
+region = Rect2(192, 1088, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6cjgn"]
+atlas = ExtResource("3_odb2l")
+region = Rect2(96, 1200, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0mfg2"]
+atlas = ExtResource("3_odb2l")
+region = Rect2(48, 944, 16, 16)
 
 [node name="SkillsUI" type="Panel" unique_id=965317542]
 custom_minimum_size = Vector2(256, 416)
@@ -28,7 +73,7 @@ offset_bottom = 40.0
 text = "0"
 horizontal_alignment = 1
 
-[node name="Skill_0" parent="." unique_id=963993930 instance=ExtResource("1_oyd6t")]
+[node name="ALL" parent="." unique_id=963993930 instance=ExtResource("1_oyd6t")]
 layout_mode = 0
 offset_left = 248.0
 offset_top = 176.0
@@ -36,78 +81,154 @@ offset_right = 320.0
 offset_bottom = 248.0
 skillText = "+1 ALL"
 availible = true
+stats = Dictionary[int, int]({
+0: 1,
+1: 1,
+2: 1,
+3: 1,
+4: 1,
+5: 1,
+6: 1,
+7: 1,
+8: 1
+})
 
-[node name="Skill_1" parent="." unique_id=1563444799 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
+[node name="Display_Sprite" parent="ALL" index="0" unique_id=1190960225]
+scale = Vector2(3.5000002, 3.5000002)
+texture = SubResource("AtlasTexture_ci6h5")
+
+[node name="STR" parent="." unique_id=1563444799 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
 layout_mode = 0
 offset_left = 248.0
 offset_top = 80.0
 offset_right = 320.0
 offset_bottom = 152.0
-skillText = "+1 STR"
-parentSkills = [NodePath("../Skill_0")]
+skillText = "+2 STR"
+parentSkills = [NodePath("../ALL")]
+stats = Dictionary[int, int]({
+0: 2,
+1: 0,
+2: 0,
+3: 0,
+4: 0,
+5: 0,
+6: 0,
+7: 0,
+8: 0
+})
 
-[node name="Skill_2" parent="." unique_id=560904053 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
+[node name="Display_Sprite" parent="STR" index="0" unique_id=1190960225]
+position = Vector2(36, 35.999996)
+scale = Vector2(3.5000002, 3.4999998)
+texture = SubResource("AtlasTexture_duovj")
+
+[node name="AGI" parent="." unique_id=560904053 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
 layout_mode = 0
 offset_left = 152.0
 offset_top = 176.0
 offset_right = 224.0
 offset_bottom = 248.0
-skillText = "+1 AGI"
-parentSkills = [NodePath("../Skill_0")]
+skillText = "+2 AGI"
+parentSkills = [NodePath("../ALL")]
+stats = Dictionary[int, int]({
+0: 0,
+1: 0,
+2: 2,
+3: 0,
+4: 0,
+5: 0,
+6: 0,
+7: 0,
+8: 0
+})
 
-[node name="Skill_3" parent="." unique_id=747967176 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
+[node name="Display_Sprite" parent="AGI" index="0" unique_id=1190960225]
+scale = Vector2(3.5000002, 3.5000002)
+texture = SubResource("AtlasTexture_b5hui")
+
+[node name="INT" parent="." unique_id=747967176 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
 layout_mode = 0
 offset_left = 248.0
 offset_top = 272.0
 offset_right = 320.0
 offset_bottom = 344.0
-skillText = "+1 INT"
-parentSkills = [NodePath("../Skill_0")]
+skillText = "+2 INT"
+parentSkills = [NodePath("../ALL")]
+stats = Dictionary[int, int]({
+0: 0,
+1: 2,
+2: 0,
+3: 0,
+4: 0,
+5: 0,
+6: 0,
+7: 0,
+8: 0
+})
 
-[node name="Skill_4" parent="." unique_id=229106207 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
+[node name="Display_Sprite" parent="INT" index="0" unique_id=1190960225]
+position = Vector2(36, 36.000015)
+scale = Vector2(3.5000002, 3.5000021)
+texture = SubResource("AtlasTexture_odb2l")
+
+[node name="WIS" parent="." unique_id=229106207 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
 layout_mode = 0
 offset_left = 344.0
 offset_top = 176.0
 offset_right = 416.0
 offset_bottom = 248.0
-skillText = "+2 STR"
-parentSkills = [NodePath("../Skill_0")]
+skillText = "+2 WIS"
+parentSkills = [NodePath("../ALL")]
+stats = Dictionary[int, int]({
+0: 0,
+1: 0,
+2: 0,
+3: 0,
+4: 2,
+5: 0,
+6: 0,
+7: 0,
+8: 0
+})
 
-[node name="Skill_5" parent="." unique_id=1945750708 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
+[node name="Display_Sprite" parent="WIS" index="0" unique_id=1190960225]
+position = Vector2(36.00002, 35.999992)
+scale = Vector2(3.4999993, 3.4999995)
+texture = SubResource("AtlasTexture_gi222")
+
+[node name="DEX" parent="." unique_id=1945750708 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
 layout_mode = 0
 offset_left = 48.0
 offset_top = 112.0
 offset_right = 120.0
 offset_bottom = 184.0
 skillText = "+2 DEX"
-parentSkills = [NodePath("../Skill_2")]
+parentSkills = [NodePath("../AGI")]
+stats = Dictionary[int, int]({
+0: 0,
+1: 0,
+2: 0,
+3: 0,
+4: 0,
+5: 2,
+6: 0,
+7: 0,
+8: 0
+})
 
-[node name="Skill_6" parent="." unique_id=148652741 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
+[node name="Display_Sprite" parent="DEX" index="0" unique_id=1190960225]
+position = Vector2(36.000004, 35.999992)
+scale = Vector2(3.5000005, 3.4999995)
+texture = SubResource("AtlasTexture_kqr5c")
+
+[node name="SPD" parent="." unique_id=148652741 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
 layout_mode = 0
 offset_left = 48.0
 offset_top = 240.0
 offset_right = 120.0
 offset_bottom = 312.0
 skillText = "+2 SPD"
-parentSkills = [NodePath("../Skill_2")]
-
-[node name="Skill_7" parent="." unique_id=1383487241 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
-layout_mode = 0
-offset_left = 456.0
-offset_top = 104.0
-offset_right = 528.0
-offset_bottom = 176.0
-skillText = "+2 TOU"
-parentSkills = [NodePath("../Skill_4")]
-
-[node name="Skill_8" parent="." unique_id=1677158838 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
-layout_mode = 0
-offset_left = 456.0
-offset_top = 232.0
-offset_right = 528.0
-offset_bottom = 304.0
-skillText = "+99 SPD"
-parentSkills = [NodePath("../Skill_4")]
+parentSkills = [NodePath("../AGI")]
 stats = Dictionary[int, int]({
 0: 0,
 1: 0,
@@ -117,8 +238,63 @@ stats = Dictionary[int, int]({
 5: 0,
 6: 0,
 7: 0,
-8: 99
+8: 2
 })
+
+[node name="Display_Sprite" parent="SPD" index="0" unique_id=1190960225]
+position = Vector2(36, 36.000008)
+scale = Vector2(4.3076916, 5.0909104)
+texture = SubResource("AtlasTexture_2c2l6")
+
+[node name="TOU" parent="." unique_id=1383487241 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
+layout_mode = 0
+offset_left = 456.0
+offset_top = 104.0
+offset_right = 528.0
+offset_bottom = 176.0
+skillText = "+2 TOU"
+parentSkills = [NodePath("../WIS")]
+stats = Dictionary[int, int]({
+0: 0,
+1: 0,
+2: 0,
+3: 2,
+4: 0,
+5: 0,
+6: 0,
+7: 0,
+8: 0
+})
+
+[node name="Display_Sprite" parent="TOU" index="0" unique_id=1190960225]
+position = Vector2(36.000004, 36)
+scale = Vector2(3.4999974, 3.4999995)
+texture = SubResource("AtlasTexture_yyja8")
+
+[node name="BLK" parent="." unique_id=1677158838 node_paths=PackedStringArray("parentSkills") instance=ExtResource("1_oyd6t")]
+layout_mode = 0
+offset_left = 456.0
+offset_top = 232.0
+offset_right = 528.0
+offset_bottom = 304.0
+skillText = "+2 BLK"
+parentSkills = [NodePath("../WIS")]
+stats = Dictionary[int, int]({
+0: 0,
+1: 0,
+2: 0,
+3: 0,
+4: 0,
+5: 0,
+6: 2,
+7: 0,
+8: 0
+})
+
+[node name="Display_Sprite" parent="BLK" index="0" unique_id=1190960225]
+position = Vector2(36.000004, 35.999985)
+scale = Vector2(3.4999974, 3.4999986)
+texture = SubResource("AtlasTexture_v84us")
 
 [node name="berseker" parent="." unique_id=331613725 instance=ExtResource("1_oyd6t")]
 layout_mode = 0
@@ -126,6 +302,21 @@ skillText = "Berseker"
 is_class_choice = true
 class_id = "berserker"
 subtree_scene = ExtResource("3_1uy7s")
+stats = Dictionary[int, int]({
+0: 5,
+1: 0,
+2: 0,
+3: 3,
+4: 0,
+5: 0,
+6: 3,
+7: 0,
+8: 1
+})
+
+[node name="Display_Sprite" parent="berseker" index="0" unique_id=1190960225]
+scale = Vector2(3.5000002, 3.5000002)
+texture = SubResource("AtlasTexture_6cjgn")
 
 [node name="mage" parent="." unique_id=2031093468 instance=ExtResource("1_oyd6t")]
 layout_mode = 0
@@ -137,6 +328,22 @@ skillText = "Mage"
 is_class_choice = true
 class_id = "mage"
 subtree_scene = ExtResource("4_g2e51")
+stats = Dictionary[int, int]({
+0: 0,
+1: 5,
+2: 0,
+3: 0,
+4: 3,
+5: 0,
+6: 0,
+7: 1,
+8: 0
+})
+
+[node name="Display_Sprite" parent="mage" index="0" unique_id=1190960225]
+position = Vector2(37.99996, 37.000004)
+scale = Vector2(3.4999986, 3.5000005)
+texture = SubResource("AtlasTexture_0mfg2")
 
 [node name="OpenClass" type="Button" parent="." unique_id=1395218759]
 layout_mode = 0
@@ -144,3 +351,15 @@ offset_left = 528.0
 offset_right = 576.0
 offset_bottom = 31.0
 text = "Class"
+
+[editable path="ALL"]
+[editable path="STR"]
+[editable path="AGI"]
+[editable path="INT"]
+[editable path="WIS"]
+[editable path="DEX"]
+[editable path="SPD"]
+[editable path="TOU"]
+[editable path="BLK"]
+[editable path="berseker"]
+[editable path="mage"]

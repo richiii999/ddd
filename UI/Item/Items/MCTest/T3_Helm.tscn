@@ -1,13 +1,17 @@
 [gd_scene format=3 uid="uid://cpggawq5c2tse"]
 
-[ext_resource type="Texture2D" uid="uid://bkvkgkoefwhlr" path="res://Assets/References/Minecraft/Invicon_Golden_Helmet.png" id="1_ihd3p"]
+[ext_resource type="Texture2D" uid="uid://d25o5ju1thdu4" path="res://Assets/ItchIO/moreIconsBruh/16x16.png" id="1_ihd3p"]
 [ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_e4gjr"]
 [ext_resource type="Resource" uid="uid://6uxfkrkyiuvg" path="res://Entity/Projectile/Attack/attack_test2.tres" id="3_7sow0"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_v014b"]
+atlas = ExtResource("1_ihd3p")
+region = Rect2(209, 1906, 12, 12)
+
 [node name="GoldHelm" type="Sprite2D" unique_id=398207244]
 texture_filter = 1
-scale = Vector2(2, 2)
-texture = ExtResource("1_ihd3p")
+scale = Vector2(2.2, 2.2)
+texture = SubResource("AtlasTexture_v014b")
 script = ExtResource("2_e4gjr")
 tier = 2
 type = 1

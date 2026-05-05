@@ -20,6 +20,19 @@
 [ext_resource type="Texture2D" uid="uid://mjmylc0o657g" path="res://Assets/Sprites/DDD_PlayerSprite_Attempt.png" id="16_pnyfx"]
 [ext_resource type="AudioStream" uid="uid://cym66d05c5h80" path="res://Assets/Audio/SFX/dead.wav" id="19_cretm"]
 [ext_resource type="AudioStream" uid="uid://0wym60docfn6" path="res://Assets/Audio/SFX/hit.wav" id="20_t0707"]
+[ext_resource type="AudioStream" uid="uid://dpenns3gsaw60" path="res://Assets/Audio/SFX/DSGNMisc_MOVEMENT-Sparkly Water_HY_PC-001.wav" id="21_e6qc5"]
+[ext_resource type="AudioStream" uid="uid://2k5ot22c7wsg" path="res://Assets/Audio/SFX/sizz.wav" id="21_s48lg"]
+[ext_resource type="AudioStream" uid="uid://cm06mdl4s4aic" path="res://Assets/Audio/SFX/DSGNMisc_MOVEMENT-Sparkly Water_HY_PC-002.wav" id="22_1hy3r"]
+[ext_resource type="AudioStream" uid="uid://dpx2rto7ttjye" path="res://Assets/Audio/SFX/DSGNSynth_BUFF-Water Buff_HY_PC-001.wav" id="22_2efty"]
+[ext_resource type="AudioStream" uid="uid://ckoaa7jo54ahh" path="res://Assets/Audio/SFX/DSGNSynth_BUFF-Water Buff_HY_PC-003.wav" id="23_be5jb"]
+[ext_resource type="AudioStream" uid="uid://v72j0eocn8pw" path="res://Assets/Audio/SFX/DSGNMisc_MOVEMENT-Sparkly Water_HY_PC-003.wav" id="23_nb1na"]
+[ext_resource type="AudioStream" uid="uid://cxylq8d30pp54" path="res://Assets/Audio/SFX/DSGNSynth_BUFF-Water Buff_HY_PC-002.wav" id="24_23qwt"]
+[ext_resource type="AudioStream" uid="uid://6hgww13lyjpu" path="res://Assets/Audio/SFX/DSGNMisc_MOVEMENT-Sparkly Water_HY_PC-004.wav" id="24_dflc1"]
+[ext_resource type="AudioStream" uid="uid://72vctimr11xq" path="res://Assets/Audio/SFX/DSGNMisc_MOVEMENT-Sparkly Water_HY_PC-005.wav" id="25_18d3b"]
+[ext_resource type="AudioStream" uid="uid://hkcrfctfpsm1" path="res://Assets/Audio/SFX/DSGNSynth_BUFF-Water Buff_HY_PC-004.wav" id="25_fnijg"]
+[ext_resource type="AudioStream" uid="uid://d3525bv4tycto" path="res://Assets/Audio/SFX/DSGNMisc_MOVEMENT-Sparkly Water_HY_PC-006.wav" id="26_ar3yw"]
+[ext_resource type="AudioStream" uid="uid://4ud6ww31yacp" path="res://Assets/Audio/SFX/DSGNSynth_BUFF-Water Buff_HY_PC-005.wav" id="26_si366"]
+[ext_resource type="AudioStream" uid="uid://dcrycxdplesgy" path="res://Assets/Audio/SFX/DSGNSynth_BUFF-Water Buff_HY_PC-006.wav" id="28_1hy3r"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sqvdy"]
 radius = 60.0
@@ -75,6 +88,23 @@ animations = [{
 playback_mode = 1
 random_pitch = 1.0806005
 random_volume_offset_db = 1.71
+streams_count = 6
+stream_0/stream = ExtResource("21_e6qc5")
+stream_1/stream = ExtResource("22_1hy3r")
+stream_2/stream = ExtResource("23_nb1na")
+stream_3/stream = ExtResource("24_dflc1")
+stream_4/stream = ExtResource("25_18d3b")
+stream_5/stream = ExtResource("26_ar3yw")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_nb1na"]
+random_pitch = 1.0614846
+streams_count = 6
+stream_0/stream = ExtResource("26_si366")
+stream_1/stream = ExtResource("28_1hy3r")
+stream_2/stream = ExtResource("25_fnijg")
+stream_3/stream = ExtResource("24_23qwt")
+stream_4/stream = ExtResource("23_be5jb")
+stream_5/stream = ExtResource("22_2efty")
 
 [node name="Player" type="CharacterBody2D" unique_id=1134707457 groups=["Player"]]
 z_index = 10
@@ -293,6 +323,16 @@ bus = &"SFX"
 
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1510153806]
 volume_db = -25.0
+bus = &"Music"
+
+[node name="pot" type="AudioStreamPlayer" parent="." unique_id=595626491]
+stream = SubResource("AudioStreamRandomizer_nb1na")
+bus = &"SFX"
+
+[node name="sizz" type="AudioStreamPlayer" parent="." unique_id=1815421767]
+stream = ExtResource("21_s48lg")
+volume_db = -7.244
+bus = &"SFX"
 
 [editable path="CanvasLayer/RMenu"]
 [editable path="CanvasLayer/RMenu/Utility"]

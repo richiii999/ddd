@@ -7,6 +7,7 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_blt2u"]
 atlas = ExtResource("1_3ia6a")
 region = Rect2(0, 128.18282, 16.354088, 15.817184)
+filter_clip = true
 
 [node name="WoodSword" type="Sprite2D" unique_id=398207244]
 texture_filter = 1
@@ -15,15 +16,15 @@ texture = SubResource("AtlasTexture_blt2u")
 script = ExtResource("2_jx5q8")
 type = 4
 stats = Dictionary[int, int]({
-0: 3,
+0: 1,
 1: 0,
 2: 1,
 3: 0,
 4: 0,
-5: 2,
+5: 1,
 6: 0,
 7: 0,
-8: 0
+8: 1
 })
 attack = ExtResource("3_dm68h")
 metadata/_custom_type_script = "uid://dpbuam0tpmaha"
