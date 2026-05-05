@@ -16,13 +16,13 @@ script = ExtResource("2_gqu0t")
 tier = 1
 type = 5
 stats = Dictionary[int, int]({
-0: 3,
-1: 0,
+0: 2,
+1: 1,
 2: 0,
-3: 4,
-4: 0,
+3: 1,
+4: 2,
 5: 0,
-6: 5,
+6: 2,
 7: 0,
 8: 0
 })
