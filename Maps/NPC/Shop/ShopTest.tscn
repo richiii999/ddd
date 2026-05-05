@@ -104,5 +104,5 @@ columns = 4
 
 [node name="coin" type="AudioStreamPlayer" parent="." unique_id=1984019463]
 stream = SubResource("AudioStreamWAV_n2126")
-volume_db = -4.122
+volume_db = -10.0
 bus = &"SFX"
