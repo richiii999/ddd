@@ -30,7 +30,7 @@ func Spawn( Source : Node = null,
 	
 	## Set stuff from Params
 	source = Source
-	player = Source is Player # Player proj or Enemy proj (determines collision masks)
+	player = Source.is_in_group("Player") # Player proj or Enemy proj (determines collision masks)
 	rotation = Rotation
 	linear_velocity = Vector2.from_angle(rotation) * Speed # Make the proj go forwards towards the mouse click
 	power = Power

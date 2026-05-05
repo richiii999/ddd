@@ -3,12 +3,11 @@
 [ext_resource type="TileSet" uid="uid://cnvmagl4xkjae" path="res://Maps/TileSet.tres" id="1_2si8f"]
 [ext_resource type="Script" uid="uid://bhqsdd2qy8h5w" path="res://Maps/Dungeons/dungeon.gd" id="2_5fku8"]
 [ext_resource type="PackedScene" uid="uid://tcx34hy287cs" path="res://Maps/Mechanics/Waygate.tscn" id="3_8bv8l"]
-[ext_resource type="AudioStream" uid="uid://ed1x0mkshk8e" path="res://Assets/Audio/BGM/BOSSLEVEL.mp3" id="3_nbcbp"]
-[ext_resource type="PackedScene" uid="uid://cv4mfe1l32jgk" path="res://Maps/Dungeons/TestDungeon/first_room_final.tscn" id="4_5fku8"]
-[ext_resource type="PackedScene" uid="uid://dcs5coak1x7i0" path="res://Maps/Dungeons/TestDungeon/first_to_second_room_hallway.tscn" id="5_8bv8l"]
-[ext_resource type="PackedScene" uid="uid://b676nlbggecrc" path="res://Maps/Dungeons/TestDungeon/second_room_final.tscn" id="5_dilrq"]
-[ext_resource type="PackedScene" uid="uid://jng1vdxwsdmh" path="res://Maps/Dungeons/TestDungeon/final_boss_room.tscn" id="6_psp2c"]
-[ext_resource type="PackedScene" uid="uid://vhj0ucgt4j1m" path="res://Maps/Dungeons/TestDungeon/secondroomtoThirdRoom.tscn" id="8_nbcbp"]
+[ext_resource type="PackedScene" uid="uid://cv4mfe1l32jgk" path="res://Maps/Dungeons/FinalDungeon/first_room_final.tscn" id="4_5fku8"]
+[ext_resource type="PackedScene" uid="uid://dcs5coak1x7i0" path="res://Maps/Dungeons/FinalDungeon/first_to_second_room_hallway.tscn" id="5_8bv8l"]
+[ext_resource type="PackedScene" uid="uid://b676nlbggecrc" path="res://Maps/Dungeons/FinalDungeon/second_room_final.tscn" id="5_dilrq"]
+[ext_resource type="PackedScene" uid="uid://jng1vdxwsdmh" path="res://Maps/Dungeons/FinalDungeon/final_boss_room.tscn" id="6_psp2c"]
+[ext_resource type="PackedScene" uid="uid://vhj0ucgt4j1m" path="res://Maps/Dungeons/FinalDungeon/secondroomtoThirdRoom.tscn" id="8_nbcbp"]
 
 [node name="FinalDungeon" type="TileMapLayer" unique_id=563884137]
 use_parent_material = true
@@ -16,7 +15,6 @@ tile_map_data = PackedByteArray("AAD7//z/AAADAAUAAAD8//v/AAADAAUAAAD6//3/AAADAAU
 tile_set = ExtResource("1_2si8f")
 physics_quadrant_size = 1
 script = ExtResource("2_5fku8")
-BGM = ExtResource("3_nbcbp")
 
 [node name="WorldEffects" type="Node2D" parent="." unique_id=732786577]
 
@@ -42,8 +40,10 @@ position = Vector2(2304, 3840)
 
 [node name="HallwayFinal1" parent="Hallways" unique_id=2101802365 instance=ExtResource("5_8bv8l")]
 position = Vector2(2176, 128)
+physics_quadrant_size = 1
 script = null
 
 [node name="HallwayFinal2" parent="Hallways" unique_id=1997804302 instance=ExtResource("8_nbcbp")]
 position = Vector2(2560, 2368)
+physics_quadrant_size = 1
 script = null

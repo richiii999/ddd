@@ -3,8 +3,8 @@
 [ext_resource type="TileSet" uid="uid://cnvmagl4xkjae" path="res://Maps/TileSet.tres" id="1_ittel"]
 [ext_resource type="Script" uid="uid://bhqsdd2qy8h5w" path="res://Maps/Dungeons/dungeon.gd" id="2_6eqjf"]
 [ext_resource type="PackedScene" uid="uid://tcx34hy287cs" path="res://Maps/Mechanics/Waygate.tscn" id="3_87sgk"]
-[ext_resource type="PackedScene" uid="uid://b2q5p8heg3qm2" path="res://Maps/Dungeons/TestDungeon/TestRoom.tscn" id="4_eji3h"]
-[ext_resource type="PackedScene" uid="uid://c5q4b6fpchbsi" path="res://Maps/Dungeons/TestDungeon/BossRoom.tscn" id="5_3faj6"]
+[ext_resource type="PackedScene" uid="uid://b2q5p8heg3qm2" path="res://Maps/Dungeons/FinalDungeon/TestRoom.tscn" id="4_eji3h"]
+[ext_resource type="PackedScene" uid="uid://c5q4b6fpchbsi" path="res://Maps/Dungeons/FinalDungeon/BossRoom.tscn" id="5_3faj6"]
 
 [node name="TestDungeon" type="TileMapLayer" unique_id=563884137]
 use_parent_material = true

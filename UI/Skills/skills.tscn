@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://11o1ypwtrjtu" path="res://UI/Skills/Classes/berserker.tscn" id="3_1uy7s"]
 [ext_resource type="Texture2D" uid="uid://d25o5ju1thdu4" path="res://Assets/ItchIO/moreIconsBruh/16x16.png" id="3_odb2l"]
 [ext_resource type="PackedScene" uid="uid://b8bg130wcy65a" path="res://UI/Skills/Classes/mage.tscn" id="4_g2e51"]
-[ext_resource type="Texture2D" uid="uid://dmbkydfgwi10r" path="res://Assets/ItchIO/Tiny RPG Character Asset Pack v1.03 -Free Soldier&Orc/Characters(100x100)/Soldier/Arrow(projectile)/Arrow01(32x32).png" id="6_ci6h5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ci6h5"]
 atlas = ExtResource("3_odb2l")
@@ -348,27 +347,10 @@ texture = SubResource("AtlasTexture_0mfg2")
 
 [node name="OpenClass" type="Button" parent="." unique_id=1395218759]
 layout_mode = 0
-offset_left = 461.0
-offset_top = 16.0
-offset_right = 530.3877
-offset_bottom = 58.0
-scale = Vector2(0.95, 0.95)
-theme_override_font_sizes/font_size = 12
-text = "Class
-"
-text_overrun_behavior = 2
-autowrap_trim_flags = 0
-icon_alignment = 1
-vertical_icon_alignment = 2
-expand_icon = true
-
-[node name="TextureRect" type="TextureRect" parent="OpenClass" unique_id=303798006]
-layout_mode = 0
-offset_left = -15.306122
-offset_top = 5.1020412
-offset_right = 78.57144
-offset_bottom = 104.08164
-texture = ExtResource("6_ci6h5")
+offset_left = 528.0
+offset_right = 576.0
+offset_bottom = 31.0
+text = "Class"
 
 [editable path="ALL"]
 [editable path="STR"]
