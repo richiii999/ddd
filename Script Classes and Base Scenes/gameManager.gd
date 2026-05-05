@@ -169,6 +169,10 @@ func LoadPlayer(P:Player):
 	if not skillData.is_empty():
 		P.find_child("SkillsUI").apply_save(skillData)
 	
+	P.maxHealthCalc()
+	P.maxManaCalc()
+	print("Stats after load: ", P.coreStats)
+	player.UpdateUIBars()
 	player.UpdateUIBars()
 
 ## Load HOF data from HallOfFame.ddd
