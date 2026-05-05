@@ -125,6 +125,7 @@ func PickItem() -> void:
 			match item.ID:
 				-2: # Coin
 					player.incCoins(1) 
+					pickup.play()
 				-3: # HPot
 					if player.HPotC == player.HPotmax:
 						player.StatusLabel.addStatusText("Full Health pots!", "GOLD")
