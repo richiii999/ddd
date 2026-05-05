@@ -98,6 +98,7 @@ func SaveToFile(data:Dictionary, filePath:String) -> void:
 ## Saves the given player & bank information to separate files
 func SaveGame(P:Player, B:Bank) -> void:
 	print("Saving game to " + str(OS.get_data_dir()))
+	print("Stats at save: ", P.coreStats)
 	SaveToFile(PlayerData(P), playerFilePath)
 	SaveToFile(BankData(B), bankFilePath)
 	SaveToFile(SkillData(P), skillFilePath)
