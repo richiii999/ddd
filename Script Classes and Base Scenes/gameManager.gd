@@ -138,8 +138,8 @@ func LoadPlayer(P:Player):
 		print("SkillPoints missing from save data")
 	P.XP = playerData.XP
 	# Consumables
-	P.incHPot(playerData.HPotC)
-	P.incMPot(playerData.MPotC)
+	P.incHPot(playerData.HPotC if playerData.HPotC > 0 else 1)
+	P.incMPot(playerData.MPotC if playerData.MPotC > 0 else 1)
 	P.incCoins(playerData.Coins)
 	# Items: Store the ID only, when loading the ID can be used to spawn them in again
 	# Gear
