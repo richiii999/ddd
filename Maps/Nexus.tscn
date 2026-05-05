@@ -139,10 +139,10 @@ repeatable = true
 dialogue = Array[String](["I like Ducks!"])
 
 [node name="Nameplate" parent="NPCs/HelalDuck" index="1" unique_id=253969490]
-offset_left = -32.0
-offset_top = 56.0
-offset_right = 32.0
-offset_bottom = 92.0
+offset_left = -7.000002
+offset_top = 8.000004
+offset_right = 57.0
+offset_bottom = 44.000004
 text = "Helal"
 
 [node name="Portrait" parent="NPCs/HelalDuck/DialoguePanel" parent_id_path=PackedInt32Array(1821983141, 991532548) index="0" unique_id=1148847670]
