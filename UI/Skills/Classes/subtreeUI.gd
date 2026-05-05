@@ -27,3 +27,8 @@ func onSkillUpdate(newSkill) -> void:
 	$SkillPointsText/SkillPointsCount.text = str(player.skillPoints)
 	
 	for stat in newSkill.stats: player.coreStats[stat] += newSkill.stats[stat]
+	player.UpdateProjStats()
+	player.maxHealthCalc()
+	player.maxManaCalc()
+	if player.has_node("%CharMenu") and player.get_node("%CharMenu").visible:
+		player.get_node("%CharMenu").refresh_stats()

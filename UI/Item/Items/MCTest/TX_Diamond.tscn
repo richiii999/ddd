@@ -1,13 +1,17 @@
 [gd_scene format=3 uid="uid://donv1t2q7pwa2"]
 
-[ext_resource type="Texture2D" uid="uid://rs3cqq6gdaa7" path="res://Assets/References/Minecraft/Invicon_Diamond.png" id="1_da0mj"]
+[ext_resource type="Texture2D" uid="uid://uvenrlql2joj" path="res://Assets/ItchIO/Itch Item Icons/Assorted.png" id="1_da0mj"]
 [ext_resource type="Script" uid="uid://dpbuam0tpmaha" path="res://UI/Item/Item.gd" id="2_6e0iq"]
 [ext_resource type="Resource" uid="uid://6uxfkrkyiuvg" path="res://Entity/Projectile/Attack/attack_test2.tres" id="3_qajcm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_my7fw"]
+atlas = ExtResource("1_da0mj")
+region = Rect2(688, 208, 15, 15)
 
 [node name="Diamond" type="Sprite2D" unique_id=398207244]
 texture_filter = 1
 scale = Vector2(2, 2)
-texture = ExtResource("1_da0mj")
+texture = SubResource("AtlasTexture_my7fw")
 script = ExtResource("2_6e0iq")
 tier = 4
 type = 3

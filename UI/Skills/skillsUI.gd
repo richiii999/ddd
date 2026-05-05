@@ -33,6 +33,8 @@ func onSkillUpdate(newSkill) -> void:
 	$SkillPointsText/SkillPointsCount.text = str(player.skillPoints)
 	for stat in newSkill.stats: player.coreStats[stat] += newSkill.stats[stat]
 	player.UpdateProjStats() #recalculate proj stats after skill purchase
+	player.maxHealthCalc()
+	player.maxManaCalc()  
 	#check to see if the class is open to the player, otherwise lock it
 	if newSkill.class_id != "" and chosen_class == "":
 		chosen_class = newSkill.class_id
@@ -41,7 +43,9 @@ func onSkillUpdate(newSkill) -> void:
 	#open the subtree if they have access to it
 	if newSkill.subtree_scene:
 		open_subtree(newSkill.subtree_scene)
-
+	
+	if player.has_node("%CharMenu") and player.get_node("%CharMenu").visible:
+		player.get_node("%CharMenu").refresh_stats()
 
 #func skillUpdate(newSkill): # Refresh UI, and adjust player stats
 #	for skill in get_children().filter(func(node): return node is skillButton): skill.checkAvailible()
@@ -87,6 +91,8 @@ func open_subtree(scene: PackedScene) -> void:
 					skill.availible = false
 					skill.active = true
 					skill.setSkillIcon()
+					for stat in skill.stats: player.coreStats[stat] += skill.stats[stat]
+	player.UpdateProjStats()
 	
 	#sfter restoring actives, update availability for unspent skills
 	for skill in sub_skills:
@@ -144,6 +150,8 @@ func apply_save(data: Dictionary) -> void:
 					skill.availible = false
 					skill.active = true
 					skill.setSkillIcon()
+					for stat in skill.stats: player.coreStats[stat] += skill.stats[stat]
+	player.UpdateProjStats()
 	
 	#ppen the subtree last as it will read from subtree_save automatically
 	for skill in skills:
