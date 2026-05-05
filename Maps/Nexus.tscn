@@ -58,6 +58,10 @@ animations = [{
 "speed": 3.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ctsjr"]
+atlas = ExtResource("9_n7ruc")
+region = Rect2(0, 0, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_n7ruc"]
 atlas = ExtResource("13_e66yt")
 region = Rect2(0, 0, 29, 17)
@@ -140,6 +144,9 @@ offset_top = 56.0
 offset_right = 32.0
 offset_bottom = 92.0
 text = "Helal"
+
+[node name="Portrait" parent="NPCs/HelalDuck/DialoguePanel" parent_id_path=PackedInt32Array(1821983141, 991532548) index="0" unique_id=1148847670]
+texture = SubResource("AtlasTexture_ctsjr")
 
 [node name="Name" parent="NPCs/HelalDuck/DialoguePanel" parent_id_path=PackedInt32Array(1821983141, 991532548) index="1" unique_id=1911208660]
 text = "Helal"
