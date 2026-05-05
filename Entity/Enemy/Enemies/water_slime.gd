@@ -25,7 +25,6 @@ func Waterexplode():
 	pattern.Emit(ProjectilePattern.PatternType.CIRCLE, 8, {"power": 10})	
 	
 	super.Death()
-	queue_free()
 
 func Death():
 	await Waterexplode()
