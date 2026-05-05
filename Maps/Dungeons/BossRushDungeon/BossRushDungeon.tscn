@@ -59,6 +59,12 @@ rotation = 7.853982
 [node name="EnemyDungeonSpawner" parent="Rooms/BossRushRoom1/Waves/Wave1" unique_id=1445437097 instance=ExtResource("6_6ckjr")]
 position = Vector2(176, -32)
 enemyScene = ExtResource("7_usm7d")
+statScale = Dictionary[String, float]({
+"DMG": 5.0,
+"HP": 10.0,
+"SIZE": 1.0,
+"SPD": 1.0
+})
 
 [node name="BossRushRoom2" type="TileMapLayer" parent="Rooms" unique_id=241939041]
 position = Vector2(3584, -8)
@@ -81,8 +87,8 @@ rotation = 4.712389
 position = Vector2(176, -32)
 enemyScene = ExtResource("8_xsx26")
 statScale = Dictionary[String, float]({
-"DMG": 10.0,
-"HP": 10.0,
+"DMG": 50.0,
+"HP": 20.0,
 "SIZE": 1.0,
 "SPD": 1.0
 })

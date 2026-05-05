@@ -73,9 +73,12 @@ radius = 272.118
 collision_layer = 256
 collision_mask = 267
 motion_mode = 1
+wall_min_slide_angle = 0.0
+safe_margin = 0.25
 script = ExtResource("1_ptwue")
 projs = Array[PackedScene]([ExtResource("2_3n4he"), ExtResource("2_3n4he"), ExtResource("2_3n4he")])
-HPmax = 200
+mainStat = 60
+HPmax = 250
 
 [node name="Status" parent="." unique_id=869158990 instance=ExtResource("3_luuok")]
 offset_left = -72.0

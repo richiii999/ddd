@@ -137,6 +137,8 @@ radius = 345.0
 collision_layer = 256
 collision_mask = 267
 motion_mode = 1
+wall_min_slide_angle = 0.0
+safe_margin = 0.25
 script = ExtResource("1_8wlo2")
 HPmax = 70
 

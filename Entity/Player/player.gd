@@ -486,7 +486,7 @@ func Death():
 	get_tree().set_pause( true )
 
 func Damage(power : int, crit:bool=false):
-	var reduction = getStats(Stats.BLK) * 0.02  # 2% eper point
+	var reduction = min(getStats(Stats.BLK) * 0.02, 0.5)  # 2% per point
 	power = int(power * (1.0 - reduction))
 	hurt_sound.play()
 	if tilePain > 0:
