@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bsq334knc34xj" path="res://Assets/Sprites/Terrain/spawnSquareON.png" id="3_b30aj"]
 [ext_resource type="Texture2D" uid="uid://w3wtcrfc68lr" path="res://Assets/Sprites/Terrain/spawnSquareOFF.png" id="4_b6lit"]
 [ext_resource type="PackedScene" uid="uid://c8y460v3po8xh" path="res://Script Classes and Base Scenes/Interactable.tscn" id="5_6772d"]
+[ext_resource type="Texture2D" uid="uid://d25o5ju1thdu4" path="res://Assets/ItchIO/moreIconsBruh/16x16.png" id="5_um7mp"]
 [ext_resource type="AudioStream" uid="uid://d1nojx4sdbqk2" path="res://Assets/Audio/SFX/heal.wav" id="6_kl5nx"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ftblx"]
@@ -14,6 +15,10 @@ spread = 180.0
 initial_velocity_min = 100.0
 initial_velocity_max = 100.0
 gravity = Vector3(0, 0, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_um7mp"]
+atlas = ExtResource("5_um7mp")
+region = Rect2(128, 1072, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4r7gn"]
 size = Vector2(288, 288)
@@ -29,6 +34,7 @@ speed_scale = 3.0
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_ftblx")
 script = ExtResource("2_1hw3p")
+Icon = SubResource("AtlasTexture_um7mp")
 
 [node name="Sprite2D_ON" type="Sprite2D" parent="." unique_id=1319976076]
 visible = false

@@ -19,7 +19,6 @@ script = ExtResource("2_t6a6c")
 
 [node name="TrainingRoom" parent="Waygates" unique_id=1724551075 instance=ExtResource("3_2uhxa")]
 position = Vector2(128, 128)
-active = true
 
 [node name="Spawners" type="Node2D" parent="." unique_id=1091589330]
 position = Vector2(88, -240)

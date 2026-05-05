@@ -17,14 +17,14 @@ tier = 2
 type = 2
 stats = Dictionary[int, int]({
 0: 3,
-1: 3,
-2: 3,
-3: 5,
-4: 0,
+1: 1,
+2: 2,
+3: 4,
+4: 1,
 5: 0,
 6: 4,
 7: 0,
-8: 1
+8: -3
 })
 attack = ExtResource("3_vwhbo")
 metadata/_custom_type_script = "uid://dpbuam0tpmaha"

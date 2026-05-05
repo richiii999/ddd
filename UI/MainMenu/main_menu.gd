@@ -16,8 +16,10 @@ func ActivateMainMenu():
 
 # Signal when play button is pressed
 func _OnPlayPressed() -> void:
+	$BGM.stop()
 	self.hide()
 	playPressed.emit()
+	
 
 func _OnQuitPressed() -> void:
 	quitPressed.emit()

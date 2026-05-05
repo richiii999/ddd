@@ -26,7 +26,7 @@ func UpdateWaygateList():
 		numNewButtons += 1
 		var button = $WGButton.duplicate() # Instantiate and setup a button scene
 		button.name = ("WaygateButton_" + str(WG)) 
-		button.icon = WG.get_node("Sprite2D_ON").texture # TODO: custom icons per zone
+		button.icon = WG.Icon
 		button.get_child(0).text = WG.name
 		button.button_down.connect(useWaygateGUI.bind(WG)) # Connect new button to this script
 		$GridContainer.add_child(button)

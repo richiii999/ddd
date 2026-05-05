@@ -9,6 +9,8 @@ class_name GameManager extends Node ## Controls the game. The "Main" scene of th
 # Projectiles: Projectiles are reparented to here, prevents inheriting entity velocity
 # CanvasLayer: Shows the Main menu for the game
 
+@export var DebugMode : bool = false # DEBUG MODE: Spawn items on ground
+
 @export var dungeons: Array[PackedScene]
 var mapOffset : Vector2 = Vector2(99999,0) # Offset each added map by this much
 func AddMap(map): 
@@ -60,14 +62,15 @@ func ActivatingMainMenu():
 func NexusSetup():
 	var nexOffset = nexus.global_position
 	
-	## Spawn 3 of every special item
-	for ID in range(2, len($ItemSpawner.specialItems)):
-		$ItemSpawner.SpawnItemByID(-ID, nexOffset + Vector2(-850, -100 * ID - 100))
-		$ItemSpawner.SpawnItemByID(-ID, nexOffset + Vector2(-900, -100 * ID - 100))
-		$ItemSpawner.SpawnItemByID(-ID, nexOffset + Vector2(-950, -100 * ID - 100))
-	
-	for ID in range(1, len($ItemSpawner.items)):
-		$ItemSpawner.SpawnItemByID(ID, nexOffset + Vector2(-900 - ((ID * 100) % 300), 50 * ID))
+	if DebugMode:
+		## Spawn 3 of every special item
+		for ID in range(2, len($ItemSpawner.specialItems)):
+			$ItemSpawner.SpawnItemByID(-ID, nexOffset + Vector2(-850, -100 * ID - 100))
+			$ItemSpawner.SpawnItemByID(-ID, nexOffset + Vector2(-900, -100 * ID - 100))
+			$ItemSpawner.SpawnItemByID(-ID, nexOffset + Vector2(-950, -100 * ID - 100))
+		
+		for ID in range(1, len($ItemSpawner.items)):
+			$ItemSpawner.SpawnItemByID(ID, nexOffset + Vector2(-900 - ((ID * 100) % 300), 50 * ID))
 
 ## PlayerSetup: Places a new player into the game
 # NOTE: Any existing player should be freed before calling this func on the next frame.
@@ -138,8 +141,8 @@ func LoadPlayer(P:Player):
 		print("SkillPoints missing from save data")
 	P.XP = playerData.XP
 	# Consumables
-	P.incHPot(playerData.HPotC)
-	P.incMPot(playerData.MPotC)
+	P.incHPot(playerData.HPotC if playerData.HPotC > 0 else 1)
+	P.incMPot(playerData.MPotC if playerData.MPotC > 0 else 1)
 	P.incCoins(playerData.Coins)
 	# Items: Store the ID only, when loading the ID can be used to spawn them in again
 	# Gear

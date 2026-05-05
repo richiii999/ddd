@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://cyesuh0mf14kt"]
 
 [ext_resource type="Script" uid="uid://b8flv0x2lfsvy" path="res://UI/MainMenu/main_menu.gd" id="1_jld46"]
+[ext_resource type="Texture2D" uid="uid://bq102fwq2ksv4" path="res://Assets/Main menu screen.png" id="2_t17p2"]
+[ext_resource type="FontFile" uid="uid://jng2wru4pm2o" path="res://Assets/Ithaca-LVB75.ttf" id="3_3jj5y"]
+[ext_resource type="AudioStream" uid="uid://ed1x0mkshk8e" path="res://Assets/Audio/BGM/BOSSLEVEL.mp3" id="4_h8rmy"]
 
 [node name="MainMenu" type="Control" unique_id=1191625732]
 layout_mode = 3
@@ -27,18 +30,24 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.2890427, 0.7106343, 0.8717462, 1)
 
+[node name="Sprite2D" type="Sprite2D" parent="BG color" unique_id=550270058]
+position = Vector2(640, 363)
+scale = Vector2(2, 1.7380953)
+texture = ExtResource("2_t17p2")
+
 [node name="Title" type="RichTextLabel" parent="BG color" unique_id=2400649]
 modulate = Color(0.057722077, 0.019735226, 0.015061044, 1)
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -319.0
-offset_top = 95.17
-offset_right = 319.0
-offset_bottom = 382.16998
+offset_left = -320.0
+offset_top = 8.0
+offset_right = 318.0
+offset_bottom = 295.0
 grow_horizontal = 2
-theme_override_font_sizes/normal_font_size = 52
+theme_override_fonts/normal_font = ExtResource("3_3jj5y")
+theme_override_font_sizes/normal_font_size = 121
 text = "Domain of the Deranged Deity"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -48,17 +57,20 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -304.0
-offset_top = 554.0
-offset_right = 334.0
-offset_bottom = 706.0
+offset_left = -544.0
+offset_top = 352.0
+offset_right = 94.0
+offset_bottom = 527.0
 grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("3_3jj5y")
+theme_override_font_sizes/normal_font_size = 26
 text = "Richiii - Game Design
 Ali - Coding
 Nimbus - Art
 Selym - Audio
-Jack's son - Coding
+MugThugs - Coding
 Helal - Biz
+Alexis - Coding
 "
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -70,14 +82,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -59.5
-offset_top = -15.5
-offset_right = 59.5
-offset_bottom = 15.5
+offset_left = -96.0
+offset_top = -16.0
+offset_right = 96.0
+offset_bottom = 67.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 34
+theme_override_fonts/font = ExtResource("3_3jj5y")
+theme_override_font_sizes/font_size = 73
 text = "Play"
 
 [node name="Quit" type="Button" parent="BG color" unique_id=1898754078]
@@ -88,15 +101,21 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -59.5
-offset_top = 38.01001
-offset_right = 59.5
-offset_bottom = 93.01001
+offset_left = -96.0
+offset_top = 88.0
+offset_right = 95.0
+offset_bottom = 176.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 34
+theme_override_fonts/font = ExtResource("3_3jj5y")
+theme_override_font_sizes/font_size = 73
 text = "Quit"
+
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=372847289]
+stream = ExtResource("4_h8rmy")
+volume_db = -11.185
+autoplay = true
 
 [connection signal="pressed" from="BG color/Play" to="." method="_OnPlayPressed"]
 [connection signal="pressed" from="BG color/Quit" to="." method="_OnQuitPressed"]

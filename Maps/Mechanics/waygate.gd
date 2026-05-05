@@ -1,6 +1,7 @@
 class_name Waygate extends GPUParticles2D ## Waygate: Node for teleporting players
 # Emits particles and changes sprite momentarily when triggered
 
+@export var Icon : Texture2D = null
 @onready var currWorld : WorldBASE = Tools.FindParentByType(self, WorldBASE)
 @export var active : bool = false # Players can only spawn here if active
 @export var exit: bool = false # One-way teleport to Nexus, no GUI (ex. dungeon exit)
