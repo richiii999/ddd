@@ -17,7 +17,6 @@ script = ExtResource("2_6eqjf")
 [node name="Waygates" type="Node2D" parent="." unique_id=902142817]
 
 [node name="TestDungeon" parent="Waygates" unique_id=991796255 instance=ExtResource("3_87sgk")]
-active = true
 
 [node name="Rooms" type="Node2D" parent="." unique_id=1892436274]
 
