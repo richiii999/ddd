@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://di63jftq5u0pf" path="res://UI/Skills/Classes/subtreeUI.gd" id="1_rffja"]
 [ext_resource type="PackedScene" uid="uid://bnwioo2u0cgq2" path="res://UI/Skills/skill_button.tscn" id="2_r3ab0"]
+[ext_resource type="Texture2D" uid="uid://dmbkydfgwi10r" path="res://Assets/ItchIO/Tiny RPG Character Asset Pack v1.03 -Free Soldier&Orc/Characters(100x100)/Soldier/Arrow(projectile)/Arrow01(32x32).png" id="2_y7ydp"]
 [ext_resource type="Texture2D" uid="uid://d25o5ju1thdu4" path="res://Assets/ItchIO/moreIconsBruh/16x16.png" id="3_r3ab0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y7ydp"]
@@ -65,11 +66,20 @@ horizontal_alignment = 1
 
 [node name="BackButton" type="Button" parent="." unique_id=533838294]
 layout_mode = 0
-offset_left = 508.0
-offset_top = -1.0
-offset_right = 577.0
-offset_bottom = 29.0
+offset_left = 475.0
+offset_top = 21.0
+offset_right = 544.0
+offset_bottom = 52.0
 text = "Back"
+
+[node name="TextureRect" type="TextureRect" parent="BackButton" unique_id=1225979261]
+layout_mode = 0
+offset_left = -15.0
+offset_top = -5.0
+offset_right = 85.0
+offset_bottom = 84.0
+texture = ExtResource("2_y7ydp")
+flip_h = true
 
 [node name="INT" parent="." unique_id=963993930 instance=ExtResource("2_r3ab0")]
 layout_mode = 0
