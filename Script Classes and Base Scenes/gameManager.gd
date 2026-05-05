@@ -124,7 +124,10 @@ func LoadBank(B:Bank):
 func LoadPlayer(P:Player):
 	var playerData = Save.LoadPlayer()
 	print("Loaded playerData: " + str(playerData))
-	if playerData == {}: return # Save doesnt exist: Just skip
+	if playerData == {}: 
+		P.incHPot(3) # Fix 'X/X' bug with empty save
+		P.incMPot(5)
+		return # Save doesnt exist: Just skip
 	
 	# Progress
 	while playerData.Level > 1: # Level starts from 1
