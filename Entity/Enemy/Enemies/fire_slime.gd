@@ -18,9 +18,7 @@ func _physics_process(_delta: float) -> void:
 #Actual explosing damage handling and animation
 func explode(play):
 	play.Damage(50)
-	death.emit()
 
 	$AnimatedSprite2D.play("Explode")
 	await $AnimatedSprite2D.animation_finished
 	super.Death()
-	queue_free()
