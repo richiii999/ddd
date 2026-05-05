@@ -1,37 +1,79 @@
 [gd_scene format=3 uid="uid://d1qn6ah5n7134"]
 
 [ext_resource type="Script" uid="uid://860o1xjghf0d" path="res://Maps/NPC/Shop/shop.gd" id="1_4ubr3"]
-[ext_resource type="Texture2D" uid="uid://gl7l68p10c2b" path="res://Assets/Sprites/GD Icons/GD_Default.tres" id="1_tmpwn"]
+[ext_resource type="Texture2D" uid="uid://dwfnr1uysdglv" path="res://Assets/ItchIO/pixelGuyIdk/Basic Humanoid II Animations/Elf Lord/ElfLord.png" id="1_n2126"]
 [ext_resource type="PackedScene" uid="uid://c8y460v3po8xh" path="res://Script Classes and Base Scenes/Interactable.tscn" id="2_5a6me"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4mujj"]
+atlas = ExtResource("1_n2126")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ja3ak"]
+atlas = ExtResource("1_n2126")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o5eft"]
+atlas = ExtResource("1_n2126")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lsc47"]
+atlas = ExtResource("1_n2126")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yyxpr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4mujj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ja3ak")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o5eft")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lsc47")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0su43"]
 radius = 148.12157
 
-[node name="ShopTest" type="Sprite2D" unique_id=2144558353]
-texture = ExtResource("1_tmpwn")
+[node name="ShopTest" type="AnimatedSprite2D" unique_id=1664528775]
+scale = Vector2(6, 6)
+sprite_frames = SubResource("SpriteFrames_yyxpr")
+autoplay = "default"
+frame_progress = 0.18834911
 script = ExtResource("1_4ubr3")
 items = Array[int]([5])
 
 [node name="InteractComponent" parent="." unique_id=337905091 instance=ExtResource("2_5a6me")]
+scale = Vector2(0.12, 0.12)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractComponent" unique_id=1527244726]
 shape = SubResource("CircleShape2D_0su43")
 
 [node name="ShopLabel" type="Label" parent="." unique_id=1561334538]
-offset_left = -20.0
-offset_top = 72.0
-offset_right = 20.0
-offset_bottom = 95.0
+offset_left = -6.6666665
+offset_top = 8.0
+offset_right = 37.333332
+offset_bottom = 31.0
+scale = Vector2(0.33, 0.33)
 text = "SHOP"
 horizontal_alignment = 1
 vertical_alignment = 2
 
 [node name="ShopGUI" type="Panel" parent="." unique_id=226205169]
 visible = false
-offset_left = -177.0
-offset_top = -272.0
-offset_right = 177.0
-offset_bottom = -58.0
+offset_left = -25.333334
+offset_top = -42.66667
+offset_right = 328.66666
+offset_bottom = 171.33333
+scale = Vector2(0.15, 0.15)
 
 [node name="GridContainer" type="GridContainer" parent="ShopGUI" unique_id=2017597173]
 layout_mode = 0

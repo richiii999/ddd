@@ -1,37 +1,76 @@
 [gd_scene format=3 uid="uid://cq8sges6clqip"]
 
-[ext_resource type="Texture2D" uid="uid://gl7l68p10c2b" path="res://Assets/Sprites/GD Icons/GD_Default.tres" id="1_7iqsq"]
+[ext_resource type="Texture2D" uid="uid://cs8c3vejykkg0" path="res://Assets/ItchIO/pixelGuyIdk/Basic Humanoid II Animations/Elf Enchanter/ElfEnchanter.png" id="1_winvr"]
 [ext_resource type="PackedScene" uid="uid://c8y460v3po8xh" path="res://Script Classes and Base Scenes/Interactable.tscn" id="2_18qgn"]
 [ext_resource type="Script" uid="uid://dn6x3whcflqpg" path="res://Maps/NPC/Bank/bank.gd" id="2_837d7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_doabm"]
+atlas = ExtResource("1_winvr")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qxufx"]
+atlas = ExtResource("1_winvr")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a7iel"]
+atlas = ExtResource("1_winvr")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dsgl2"]
+atlas = ExtResource("1_winvr")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2xfok"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_doabm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qxufx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a7iel")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dsgl2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_837d7"]
 radius = 160.02812
 
-[node name="BankTest" type="Sprite2D" unique_id=18598485]
-texture = ExtResource("1_7iqsq")
+[node name="BankTest" type="AnimatedSprite2D" unique_id=1804146904]
+scale = Vector2(6, 6)
+sprite_frames = SubResource("SpriteFrames_2xfok")
 script = ExtResource("2_837d7")
 
 [node name="InteractComponent" parent="." unique_id=248235521 instance=ExtResource("2_18qgn")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractComponent" unique_id=1104071653]
+scale = Vector2(0.12, 0.12)
 shape = SubResource("CircleShape2D_837d7")
 
 [node name="BankLabel" type="Label" parent="." unique_id=1414653184]
-offset_left = -24.0
-offset_top = -90.0
-offset_right = 20.0
-offset_bottom = -67.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+offset_left = -10.666667
+offset_top = -21.333334
+offset_right = 33.333332
+offset_bottom = 1.666666
+scale = Vector2(0.5, 0.5)
 text = "BANK"
 horizontal_alignment = 1
 vertical_alignment = 2
 
 [node name="BankGUI" type="Panel" parent="." unique_id=1712464283]
 visible = false
-offset_left = -177.0
-offset_top = -272.0
-offset_right = 177.0
-offset_bottom = -58.0
+offset_left = -25.333334
+offset_top = -52.0
+offset_right = 328.66666
+offset_bottom = 162.0
+scale = Vector2(0.15, 0.15)
 
 [node name="GridContainer" type="GridContainer" parent="BankGUI" unique_id=577392292]
 layout_mode = 0

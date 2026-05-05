@@ -1,14 +1,57 @@
 [gd_scene format=3 uid="uid://bbmy3615xp8ba"]
 
 [ext_resource type="Script" uid="uid://djs45ummhxcbc" path="res://Maps/NPC/NPC.gd" id="1_5av4h"]
+[ext_resource type="Texture2D" uid="uid://2knuqakbrbjn" path="res://Assets/ItchIO/pixelGuyIdk/Basic Humanoid II Animations/Elf Wayfarer/ElfWayfarer.png" id="1_mscf4"]
 [ext_resource type="PackedScene" uid="uid://c8y460v3po8xh" path="res://Script Classes and Base Scenes/Interactable.tscn" id="1_ty5tp"]
-[ext_resource type="Texture2D" uid="uid://gl7l68p10c2b" path="res://Assets/Sprites/GD Icons/GD_Default.tres" id="2_4fo1f"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g14o1"]
+atlas = ExtResource("1_mscf4")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1ni4"]
+atlas = ExtResource("1_mscf4")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dsc5w"]
+atlas = ExtResource("1_mscf4")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yy53k"]
+atlas = ExtResource("1_mscf4")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_26sxt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g14o1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1ni4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dsc5w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yy53k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ty5tp"]
-radius = 106.004715
+radius = 13.0
 
-[node name="DialogueNPC" type="Sprite2D" unique_id=1821983141]
-texture = ExtResource("2_4fo1f")
+[sub_resource type="AtlasTexture" id="AtlasTexture_dupkw"]
+atlas = ExtResource("1_mscf4")
+region = Rect2(0, 0, 16, 16)
+
+[node name="DialogueNPC" type="AnimatedSprite2D" unique_id=626252511]
+scale = Vector2(8, 8)
+sprite_frames = SubResource("SpriteFrames_26sxt")
+autoplay = "default"
+frame_progress = 0.5837978
 script = ExtResource("1_5av4h")
 repeatable = false
 dialogue = Array[String](["Hi im joe", "ur trash kid", "*dies*"])
@@ -19,32 +62,34 @@ dialogue = Array[String](["Hi im joe", "ur trash kid", "*dies*"])
 shape = SubResource("CircleShape2D_ty5tp")
 
 [node name="Nameplate" type="Label" parent="." unique_id=253969490]
-offset_left = -19.0
-offset_top = 63.0
-offset_right = 21.0
-offset_bottom = 99.0
+offset_left = -4.000001
+offset_top = 6.9999995
+offset_right = 36.0
+offset_bottom = 43.0
+scale = Vector2(0.2, 0.2)
 theme_override_font_sizes/font_size = 26
 text = "Joe"
 horizontal_alignment = 1
 
 [node name="DialoguePanel" type="Panel" parent="." unique_id=991532548]
 visible = false
-offset_left = -231.0
-offset_top = -207.0
-offset_right = 232.0
-offset_bottom = -89.0
+offset_left = -35.0
+offset_top = -27.0
+offset_right = 428.0
+offset_bottom = 91.0
+scale = Vector2(0.15, 0.15)
 
 [node name="Portrait" type="Sprite2D" parent="DialoguePanel" unique_id=1148847670]
-position = Vector2(58, 54)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("2_4fo1f")
+position = Vector2(59.999996, 53.333336)
+scale = Vector2(5.416666, 5.416666)
+texture = SubResource("AtlasTexture_dupkw")
 
 [node name="Name" type="Label" parent="DialoguePanel" unique_id=1911208660]
 layout_mode = 0
 offset_left = 35.0
-offset_top = 94.0
+offset_top = 90.83333
 offset_right = 82.0
-offset_bottom = 117.0
+offset_bottom = 113.83333
 theme_override_font_sizes/font_size = 12
 text = "Joe"
 horizontal_alignment = 1

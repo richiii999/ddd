@@ -28,6 +28,7 @@ collision_layer = 0
 collision_mask = 0
 monitorable = false
 script = ExtResource("1_lkibk")
+affectsPlayers = false
 metadata/_custom_type_script = "uid://bkeg7sxgvrmuu"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1779874368]
