@@ -23,6 +23,7 @@ func UpdateWaygateList():
 	## Add all active waygates in the world to the GUI
 	var numNewButtons : int = 0
 	for WG in get_node("/root/GameManager").GetActiveWaygates():
+		print(WG)
 		numNewButtons += 1
 		var button = $WGButton.duplicate() # Instantiate and setup a button scene
 		button.name = ("WaygateButton_" + str(WG)) 
