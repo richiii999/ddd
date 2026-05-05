@@ -2,43 +2,7 @@
 
 [ext_resource type="Script" uid="uid://di63jftq5u0pf" path="res://UI/Skills/Classes/subtreeUI.gd" id="1_pkmo5"]
 [ext_resource type="PackedScene" uid="uid://bnwioo2u0cgq2" path="res://UI/Skills/skill_button.tscn" id="2_rrqsg"]
-[ext_resource type="Texture2D" uid="uid://d25o5ju1thdu4" path="res://Assets/ItchIO/moreIconsBruh/16x16.png" id="3_y27br"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3k6n5"]
-atlas = ExtResource("3_y27br")
-region = Rect2(0.39606953, 592.7018, 15.921306, 14.808899)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mrawq"]
-atlas = ExtResource("3_y27br")
-region = Rect2(111.33971, 1103.9539, 18.003891, 16.223389)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_y27br"]
-atlas = ExtResource("3_y27br")
-region = Rect2(160.2103, 656.5171, 16.887451, 15.612915)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hx5cb"]
-atlas = ExtResource("3_y27br")
-region = Rect2(160.11337, 1088.9672, 16.10669, 15.047607)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tqwsn"]
-atlas = ExtResource("3_y27br")
-region = Rect2(0.5936451, 608.9989, 15.123224, 14.323853)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kh2fo"]
-atlas = ExtResource("3_y27br")
-region = Rect2(96.50195, 610.10864, 15.131378, 14.05542)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xrt55"]
-atlas = ExtResource("3_y27br")
-region = Rect2(162.95757, 1169.0804, 11.464325, 15.623169)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6l7ck"]
-atlas = ExtResource("3_y27br")
-region = Rect2(34.191223, 1103.9653, 11.152115, 16.250244)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_srw3c"]
-atlas = ExtResource("3_y27br")
-region = Rect2(192.09387, 1088.8889, 16.117722, 15.300049)
+[ext_resource type="Texture2D" uid="uid://dmbkydfgwi10r" path="res://Assets/ItchIO/Tiny RPG Character Asset Pack v1.03 -Free Soldier&Orc/Characters(100x100)/Soldier/Arrow(projectile)/Arrow01(32x32).png" id="2_y27br"]
 
 [node name="SkillsUI" type="Panel" unique_id=965317542]
 custom_minimum_size = Vector2(256, 416)
@@ -65,11 +29,20 @@ horizontal_alignment = 1
 
 [node name="BackButton" type="Button" parent="." unique_id=533838294]
 layout_mode = 0
-offset_left = 508.0
-offset_top = -1.0
-offset_right = 577.0
-offset_bottom = 29.0
+offset_left = 470.0
+offset_top = 17.0
+offset_right = 539.0
+offset_bottom = 48.0
 text = "Back"
+
+[node name="TextureRect" type="TextureRect" parent="BackButton" unique_id=2114415976]
+layout_mode = 0
+offset_left = -12.0
+offset_top = -1.0
+offset_right = 81.0
+offset_bottom = 85.0
+texture = ExtResource("2_y27br")
+flip_h = true
 
 [node name="STR" parent="." unique_id=963993930 instance=ExtResource("2_rrqsg")]
 layout_mode = 0
@@ -91,17 +64,12 @@ stats = Dictionary[int, int]({
 8: 0
 })
 
-[node name="Display_Sprite" parent="STR" index="0" unique_id=1190960225]
-position = Vector2(35.476563, 34.303123)
-scale = Vector2(3.2697914, 3.3852682)
-texture = SubResource("AtlasTexture_3k6n5")
-
 [node name="HP_DEF" parent="." unique_id=1563444799 node_paths=PackedStringArray("parentSkills") instance=ExtResource("2_rrqsg")]
 layout_mode = 0
-offset_left = 240.0
-offset_top = 83.0
-offset_right = 312.0
-offset_bottom = 155.0
+offset_left = 248.0
+offset_top = 80.0
+offset_right = 320.0
+offset_bottom = 152.0
 skillText = "HP/DEF UP"
 parentSkills = [NodePath("../STR")]
 stats = Dictionary[int, int]({
@@ -115,11 +83,6 @@ stats = Dictionary[int, int]({
 7: 0,
 8: 0
 })
-
-[node name="Display_Sprite" parent="HP_DEF" index="0" unique_id=1190960225]
-position = Vector2(37, 34.5)
-scale = Vector2(2.555557, 3.1875002)
-texture = SubResource("AtlasTexture_mrawq")
 
 [node name="SPD" parent="." unique_id=560904053 node_paths=PackedStringArray("parentSkills") instance=ExtResource("2_rrqsg")]
 layout_mode = 0
@@ -141,11 +104,6 @@ stats = Dictionary[int, int]({
 8: 1
 })
 
-[node name="Display_Sprite" parent="SPD" index="0" unique_id=1190960225]
-position = Vector2(36.5, 34.828125)
-scale = Vector2(3.062501, 3.2229166)
-texture = SubResource("AtlasTexture_y27br")
-
 [node name="TOU" parent="." unique_id=747967176 node_paths=PackedStringArray("parentSkills") instance=ExtResource("2_rrqsg")]
 layout_mode = 0
 offset_left = 248.0
@@ -165,11 +123,6 @@ stats = Dictionary[int, int]({
 7: 0,
 8: 0
 })
-
-[node name="Display_Sprite" parent="TOU" index="0" unique_id=1190960225]
-position = Vector2(34.087513, 36.113285)
-scale = Vector2(3.1140633, 3.451563)
-texture = SubResource("AtlasTexture_hx5cb")
 
 [node name="STR2" parent="." unique_id=229106207 node_paths=PackedStringArray("parentSkills") instance=ExtResource("2_rrqsg")]
 layout_mode = 0
@@ -191,11 +144,6 @@ stats = Dictionary[int, int]({
 8: 0
 })
 
-[node name="Display_Sprite" parent="STR2" index="0" unique_id=1190960225]
-position = Vector2(35.605465, 34.37969)
-scale = Vector2(3.2807276, 3.0542397)
-texture = SubResource("AtlasTexture_tqwsn")
-
 [node name="SPD2" parent="." unique_id=1945750708 node_paths=PackedStringArray("parentSkills") instance=ExtResource("2_rrqsg")]
 layout_mode = 0
 offset_left = 48.0
@@ -215,11 +163,6 @@ stats = Dictionary[int, int]({
 7: 0,
 8: 1
 })
-
-[node name="Display_Sprite" parent="SPD2" index="0" unique_id=1190960225]
-position = Vector2(33.914066, 35.11562)
-scale = Vector2(3.7447917, 3.6977682)
-texture = SubResource("AtlasTexture_kh2fo")
 
 [node name="STR_HP" parent="." unique_id=148652741 node_paths=PackedStringArray("parentSkills") instance=ExtResource("2_rrqsg")]
 layout_mode = 0
@@ -241,11 +184,6 @@ stats = Dictionary[int, int]({
 8: 0
 })
 
-[node name="Display_Sprite" parent="STR_HP" index="0" unique_id=1190960225]
-position = Vector2(38, 36.04689)
-scale = Vector2(5.357671, 3.606251)
-texture = SubResource("AtlasTexture_xrt55")
-
 [node name="BLK" parent="." unique_id=1383487241 node_paths=PackedStringArray("parentSkills") instance=ExtResource("2_rrqsg")]
 layout_mode = 0
 offset_left = 456.0
@@ -266,11 +204,6 @@ stats = Dictionary[int, int]({
 8: 0
 })
 
-[node name="Display_Sprite" parent="BLK" index="0" unique_id=1190960225]
-position = Vector2(35.499992, 33.999996)
-scale = Vector2(4.4545455, 3.249999)
-texture = SubResource("AtlasTexture_6l7ck")
-
 [node name="BLK2" parent="." unique_id=1677158838 node_paths=PackedStringArray("parentSkills") instance=ExtResource("2_rrqsg")]
 layout_mode = 0
 offset_left = 456.0
@@ -290,18 +223,3 @@ stats = Dictionary[int, int]({
 7: 0,
 8: 0
 })
-
-[node name="Display_Sprite" parent="BLK2" index="0" unique_id=1190960225]
-position = Vector2(37.63332, 34.914074)
-scale = Vector2(3.170834, 3.3447912)
-texture = SubResource("AtlasTexture_srw3c")
-
-[editable path="STR"]
-[editable path="HP_DEF"]
-[editable path="SPD"]
-[editable path="TOU"]
-[editable path="STR2"]
-[editable path="SPD2"]
-[editable path="STR_HP"]
-[editable path="BLK"]
-[editable path="BLK2"]

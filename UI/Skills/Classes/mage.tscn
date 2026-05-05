@@ -2,43 +2,7 @@
 
 [ext_resource type="Script" uid="uid://di63jftq5u0pf" path="res://UI/Skills/Classes/subtreeUI.gd" id="1_rffja"]
 [ext_resource type="PackedScene" uid="uid://bnwioo2u0cgq2" path="res://UI/Skills/skill_button.tscn" id="2_r3ab0"]
-[ext_resource type="Texture2D" uid="uid://d25o5ju1thdu4" path="res://Assets/ItchIO/moreIconsBruh/16x16.png" id="3_r3ab0"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_y7ydp"]
-atlas = ExtResource("3_r3ab0")
-region = Rect2(17.116825, 592.97675, 14.618717, 14.618713)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lqdqq"]
-atlas = ExtResource("3_r3ab0")
-region = Rect2(161.93819, 1072.087, 13.175278, 16.832886)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_x2dg4"]
-atlas = ExtResource("3_r3ab0")
-region = Rect2(16.053001, 576.10364, 15.725237, 15.951172)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_amot4"]
-atlas = ExtResource("3_r3ab0")
-region = Rect2(144.04077, 960.00995, 16.533081, 15.331909)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ipruf"]
-atlas = ExtResource("3_r3ab0")
-region = Rect2(17.013983, 609.06244, 15.304773, 14.968628)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_r3ab0"]
-atlas = ExtResource("3_r3ab0")
-region = Rect2(99.96056, 1072.9932, 8.073952, 13.994751)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fo1ym"]
-atlas = ExtResource("3_r3ab0")
-region = Rect2(32.067112, 960.2852, 16.012997, 15.310364)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_opdhq"]
-atlas = ExtResource("3_r3ab0")
-region = Rect2(48.001507, 1039.9653, 16.066936, 16.068604)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j6rvg"]
-atlas = ExtResource("3_r3ab0")
-region = Rect2(176.01062, 1072.0027, 16.011978, 15.976685)
+[ext_resource type="Texture2D" uid="uid://dmbkydfgwi10r" path="res://Assets/ItchIO/Tiny RPG Character Asset Pack v1.03 -Free Soldier&Orc/Characters(100x100)/Soldier/Arrow(projectile)/Arrow01(32x32).png" id="2_y7ydp"]
 
 [node name="SkillsUI" type="Panel" unique_id=965317542]
 custom_minimum_size = Vector2(256, 416)
@@ -65,11 +29,20 @@ horizontal_alignment = 1
 
 [node name="BackButton" type="Button" parent="." unique_id=533838294]
 layout_mode = 0
-offset_left = 508.0
-offset_top = -1.0
-offset_right = 577.0
-offset_bottom = 29.0
+offset_left = 495.0
+offset_top = 14.0
+offset_right = 564.0
+offset_bottom = 45.0
 text = "Back"
+
+[node name="TextureRect" type="TextureRect" parent="BackButton" unique_id=1719083582]
+layout_mode = 0
+offset_left = -10.0
+offset_top = -5.0
+offset_right = 80.0
+offset_bottom = 85.0
+texture = ExtResource("2_y7ydp")
+flip_h = true
 
 [node name="INT" parent="." unique_id=963993930 instance=ExtResource("2_r3ab0")]
 layout_mode = 0
@@ -91,11 +64,6 @@ stats = Dictionary[int, int]({
 8: 0
 })
 
-[node name="Display_Sprite" parent="INT" index="0" unique_id=1190960225]
-position = Vector2(33.000008, 36)
-scale = Vector2(3.3598218, 3.2910712)
-texture = SubResource("AtlasTexture_y7ydp")
-
 [node name="WIS_WIL" parent="." unique_id=1563444799 node_paths=PackedStringArray("parentSkills") instance=ExtResource("2_r3ab0")]
 layout_mode = 0
 offset_left = 248.0
@@ -115,11 +83,6 @@ stats = Dictionary[int, int]({
 7: 2,
 8: 0
 })
-
-[node name="Display_Sprite" parent="WIS_WIL" index="0" unique_id=1190960225]
-position = Vector2(31.999985, 33)
-scale = Vector2(4.1908655, 2.9156246)
-texture = SubResource("AtlasTexture_lqdqq")
 
 [node name="WIS" parent="." unique_id=560904053 node_paths=PackedStringArray("parentSkills") instance=ExtResource("2_r3ab0")]
 layout_mode = 0
@@ -141,11 +104,6 @@ stats = Dictionary[int, int]({
 8: 0
 })
 
-[node name="Display_Sprite" parent="WIS" index="0" unique_id=1190960225]
-position = Vector2(35, 36.00001)
-scale = Vector2(2.9468758, 2.946875)
-texture = SubResource("AtlasTexture_x2dg4")
-
 [node name="WIL" parent="." unique_id=747967176 node_paths=PackedStringArray("parentSkills") instance=ExtResource("2_r3ab0")]
 layout_mode = 0
 offset_left = 248.0
@@ -165,11 +123,6 @@ stats = Dictionary[int, int]({
 7: 1,
 8: 0
 })
-
-[node name="Display_Sprite" parent="WIL" index="0" unique_id=1190960225]
-position = Vector2(36.499996, 34.000008)
-scale = Vector2(3.0624988, 3.066667)
-texture = SubResource("AtlasTexture_amot4")
 
 [node name="INT2" parent="." unique_id=229106207 node_paths=PackedStringArray("parentSkills") instance=ExtResource("2_r3ab0")]
 layout_mode = 0
@@ -191,11 +144,6 @@ stats = Dictionary[int, int]({
 8: 0
 })
 
-[node name="Display_Sprite" parent="INT2" index="0" unique_id=1190960225]
-position = Vector2(36.71093, 35.00001)
-scale = Vector2(3.161457, 3.2857149)
-texture = SubResource("AtlasTexture_ipruf")
-
 [node name="INT_WIS" parent="." unique_id=1945750708 node_paths=PackedStringArray("parentSkills") instance=ExtResource("2_r3ab0")]
 layout_mode = 0
 offset_left = 48.0
@@ -215,11 +163,6 @@ stats = Dictionary[int, int]({
 7: 0,
 8: 0
 })
-
-[node name="Display_Sprite" parent="INT_WIS" index="0" unique_id=1190960225]
-position = Vector2(36.2, 35.942192)
-scale = Vector2(5.7000012, 3.5473564)
-texture = SubResource("AtlasTexture_r3ab0")
 
 [node name="WIS2" parent="." unique_id=148652741 node_paths=PackedStringArray("parentSkills") instance=ExtResource("2_r3ab0")]
 layout_mode = 0
@@ -241,11 +184,6 @@ stats = Dictionary[int, int]({
 8: 0
 })
 
-[node name="Display_Sprite" parent="WIS2" index="0" unique_id=1190960225]
-position = Vector2(35, 36)
-scale = Vector2(3.090625, 2.7114584)
-texture = SubResource("AtlasTexture_fo1ym")
-
 [node name="WIL2" parent="." unique_id=1383487241 node_paths=PackedStringArray("parentSkills") instance=ExtResource("2_r3ab0")]
 layout_mode = 0
 offset_left = 456.0
@@ -266,11 +204,6 @@ stats = Dictionary[int, int]({
 8: 0
 })
 
-[node name="Display_Sprite" parent="WIL2" index="0" unique_id=1190960225]
-position = Vector2(36.500004, 36.000004)
-scale = Vector2(2.812502, 2.7500005)
-texture = SubResource("AtlasTexture_opdhq")
-
 [node name="INT_WIL" parent="." unique_id=1677158838 node_paths=PackedStringArray("parentSkills") instance=ExtResource("2_r3ab0")]
 layout_mode = 0
 offset_left = 456.0
@@ -290,18 +223,3 @@ stats = Dictionary[int, int]({
 7: 3,
 8: 0
 })
-
-[node name="Display_Sprite" parent="INT_WIL" index="0" unique_id=1190960225]
-position = Vector2(36.00001, 32)
-scale = Vector2(3.3937497, 3.2791662)
-texture = SubResource("AtlasTexture_j6rvg")
-
-[editable path="INT"]
-[editable path="WIS_WIL"]
-[editable path="WIS"]
-[editable path="WIL"]
-[editable path="INT2"]
-[editable path="INT_WIS"]
-[editable path="WIS2"]
-[editable path="WIL2"]
-[editable path="INT_WIL"]
