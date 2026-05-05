@@ -10,10 +10,12 @@ func _ready():
 ## TP to a waygate when player clicks one of the Waygate buttons
 func useWaygateGUI(waygate : Waygate):
 	if player == null:
-		player = find_parent("Player")
+		print(self)
+		player = find_parent("GameManager").find_child("Players").get_child(0)
 		if player == null: 
 			push_error("BRUH waygateGUI cant find player")
 			return
+		
 	waygate.UseWaygate(player)
 	player.toggleWaygateGUI(false) # Close GUI after teleporting
 
