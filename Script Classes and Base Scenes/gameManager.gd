@@ -160,10 +160,13 @@ func LoadPlayer(P:Player):
 	if playerData.Inv7 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV7, $ItemSpawner.ItemByID(playerData.Inv7))
 	if playerData.Inv8 > 0: P.Inv.PutItemInSlot(P.Inv.Slot.INV8, $ItemSpawner.ItemByID(playerData.Inv8))
 	
+
 	# Prevent "Level X!" spam
 	player.StatusLabel.textQueue = []
 	player.StatusLabel.addStatusText("Spawned in!", "BLUE")
-	
+	P.Inv.InitStats()
+	P.maxHealthCalc()
+	P.maxManaCalc()
 	#load skills last cuz we needs player stats and setup to be done first
 	var skillData = Save.LoadSkills()
 	if not skillData.is_empty():
@@ -171,8 +174,6 @@ func LoadPlayer(P:Player):
 	
 	P.maxHealthCalc()
 	P.maxManaCalc()
-	print("Stats after load: ", P.coreStats)
-	player.UpdateUIBars()
 	player.UpdateUIBars()
 
 ## Load HOF data from HallOfFame.ddd

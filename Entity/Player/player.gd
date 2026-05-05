@@ -10,7 +10,7 @@ class_name Player extends ENTITY ## PLAYER: Gamedevs be like: Player.script = 10
 @onready var sizz: AudioStreamPlayer = $sizz
 @onready var pot: AudioStreamPlayer = $pot
 
-## Stats
+## Statss
 @warning_ignore("int_as_enum_without_cast")
 @export var coreStats: Dictionary[Stats.STAT, int] = {
 Stats.STR: 5, 
