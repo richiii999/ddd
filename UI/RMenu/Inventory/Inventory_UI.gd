@@ -4,6 +4,7 @@ extends Control ## Inventory: Stores the slots for gear, items, and the mouse. H
 @onready var player : Player = Tools.FindParentByType(self, Player)
 @onready var itemPickupRange : SmartArea = player.find_child("ItemPickupRange")
 @onready var itemSpawner = get_node("/root/GameManager/ItemSpawner")
+@onready var pickup: AudioStreamPlayer = $pickup
 
 # Position of the inventory's origin relative to game's origin
 # NOTE: Offset by a few extra pixels (20) to avoid overlapping the mouse
@@ -101,7 +102,8 @@ func FirstEmptyInvSlot() -> int:
 ## 'Q' to pickup / drop items on ground
 func Loot() -> void: 
 	if ItemInSlot(Slot.MOUSE): DropItem()
-	else: PickItem()
+	else: 
+		PickItem()
 
 ## Pickup a nearby item from the ground
 func PickItem() -> void:
@@ -129,12 +131,14 @@ func PickItem() -> void:
 						continue # Prevent blocking
 					else: 
 						player.incHPot(1)
+						pickup.play()
 				-4: # MPot
 					if player.MPotC == player.MPotmax:
 						player.StatusLabel.addStatusText("Full Mana pots!", "GOLD")
 						continue # Prevent blocking
 					else: 
 						player.incMPot(1)
+						pickup.play()
 			
 			groundItem.queue_free()
 			return # Only pick up 1 item per press
@@ -147,6 +151,7 @@ func PickItem() -> void:
 		else:
 			PutItemInSlot(openSlot, item)
 			groundItem.queue_free() # Delete grounditem after
+			pickup.play()
 			return # Only pick up 1 item per press
 
 ## Drop the item in mouse on the ground

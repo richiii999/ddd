@@ -1,11 +1,12 @@
 class_name Enemy extends ENTITY ## ENEMY: Base class for enemies, who are instantiated with params for their behavior and appearance
 # Controls enemy behavior, shooting, health, and death
 
-# Refs to nodes
+# Refs to nodess
 @onready var HurtTimer = find_child("HurtTimer") # May not exist (ex. training dummy)
 
 @export var XP : int = 10 # How much XP does the mob give on death? (Emitted with entity.death)
 @export var targetOnSight:bool = true # Target player when spotted?
+
 
 var following:Enemy = null # Set by parent enemy's spawner (ex. NecroSkull Orbiters)
 
@@ -60,11 +61,11 @@ func SightIncrease(enterOrExit:bool):
 ## OVERRIDE FUNCS: Entity Funcs overridden by Enemy.gd
 func Damage(power:int, crit:bool=false):
 	super.Damage(power, crit)
-	
 	if HurtTimer: # Increase enemy sight when starting combat
 		if not HurtTimer.time_left:
 			SightIncrease(true)
 		HurtTimer.start(5.00)
+	
 
 func Death():
 	for E in $Sight.smartArea: # For each Player in Sight

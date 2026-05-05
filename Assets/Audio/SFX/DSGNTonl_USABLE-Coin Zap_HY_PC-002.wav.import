@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dldr4tsel63xl"
+path="res://.godot/imported/DSGNTonl_USABLE-Coin Zap_HY_PC-002.wav-6d9a37115097eb355efc8573d1328146.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/SFX/DSGNTonl_USABLE-Coin Zap_HY_PC-002.wav"
+dest_files=["res://.godot/imported/DSGNTonl_USABLE-Coin Zap_HY_PC-002.wav-6d9a37115097eb355efc8573d1328146.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

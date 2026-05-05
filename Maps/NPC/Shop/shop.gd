@@ -5,6 +5,7 @@ var currPlayer = null # Ref to player (set when u open the shop)
 @export var items : Array[int] = [] # Put itemIDs in the editor
 
 var invSlot = preload("res://UI/RMenu/Inventory/inv_slot.tscn")
+@onready var coin: AudioStreamPlayer = $coin
 
 func _ready():
 	$InteractComponent.Interact.connect(ToggleShopGUI)
@@ -41,3 +42,4 @@ func BuyItem(slotN:int):
 	else:
 		currPlayer.incCoins(item.price * -1)
 		currPlayer.Inv.PutItemInSlot(currPlayer.Inv.FirstEmptyInvSlot(), item)
+		coin.play()
