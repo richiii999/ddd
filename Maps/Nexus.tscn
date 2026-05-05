@@ -233,4 +233,26 @@ position = Vector2(-960, 1168)
 scale = Vector2(-2.2, 2.2)
 texture = ExtResource("15_oi5ai")
 
+[node name="Panel" type="Panel" parent="." unique_id=346864430]
+offset_left = 200.0
+offset_top = -208.0
+offset_right = 448.0
+offset_bottom = 32.0
+
+[node name="Label" type="Label" parent="Panel" unique_id=954221287]
+layout_mode = 0
+offset_right = 216.0
+offset_bottom = 216.0
+text = "Welcome to the Nexus! 
+
+A place to relax between 
+adventures, check out the 
+Shop (top right), store items
+in the Bank (bottom).
+
+When you're ready, use the
+waygate and head to the Beach"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [editable path="NPCs/HelalDuck"]
